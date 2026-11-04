@@ -45,22 +45,11 @@ const timer=setInterval(()=>{
     b._src=src;return b;};
   const group=()=>{const g=document.createElement('div');g.style.cssText='display:flex;gap:12px;align-items:center';return g;};
   const L=group(),R=group();
-  /* 2026-11-04：「遊戲」圖示——遊戲目錄放在練習網站的 games 資料夾。
-     先用原本的「練習」同步打開練習網站，載入後再切到遊戲目錄；練習網站的換頁同步會讓另一台跟著切過去。 */
-  const GAMES=BASE+'games/';
-  const practiceOpen=()=>layer.style.display!=='none'&&document.getElementById('syncExternalOpen')?.href===BASE;
-  const openGames=()=>{
-    if(practiceOpen()){frame.src=GAMES;return;}
-    const src=document.querySelector('a.navPill[href="'+BASE+'"]');if(!src)return;
-    const once=()=>{frame.removeEventListener('load',once);setTimeout(()=>{if(practiceOpen())frame.src=GAMES;},600);};
-    frame.addEventListener('load',once);src.click();
-  };
-  document.addEventListener('click',e=>{const a=e.target.closest?.('a.navPill[data-games]');if(!a)return;
-    e.preventDefault();e.stopImmediatePropagation();openGames();},true);
+  /* 2026-11-04：遊戲已搬到獨立的 games 專案，「遊戲」圖示和其他藍色圖示一樣，由 sync.js 開在同步視窗裡。 */
   ['a.navPill[data-sync-video=resources]','a.navPill[href="https://bobayhsu.github.io/bullseye/"]','a.navPill[href="https://bobayhsu.github.io/practice/"]','a.navPill[data-games]'].forEach(sel=>{const b=mk(sel,'#1F5FA8');if(!b)return;L.appendChild(b);
     b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();
-      if(b._src.hasAttribute('data-games')){openGames();return;}
-      if(b._src.getAttribute('href')===BASE&&document.getElementById('syncExternalOpen')?.href===BASE){frame.src=BASE;return;}
+      const h=b._src.getAttribute('href');
+      if((h===BASE||h==='https://bobayhsu.github.io/games/')&&document.getElementById('syncExternalOpen')?.href===h){frame.src=h;return;} // 已經開著：回到該網站的目錄
       b._src.click();});});
   ['div.navPill[data-jump=formula]','div.navPill[data-jump=types]','#endBtn','#backBtn','#home'].forEach(sel=>{const b=mk(sel,'#1E1C1A');if(!b)return;R.appendChild(b);
     b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();close.click();setTimeout(()=>b._src.click(),60);});});
