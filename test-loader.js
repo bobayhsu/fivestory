@@ -1,4 +1,4 @@
-/* Independent fivestory-test loader: ALL sync scripts come from this repository. */
+/* Independent FiveStory loader: sync scripts reside in this repository. */
 (function(){'use strict';
 if(!new URLSearchParams(location.search).has('sync')||window.__TIMER)return;
 const ready=fn=>document.readyState==='loading'?document.addEventListener('DOMContentLoaded',fn,{once:true}):fn();
@@ -17,6 +17,7 @@ ready(async function(){
   await load('./video-sync.js?v=independent1');
   await load('./video-list-sync.js?v=independent1');
   await load('./mobile-red-fix.js?v=independent1');
+  await load('./practice-sync.js?v=1');
   if(badge.textContent==='同步：正在載入…')badge.textContent='同步主程式尚未啟動';
  }catch(err){badge.textContent='同步載入失敗：'+err.message;console.error(err)}
 });
