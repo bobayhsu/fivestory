@@ -54,7 +54,8 @@ const timer=setInterval(()=>{
   const st2=document.createElement('style');
   st2.textContent='#fivestorySyncedExternal.withBottom #syncExternalFrame{width:min(100vw,calc((100vh - 132px)*16/9))!important}';
   document.head.appendChild(st2);
-  setInterval(()=>{const on=layer.style.display!=='none'&&document.getElementById('syncExternalOpen')?.href===BASE;
+  /* 2026-11-04：所有超連結出去的網頁（說書人、影片資源、練習、YouTube）底下都顯示這排圖示 */
+  setInterval(()=>{const on=layer.style.display!=='none';
     bottom.style.display=on?'flex':'none';layer.classList.toggle('withBottom',on);},400);
   // 上方黑色列的點擊（書本鈕等）不要傳到投影片；投影片的「點空白處前進」會讓底下翻到下一頁
   layer.addEventListener('click',e=>e.stopPropagation());
