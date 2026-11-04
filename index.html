@@ -1334,7 +1334,7 @@ const run=()=>{try{fix();}catch(e){}};if(document.fonts&&document.fonts.ready)do
 </script>
 
 <script>/* 分頁開著時按右下跳頁鈕：先關掉分頁再跳 */(function(){const sel='#home,#backBtn,#endBtn,div.navPill';document.addEventListener('click',e=>{if(!e.target.closest||!e.target.closest(sel))return;document.querySelectorAll('.ovPage.open,#pv.open,#drill.open,#endPage.open').forEach(x=>x.classList.remove('open'));if(document.body.classList.contains('tmode')){document.body.classList.remove('tmode');document.querySelectorAll('[data-tmh]').forEach(el=>{el.style.display=el.dataset.tmh||'';delete el.dataset.tmh;});}},true);})();</script>
-<script src="test-loader.js?v=8"></script>
+<script src="test-loader.js?v=9"></script>
 <style id="polish-202611">
 /* 美化小修正 2026-11：只調位置與顯示，不動版面、配色、同步 */
 #hint{bottom:66px}
