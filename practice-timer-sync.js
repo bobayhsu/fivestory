@@ -22,7 +22,7 @@ const page=()=>{
     const u=new URL(frame.contentWindow.location.href);
     if(u.origin!==new URL(base).origin || !u.pathname.startsWith('/practice/'))return '';
     const name=u.pathname.split('/').pop();
-    return name==='p01.html'||name==='p02.html'||name==='p03.html'||name==='p04.html'||name==='p05.html'?name:'';
+    return name==='p01.html'||name==='p02.html'||name==='p03.html'||name==='p04.html'||name==='p05.html'||name==='p06.html'?name:'';
   }catch(_){return '';}
 };
 const doc=()=>{try{return frame.contentDocument;}catch(_){return null;}};
@@ -100,7 +100,7 @@ ref.on('value',snap=>{
   if(first){first=false;return;}
   if(!cmd||cmd.source===node||typeof cmd.id!=='string'||lastId===cmd.id)return;
   lastId=cmd.id;
-  if(!['p01.html','p02.html','p03.html','p04.html','p05.html'].includes(cmd.page))return;
+  if(!['p01.html','p02.html','p03.html','p04.html','p05.html','p06.html'].includes(cmd.page))return;
   if(!['preset','running','add30','reset'].includes(cmd.action))return;
   // Navigation is controlled by practice-sync.js. Don't switch pages for timer events.
   if(page()!==cmd.page)return;
