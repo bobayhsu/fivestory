@@ -14,7 +14,13 @@ const timer=setInterval(()=>{
   const frame=document.getElementById('syncExternalFrame');
   if(!layer||!close||!frame){if(++tries>100)clearInterval(timer);return;}
   clearInterval(timer);
-  close.innerHTML=ICON_STORY;close.title='返回故事';close.setAttribute('aria-label','返回故事');close.style.cssText=BTN;
+  close.innerHTML=ICON_STORY+'<span>返回故事</span>';close.title='返回故事';close.setAttribute('aria-label','返回故事');
+  // 返回故事：放在黑色列最左邊、紅底大按鈕，一眼就看得到
+  close.style.cssText='order:-1;height:48px;padding:0 18px;border:0;border-radius:24px;background:#D2262E;color:#fff;display:inline-flex;align-items:center;gap:8px;font:900 18px "Noto Sans TC","Microsoft JhengHei",sans-serif;cursor:pointer;flex:none;box-shadow:0 3px 10px rgba(0,0,0,.4)';
+  // 超連結出去的網頁：固定 16:9 大小，置中，不隨視窗拉長變形
+  const st=document.createElement('style');
+  st.textContent='#fivestorySyncedExternal{background:#000!important}#syncExternalFrame{flex:none!important;width:min(100vw,calc((100vh - 68px)*16/9))!important;height:auto!important;aspect-ratio:16/9;margin:auto!important}';
+  document.head.appendChild(st);
   const menu=document.createElement('button');
   menu.type='button';menu.id='syncPracticeMenu';menu.innerHTML=ICON_MENU;
   menu.title='返回練習目錄';menu.setAttribute('aria-label','返回練習目錄');
