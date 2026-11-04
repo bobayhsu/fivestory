@@ -1334,4 +1334,11 @@ const run=()=>{try{fix();}catch(e){}};if(document.fonts&&document.fonts.ready)do
 </script>
 
 <script src="test-loader.js?v=2"></script>
+<style id="polish-202611">
+/* 美化小修正 2026-11：只調位置與顯示，不動版面、配色、同步 */
+#hint{bottom:66px}
+.toTop{width:40px;height:40px;font-size:19px;background:rgba(30,28,26,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .25s,transform .25s}
+body.scrolled .toTop{opacity:1;pointer-events:auto;transform:none}
+</style>
+<script>addEventListener('scroll',function(){document.body.classList.toggle('scrolled',scrollY>400)},{passive:true});</script>
 </body></html>
