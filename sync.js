@@ -119,8 +119,15 @@ function send(){
  latest=val;
  ref.update({v:1,source:nodeId,at:firebase.database.ServerValue.TIMESTAMP,screen:s}).catch(e=>{badge.textContent='寫入失敗：請檢查資料庫規則';console.error(e);});
 }
+/* 房間裡的畫面超過 30 分鐘沒人動，就當作上一堂課留下的舊畫面：打開時從第一頁開始，不跳回去 */
+const STALE_MS=30*60*1000;let serverOffset=0;
+db.ref('.info/serverTimeOffset').on('value',s=>{serverOffset=s.val()||0;});
 ref.on('value',snap=>{
  const packet=snap.val();
+ if(packet?.screen&&initial&&typeof packet.at==='number'&&Date.now()+serverOffset-packet.at>STALE_MS){
+  initial=false;connected=true;latest='';send();
+  badge.textContent='同步已連線：'+room;return;
+ }
  if(packet?.screen){
   if(packet.source!==nodeId){latestRemote=stable(packet.screen);apply(packet.screen);}
   /* 自己的回音不覆蓋 latest（Firebase 會刪掉空陣列，覆蓋會造成每 0.4 秒重寫） */
