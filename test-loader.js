@@ -18,7 +18,7 @@ ready(async function(){
   await load('./video-list-sync.js?v=independent1');
   await load('./mobile-red-fix.js?v=independent1');
   await load('./practice-sync.js?v=2');
-  await load('./practice-timer-sync.js?v=2');
+  await load('./practice-timer-sync.js?v=3');
   await load('./nav-buttons.js?v=6');
   if(badge.textContent==='同步：正在載入…')badge.textContent='同步主程式尚未啟動';
  }catch(err){badge.textContent='同步載入失敗：'+err.message;console.error(err)}
