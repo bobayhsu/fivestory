@@ -33,7 +33,8 @@ const timer=setInterval(()=>{
     if(document.getElementById('syncExternalOpen')?.href!==BASE)return false;
     try{const p=frame.contentWindow.location.pathname;return /\.html$/i.test(p)&&!/index\.html$/i.test(p);}catch(_){return false;}
   };
-  setInterval(()=>{menu.style.display=inPractice()?'inline-flex':'none';},400);
+  /* 2026-11-04：清單圖示（返回練習目錄）不再顯示，改用底下藍色「練習」圖示回目錄 */
+  menu.style.setProperty('display','none','important');
   // 練習網站底下也放一排和簡報相同的八顆圖示（左：影片、說書人、練習；右：靶心人、五大類、末頁、上一頁、首頁）
   const bottom=document.createElement('div');bottom.id='syncBottomBar';
   bottom.style.cssText='display:none;flex:none;justify-content:space-between;align-items:center;padding:8px 16px;background:#000;min-height:64px;box-sizing:border-box';
