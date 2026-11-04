@@ -123,7 +123,7 @@ ref.on('value',snap=>{
  const packet=snap.val();
  if(packet?.screen){
   if(packet.source!==nodeId){latestRemote=stable(packet.screen);apply(packet.screen);}
-  else latest=stable(packet.screen);
+  /* 自己的回音不覆蓋 latest（Firebase 會刪掉空陣列，覆蓋會造成每 0.4 秒重寫） */
  } else if(initial){
   // First participant initializes the session.
   initial=false;connected=true;send();
