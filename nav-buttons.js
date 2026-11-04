@@ -57,6 +57,34 @@ const timer=setInterval(()=>{
   /* 2026-11-04：所有超連結出去的網頁（說書人、影片資源、練習、YouTube）底下都顯示這排圖示 */
   setInterval(()=>{const on=layer.style.display!=='none';
     bottom.style.display=on?'flex':'none';layer.classList.toggle('withBottom',on);},400);
+  /* 2026-11-04：外部網頁和簡報同一個版面——
+     網頁放在和投影片一樣大的範圍（同位置、同大小），拿掉上方黑色列；
+     底下八顆圖示和簡報上的圖示同大小、同位置；返回故事鈕縮小，放在右上角。 */
+  const topBar=close.parentElement, stage=document.getElementById('stage');
+  const imp=(el,k,v)=>el.style.setProperty(k,v,'important');
+  const titleEl=document.getElementById('syncExternalTitle');if(titleEl)imp(titleEl,'visibility','hidden');
+  imp(topBar,'position','absolute');imp(topBar,'background','transparent');imp(topBar,'min-height','0');imp(topBar,'padding','0');
+  imp(topBar,'z-index','3');imp(topBar,'pointer-events','none');imp(topBar,'gap','8px');
+  [close,menu].forEach(b=>{imp(b,'pointer-events','auto');});
+  imp(bottom,'position','absolute');imp(bottom,'inset','0');imp(bottom,'background','transparent');imp(bottom,'padding','0');
+  imp(bottom,'min-height','0');imp(bottom,'pointer-events','none');imp(bottom,'z-index','2');
+  [L,R].forEach(g=>imp(g,'display','contents'));
+  const copies=[...bottom.querySelectorAll('button')];
+  copies.forEach(b=>{imp(b,'position','absolute');imp(b,'pointer-events','auto');imp(b,'box-shadow','0 2px 6px rgba(0,0,0,.35)');});
+  const layout=()=>{
+    if(layer.style.display==='none'||!stage)return;
+    const r=stage.getBoundingClientRect();if(!r.width)return;
+    imp(layer,'background',getComputedStyle(document.body).backgroundColor||'#000');
+    imp(frame,'position','absolute');imp(frame,'margin','0');imp(frame,'aspect-ratio','auto');imp(frame,'flex','none');
+    imp(frame,'left',r.left+'px');imp(frame,'top',r.top+'px');imp(frame,'width',r.width+'px');imp(frame,'height',r.height+'px');
+    const s=Math.round(r.width*42/1436);
+    imp(topBar,'top',(r.top+12)+'px');imp(topBar,'right',(innerWidth-r.right+12)+'px');imp(topBar,'left','auto');
+    [close,menu].forEach(b=>{imp(b,'width',s+'px');imp(b,'height',s+'px');});
+    copies.forEach(b=>{const q=b._src&&b._src.getBoundingClientRect();if(!q||!q.width)return;
+      imp(b,'left',q.left+'px');imp(b,'top',q.top+'px');imp(b,'width',q.width+'px');imp(b,'height',q.height+'px');
+      const sv=b.querySelector('svg');if(sv){const z=Math.round(q.width*.55)+'px';sv.style.width=z;sv.style.height=z;}});
+  };
+  setInterval(layout,400);addEventListener('resize',()=>setTimeout(layout,50));
   // 上方黑色列的點擊（書本鈕等）不要傳到投影片；投影片的「點空白處前進」會讓底下翻到下一頁
   layer.addEventListener('click',e=>e.stopPropagation());
 },100);
