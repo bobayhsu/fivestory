@@ -28,13 +28,7 @@ const timer=setInterval(()=>{
     try{const p=frame.contentWindow.location.pathname;return /\.html$/i.test(p)&&!/index\.html$/i.test(p);}catch(_){return false;}
   };
   setInterval(()=>{menu.style.display=inPractice()?'inline-flex':'none';},400);
-  // 書本鈕：回到打開外部網站（練習等）之前的那一頁投影片
-  const slideIx=()=>{const all=[...document.querySelectorAll('#stage>.slide')];return all.indexOf(document.querySelector('#stage>.slide.active'));};
-  let wasOpen=false,saved=-1;
-  setInterval(()=>{const open=layer.style.display!=='none';if(open&&!wasOpen)saved=slideIx();wasOpen=open;},150);
-  close.addEventListener('click',()=>{
-    const k=saved;if(k<0)return;
-    setTimeout(()=>{if(slideIx()!==k&&typeof window.show==='function')window.show(k,true);},50);
-  });
+  // 上方黑色列的點擊（書本鈕等）不要傳到投影片；投影片的「點空白處前進」會讓底下翻到下一頁
+  layer.addEventListener('click',e=>e.stopPropagation());
 },100);
 })();
