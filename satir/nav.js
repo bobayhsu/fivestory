@@ -32,6 +32,12 @@
     pendingShown = null; backward = false;
     setShown(n);
     var sc = slides[i].querySelector('.stage'); if (sc) sc.scrollTop = 0;
+    /* 影片頁：進來才載入影片，離開就停掉（不然看不到的影片會繼續播聲音） */
+    slides.forEach(function(s, k){
+      var f = s.querySelector('iframe[data-src]'); if (!f) return;
+      if (k === i){ if (!f.getAttribute('src')) f.setAttribute('src', f.getAttribute('data-src')); }
+      else if (f.getAttribute('src')) f.removeAttribute('src');
+    });
   }
   function go(d){
     var st = steps(), n = shownCount();

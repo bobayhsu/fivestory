@@ -65,7 +65,7 @@
   /* 首頁 */
   var T = D['標題'], L = D['標題連結'];
   var titleHtml = T.indexOf(L['文字']) === 0
-    ? '<a class="tlink" href="' + esc(L['網址']) + '" target="_blank" rel="noopener" title="' + esc(L['說明']) + '">' + esc(L['文字']) + '</a>' + esc(T.slice(L['文字'].length))
+    ? '<a class="tlink" href="#video" title="' + esc(L['說明']) + '">' + esc(L['文字']) + '</a>' + esc(T.slice(L['文字'].length))
     : esc(T);
   pages.push([PAGE.home, '<div class="cover2"><h1 class="ctitle">' + titleHtml + '</h1>\n' + menu() + '\n<div class="stances">' +
     D['四種姿態'].map(function(s){
@@ -92,6 +92,10 @@
     pages.push([sceneId(i), '<div class="scene" style="--bg:url(' + esc(s['背景圖']) + ')"><div class="shade"></div><div class="dlg photo"><span class="no">' + (i + 1) + '</span>' +
       mini(i, scenes, sceneId, sceneTitle) + '<h3 class="loc">' + esc(s['地點'] + ' - ' + s['意象']) + '</h3>' + dialog(s) + '</div></div>']);
   });
+
+  /* 影片頁：點標題「薩提爾」進來，在網頁裡播放（同步模式下兩台一起） */
+  var vid = (L['網址'].match(/[?&]v=([\w-]{11})/) || [])[1];
+  if (vid) pages.push(['video', '<div class="vidpage"><h2 class="vtitle">' + esc(L['說明'].replace(/（YouTube）$/, '')) + '</h2><div class="vbox"><iframe data-src="https://www.youtube-nocookie.com/embed/' + vid + '?rel=0" title="' + esc(L['說明']) + '" allow="accelerometer;autoplay;encrypted-media;gyroscope;picture-in-picture;fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div></div>']);
 
   document.getElementById('slides').innerHTML = pages.map(function(p, k){
     return '<section class="slide" id="' + p[0] + '" data-n="' + (k + 1) + '"><div class="stage">' + p[1] + (p[0] !== PAGE.home ? menu() : '') + '</div></section>';

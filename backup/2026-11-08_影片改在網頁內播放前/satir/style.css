@@ -1,0 +1,210 @@
+/* ===== 薩提爾網頁樣式（2026-11-08 整理成一份）=====
+   版面和五大類故事首頁相同：16:9 投影片滿版，底部 11 顆圖示疊在投影片上。
+   投影片裡的大小都用 cqh／cqw（投影片高、寬的百分比），所以任何螢幕都等比例縮放。 */
+
+/* ---------- 顏色 ---------- */
+:root{
+  --ink:#1d1a17;      /* 黑：文字、男 */
+  --gray:#8a847c;     /* 灰：女 */
+  --paper:#faf7f1;    /* 投影片底色 */
+  --line:#e4ddd0;     /* 細框線 */
+  --red:#d92b2b;      /* 紅：選單按鈕 */
+  --hl:#ffe83d;       /* 黃：場景標題、動作 */
+  --blue:#1F5FA8;     /* 底部藍色圖示 */
+  --dark:#1E1C1A;     /* 底部黑色圖示 */
+}
+
+/* ---------- 整體 ---------- */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#000;color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif}
+a{color:inherit}
+
+/* 畫面（手機直拿的版面在檔案最後面） */
+#app{position:fixed;left:0;top:0;width:100vw;height:100vh;--VW:100vw;--VH:100vh}
+/* --W、--H：投影片寬高；--nb：底部圖示大小（同五大類故事：至少 48px，最多投影片高的 13.9%） */
+#app{--W:min(var(--VW),calc(var(--VH)*16/9));--H:calc(var(--W)*9/16);--nb:clamp(calc(var(--H)*.0704),48px,calc(var(--H)*.139))}
+
+main{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.slide{display:none;width:100%;height:100%;align-items:center;justify-content:center}
+.slide.on{display:flex}
+.stage{position:relative;width:var(--W);height:var(--H);background:var(--paper);overflow:hidden;container-type:size;display:flex;flex-direction:column;justify-content:center}
+
+/* ---------- 底部 11 顆圖示 ---------- */
+#fsbar{position:absolute;z-index:25;left:calc((var(--VW) - var(--W))/2);width:var(--W);top:calc((var(--VH) + var(--H))/2 - var(--nb)*1.2);height:var(--nb);
+  display:flex;justify-content:space-between;align-items:center;padding:0 calc(var(--W)*.0104);pointer-events:none}
+#fsbar .g{display:flex;gap:calc(var(--H)*.011);pointer-events:auto}
+#fsbar .fb{width:var(--nb);height:var(--nb);border-radius:50%;border:0;padding:0;display:inline-flex;align-items:center;justify-content:center;color:#FBF8F3;cursor:pointer;
+  box-shadow:0 3px 8px rgba(0,0,0,.35);text-decoration:none;transition:transform .15s,background .15s}
+#fsbar .blue{background:var(--blue)}
+#fsbar .dark{background:var(--dark);opacity:.92}
+#fsbar .fb:hover{background:#D2262E;transform:scale(1.06)}
+#fsbar svg{width:calc(var(--nb)*.55);height:calc(var(--nb)*.55)}
+#count{position:absolute;left:50%;transform:translateX(-50%);min-width:56px;text-align:center;color:rgba(0,0,0,.28);font-size:calc(var(--H)*.02);font-variant-numeric:tabular-nums;pointer-events:none}
+body.embedded #fsbar{display:none}   /* 在五大類故事的同步視窗裡，改用同步視窗自己的圖示 */
+
+/* ---------- 右上角「白象似的群山」選單 ---------- */
+.wbs{position:absolute;right:2cqw;top:2.6cqh;z-index:8;text-align:right}
+.wbs-btn{font:inherit;font-weight:700;font-size:2.8cqh;color:var(--red);background:#fff;border:2px solid var(--red);border-radius:999px;padding:.8cqh 2cqw;cursor:pointer;text-decoration:underline;text-underline-offset:.2em}
+.wbs-btn:hover{background:#fff1d6}
+.wbs-menu{display:none;margin-top:1cqh;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.18);overflow:hidden;text-align:left}
+.wbs.open .wbs-menu{display:block}
+.wbs-menu a{display:block;text-decoration:none;font-size:2.8cqh;padding:1.6cqh 2cqw;white-space:nowrap}
+.wbs-menu a+a{border-top:1px solid var(--line)}
+.wbs-menu a:hover{background:#fff1d6}
+
+/* ---------- 首頁：四種姿態 ---------- */
+.cover2{position:relative;height:100%;display:flex;flex-direction:column;padding:2.5cqh 2cqw 1cqh}
+.ctitle{font-family:"Noto Serif TC",serif;font-weight:900;font-size:7.6cqh;margin:0 0 1cqh;text-align:center}
+.tlink{color:inherit;text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.14em}
+.tlink:hover{color:#D2262E}
+.stances{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr);gap:2cqw;padding:1cqh 3cqw calc(var(--nb)*1.3)}
+.st{display:flex;flex-direction:column;align-items:center;min-height:0}
+.fig{position:relative;flex:1;min-height:0;width:100%;display:flex;justify-content:center;align-items:flex-end}
+.fig img{max-width:100%;min-width:0;object-fit:contain;object-position:bottom;display:block}
+.sname{color:#e01b1b;font-weight:900;font-size:5cqh;writing-mode:vertical-rl;letter-spacing:.1em;align-self:flex-start;margin-top:4cqh;margin-right:.6cqw;flex:none}
+.stag{background:#111;color:#fff;font-weight:900;font-size:3.2cqh;padding:.4cqh 1.2cqw;margin:.6cqh 0 1cqh;white-space:nowrap}
+.pie{height:14cqh;flex:none;overflow:visible}
+.pie path{stroke:#333;stroke-width:1.6}
+.pie text{font-size:12px;fill:#555;text-anchor:middle}
+
+/* ---------- 小說原文 ---------- */
+.essay{height:100%;overflow:auto;padding:5cqh 12cqw calc(var(--nb)*1.4);font-family:"Noto Serif TC",serif;font-size:3.4cqh;line-height:1.55}
+.essay p{margin:0}
+.essay .gap{height:1.55em}
+.etitle{font-size:4.4cqh;margin:0}
+
+/* ---------- 組合表（大表，黑白：女灰、男黑） ---------- */
+.title{font-family:"Noto Serif TC",serif;font-size:5cqh;margin:3cqh 6cqw 2cqh;display:flex;align-items:baseline;gap:2cqw}
+.matrix{flex:1;margin:0 6cqw calc(var(--nb)*1.35);border-collapse:separate;border-spacing:.6cqh;table-layout:fixed}
+.matrix th{color:#fff;background:var(--ink);font-size:3.6cqh;font-weight:900;border-radius:6px}
+.matrix th.col{height:9cqh;background:var(--gray)}
+.matrix .corner{position:relative;background:linear-gradient(to top right,var(--ink) 50%,var(--gray) 50%)}
+.corner .cf{position:absolute;right:12%;top:8%;font-size:3cqh}
+.corner .cm{position:absolute;left:12%;bottom:8%;font-size:3cqh}
+.matrix td{background:#fff;border:1px solid var(--line);border-radius:6px;padding:0}
+.matrix td a{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:9cqh;padding:.8cqh .8cqw;text-align:center;text-decoration:none;transition:.15s}
+.matrix td a:hover{background:#eee}
+.matrix td b{font-size:4.4cqh;color:var(--ink);text-decoration:underline;text-underline-offset:.15em;line-height:1.1}
+.matrix td a.scell{flex-direction:row;font-size:4.2cqh;font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:.18em}
+.matrix td.thumb{position:relative;overflow:hidden}
+.matrix td.thumb a{position:absolute;inset:0;padding:0;min-height:0}
+.matrix td.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1)}
+
+/* ---------- 對話頁（群山 .plain／場景 .photo 共用） ---------- */
+.dlg{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:5cqh 20cqw calc(var(--nb)*1.4) 9cqw;cursor:pointer}
+.no{position:absolute;left:3cqw;top:3cqh;font-family:"Noto Serif TC",serif;font-weight:900;font-size:6cqh;color:#d8cfbf}
+.roles{display:flex;flex-wrap:wrap;gap:1.4cqw;margin-bottom:3cqh}
+.role{display:inline-flex;align-items:center;gap:1cqw;border-radius:999px;color:#fff;font-weight:700;font-size:3cqh;padding:.6cqh 1.8cqw .6cqh .6cqh}
+.role b{display:inline-grid;place-items:center;width:4.6cqh;height:4.6cqh;border-radius:50%;background:#fff;font-size:2.6cqh}
+.role.rf{background:var(--gray)}.role.rf b{color:var(--gray)}   /* 女：灰 */
+.role.rm{background:var(--ink)}.role.rm b{color:var(--ink)}     /* 男：黑 */
+.lines p{display:flex;align-items:flex-start;gap:1.4cqw;margin:0 0 2.4cqh;font-size:4.1cqh;line-height:1.5}
+.say i{flex:none;display:grid;place-items:center;width:4.8cqh;height:4.8cqh;margin-top:.3cqh;border-radius:50%;color:#fff;font-style:normal;font-weight:900;font-size:2.6cqh}
+.say.f i{background:var(--gray)}
+.say.m i{background:var(--ink)}
+.lines p.act{margin-top:1cqh;padding-top:2cqh;border-top:2px solid currentColor;font-style:italic;color:#9b6b00}
+/* 一句一句出現 */
+.lines p.step{opacity:0;visibility:hidden;transform:translateY(1.2cqh);transition:opacity .35s,transform .35s}
+.lines p.step.shown{opacity:1;visibility:visible;transform:none}
+.hint{position:absolute;left:50%;bottom:calc(var(--nb)*1.3);transform:translateX(-50%);font-size:2cqh;opacity:.55;pointer-events:none;animation:blink 1.6s infinite}
+.done .hint{display:none}
+@keyframes blink{50%{opacity:.15}}
+
+/* 群山對話（白底） */
+.plain{padding-left:7cqw}
+.plain .role{font-size:3.8cqh}
+.plain .role b{width:5.6cqh;height:5.6cqh;font-size:3.2cqh}
+.plain .lines p{font-size:5.4cqh;margin-bottom:3cqh;gap:1.8cqw}
+.plain .say i{width:6cqh;height:6cqh;font-size:3.2cqh;margin-top:.6cqh}
+
+/* 場景對話（照片底） */
+.scene{position:relative;height:100%;background:var(--bg) center/cover no-repeat}
+.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.6) 60%,rgba(0,0,0,.25) 100%)}
+.photo{padding-left:6cqw;color:#fff}
+.photo .no{color:rgba(255,255,255,.35)}
+.loc{margin:0 0 2.4cqh;font-family:"Noto Serif TC",serif;font-size:5cqh;color:var(--hl)}
+.photo .role{font-size:3.6cqh}
+.photo .role b{width:5.2cqh;height:5.2cqh;font-size:3cqh}
+.photo .lines p{font-size:4.6cqh;margin-bottom:2.2cqh;gap:1.6cqw;line-height:1.4;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.photo .say i{width:5.4cqh;height:5.4cqh;font-size:3cqh;margin-top:.4cqh}
+.photo .role,.photo .say i{box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.photo .lines p.act{color:var(--hl);border-color:rgba(255,232,61,.6)}
+
+/* 右上角小組合表 */
+.mini4{position:absolute;right:2.4cqw;top:11cqh;z-index:4;display:grid;grid-template-columns:repeat(5,5.4cqh);grid-auto-rows:4.6cqh;gap:.4cqh}
+.mini4 span,.mini4 a{display:grid;place-items:center;border-radius:4px;font-size:2.2cqh;font-weight:700;text-decoration:none}
+.mini4 .mh{color:#fff}
+.mini4 .mf{background:var(--gray)}   /* 女 */
+.mini4 .mm{background:var(--ink)}    /* 男 */
+.mini4 .mc{position:relative;color:#fff;font-size:1.5cqh;background:linear-gradient(to top right,var(--ink) 50%,var(--gray) 50%)}
+.mini4 .mc i{position:absolute;font-style:normal}
+.mini4 .mc i:first-child{right:12%;top:2%}
+.mini4 .mc i:last-child{left:12%;bottom:2%}
+.mini4 a{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.mini4 a:hover{background:#fff1d6}
+.photo .mini4 a{background:rgba(255,255,255,.92)}
+.mini4 a.on,.photo .mini4 a.on{background:var(--ink);color:#fff;border-color:#fff}
+
+/* =====================================================================
+   手機直拿（直式版面）：投影片改成整頁往下捲，字和圖改用螢幕寬度（cqw）計算；
+   底部圖示固定在螢幕最下面，分兩排（上排藍、下排黑）。
+   ===================================================================== */
+@media (orientation:portrait) and (max-width:900px){
+  #app{--nb:30vw}   /* 內容底部留給圖示的空間 */
+  .stage{width:100vw;height:100vh;height:100dvh;display:block;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  #fsbar{position:fixed;left:0;right:0;top:auto;bottom:0;width:auto;height:auto;flex-direction:column;align-items:stretch;gap:2vw;
+    padding:2.4vw 3vw calc(2.4vw + env(safe-area-inset-bottom));background:rgba(250,247,241,.95);box-shadow:0 -2px 12px rgba(0,0,0,.12);pointer-events:auto}
+  #fsbar .g{justify-content:center;gap:2.6vw}
+  #fsbar .fb{width:min(11vw,48px);height:min(11vw,48px)}
+  #fsbar svg{width:58%;height:58%}
+  #count{display:none}
+
+  /* 右上角選單 */
+  .wbs{right:3cqw;top:3cqw}
+  .wbs-btn{font-size:4cqw;padding:1.6cqw 3.6cqw}
+  .wbs-menu{margin-top:2cqw}
+  .wbs-menu a{font-size:4.4cqw;padding:3.4cqw 5cqw}
+
+  /* 首頁：四種姿態排成 2×2 */
+  .cover2{height:auto;display:block;padding:15cqw 3cqw 0}
+  .ctitle{font-size:8.6cqw;margin:0 0 4cqw}
+  .stances{display:grid;grid-template-columns:1fr 1fr;gap:6cqw 3cqw;padding:0 1cqw calc(var(--nb)*1.1)}
+  .fig{flex:none;height:56cqw}
+  .sname{font-size:6.4cqw;margin-top:1cqw;margin-right:1cqw}
+  .stag{font-size:4.2cqw;padding:.6cqw 2.4cqw;margin:2cqw 0}
+  .pie{height:24cqw}
+
+  /* 小說原文 */
+  .essay{height:auto;overflow:visible;padding:17cqw 6cqw calc(var(--nb)*1.1);font-size:4.8cqw;line-height:1.7}
+  .etitle{font-size:6.2cqw}
+
+  /* 組合表 */
+  .title{font-size:7cqw;margin:16cqw 3cqw 3cqw}
+  .matrix{width:94cqw;margin:0 3cqw calc(var(--nb)*1.1);border-spacing:1cqw}
+  .matrix th{font-size:3.8cqw;border-radius:4px}
+  .matrix th.col{height:10cqw}
+  .corner .cf,.corner .cm{font-size:3.4cqw}
+  .matrix td{border-radius:4px}
+  .matrix td a{min-height:17cqw;padding:1cqw}
+  .matrix td b{font-size:6.4cqw}
+  .matrix td a.scell{font-size:3.1cqw;line-height:1.3;flex-wrap:wrap}
+  .matrix td.thumb{height:17cqw}
+
+  /* 對話頁 */
+  .dlg{height:auto;min-height:100%;justify-content:flex-start;padding:46cqw 5cqw calc(var(--nb)*1.1) 5cqw}
+  .no{left:4cqw;top:3cqw;font-size:9cqw}
+  .mini4{top:15cqw;right:3cqw;grid-template-columns:repeat(5,7cqw);grid-auto-rows:5.6cqw;gap:.6cqw}
+  .mini4 span,.mini4 a{font-size:3cqw}
+  .mini4 .mc{font-size:2.2cqw}
+  .roles{gap:2.4cqw;margin-bottom:5cqw}
+  .role,.plain .role,.photo .role{font-size:4.6cqw;gap:1.6cqw;padding:1cqw 3.4cqw 1cqw 1cqw}
+  .role b,.plain .role b,.photo .role b{width:7cqw;height:7cqw;font-size:4cqw}
+  .lines p,.plain .lines p,.photo .lines p{font-size:5.2cqw;line-height:1.55;gap:3cqw;margin-bottom:4.5cqw}
+  .say i,.plain .say i,.photo .say i{width:7.6cqw;height:7.6cqw;font-size:4cqw;margin-top:.4cqw}
+  .lines p.act{margin-top:2cqw;padding-top:4cqw}
+  .lines p.step{transform:translateY(2cqw)}
+  .hint{position:static;display:block;transform:none;text-align:center;font-size:3.6cqw;margin-top:2cqw}
+  .loc{font-size:6.2cqw;margin-bottom:4cqw}
+  .scene{height:auto;min-height:100%}
+  .shade{background:rgba(0,0,0,.66)}
+}

@@ -145,6 +145,12 @@ body.embedded #fsbar{display:none}   /* 在五大類故事的同步視窗裡，�
 .photo .mini4 a{background:rgba(255,255,255,.92)}
 .mini4 a.on,.photo .mini4 a.on{background:var(--ink);color:#fff;border-color:#fff}
 
+/* ---------- 影片頁（點標題「薩提爾」） ---------- */
+.vidpage{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3cqh 6cqw calc(var(--nb)*1.35);background:#111}
+.vtitle{margin:0 0 2.4cqh;color:#fff;font-family:"Noto Serif TC",serif;font-size:4.6cqh}
+.vbox{flex:1;min-height:0;aspect-ratio:16/9;max-width:100%}
+.vbox iframe{width:100%;height:100%;border:0;display:block;background:#000}
+
 /* =====================================================================
    手機直拿（直式版面）：投影片改成整頁往下捲，字和圖改用螢幕寬度（cqw）計算；
    底部圖示固定在螢幕最下面，分兩排（上排藍、下排黑）。
@@ -207,4 +213,7 @@ body.embedded #fsbar{display:none}   /* 在五大類故事的同步視窗裡，�
   .loc{font-size:6.2cqw;margin-bottom:4cqw}
   .scene{height:auto;min-height:100%}
   .shade{background:rgba(0,0,0,.66)}
+  .vidpage{min-height:100%;height:auto;justify-content:flex-start;padding:18cqw 3cqw calc(var(--nb)*1.1)}
+  .vtitle{font-size:6cqw;margin-bottom:4cqw}
+  .vbox{flex:none;width:94cqw}
 }
