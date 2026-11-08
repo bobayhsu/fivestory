@@ -5,9 +5,9 @@
   var POSES = ['指責','討好','超理智','打岔'];
   var short = function(p){ return p === '超理智' ? '超' : p.charAt(0); };
   /* 頁面代號 */
-  var PAGE = { home:'s1', novel:'s2', combos:'s4', cnn:'s21', cnnList:'s22', scenes:'s23' };
-  var comboId = function(i){ return 's' + (5 + i); };
-  var sceneId = function(i){ return 's' + (24 + i); };
+  var PAGE = { home:'home', novel:'novel', combos:'combos', scenes:'scenes' };
+  var comboId = function(i){ return 'combo-' + (i + 1); };
+  var sceneId = function(i){ return 'scene-' + (i + 1); };
 
   function pie(ignored){
     var r = 46, c = 50, P = function(a){ a = a * Math.PI / 180; return [c + r * Math.cos(a), c + r * Math.sin(a)]; };
@@ -84,23 +84,17 @@
     pages.push([comboId(i), '<div class="dlg plain"><span class="no">' + (i + 1) + '</span>' + mini(i, combos, comboId, comboTitle) + dialog(c) + '</div>']);
   });
 
-  /* 奇景兩頁 */
-  pages.push([PAGE.cnn, '<a class="bigimg" href="' + esc(cnn['網址']) + '" target="_blank" rel="noopener"><img src="' + esc(cnn['封面圖']) + '" alt="CNN評選一生必去世界15大絕美奇景"><span class="tag">點圖開啟原文 ↗</span></a>']);
-  pages.push([PAGE.cnnList, '<div class="figwrap two"><img src="' + esc(cnn['清單圖']) + '" alt="15 大奇景清單"><a class="mini" href="' + esc(cnn['網址']) + '" target="_blank" rel="noopener"><img src="' + esc(cnn['封面圖']) + '" alt="開啟原文"><span>開啟原文 ↗</span></a></div>']);
-
   /* 場景表 */
   pages.push([PAGE.scenes, '<h2 class="title">' + esc(D['場景意象']['標題']) + '</h2>' +
     matrix(scenes, sceneId, function(i){ return '<td><a class="scell" href="#' + sceneId(i) + '" title="' + esc(sceneTitle(i).replace(/^\d+/, '')) + '">' + (i + 1) + '.' + esc(scenes[i]['意象']) + '</a></td>'; },
-      '<td class="thumb"><a href="#' + PAGE.cnn + '"><img src="' + esc(cnn['封面圖']) + '" alt="CNN 15 大奇景"></a></td>')]);
+      '<td class="thumb"><a href="' + esc(cnn['網址']) + '" target="_blank" rel="noopener" title="CNN 評選一生必去世界 15 大絕美奇景（另開視窗）"><img src="' + esc(cnn['封面圖']) + '" alt="CNN 15 大奇景"></a></td>')]);
   scenes.forEach(function(s, i){
     pages.push([sceneId(i), '<div class="scene" style="--bg:url(' + esc(s['背景圖']) + ')"><div class="shade"></div><div class="dlg photo"><span class="no">' + (i + 1) + '</span>' +
       mini(i, scenes, sceneId, sceneTitle) + '<h3 class="loc">' + esc(s['地點'] + ' - ' + s['意象']) + '</h3>' + dialog(s) + '</div></div>']);
   });
 
-  var order = function(id){ return +id.slice(1); };
-  pages.sort(function(a, b){ return order(a[0]) - order(b[0]); });
-  document.getElementById('slides').innerHTML = pages.map(function(p){
-    return '<section class="slide" id="' + p[0] + '" data-n="' + order(p[0]) + '"><div class="stage">' + p[1] + (p[0] !== PAGE.home ? menu() : '') + '</div></section>';
+  document.getElementById('slides').innerHTML = pages.map(function(p, k){
+    return '<section class="slide" id="' + p[0] + '" data-n="' + (k + 1) + '"><div class="stage">' + p[1] + (p[0] !== PAGE.home ? menu() : '') + '</div></section>';
   }).join('');
   var cnt = document.getElementById('count'); if (cnt) cnt.textContent = '1 / ' + pages.length;
 })();

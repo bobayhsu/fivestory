@@ -19,11 +19,8 @@
 html,body{margin:0;height:100%;background:#000;color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif}
 a{color:inherit}
 
-/* 畫面：手機直拿時整個轉 90 度，變成橫向 */
+/* 畫面（手機直拿的版面在檔案最後面） */
 #app{position:fixed;left:0;top:0;width:100vw;height:100vh;--VW:100vw;--VH:100vh}
-@media (orientation:portrait) and (max-width:900px){
-  #app{width:100vh;height:100vw;--VW:100vh;--VH:100vw;left:100vw;transform-origin:top left;transform:rotate(90deg)}
-}
 /* --W、--H：投影片寬高；--nb：底部圖示大小（同五大類故事：至少 48px，最多投影片高的 13.9%） */
 #app{--W:min(var(--VW),calc(var(--VH)*16/9));--H:calc(var(--W)*9/16);--nb:clamp(calc(var(--H)*.0704),48px,calc(var(--H)*.139))}
 
@@ -148,13 +145,66 @@ body.embedded #fsbar{display:none}   /* 在五大類故事的同步視窗裡，�
 .photo .mini4 a{background:rgba(255,255,255,.92)}
 .mini4 a.on,.photo .mini4 a.on{background:var(--ink);color:#fff;border-color:#fff}
 
-/* ---------- CNN 奇景兩頁 ---------- */
-.bigimg{position:relative;display:flex;justify-content:center;height:100%;background:#111}
-.bigimg img{height:100%;object-fit:contain}
-.tag{position:absolute;right:3cqw;bottom:calc(var(--nb)*1.4);background:var(--red);color:#fff;font-size:2.6cqh;font-weight:700;padding:1cqh 2cqw;border-radius:999px}
-.figwrap{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
-.figwrap>img{max-width:100%;max-height:100%;display:block}
-.two{background:#fff}
-.mini{position:absolute;right:2.5cqw;bottom:calc(var(--nb)*1.4);width:20cqw;display:block;overflow:hidden;border:3px solid #fff;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.35);text-decoration:none}
-.mini img{width:100%;display:block}
-.mini span{position:absolute;inset:auto 0 0 0;background:rgba(217,43,43,.92);color:#fff;font-size:2.2cqh;text-align:center;padding:.6cqh}
+/* =====================================================================
+   手機直拿（直式版面）：投影片改成整頁往下捲，字和圖改用螢幕寬度（cqw）計算；
+   底部圖示固定在螢幕最下面，分兩排（上排藍、下排黑）。
+   ===================================================================== */
+@media (orientation:portrait) and (max-width:900px){
+  #app{--nb:30vw}   /* 內容底部留給圖示的空間 */
+  .stage{width:100vw;height:100vh;height:100dvh;display:block;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  #fsbar{position:fixed;left:0;right:0;top:auto;bottom:0;width:auto;height:auto;flex-direction:column;align-items:stretch;gap:2vw;
+    padding:2.4vw 3vw calc(2.4vw + env(safe-area-inset-bottom));background:rgba(250,247,241,.95);box-shadow:0 -2px 12px rgba(0,0,0,.12);pointer-events:auto}
+  #fsbar .g{justify-content:center;gap:2.6vw}
+  #fsbar .fb{width:min(11vw,48px);height:min(11vw,48px)}
+  #fsbar svg{width:58%;height:58%}
+  #count{display:none}
+
+  /* 右上角選單 */
+  .wbs{right:3cqw;top:3cqw}
+  .wbs-btn{font-size:4cqw;padding:1.6cqw 3.6cqw}
+  .wbs-menu{margin-top:2cqw}
+  .wbs-menu a{font-size:4.4cqw;padding:3.4cqw 5cqw}
+
+  /* 首頁：四種姿態排成 2×2 */
+  .cover2{height:auto;display:block;padding:15cqw 3cqw 0}
+  .ctitle{font-size:8.6cqw;margin:0 0 4cqw}
+  .stances{display:grid;grid-template-columns:1fr 1fr;gap:6cqw 3cqw;padding:0 1cqw calc(var(--nb)*1.1)}
+  .fig{flex:none;height:56cqw}
+  .sname{font-size:6.4cqw;margin-top:1cqw;margin-right:1cqw}
+  .stag{font-size:4.2cqw;padding:.6cqw 2.4cqw;margin:2cqw 0}
+  .pie{height:24cqw}
+
+  /* 小說原文 */
+  .essay{height:auto;overflow:visible;padding:17cqw 6cqw calc(var(--nb)*1.1);font-size:4.8cqw;line-height:1.7}
+  .etitle{font-size:6.2cqw}
+
+  /* 組合表 */
+  .title{font-size:7cqw;margin:16cqw 3cqw 3cqw}
+  .matrix{width:94cqw;margin:0 3cqw calc(var(--nb)*1.1);border-spacing:1cqw}
+  .matrix th{font-size:3.8cqw;border-radius:4px}
+  .matrix th.col{height:10cqw}
+  .corner .cf,.corner .cm{font-size:3.4cqw}
+  .matrix td{border-radius:4px}
+  .matrix td a{min-height:17cqw;padding:1cqw}
+  .matrix td b{font-size:6.4cqw}
+  .matrix td a.scell{font-size:3.1cqw;line-height:1.3;flex-wrap:wrap}
+  .matrix td.thumb{height:17cqw}
+
+  /* 對話頁 */
+  .dlg{height:auto;min-height:100%;justify-content:flex-start;padding:46cqw 5cqw calc(var(--nb)*1.1) 5cqw}
+  .no{left:4cqw;top:3cqw;font-size:9cqw}
+  .mini4{top:15cqw;right:3cqw;grid-template-columns:repeat(5,7cqw);grid-auto-rows:5.6cqw;gap:.6cqw}
+  .mini4 span,.mini4 a{font-size:3cqw}
+  .mini4 .mc{font-size:2.2cqw}
+  .roles{gap:2.4cqw;margin-bottom:5cqw}
+  .role,.plain .role,.photo .role{font-size:4.6cqw;gap:1.6cqw;padding:1cqw 3.4cqw 1cqw 1cqw}
+  .role b,.plain .role b,.photo .role b{width:7cqw;height:7cqw;font-size:4cqw}
+  .lines p,.plain .lines p,.photo .lines p{font-size:5.2cqw;line-height:1.55;gap:3cqw;margin-bottom:4.5cqw}
+  .say i,.plain .say i,.photo .say i{width:7.6cqw;height:7.6cqw;font-size:4cqw;margin-top:.4cqw}
+  .lines p.act{margin-top:2cqw;padding-top:4cqw}
+  .lines p.step{transform:translateY(2cqw)}
+  .hint{position:static;display:block;transform:none;text-align:center;font-size:3.6cqw;margin-top:2cqw}
+  .loc{font-size:6.2cqw;margin-bottom:4cqw}
+  .scene{height:auto;min-height:100%}
+  .shade{background:rgba(0,0,0,.66)}
+}
