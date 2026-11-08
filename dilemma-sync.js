@@ -34,6 +34,11 @@ function observe(){
  if(!seen){seen=s;return;}
  if(s!==seen){seen=s;publish(s);}
 }
+/* 2026-11-09：開著童話兩難時，不顯示右上角紅色「返回故事」圖示（同薩提爾；改用底部圖示回去） */
+const hide=document.createElement('style');
+hide.textContent='#fivestorySyncedExternal.dilemmaOn #syncExternalClose{display:none!important}';
+document.head.appendChild(hide);
+setInterval(()=>layer.classList.toggle('dilemmaOn',active()),300);
 frame.addEventListener('load',()=>{seen='';setTimeout(()=>{if(remote)apply();},300);});
 ref.on('value',snap=>{
  const cmd=snap.val();
