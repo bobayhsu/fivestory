@@ -295,6 +295,7 @@ body{padding-bottom:calc(var(--fsb-h) + 40px)}
   #fsbar .g{gap:8px}
   #fsbar .fb{width:min(5.4vw,48px);height:min(5.4vw,48px)}
 }
+html.embedded #fsbar{display:none}html.embedded body{padding-bottom:16px}@media (min-width:900px){html.embedded .stage{width:min(100%, calc((100vh - 32px) * 16 / 9))}}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
@@ -402,6 +403,7 @@ const TYPES = {
 const QUAD_ORDER = ['self', 'hero', 'survive', 'swap'];
 
 const app = document.getElementById('app');
+let view = 'intro';
 let i = 0;
 let answers = [];
 const thirdOpen = new Set();
@@ -474,7 +476,7 @@ function escText(s) {
 }
 
 function renderIntro() {
-  lastQ = -1;
+  lastQ = -1; view = 'intro';
   app.innerHTML = `
     <div class="pane-l hero" style="--hero:url('${QUESTIONS[0].img}')">
       <div class="hero-text">
@@ -503,6 +505,7 @@ function renderIntro() {
   });
 }
 function renderQuestion() {
+  view = 'q';
   const keep = paneScroll(lastQ === i);
   lastQ = i;
   const q = QUESTIONS[i];
@@ -633,7 +636,7 @@ function renderQuestion() {
   });
 }
 function renderResult() {
-  lastQ = -1;
+  lastQ = -1; view = 'result';
   const { w, l } = scores();
   const key = typeOf(w, l);
   const t = TYPES[key];
@@ -697,6 +700,37 @@ function renderResult() {
 }
 
 renderIntro();
+
+/* ---- 手機桌機同步（2026-11-09）：五大類故事的同步程式透過 window.DilemmaSync 讀取、設定目前畫面 ---- */
+(function(){
+  try { if (window.self !== window.top) document.documentElement.classList.add('embedded'); } catch (e) { document.documentElement.classList.add('embedded'); }
+  const arr = s => [...s].map(String).sort();
+  function state() {
+    return JSON.stringify({ v: view, i, a: QUESTIONS.map((_, n) => answers[n] || ''),
+      t: arr(thirdOpen), k: arr(keyPanelOpen), o: arr(keyOpen), s: arr(storyOpen) });
+  }
+  const fill = (set, list, num) => { set.clear(); (list || []).forEach(x => set.add(num ? Number(x) : String(x))); };
+  const listeners = [];
+  let last = '';
+  function changed() { const s = state(); if (s === last) return; last = s; listeners.forEach(f => { try { f(s); } catch (_) {} }); }
+  window.DilemmaSync = {
+    get: state,
+    set(json) {
+      let s; try { s = JSON.parse(json); } catch (_) { return; }
+      if (!s || json === state()) return;
+      answers = (s.a || []).map(x => x || undefined);
+      i = Math.max(0, Math.min(QUESTIONS.length - 1, Number(s.i) || 0));
+      fill(thirdOpen, s.t, true); fill(keyPanelOpen, s.k, true); fill(keyOpen, s.o, false); fill(storyOpen, s.s, true);
+      const same = view === s.v && (s.v !== 'q' || lastQ === i);
+      if (s.v === 'result') renderResult(); else if (s.v === 'q') renderQuestion(); else renderIntro();
+      if (!same) toTop();
+      last = state();
+    },
+    onChange(f) { listeners.push(f); }
+  };
+  document.addEventListener('click', () => setTimeout(changed, 0));
+  setInterval(changed, 400);
+})();
 </script>
 </body>
 </html>
