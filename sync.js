@@ -30,7 +30,7 @@ const externalTargets={
  'https://bobayhsu.github.io/allbobay/':{title:'影片資源',frame:'https://bobayhsu.github.io/allbobay/'},
   'https://bobayhsu.github.io/practice/':{title:'練習',frame:'https://bobayhsu.github.io/practice/'},
   'https://bobayhsu.github.io/games/':{title:'遊戲',frame:'https://bobayhsu.github.io/games/'},
-  'https://bobayhsu.github.io/fivestory/satir/':{title:'薩提爾',frame:'https://bobayhsu.github.io/fivestory/satir/'},
+  'https://bobayhsu.github.io/fivestory/satir/':{title:'薩提爾',frame:'https://bobayhsu.github.io/fivestory/satir/?v=4'},  /* ?v= 讓瀏覽器每次都拿最新版；薩提爾改版時加 1 */
  'https://www.youtube.com/watch?v=CSuwxPxaJSQ':{title:'看影片',frame:'https://www.youtube-nocookie.com/embed/CSuwxPxaJSQ?rel=0'},
  'https://www.youtube.com/watch?v=4gUPQSsD8JU':{title:'薩提爾的對話練習',frame:'https://www.youtube-nocookie.com/embed/4gUPQSsD8JU?rel=0'}
 };
