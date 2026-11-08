@@ -30,6 +30,7 @@ const externalTargets={
  'https://bobayhsu.github.io/allbobay/':{title:'影片資源',frame:'https://bobayhsu.github.io/allbobay/'},
   'https://bobayhsu.github.io/practice/':{title:'練習',frame:'https://bobayhsu.github.io/practice/'},
   'https://bobayhsu.github.io/games/':{title:'遊戲',frame:'https://bobayhsu.github.io/games/'},
+  'https://bobayhsu.github.io/fivestory/satir/':{title:'薩提爾',frame:'https://bobayhsu.github.io/fivestory/satir/'},
  'https://www.youtube.com/watch?v=CSuwxPxaJSQ':{title:'看影片',frame:'https://www.youtube-nocookie.com/embed/CSuwxPxaJSQ?rel=0'}
 };
 let externalPage='';
