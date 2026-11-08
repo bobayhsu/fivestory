@@ -16,6 +16,8 @@
 
 /* ---------- 整體 ---------- */
 *{box-sizing:border-box}
+/* 手機（特別是 LINE 等 App 內建瀏覽器）會自動把字放大，造成文字擠出畫面；這行禁止自動放大（同五大類故事） */
+html,body,*{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}
 html,body{margin:0;height:100%;background:#000;color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif}
 a{color:inherit}
 
