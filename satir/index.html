@@ -25,5 +25,7 @@
 <script src="content.js?v=3"></script>
 <script src="render.js?v=4"></script>
 <script src="nav.js?v=4"></script>
+<style id="fsAutoHide">html.fs-idle #fsbar{opacity:0!important;visibility:hidden!important;transition:opacity .3s ease,visibility .3s}</style>
+<script>/* 2026-11-09 底部圖示列：不用 2.5 秒自動隱藏；滑鼠移到畫面下方、或手機點一下就出現 */(function(){var S='#fsbar',d=document.documentElement,t;function over(){try{return [].some.call(document.querySelectorAll(S),function(e){return e.matches(":hover")})}catch(_){return false}}function hide(){if(over()){clearTimeout(t);t=setTimeout(hide,1200);return}d.classList.add("fs-idle")}function show(){d.classList.remove("fs-idle");clearTimeout(t);t=setTimeout(hide,2500)}function hook(w){try{if(!w||w.__fsAH)return;w.__fsAH=1;w.addEventListener("mousemove",function(e){if(e.clientY>w.innerHeight-140)show()},{passive:true});w.addEventListener("touchstart",show,{passive:true});w.addEventListener("keydown",show)}catch(_){}}hook(window);setInterval(function(){var f=document.getElementById("syncExternalFrame");if(f)hook(f.contentWindow)},1000);show();})();</script>
 </body>
 </html>
