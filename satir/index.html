@@ -182,7 +182,7 @@ body.embedded{--chrome:80px}
 html,body{background:#000}
 #app{position:fixed;left:0;top:0;width:100vw;height:100vh;--VW:100vw;--VH:100vh}
 @media (orientation:portrait) and (max-width:900px){#app{width:100vh;height:100vw;--VW:100vh;--VH:100vw;left:100vw;transform-origin:top left;transform:rotate(90deg)}}
-#app{--W:min(var(--VW),calc(var(--VH)*16/9));--H:calc(var(--W)*9/16);--nb:calc(var(--H)*.0704)}
+#app{--W:min(var(--VW),calc(var(--VH)*16/9));--H:calc(var(--W)*9/16);--nb:clamp(calc(var(--H)*.0704),48px,calc(var(--H)*.139))}
 main{position:absolute;inset:0;padding:0}
 .stage{width:var(--W)!important;height:var(--H);aspect-ratio:auto;border-radius:0;box-shadow:none}
 #fsbar{position:absolute;left:calc((var(--VW) - var(--W))/2);width:var(--W);top:calc((var(--VH) + var(--H))/2 - var(--nb)*1.2);bottom:auto;height:var(--nb);background:transparent;padding:0 calc(var(--W)*.0104);pointer-events:none}
@@ -195,13 +195,13 @@ body:not(.embedded) main{bottom:0}
 @media (max-width:700px){#fsbar{height:var(--nb);padding:0 calc(var(--W)*.0104)}#fsbar .g{gap:calc(var(--H)*.011)}#fsbar .fb{width:var(--nb);height:var(--nb)}#fsbar svg{width:calc(var(--nb)*.55);height:calc(var(--nb)*.55)}body:not(.embedded) main{bottom:0}}
 /* 讓內容避開底部圖示 */
 .home{display:none!important}
-.dlg{padding-bottom:12cqh!important}
+.dlg{padding-bottom:calc(var(--nb)*1.4)!important}
 .back{top:3.2cqh;bottom:auto!important;left:8cqw;right:auto!important}
-.hint{bottom:11cqh!important}
-.cover2 .stances{padding-bottom:10cqh!important}
-.matrix{margin-bottom:11cqh!important}
-.essay{padding-bottom:12cqh!important}
-.tag{bottom:12cqh!important}.mini{bottom:12cqh!important}
+.hint{bottom:calc(var(--nb)*1.3)!important}
+.cover2 .stances{padding-bottom:calc(var(--nb)*1.3)!important}
+.matrix{margin-bottom:calc(var(--nb)*1.35)!important}
+.essay{padding-bottom:calc(var(--nb)*1.4)!important}
+.tag{bottom:calc(var(--nb)*1.4)!important}.mini{bottom:calc(var(--nb)*1.4)!important}
 .plain,.photo{padding-right:20cqw!important}
 </style>
 </head>
