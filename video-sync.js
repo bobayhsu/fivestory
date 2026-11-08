@@ -15,6 +15,9 @@ const self='v5-'+Date.now()+'-'+Math.random().toString(36).slice(2);
 const began=Date.now();
 let last='',remote=false,documentWatched=null,player=null,ready=false,playingID='',queued=null,generation=0,ytPromise=null,ignoreSelectUntil=0;
 const active=()=>layer.style.display!=='none'&&(frame.getAttribute('src')||'').startsWith(resourceURL);
+// 2026-11-08：薩提爾網頁（標題「薩提爾」）送來的影片，也用這套同步播放器
+const satirURL='https://bobayhsu.github.io/fivestory/satir/';
+const satirActive=()=>layer.style.display!=='none'&&(frame.getAttribute('src')||'').startsWith(satirURL);
 // The main 「看影片」 button opens a direct YouTube embed via sync.js.
 // Its externalPage is already synchronized by the existing screen state.
 const directVideoID='CSuwxPxaJSQ';
@@ -112,6 +115,9 @@ window.addEventListener('click',e=>{
  transmit({kind:'select',videoID:id,title:'許川川田能久大蛇精'});
 },true);
 
+window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow||e.data?.type!=='fivestory-satir-video')return;
+ const id=youtubeID(e.data.url);if(!id||!satirActive())return;const t=e.data.title||'YouTube 影片';
+ becomeClockOwner();standaloneDirect=false;show(id,t);transmit({kind:'select',videoID:id,title:t});});
 // allbobay V5 sends this message directly, avoiding its window.open() behavior.
 window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow||e.data?.type!=='fivestory-video-select-v5')return;select(e.data.url,e.data.title)});
 // Legacy allbobay support: intercept clicks at capture phase before its own window.open handler.
@@ -128,7 +134,7 @@ setInterval(()=>{
   return;
  }
  directHandled=false;
- if(!active()&&!standaloneDirect&&panel.style.display!=='none')close();
+ if(!active()&&!satirActive()&&!standaloneDirect&&panel.style.display!=='none')close();
 },250);
 panel.querySelector('#fsvPlay').onclick=()=>{becomeClockOwner();playback('play');transmit({kind:'playback',op:'play'});setTimeout(()=>publishClock(true),350)};
 panel.querySelector('#fsvPause').onclick=()=>{becomeClockOwner();playback('pause');transmit({kind:'playback',op:'pause'});setTimeout(()=>publishClock(true),250)};

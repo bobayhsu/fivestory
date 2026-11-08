@@ -65,7 +65,7 @@
   /* 首頁 */
   var T = D['標題'], L = D['標題連結'];
   var titleHtml = T.indexOf(L['文字']) === 0
-    ? '<a class="tlink" href="#video" title="' + esc(L['說明']) + '">' + esc(L['文字']) + '</a>' + esc(T.slice(L['文字'].length))
+    ? '<a class="tlink" href="#video" data-video="' + esc(L['網址']) + '" data-title="' + esc(L['說明'].replace(/（YouTube）$/, '')) + '" title="' + esc(L['說明']) + '">' + esc(L['文字']) + '</a>' + esc(T.slice(L['文字'].length))
     : esc(T);
   pages.push([PAGE.home, '<div class="cover2"><h1 class="ctitle">' + titleHtml + '</h1>\n' + menu() + '\n<div class="stances">' +
     D['四種姿態'].map(function(s){

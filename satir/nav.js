@@ -48,6 +48,18 @@
     backward = d < 0; location.hash = ids[i];
   }
 
+  /* 在五大類故事的同步視窗裡：點標題「薩提爾」改用五大類故事的同步播放器（播放、暫停、進度兩台一起） */
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('a.tlink[data-video]'); if (!t) return;
+    try{
+      var P = window.parent;
+      if (P !== window && P.document.getElementById('fivestoryVideoPanel')){
+        e.preventDefault(); e.stopPropagation();
+        P.postMessage({ type:'fivestory-satir-video', url:t.getAttribute('data-video'), title:t.getAttribute('data-title') }, location.origin);
+      }
+    }catch(_){}
+  }, true);
+
   document.addEventListener('click', function(e){
     var w = e.target.closest('.wbs-btn');
     document.querySelectorAll('.wbs').forEach(function(x){ if (!w || x !== w.parentNode) x.classList.remove('open'); });
