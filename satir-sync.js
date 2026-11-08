@@ -35,7 +35,25 @@ function observe(){
  if(!seen){seen=k;return;}              // 剛打開：先記下，不送出
  if(k!==seen){seen=k;publish(s);}       // 這台有人點了：送出
 }
-frame.addEventListener('load',()=>{seen='';setTimeout(()=>{if(remote)apply();},300);});
+frame.addEventListener('load',()=>{seen='';setTimeout(()=>{if(remote)apply();},300);hookLinks();});
+/* 2026-11-08：標題「薩提爾」連到 YouTube——不另開分頁，改在同步視窗裡播放，兩台一起打開 */
+const VIDEO='https://www.youtube.com/watch?v=4gUPQSsD8JU';
+function hookLinks(){
+ if(!active())return;
+ let doc;try{doc=frame.contentDocument;}catch(_){return;}
+ if(!doc||doc.__satirVideoHook)return;doc.__satirVideoHook=true;
+ doc.addEventListener('click',e=>{
+  const a=e.target.closest&&e.target.closest('a[href]');if(!a||a.href!==VIDEO)return;
+  e.preventDefault();e.stopPropagation();
+  const t=document.createElement('a');t.href=VIDEO;t.style.display='none';document.body.appendChild(t);t.click();t.remove();
+ },true);
+}
+setInterval(hookLinks,1000);
+/* 2026-11-08：開著薩提爾時，不顯示右上角紅色「返回故事」圖示（會蓋到薩提爾的選單；改用底部圖示回去） */
+const hide=document.createElement('style');
+hide.textContent='#fivestorySyncedExternal.satirOn #syncExternalClose{display:none!important}';
+document.head.appendChild(hide);
+setInterval(()=>layer.classList.toggle('satirOn',active()),300);
 ref.on('value',snap=>{
  const cmd=snap.val();
  if(firstSnapshot){firstSnapshot=false;return;}
