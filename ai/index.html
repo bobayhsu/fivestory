@@ -22,6 +22,21 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 .frame .tab:hover p{color:#FBF8F3!important}
 .frame .tab:hover p[style*="background:#1E1C1A"]{background:#FBF8F3!important;color:#C41F27!important}
 .frame h2{text-shadow:0 2px 0 rgba(196,31,39,.12)}
+/* 2026-11-09 左側單元選單（總覽頁以外都顯示，目前單元反白） */
+#aiSide{position:absolute;left:28px;top:50%;transform:translateY(-50%);z-index:5;display:none;flex-direction:column;gap:14px;width:232px;cursor:default}
+#stage.side #aiSide{display:flex}
+#aiSide .sd{font-size:40px;font-weight:900;color:#C41F27;letter-spacing:4px;text-align:center;background:#FBF9F6;border:2px solid #E4DED5;border-radius:16px;padding:18px 0;cursor:pointer;box-shadow:0 4px 14px rgba(30,28,26,.06);transition:background .2s,color .2s,transform .2s,border-color .2s}
+#aiSide .sd:hover{background:#C41F27;border-color:#C41F27;color:#FBF8F3;transform:translateX(6px)}
+#aiSide .sd.on{background:#FBEDEC;border-color:#E9B9B5}
+#aiSide .sd.on:hover{background:#C41F27;color:#FBF8F3}
+#stage.side .slide:not(#ai-frame){padding-left:300px!important}
+#stage.side #ai-practice h2{font-size:84px!important}
+#stage.side #ai-order .aiS.sm{font-size:33px}
+#stage.side #ai-order .aiOrd{font-size:26px;padding:8px 18px;gap:16px}
+#stage.side #ai-order .aiOrd b{font-size:30px;width:140px}
+#stage.side #ai-order .aiOrd span{width:120px}
+#stage.side #ai-order .aiPrompt.sm{font-size:26px;padding:12px 20px}
+#stage.side #ai-curve .aiC{font-size:32px}
 /* 右上角翻頁 */
 #pager{position:absolute;top:26px;right:30px;z-index:5;display:flex;gap:10px;align-items:center;cursor:default}
 #pager button{width:64px;height:64px;border-radius:50%;border:0;background:#1E1C1A;color:#FBF8F3;font-size:34px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.85}
@@ -148,6 +163,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </head>
 <body>
 <div id="stage">
+<nav id="aiSide" aria-label="AI 加值單元"><div class="sd" data-go="ai-multi">多 AI</div><div class="sd" data-go="ai-curve">人物</div><div class="sd" data-go="ai-order">換順序</div><div class="sd" data-go="ai-filter">套濾鏡</div><div class="sd" data-go="ai-human">去 AI 感</div></nav>
 <div id="pager"><button class="toc" type="button" data-pg="toc" title="回 AI 加值總覽">總覽</button><button type="button" data-pg="prev" title="上一頁（←）">‹</button><span class="num"></span><button type="button" data-pg="next" title="下一頁（→）">›</button></div>
 <!-- ===== 2026-11-09 新章節：AI 加值（ai-*） ===== -->
 <section class="slide frame" id="ai-frame" data-transition="fade" style="background:#F7F5F1;color:#1E1C1A;font-family:'Noto Sans TC', Arial, sans-serif;padding:96px 128px;display:flex;flex-direction:column;justify-content:center;gap:36px">
@@ -293,7 +309,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
  function fit(){var vw=document.documentElement.clientWidth||innerWidth,vh=document.documentElement.clientHeight||innerHeight,m=embedded?0:24;var s=Math.min((vw-m)/1920,(vh-m)/1080);stage.style.transform='translate(-50%,-50%) scale('+s+')';}
  addEventListener('resize',fit);addEventListener('orientationchange',function(){setTimeout(fit,250);});fit();
  function show(i,silent){i=Math.max(0,Math.min(slides.length-1,i|0));slides.forEach(function(s,k){s.classList.toggle('active',k===i);});cur=i;
-  num.textContent=(i+1)+' / '+slides.length;prevB.disabled=i===0;nextB.disabled=i===slides.length-1;
+  num.textContent=(i+1)+' / '+slides.length;stage.classList.toggle('side',slides[i].id!=='ai-frame');[].forEach.call(document.querySelectorAll('#aiSide .sd'),function(d){d.classList.toggle('on',d.dataset.go===slides[i].id);});prevB.disabled=i===0;nextB.disabled=i===slides.length-1;
   try{history.replaceState(null,'','#'+(i+1));}catch(_){}
   if(!silent)listeners.forEach(function(f){try{f(String(cur));}catch(_){}});}
  function go(id){var k=slides.findIndex(function(s){return s.id===id;});if(k>=0)show(k);}
