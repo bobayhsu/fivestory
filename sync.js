@@ -26,7 +26,7 @@ const overlayIds=['formula','ov-map','ov-star','ov-bird','ov-girl','endPage'];
 // Two external video links are shown inside the same synchronized page.
 // External websites are not controllable by the Firebase screen state.
 const externalTargets={
- 'https://bobayhsu.github.io/bullseye/':{title:'說書人',frame:'https://bobayhsu.github.io/bullseye/?v=2'}  /* 說書人改版時 ?v= 加 1 */,
+ 'https://bobayhsu.github.io/bullseye/':{title:'說書人',frame:'https://bobayhsu.github.io/bullseye/?v=3'}  /* 說書人改版時 ?v= 加 1 */,
  'https://bobayhsu.github.io/allbobay/':{title:'影片資源',frame:'https://bobayhsu.github.io/allbobay/'},
   'https://bobayhsu.github.io/practice/':{title:'練習',frame:'https://bobayhsu.github.io/practice/'},
   'https://bobayhsu.github.io/games/':{title:'遊戲',frame:'https://bobayhsu.github.io/games/'},
