@@ -11,7 +11,7 @@ html,body,*{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!import
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;height:100%;background:#1B1815;font-family:'Noto Sans TC',Arial,sans-serif;overscroll-behavior:none}
 body{overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:manipulation}
-#stage{position:absolute;top:50%;left:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.55);cursor:pointer}
+#stage{position:absolute;top:50%;left:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.55);cursor:default}
 html.embedded #stage{border-radius:0;box-shadow:none}
 .slide{position:absolute;top:0;left:0;width:1920px;height:1080px;opacity:0;visibility:hidden;transform:scale(.985);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1),visibility .45s;background-image:radial-gradient(ellipse at 50% -10%,rgba(255,255,255,.55),transparent 55%),radial-gradient(ellipse at 50% 115%,rgba(60,40,20,.07),transparent 60%)!important}
 .slide.active{opacity:1;visibility:visible;transform:none}
@@ -281,9 +281,9 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   if(window.__aiRunOpen&&window.__aiRunOpen())return;
   if(e.target.closest('#aiTop')&&!e.target.closest('[data-go]'))return;
   var t=e.target.closest('[data-go]');if(t){go(t.dataset.go);return;}
-  if(e.target.closest('.aiRunBtn,button,a,textarea'))return;
-  next();});
- stage.addEventListener('contextmenu',function(e){e.preventDefault();prev();});
+  /* 2026-11-09 除了按鈕之外，按到畫面其他地方都不翻頁（鍵盤方向鍵、手機左右滑照常可用） */
+  });
+ stage.addEventListener('contextmenu',function(e){e.preventDefault();});
  addEventListener('keydown',function(e){if(document.body.classList.contains('reader'))return;
   if(['ArrowRight','ArrowDown',' ','PageDown','Enter'].indexOf(e.key)>=0){e.preventDefault();next();}
   else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].indexOf(e.key)>=0){e.preventDefault();prev();}
