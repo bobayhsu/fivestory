@@ -155,7 +155,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .aiRunRow .aiPrompt{background:none;border:0;padding:0}
 .aiRunRow .aiRunBtn{align-self:center}
 /* 換順序頁：名稱在前、改粗黑；數字在後 */
-#ai-order .aiOrd span{color:#1E1C1A;font-weight:900}
+#ai-order .aiOrd span{color:#1E1C1A;font-weight:900} #ai-order .aiOrd{cursor:pointer}
 /* 每一頁：滑鼠移到哪一格，哪一格就凸顯 */
 @media (hover:hover){
 .slide.ai .aiOrd,.slide.ai .aiC,.slide.ai .aiRow,.aiPlots .pl{transition:background .15s,border-color .15s,box-shadow .15s}
@@ -369,7 +369,9 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function msg(t,err){var m=$('.arMsg');m.textContent=t;m.classList.toggle('err',!!err);}
  function open(id){var t=TASKS[id];if(!t)return;cur=id;$('#arTitle').textContent=t.name;$('.arTask').textContent=t.desc;
   if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('#arTitle').textContent=t.name+'｜'+window.__aiPlot.n+' '+window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
-  var o=$('.arOpt');o.innerHTML='';if(t.opts&&id!=='ai-filter'){var sel=opt[id]||t.opts[0];o.classList.toggle('plots',id==='ai-filter');t.opts.forEach(function(x,k){var b=document.createElement('button');b.type='button';if(id==='ai-filter')b.innerHTML='<i>'+(k+1)+'</i>'+x;else b.textContent=x;b.dataset.opt=x;if(x===sel)b.classList.add('on');o.appendChild(b);});o.style.display='';}else o.style.display='none';
+  var rd=document.body.classList.contains('reader');
+  if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.n+' '+window.__aiOrd.name;if(!rd){$('#arTitle').textContent=t.name+'｜'+window.__aiOrd.n+' '+window.__aiOrd.name;$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
+  var o=$('.arOpt');o.innerHTML='';if(t.opts&&id!=='ai-filter'&&!(id==='ai-order'&&!rd)){var sel=opt[id]||t.opts[0];o.classList.toggle('plots',id==='ai-filter');t.opts.forEach(function(x,k){var b=document.createElement('button');b.type='button';if(id==='ai-filter')b.innerHTML='<i>'+(k+1)+'</i>'+x;else b.textContent=x;b.dataset.opt=x;if(x===sel)b.classList.add('on');o.appendChild(b);});o.style.display='';}else o.style.display='none';
   msg('');preview();box.classList.add('open');box.setAttribute('aria-hidden','false');setTimeout(function(){try{ta.focus({preventScroll:true});}catch(_){}},60);}
  function close(){box.classList.remove('open');box.setAttribute('aria-hidden','true');try{ta.blur();}catch(_){}}
  window.__aiRunOpen=function(){return box.classList.contains('open');};
@@ -418,6 +420,26 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
  /* 手機閱讀版是之後才建立的，建立後再對一次 */
  var R=document.getElementById('reader');if(R&&window.MutationObserver)new MutationObserver(function(){if(R.querySelector('.card .pl'))pick(window.__aiPlot);}).observe(R,{childList:true});
  document.addEventListener('click',function(e){var el=e.target.closest&&e.target.closest('.aiPlots .pl, #reader .card .pl');if(!el)return;e.preventDefault();pick(nameOf(el));});
+})();
+</script>
+<script>/* 2026-11-09 換順序：點選左邊的排列，提示詞和右邊小美人魚的順序自動換 */
+(function(){
+ var N=['','目標','阻礙','努力','結果','意外','轉彎','結局'];
+ function info(el){return {n:el.querySelector('b').textContent.trim(),name:el.querySelector('span').textContent.trim()};}
+ function pick(sel){window.__aiOrd=sel;
+  document.querySelectorAll('#ai-order .aiOrd').forEach(function(el){el.classList.toggle('hot',info(el).n===sel.n);});
+  var seq=sel.n.split('').map(function(d){return N[+d];}).join('→');
+  var html='用<span class="plotSel">「'+sel.n+' '+sel.name+'」</span>的順序（'+seq+'），把我的故事重新說一次。';
+  document.querySelectorAll('#ai-order .aiPrompt, #reader .aiRunRow[data-slide="ai-order"] .aiPrompt').forEach(function(p){p.innerHTML=html;});
+  var first=document.querySelector('#ai-order .aiC.step');if(!first)return;var col=first.parentNode,rows={};
+  col.querySelectorAll('.aiC.step').forEach(function(r){rows[r.querySelector('b').textContent.trim().charAt(0)]=r;});
+  sel.n.split('').forEach(function(d){if(rows[d])col.appendChild(rows[d]);});
+  var hd=col.querySelector('.aiH.red');if(hd)hd.textContent='小美人魚的靶心人，改成 '+sel.n+'（'+sel.name+'）';}
+ var h=document.querySelector('#ai-order .aiOrd.hot');
+ function init(){var x=document.querySelector('#ai-order .aiOrd.hot')||h;if(x)pick(info(x));}
+ init();
+ var R=document.getElementById('reader');if(R&&window.MutationObserver)new MutationObserver(function(){if(R.querySelector('.aiRunRow[data-slide="ai-order"]')&&window.__aiOrd)pick(window.__aiOrd);}).observe(R,{childList:true});
+ document.addEventListener('click',function(e){var el=e.target.closest&&e.target.closest('#ai-order .aiOrd');if(!el)return;e.preventDefault();pick(info(el));});
 })();
 </script>
 </body>
