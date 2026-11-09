@@ -23,7 +23,7 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 .frame .tab:hover p[style*="background:#1E1C1A"]{background:#FBF8F3!important;color:#C41F27!important}
 .frame h2{text-shadow:0 2px 0 rgba(196,31,39,.12)}
 /* 右上角單元選單（取代原本的翻頁鈕），目前單元反白 */
-#aiTop{position:absolute;top:14px;right:24px;z-index:5;display:flex;gap:10px;cursor:default}
+#aiTop{position:absolute;top:0;right:0;z-index:5;display:flex;gap:10px;cursor:default;padding:14px 24px 40px 70px}/* 加大四顆按鈕周圍的「不翻頁」範圍，不小心按到旁邊不會換頁 */
 #aiTop .sd{font-size:24px;font-weight:900;color:#C41F27;letter-spacing:3px;background:#FBF9F6;border:2px solid #E4DED5;border-radius:12px;padding:8px 22px;cursor:pointer;box-shadow:0 3px 10px rgba(30,28,26,.08);transition:background .2s,color .2s,transform .2s,border-color .2s;white-space:nowrap}
 #aiTop .sd:hover{background:#C41F27;border-color:#C41F27;color:#FBF8F3;transform:translateY(2px)}
 #aiTop .sd.on{background:#FBEDEC;border-color:#E9B9B5}
