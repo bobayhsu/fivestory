@@ -51,8 +51,8 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 .aiGrid .aiH{font-size:32px;font-weight:900;color:#FBF8F3;background:#1E1C1A;border-radius:12px;padding:8px 24px}
 .aiGrid .aiH.red{background:#C41F27}
 .aiC{font-size:34px;line-height:1.35;background:#FBF9F6;border:2px solid #E4DED5;border-radius:14px;padding:10px 22px;display:flex;gap:20px;align-items:center}
-.aiC b{flex:none;font-size:28px;color:#8A847B;width:100px;white-space:nowrap}
-.aiC.step b{color:#C41F27}
+.aiC>b{flex:none;font-size:28px;color:#8A847B;width:100px;white-space:nowrap}
+.aiC.step>b{color:#C41F27}
 .aiSub{font-size:34px;font-weight:700;color:#5E5850}
 .aiOrd{display:flex;gap:22px;align-items:center;background:#FBF9F6;border:2px solid #E4DED5;border-radius:14px;padding:10px 24px;font-size:32px}
 .aiOrd b{font-size:36px;letter-spacing:3px;color:#1E1C1A;width:170px}
@@ -154,13 +154,6 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .aiRunRow:hover{border-color:#C41F27;box-shadow:0 6px 18px rgba(196,31,39,.12)}
 .aiRunRow .aiPrompt{background:none;border:0;padding:0}
 .aiRunRow .aiRunBtn{align-self:center}
-/* 靶心人頁：左右兩欄逐行對齊（同心結人頁） */
-#ai-bullseye .bxGrid{flex:1;display:grid;grid-template-columns:1fr 1.25fr;grid-auto-flow:row dense;gap:12px 48px;align-content:center;align-items:center}
-#ai-bullseye .bxEx,#ai-bullseye .bxQ{display:contents}
-#ai-bullseye .bxQ>*{grid-column:1} #ai-bullseye .bxEx>*{grid-column:2}
-#ai-bullseye .bxQ .aiQ{align-self:stretch;margin:0}
-/* 靶心人頁：標籤和內容同一個字級 */
-#ai-bullseye .aiL{font-size:38px} #ai-bullseye .aiS.sm{font-size:38px}
 /* 每一頁：滑鼠移到哪一格，哪一格就凸顯 */
 @media (hover:hover){
 .slide.ai .aiOrd,.slide.ai .aiC,.slide.ai .aiRow,.aiPlots .pl{transition:background .15s,border-color .15s,box-shadow .15s}
@@ -199,21 +192,15 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 
 <section class="slide ai" id="ai-bullseye" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:24px">
 <h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人：三分鐘說一個完整的故事</h2>
-<div class="bxGrid">
-<div class="bxEx">
-<p class="aiSub">小美人魚的靶心人七步</p>
-<div class="aiRow"><p class="lbl aiL">1 目標</p><p class="step aiS sm" data-rl="1 目標">讓王子愛上自己。</p></div>
-<div class="aiRow"><p class="lbl aiL">2 阻礙</p><p class="step aiS sm" data-rl="2 阻礙">用聲音換了雙腿，說不出真相。</p></div>
-<div class="aiRow"><p class="lbl aiL">3 努力</p><p class="step aiS sm" data-rl="3 努力">忍著刀割般的痛，天天為他跳舞。</p></div>
-<div class="aiRow"><p class="lbl aiL">4 結果</p><p class="step aiS sm" data-rl="4 結果">王子只把她當成可愛的小孤女。</p></div>
-<div class="aiRow"><p class="lbl aiL red">5 意外</p><p class="step aiS sm" data-rl="5 意外">王子娶公主，<b><span style="color:#C41F27">以為是公主救了他</span></b>。</p></div>
-<div class="aiRow"><p class="lbl aiL">6 轉彎</p><p class="step aiS sm" data-rl="6 轉彎">姊姊送來匕首，她卻把刀丟進海裡。</p></div>
-<div class="aiRow"><p class="lbl aiL">7 結局</p><p class="step aiS sm" data-rl="7 結局">化成泡沫，成為空氣的女兒。</p></div>
-</div>
-<div class="bxQ">
-<p class="aiSub">每一步，問一個問題</p>
-<div class="aiOrd aiQ"><b>1 目標</b><i>主角想要什麼？</i></div><div class="aiOrd aiQ"><b>2 阻礙</b><i>什麼擋住了他？</i></div><div class="aiOrd aiQ"><b>3 努力</b><i>他怎麼做？</i></div><div class="aiOrd aiQ"><b>4 結果</b><i>成功了嗎？</i></div><div class="aiOrd aiQ"><b>5 意外</b><i>發生什麼想不到的事？</i></div><div class="aiOrd aiQ"><b>6 轉彎</b><i>情節怎麼轉向？</i></div><div class="aiOrd aiQ"><b>7 結局</b><i>最後怎麼了？</i></div>
-</div>
+<div class="aiGrid">
+<p class="aiH">每一步，問一個問題</p><p class="aiH red">小美人魚的靶心人七步</p>
+<p class="aiC"><b>1 目標</b><span>主角想要什麼？</span></p><p class="aiC step" data-rl="1 目標"><b>1 目標</b><span>讓王子愛上自己</span></p>
+<p class="aiC"><b>2 阻礙</b><span>什麼擋住了他？</span></p><p class="aiC step" data-rl="2 阻礙"><b>2 阻礙</b><span>用聲音換了雙腿，說不出真相</span></p>
+<p class="aiC"><b>3 努力</b><span>他怎麼做？</span></p><p class="aiC step" data-rl="3 努力"><b>3 努力</b><span>忍著刀割般的痛，天天為他跳舞</span></p>
+<p class="aiC"><b>4 結果</b><span>成功了嗎？</span></p><p class="aiC step" data-rl="4 結果"><b>4 結果</b><span>王子只把她當成可愛的小孤女</span></p>
+<p class="aiC"><b>5 意外</b><span>發生什麼想不到的事？</span></p><p class="aiC step" data-rl="5 意外"><b>5 意外</b><span>王子娶公主，<b><span style="color:#C41F27">以為是公主救了他</span></b></span></p>
+<p class="aiC"><b>6 轉彎</b><span>情節怎麼轉向？</span></p><p class="aiC step" data-rl="6 轉彎"><b>6 轉彎</b><span>姊姊送來匕首，她卻把刀丟進海裡</span></p>
+<p class="aiC"><b>7 結局</b><span>最後怎麼了？</span></p><p class="aiC step" data-rl="7 結局"><b>7 結局</b><span>化成泡沫，成為空氣的女兒</span></p>
 </div>
 <div class="aiRunRow" data-slide="ai-bullseye">
 <p class="aiPrompt sm" style="flex:1">把我的經歷整理成靶心人七步：目標、阻礙、努力、結果、意外、轉彎、結局，每一步一到兩句。</p>
@@ -326,7 +313,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
    if(s.id==='ai-frame')s.querySelectorAll('.tab').forEach(function(tb){var p=tb.querySelectorAll('p');h+='<div class="card"><div class="trow"><span class="ty">'+esc(p[0].textContent.trim())+'</span><span class="kw">'+esc(p[1].textContent.trim())+'</span><span>'+esc(p[2].textContent.trim())+'</span></div></div>';});
    var big=s.querySelector('.aiBig');if(big)h+='<p class="note"><b>'+esc(big.textContent.trim())+'</b></p>';
    s.querySelectorAll('[data-rl]').forEach(function(el){var c=el.cloneNode(true),pre='';
-    if(el.classList.contains('aiC')){var b=c.querySelector(':scope > b');if(b)b.remove();var pv=el.previousElementSibling;if(pv&&pv.classList.contains('aiC')){var pb=pv.querySelector('b'),ps=pv.querySelector('span');pre='<span style="display:block;color:#8A847B;font-size:.9em;margin-bottom:4px">靶心人｜'+esc(pb?pb.textContent:'')+'：'+esc(ps?ps.textContent:'')+'</span>';}}
+    if(el.classList.contains('aiC')){var b=c.querySelector(':scope > b');if(b)b.remove();var pv=el.previousElementSibling;if(pv&&pv.classList.contains('aiC')){var pb=pv.querySelector('b'),ps=pv.querySelector('span');pre='<span style="display:block;color:#8A847B;font-size:.9em;margin-bottom:4px">'+(s.id==='ai-bullseye'?'問｜'+esc(ps?ps.textContent:''):'靶心人｜'+esc(pb?pb.textContent:'')+'：'+esc(ps?ps.textContent:''))+'</span>';}}
     var lab=el.getAttribute('data-rl'),cls=/^5|意外|觸動|回頭|兩難|刺痛|抉擇/.test(lab)?'key':'';
     h+='<div class="card '+cls+'"><span class="lab">'+esc(lab)+'</span><p>'+pre+c.innerHTML+'</p></div>';});
    s.querySelectorAll('.aiPrompt').forEach(function(p){var row=!!p.closest('.aiRunRow');h+=(row?'<div class="aiRunRow" data-slide="'+s.id+'">':'')+'<p class="aiPrompt">'+esc(p.textContent.trim())+'</p><span class="aiRunBtn" data-slide="'+s.id+'">▶ 貼上故事，執行</span>'+(row?'</div>':'');});
