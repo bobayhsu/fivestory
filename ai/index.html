@@ -51,14 +51,14 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 .aiGrid .aiH{font-size:32px;font-weight:900;color:#FBF8F3;background:#1E1C1A;border-radius:12px;padding:8px 24px}
 .aiGrid .aiH.red{background:#C41F27}
 .aiC{font-size:34px;line-height:1.35;background:#FBF9F6;border:2px solid #E4DED5;border-radius:14px;padding:10px 22px;display:flex;gap:20px;align-items:center}
-.aiC b{flex:none;font-size:28px;color:#8A847B;width:72px}
+.aiC b{flex:none;font-size:28px;color:#8A847B;width:100px;white-space:nowrap}
 .aiC.step b{color:#C41F27}
 .aiSub{font-size:34px;font-weight:700;color:#5E5850}
 .aiOrd{display:flex;gap:22px;align-items:center;background:#FBF9F6;border:2px solid #E4DED5;border-radius:14px;padding:10px 24px;font-size:32px}
 .aiOrd b{font-size:36px;letter-spacing:3px;color:#1E1C1A;width:170px}
 .aiOrd span{font-weight:900;color:#C41F27;width:150px}
 .aiOrd i{font-style:normal;color:#5E5850}
-.aiOrd.hot{border-color:#C41F27;background:#FBEDEC} .aiOrd.aiQ{padding:6px 24px;font-size:30px} .aiOrd.aiQ b{width:90px;color:#C41F27;letter-spacing:2px;font-size:32px}
+.aiOrd.hot{border-color:#C41F27;background:#FBEDEC} .aiOrd.aiQ{padding:4px 24px;font-size:40px} .aiOrd.aiQ b{width:130px;color:#C41F27;letter-spacing:2px;font-size:32px;flex:none}
 .aiBig{font-size:46px;font-weight:900;text-align:center;color:#1E1C1A;background:#FBF9F6;border:2px solid #E4DED5;border-radius:18px;padding:14px 0}
 .aiBig span{color:#C41F27}
 .aiTbl{display:grid;grid-template-columns:180px 1fr 1.5fr;gap:10px 22px;align-items:center}
@@ -197,7 +197,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </div>
 <div style="flex:1;display:flex;flex-direction:column;gap:10px">
 <p class="aiSub">每一步，問一個問題</p>
-<div class="aiOrd aiQ"><b>目標</b><i>主角想要什麼？</i></div><div class="aiOrd aiQ"><b>阻礙</b><i>什麼擋住了他？</i></div><div class="aiOrd aiQ"><b>努力</b><i>他怎麼做？</i></div><div class="aiOrd aiQ"><b>結果</b><i>成功了嗎？</i></div><div class="aiOrd aiQ"><b>意外</b><i>發生什麼想不到的事？</i></div><div class="aiOrd aiQ"><b>轉彎</b><i>情節怎麼轉向？</i></div><div class="aiOrd aiQ"><b>結局</b><i>最後怎麼了？</i></div>
+<div class="aiOrd aiQ"><b>1 目標</b><i>主角想要什麼？</i></div><div class="aiOrd aiQ"><b>2 阻礙</b><i>什麼擋住了他？</i></div><div class="aiOrd aiQ"><b>3 努力</b><i>他怎麼做？</i></div><div class="aiOrd aiQ"><b>4 結果</b><i>成功了嗎？</i></div><div class="aiOrd aiQ"><b>5 意外</b><i>發生什麼想不到的事？</i></div><div class="aiOrd aiQ"><b>6 轉彎</b><i>情節怎麼轉向？</i></div><div class="aiOrd aiQ"><b>7 結局</b><i>最後怎麼了？</i></div>
 </div>
 </div>
 <div class="aiRunRow" data-slide="ai-bullseye">
@@ -210,13 +210,13 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">心結人：事情轉彎了，人呢？</h2>
 <div class="aiGrid">
 <p class="aiH">靶心人：事件線（事情轉彎）</p><p class="aiH red">心結人：人物線（人物現形）</p>
-<p class="aiC"><b>目標</b><span>讓王子愛上自己</span></p><p class="aiC step" data-rl="渴望"><b>渴望</b><span>只想留在王子身邊，得到他的愛</span></p>
-<p class="aiC"><b>阻礙</b><span>用聲音換了雙腿，說不出真相</span></p><p class="aiC step" data-rl="顧忌"><b>顧忌</b><span>他若娶了別人，天亮她就化成泡沫</span></p>
-<p class="aiC"><b>努力</b><span>忍著刀割般的痛，天天為他跳舞</span></p><p class="aiC step" data-rl="兩難"><b>兩難</b><span>殺了他，<span style="color:#C41F27">自己能活</span>；不殺，<span style="color:#C41F27">自己消失</span></span></p>
-<p class="aiC"><b>結果</b><span>王子只把她當成可愛的小孤女</span></p><p class="aiC step" data-rl="抗拒"><b>抗拒</b><span>握著刀告訴自己：「他不愛我了。」</span></p>
-<p class="aiC"><b>意外</b><span>王子娶公主，以為是公主救了他</span></p><p class="aiC step" data-rl="刺痛"><b>刺痛</b><span>熟睡的王子，在夢裡喊著新娘的名字</span></p>
-<p class="aiC"><b>轉彎</b><span>姊姊送來匕首，她卻把刀丟進海裡</span></p><p class="aiC step" data-rl="抉擇"><b>抉擇</b><span>把刀丟進海裡——<span style="color:#C41F27">不拿他的命換</span></span></p>
-<p class="aiC"><b>結局</b><span>化成泡沫，成為空氣的女兒</span></p><p class="aiC step" data-rl="承擔"><b>承擔</b><span>太陽升起，她化成了泡沫</span></p>
+<p class="aiC"><b>1 目標</b><span>讓王子愛上自己</span></p><p class="aiC step" data-rl="1 渴望"><b>1 渴望</b><span>只想留在王子身邊，得到他的愛</span></p>
+<p class="aiC"><b>2 阻礙</b><span>用聲音換了雙腿，說不出真相</span></p><p class="aiC step" data-rl="2 顧忌"><b>2 顧忌</b><span>他若娶了別人，天亮她就化成泡沫</span></p>
+<p class="aiC"><b>3 努力</b><span>忍著刀割般的痛，天天為他跳舞</span></p><p class="aiC step" data-rl="3 兩難"><b>3 兩難</b><span>殺了他，<span style="color:#C41F27">自己能活</span>；不殺，<span style="color:#C41F27">自己消失</span></span></p>
+<p class="aiC"><b>4 結果</b><span>王子只把她當成可愛的小孤女</span></p><p class="aiC step" data-rl="4 抗拒"><b>4 抗拒</b><span>握著刀告訴自己：「他不愛我了。」</span></p>
+<p class="aiC"><b>5 意外</b><span>王子娶公主，以為是公主救了他</span></p><p class="aiC step" data-rl="5 刺痛"><b>5 刺痛</b><span>熟睡的王子，在夢裡喊著新娘的名字</span></p>
+<p class="aiC"><b>6 轉彎</b><span>姊姊送來匕首，她卻把刀丟進海裡</span></p><p class="aiC step" data-rl="6 抉擇"><b>6 抉擇</b><span>把刀丟進海裡——<span style="color:#C41F27">不拿他的命換</span></span></p>
+<p class="aiC"><b>7 結局</b><span>化成泡沫，成為空氣的女兒</span></p><p class="aiC step" data-rl="7 承擔"><b>7 承擔</b><span>太陽升起，她化成了泡沫</span></p>
 </div>
 <div class="aiRunRow" data-slide="ai-curve">
 <p class="aiPrompt sm" style="flex:1">把這個靶心人七步，改寫成心結人七步：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔——看他最後選了什麼、付了什麼代價。</p>
