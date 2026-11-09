@@ -58,7 +58,7 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 .aiOrd b{font-size:36px;letter-spacing:3px;color:#1E1C1A;width:170px}
 .aiOrd span{font-weight:900;color:#C41F27;width:150px}
 .aiOrd i{font-style:normal;color:#5E5850}
-.aiOrd.hot{border-color:#C41F27;background:#FBEDEC} .aiOrd.aiQ{padding:4px 24px;font-size:40px} .aiOrd.aiQ b{width:130px;color:#C41F27;letter-spacing:2px;font-size:32px;flex:none}
+.aiOrd.hot{border-color:#C41F27;background:#FBEDEC} .aiOrd.aiQ{padding:4px 24px;font-size:38px} .aiOrd.aiQ b{width:160px;color:#C41F27;letter-spacing:2px;font-size:38px;flex:none}
 .aiBig{font-size:46px;font-weight:900;text-align:center;color:#1E1C1A;background:#FBF9F6;border:2px solid #E4DED5;border-radius:18px;padding:14px 0}
 .aiBig span{color:#C41F27}
 .aiTbl{display:grid;grid-template-columns:180px 1fr 1.5fr;gap:10px 22px;align-items:center}
@@ -153,7 +153,17 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .aiRunRow{display:flex;gap:28px;align-items:center;background:#FDF1D6;border:2px dashed #D4A94E;border-radius:16px;padding:14px 16px 14px 26px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
 .aiRunRow:hover{border-color:#C41F27;box-shadow:0 6px 18px rgba(196,31,39,.12)}
 .aiRunRow .aiPrompt{background:none;border:0;padding:0}
-.aiRunRow .aiRunBtn{align-self:center} /* 按鈕在框內垂直置中 */
+.aiRunRow .aiRunBtn{align-self:center}
+/* 靶心人頁：標籤和內容同一個字級 */
+#ai-bullseye .aiL{font-size:38px} #ai-bullseye .aiS.sm{font-size:38px}
+/* 每一頁：滑鼠移到哪一格，哪一格就凸顯 */
+@media (hover:hover){
+.slide.ai .aiOrd,.slide.ai .aiC,.slide.ai .aiRow,.aiPlots .pl{transition:background .15s,border-color .15s,box-shadow .15s}
+.slide.ai .aiOrd:hover,.slide.ai .aiC:hover,.aiPlots .pl:hover{border-color:#C41F27;background:#FBEDEC;box-shadow:0 4px 14px rgba(196,31,39,.15)}
+.slide.ai .aiRow{border-radius:12px}
+.slide.ai .aiRow:hover{background:#FBEDEC;box-shadow:0 0 0 8px #FBEDEC}
+.slide.ai .aiRow:hover .aiL{background:#C41F27}
+} /* 按鈕在框內垂直置中 */
 /* 套濾鏡整頁字體一致：提示詞也用黑體，選中的格子不加粗 */
 .aiRunRow .aiPrompt{font-family:'Noto Sans TC',Arial,sans-serif}
 .aiPlots .pl.hot,#reader .card .pl.hot{font-weight:inherit}
