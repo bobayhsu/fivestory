@@ -41,7 +41,7 @@ main{position:absolute;inset:0;display:flex;align-items:center;justify-content:c
 #fsbar .dark{background:var(--dark);opacity:.92}
 #fsbar .fb:hover{background:#D2262E;transform:scale(1.06)}
 #fsbar svg{width:calc(var(--nb)*.55);height:calc(var(--nb)*.55)}
-#count{position:absolute;left:50%;transform:translateX(-50%);min-width:56px;text-align:center;color:rgba(0,0,0,.28);font-size:calc(var(--H)*.02);font-variant-numeric:tabular-nums;pointer-events:none}
+#count{position:absolute;left:50%;transform:translateX(-50%);min-width:56px;text-align:center;color:rgba(0,0,0,.28);font-size:max(11px,calc(var(--H)*.02));font-variant-numeric:tabular-nums;pointer-events:none}
 body.embedded #fsbar{display:none}   /* 在五大類故事的同步視窗裡，改用同步視窗自己的圖示 */
 
 /* ---------- 右上角「白象似的群山」選單 ---------- */
