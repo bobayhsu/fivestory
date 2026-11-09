@@ -123,6 +123,9 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 #aiRun .arFilm button.fName:hover{text-decoration:underline}
 #aiRun .arFilm .fPlay{display:none;margin-top:8px;position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}
 #aiRun .arFilm .fPlay.on{display:block}
+#aiRun .arFilm .fPlay.txt{aspect-ratio:auto;background:#FFF;border:1px solid #E4DED5}
+#aiRun .arFilm .fText{white-space:pre-wrap;font-size:15px;line-height:1.75;color:#2A2723;padding:10px 14px;max-height:260px;overflow:auto;font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
+#aiRun .arFilm button.fName i.t{font-size:12px;padding-left:0;font-weight:900}
 #aiRun .arFilm .fPlay iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 #aiRun .arFilm input{flex:1 1 220px;min-width:0;font-size:15px;border:1px solid #D9D1C5;border-radius:8px;padding:7px 10px;background:#FFF;color:#1E1C1A;font-family:system-ui,-apple-system,sans-serif}
 #aiRun .arFilm button{font-size:14px;font-weight:900;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;color:#FBF8F3;background:#1E1C1A;flex:none}
@@ -379,11 +382,11 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  };
  var KEY='fivestory-ai-story',story='';try{story=localStorage.getItem(KEY)||'';}catch(_){}
  var cur=null,opt={'ai-filter':'為愛情犧牲一切'}; /* 套濾鏡預設 22，和投影片一致 */
- var FILMS=[['Giving','https://www.youtube.com/watch?v=7s22HX18wDY'],['Violinist','https://www.youtube.com/watch?v=Ect56804xfA']]; /* 2026-11-10 靶心人練習用微電影 */
+ var FILMS=[['Giving','https://www.youtube.com/watch?v=7s22HX18wDY'],['Violinist','https://www.youtube.com/watch?v=Ect56804xfA'],['Woodpecker','',"有天小明和小美出去約會，突然小明肚子一陣滾動，變得很想放屁。\n聰明的他靈機一動，想到了一個絕妙的掩飾方法，於是轉頭對小美說：\n「小美，妳知道啄木鳥是怎麼叫的嗎？」\n小美搖搖頭說：「不知道耶，怎麼叫？」\n小明得意地笑著說：「那我模仿給妳聽喔～」\n接著，小明一邊用嘴巴發出「答答答答答」的模仿聲，一邊順便偷偷放了一個大響屁！\n模仿完畢後，小明一臉輕鬆地問：「怎麼樣？現在妳知道啄木鳥是怎樣叫了吧！」\n此時，小美一臉尷尬地看著他，弱弱地說：\n「不好意思……你剛剛放屁太大聲了，我完全沒聽到你模仿的叫聲。」\n小明：……"]]; /* 2026-11-10 靶心人練習用微電影 */
  var box=document.createElement('div');box.id='aiRun';box.setAttribute('aria-hidden','true');
  box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-labelledby="arTitle"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
   '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
-  '<div class="arFilm"><p>沒有故事？用微電影練習拆解</p>'+FILMS.map(function(f,k){return '<div class="fRow"><button type="button" class="fName" data-act="filmplay" data-film="'+k+'" title="播放影片"><i>▶</i>《'+f[0]+'》</button><button type="button" data-act="filmcopy" data-film="'+k+'">複製網址</button></div><div class="fPlay" data-film="'+k+'"></div>';}).join('')+'</div>'+
+  '<div class="arFilm"><p>沒有故事？用這些故事練習拆解</p>'+FILMS.map(function(f,k){return '<div class="fRow"><button type="button" class="fName" data-act="filmplay" data-film="'+k+'" title="'+(f[2]?'看文章':'播放影片')+'"><i'+(f[2]?' class="t"':'')+'>'+(f[2]?'文':'▶')+'</i>《'+f[0]+'》</button><button type="button" data-act="filmcopy" data-film="'+k+'">'+(f[2]?'複製文字':'複製網址')+'</button></div><div class="fPlay" data-film="'+k+'"></div>';}).join('')+'</div>'+
   '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……（也可以貼 YouTube 影片網址，請用 Gemini）"></textarea>'+
   '<p class="arYT">偵測到 YouTube 影片網址 ▶ 請用 <b>Gemini</b>，它能看影片。<br>ChatGPT、Claude、Meta AI 看不到影片內容，可能會照標題亂編；要用它們，請改貼逐字稿（YouTube 影片下方「…」→「顯示逐字稿」）。</p><details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
@@ -405,7 +408,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.name+' '+window.__aiOrd.n;if(!rd){$('#arTitle').textContent=t.name+'｜'+window.__aiOrd.name+' '+window.__aiOrd.n;$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
   var o=$('.arOpt');o.innerHTML='';if(t.opts&&id!=='ai-filter'&&!(id==='ai-order'&&!rd)){var sel=opt[id]||t.opts[0];o.classList.toggle('plots',id==='ai-filter');t.opts.forEach(function(x,k){var b=document.createElement('button');b.type='button';if(id==='ai-filter')b.innerHTML='<i>'+(k+1)+'</i>'+x;else b.textContent=x;b.dataset.opt=x;if(x===sel)b.classList.add('on');o.appendChild(b);});o.style.display='';}else o.style.display='none';
   msg('');preview();box.classList.add('open');box.setAttribute('aria-hidden','false');setTimeout(function(){try{ta.focus({preventScroll:true});}catch(_){}},60);}
- function stopFilm(){box.querySelectorAll('.fPlay').forEach(function(x){x.classList.remove('on');x.innerHTML='';});}
+ function stopFilm(){box.querySelectorAll('.fPlay').forEach(function(x){x.classList.remove('on','txt');x.innerHTML='';});}
  function close(){stopFilm();box.classList.remove('open');box.setAttribute('aria-hidden','true');try{ta.blur();}catch(_){}}
  window.__aiRunOpen=function(){return box.classList.contains('open');};
  function copySync(t){var ok=false,x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.cssText='position:fixed;left:-9999px;top:0;opacity:0';box.appendChild(x);x.select();try{x.setSelectionRange(0,t.length);}catch(_){}try{ok=document.execCommand('copy');}catch(_){}x.remove();
@@ -432,12 +435,14 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   if(e.target===box){close();return;}
   var b=e.target.closest('button');if(!b)return;e.preventDefault();
   if(b.dataset.act==='close')close();
-  else if(b.dataset.act==='filmplay'){var F=FILMS[+b.dataset.film]||FILMS[0],vid=(F[1].match(/[?&]v=([\w-]{11})/)||[])[1];if(!vid)return;
+  else if(b.dataset.act==='filmplay'){var F=FILMS[+b.dataset.film]||FILMS[0];
+   if(F[2]){var pt=box.querySelector('.fPlay[data-film="'+b.dataset.film+'"]'),wt=pt.classList.contains('on');stopFilm();if(!wt){var d=document.createElement('div');d.className='fText';d.textContent=F[2];pt.appendChild(d);pt.classList.add('on','txt');msg('再點一次《'+F[0]+'》收起。');}else msg('');return;}
+   var vid=(F[1].match(/[?&]v=([\w-]{11})/)||[])[1];if(!vid)return;
    /* 在五大類故事的同步視窗裡：交給同步播放器（兩台一起播放、暫停、進度） */
    try{var P=window.parent;if(P!==window&&P.document.getElementById('fivestoryVideoPanel')){P.postMessage({type:'fivestory-satir-video',url:F[1],title:F[0]},location.origin);msg('正在播放《'+F[0]+'》');return;}}catch(_){}
    var pl=box.querySelector('.fPlay[data-film="'+b.dataset.film+'"]'),was=pl.classList.contains('on');stopFilm();
    if(!was){pl.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+vid+'?autoplay=1&playsinline=1&rel=0" title="'+F[0]+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';pl.classList.add('on');msg('正在播放《'+F[0]+'》，再點一次片名收起。');}else msg('');}
-  else if(b.dataset.act==='filmcopy'){var F=FILMS[+b.dataset.film]||FILMS[0],okc=copySync(F[1]);msg(okc?'已複製《'+F[0]+'》網址！可以貼到 Gemini，或貼進下面的框。':'複製失敗，請長按網址手動複製。',!okc);}
+  else if(b.dataset.act==='filmcopy'){var F=FILMS[+b.dataset.film]||FILMS[0],okc=copySync(F[2]||F[1]);msg(okc?(F[2]?'已複製《'+F[0]+'》全文！貼進下面的框就能用。':'已複製《'+F[0]+'》網址！可以貼到 Gemini，或貼進下面的框。'):'複製失敗，請長按網址手動複製。',!okc);}
   else if(b.dataset.act==='filmfill'){var F=FILMS[+b.dataset.film]||FILMS[0];ta.value=F[1];ta.dispatchEvent(new Event('input',{bubbles:true}));preview();msg('已把《'+F[0]+'》放進框裡。這是影片網址，建議按 Gemini（它能看影片）。');}
   else if(b.dataset.opt){opt[cur]=b.dataset.opt;box.querySelectorAll('.arOpt button').forEach(function(x){x.classList.toggle('on',x===b);});preview();}
   else if(b.dataset.ai)go(b.dataset.ai);
