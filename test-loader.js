@@ -12,9 +12,9 @@ ready(async function(){
   if(!window.firebase?.apps)await load('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js');
   if(!window.firebase?.database)await load('https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js');
   if(!window.FIVESTORY_FIREBASE_CONFIG)await load('./sync-config.js?v=independent1');
-  await load('./sync.js?v=independent36');
+  await load('./sync.js?v=independent37');
   await load('./bullseye-sync.js?v=independent1');
-  await load('./video-sync.js?v=independent2');
+  await load('./video-sync.js?v=independent3');
   await load('./video-list-sync.js?v=independent1');
   await load('./mobile-red-fix.js?v=independent1');
   await load('./practice-sync.js?v=2');

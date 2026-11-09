@@ -17,7 +17,9 @@ let last='',remote=false,documentWatched=null,player=null,ready=false,playingID=
 const active=()=>layer.style.display!=='none'&&(frame.getAttribute('src')||'').startsWith(resourceURL);
 // 2026-11-08：薩提爾網頁（標題「薩提爾」）送來的影片，也用這套同步播放器
 const satirURL='https://bobayhsu.github.io/fivestory/satir/';
-const satirActive=()=>layer.style.display!=='none'&&(frame.getAttribute('src')||'').startsWith(satirURL);
+// 2026-11-10：AI 加值網頁（靶心人對話框的練習微電影）也用同一套同步播放器
+const aiURL='https://bobayhsu.github.io/fivestory/ai/';
+const satirActive=()=>layer.style.display!=='none'&&((frame.getAttribute('src')||'').startsWith(satirURL)||(frame.getAttribute('src')||'').startsWith(aiURL));
 // The main 「看影片」 button opens a direct YouTube embed via sync.js.
 // Its externalPage is already synchronized by the existing screen state.
 const directVideoID='CSuwxPxaJSQ';
