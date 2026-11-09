@@ -444,5 +444,42 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
  document.addEventListener('click',function(e){var el=e.target.closest&&e.target.closest('#ai-order .aiOrd');if(!el)return;e.preventDefault();pick(info(el));});
 })();
 </script>
+<script>/* 2026-11-09 字體放大保護：有些手機的 App 內建瀏覽器（Messenger、LINE…）會跟著手機「字體大小」設定把字放大，
+   text-size-adjust 擋不住。這裡實際量出放大倍數，有放大才把投影片（#stage）裡的字等比例縮回去；沒放大的裝置完全不動。
+   想看量到的數值：網址加 ?diag=1 */
+(function(){
+ var stage=document.getElementById('stage');if(!stage)return;
+ var probe=document.createElement('span');
+ probe.setAttribute('aria-hidden','true');
+ probe.style.cssText='position:absolute;left:0;top:0;visibility:hidden;pointer-events:none;white-space:nowrap;font:400 100px/1 Arial,sans-serif;padding:0;margin:0;border:0';
+ probe.textContent='國國國國國國國國國國';
+ stage.appendChild(probe);
+ var last=1;
+ function scaleOf(){var r=stage.getBoundingClientRect();return r.width/1920||1;}
+ function measure(){var s=scaleOf(),h=probe.getBoundingClientRect().height/s,k=parseFloat(getComputedStyle(probe).fontSize)/100||1;return {f:h/100,k:k};}
+ function apply(){
+  if(document.body.classList.contains('reader'))return;
+  var m=measure(),f=m.f;
+  if(!(f>0))return;
+  if(Math.abs(f-1)<0.04&&last===1)return;      /* 沒放大：完全不動 */
+  var els=stage.querySelectorAll('*');
+  for(var i=0;i<els.length;i++){var e=els[i];if(e===probe||e.closest('svg'))continue;
+   var want=e.getAttribute('data-fs0');
+   if(want===null){want=parseFloat(getComputedStyle(e).fontSize)/m.k;e.setAttribute('data-fs0',want);}
+   want=parseFloat(want);
+   if(Math.abs(f-1)<0.04)e.style.removeProperty('font-size');
+   else e.style.setProperty('font-size',(want/f).toFixed(2)+'px','important');}
+  last=Math.abs(f-1)<0.04?1:f;
+  diag(m);
+ }
+ function diag(m){if(!/[?&]diag=1/.test(location.search))return;var d=document.getElementById('fsDiag');if(!d){d=document.createElement('div');d.id='fsDiag';d.style.cssText='position:fixed;left:6px;top:6px;z-index:2147483647;background:#000;color:#0f0;font:12px/1.4 monospace;padding:6px 8px;border-radius:6px;max-width:90vw';document.body.appendChild(d);}
+  d.textContent='字體放大倍數 f='+m.f.toFixed(2)+'  computed k='+m.k.toFixed(2)+'  補償='+(last===1?'無':'1/'+last.toFixed(2))+'  '+innerWidth+'x'+innerHeight+' dpr'+devicePixelRatio;}
+ function run(){try{apply();var m=measure();diag(m);}catch(e){}}
+ var t;function later(){clearTimeout(t);t=setTimeout(run,200);}
+ run();addEventListener('load',run);addEventListener('resize',later);addEventListener('orientationchange',later);
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(run);
+ setTimeout(run,1500);
+})();
+</script>
 </body>
 </html>
