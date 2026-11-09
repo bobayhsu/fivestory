@@ -153,6 +153,9 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .aiRunRow{display:flex;gap:28px;align-items:center;background:#FFFFFF;border:2px dashed #C9BFB1;border-radius:16px;padding:14px 16px 14px 26px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
 .aiRunRow:hover{border-color:#C41F27;box-shadow:0 6px 18px rgba(196,31,39,.12)}
 .aiRunRow .aiPrompt{background:none;border:0;padding:0}
+/* 套濾鏡整頁字體一致：提示詞也用黑體，選中的格子不加粗 */
+.aiRunRow .aiPrompt{font-family:'Noto Sans TC',Arial,sans-serif}
+.aiPlots .pl.hot,#reader .card .pl.hot{font-weight:inherit}
 /* 提示詞裡選中的劇情模式，和上方選中的格子同色系 */
 .plotSel{color:#C41F27;font:inherit;background:#FBEDEC;border:2px solid #C41F27;border-radius:8px;padding:0 6px;margin:0 2px;white-space:nowrap}
 #reader .plotSel{border-width:1.5px;border-radius:6px;padding:0 4px}
