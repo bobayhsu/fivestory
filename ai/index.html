@@ -149,6 +149,13 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #reader .trow .kw{font-size:13px;font-weight:700;color:#FBF8F3;background:#1E1C1A;border-radius:6px;padding:2px 7px;white-space:nowrap}
 #reader .note{font-size:15px;line-height:1.6;color:#4A3F30;background:#F3E7D2;border-left:5px solid #9A7430;border-radius:10px;padding:10px 12px;margin:0 0 10px}
 #reader .aiPrompt{font-size:15px;padding:10px 12px;margin:4px 0 8px}
+/* 提示詞框和執行鈕合成一塊，整塊按到都有效 */
+.aiRunRow{display:flex;gap:28px;align-items:center;background:#FFFFFF;border:2px dashed #C9BFB1;border-radius:16px;padding:14px 16px 14px 26px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.aiRunRow:hover{border-color:#C41F27;box-shadow:0 6px 18px rgba(196,31,39,.12)}
+.aiRunRow .aiPrompt{background:none;border:0;padding:0}
+#reader .aiRunRow{display:block;padding:10px 12px 12px;margin:4px 0 14px;border-radius:12px}
+#reader .aiRunRow .aiPrompt{margin:0 0 10px}
+#reader .aiRunRow .aiRunBtn{margin:0}
 #reader .aiRunBtn{display:inline-block;font-size:16px;padding:10px 20px;margin:0 0 14px;letter-spacing:1px}
 @media (max-width:899px) and (orientation:landscape){#fsbar .fb{width:min(5.4vw,48px);height:min(5.4vw,48px)}#fsbar .g{gap:8px}}
 </style>
@@ -237,11 +244,10 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <section class="slide ai" id="ai-filter" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:64px 128px 52px;display:flex;flex-direction:column;gap:18px">
 <h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">套濾鏡：36 種劇情模式</h2>
 <p class="aiPlots step" data-rl="36 種劇情模式"><span class="pl"><i>1</i>哀求請託</span><span class="pl"><i>2</i>援救</span><span class="pl"><i>3</i>復仇</span><span class="pl"><i>4</i>親族間的報復</span><span class="pl"><i>5</i>逃亡者的追捕</span><span class="pl"><i>6</i>災禍</span><span class="pl"><i>7</i>不幸的遭遇</span><span class="pl"><i>8</i>反抗（革命）</span><span class="pl"><i>9</i>壯舉（征服）</span><span class="pl"><i>10</i>拐劫</span><span class="pl"><i>11</i>謎的解釋</span><span class="pl"><i>12</i>獲取</span><span class="pl"><i>13</i>骨肉仇恨</span><span class="pl"><i>14</i>骨肉競爭</span><span class="pl"><i>15</i>姦情殺害</span><span class="pl"><i>16</i>瘋狂</span><span class="pl"><i>17</i>因輕忽而招致損害</span><span class="pl"><i>18</i>不知而犯的戀愛罪惡</span><span class="pl"><i>19</i>無意中傷害自己所愛</span><span class="pl"><i>20</i>為了主義而犧牲自己</span><span class="pl"><i>21</i>為了所愛（骨肉親人）而犧牲自己</span><span class="pl hot"><i>22</i>為愛情犧牲一切</span><span class="pl"><i>23</i>有原因的犧牲所愛之人</span><span class="pl"><i>24</i>兩種不均等的勢力鬥爭</span><span class="pl"><i>25</i>奸通（外遇／偷情）</span><span class="pl"><i>26</i>戀愛的罪惡</span><span class="pl"><i>27</i>發現所愛之人有不名譽的事</span><span class="pl"><i>28</i>戀愛發生阻礙</span><span class="pl"><i>29</i>愛上自己的仇敵</span><span class="pl"><i>30</i>野心</span><span class="pl"><i>31</i>人與神的鬥爭</span><span class="pl"><i>32</i>錯誤的嫉妒</span><span class="pl"><i>33</i>錯誤的判斷</span><span class="pl"><i>34</i>悔恨</span><span class="pl"><i>35</i>親族的重逢</span><span class="pl"><i>36</i>失去所愛之人</span></p>
-<div style="display:flex;gap:32px;align-items:center">
+<div class="aiRunRow" data-slide="ai-filter">
 <p class="aiPrompt sm" style="flex:1">把我的故事套上劇情模式「1-36」重新改寫，保留靶心人七步結構，改變的是核心衝突，最後逐條說明改了哪裡。</p>
 <div class="aiRunBtn">▶ 貼上故事，執行</div>
 </div>
-<p class="aiFoot">源自波爾蒂「36 種戲劇情境」，例子見《故事課》附錄。濾鏡不換骨架，換的是核心衝突。<b style="color:#C41F27">小美人魚＝第 22 種。</b></p>
 </section>
 
 <!-- ===== AI 加值章節結束 ===== -->
@@ -297,7 +303,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
     if(el.classList.contains('aiC')){var b=c.querySelector(':scope > b');if(b)b.remove();var pv=el.previousElementSibling;if(pv&&pv.classList.contains('aiC')){var pb=pv.querySelector('b'),ps=pv.querySelector('span');pre='<span style="display:block;color:#8A847B;font-size:.9em;margin-bottom:4px">靶心人｜'+esc(pb?pb.textContent:'')+'：'+esc(ps?ps.textContent:'')+'</span>';}}
     var lab=el.getAttribute('data-rl'),cls=/^5|意外|觸動|回頭|兩難|刺痛|抉擇/.test(lab)?'key':'';
     h+='<div class="card '+cls+'"><span class="lab">'+esc(lab)+'</span><p>'+pre+c.innerHTML+'</p></div>';});
-   s.querySelectorAll('.aiPrompt').forEach(function(p){h+='<p class="aiPrompt">'+esc(p.textContent.trim())+'</p><span class="aiRunBtn" data-slide="'+s.id+'">▶ 貼上故事，執行</span>';});
+   s.querySelectorAll('.aiPrompt').forEach(function(p){var row=!!p.closest('.aiRunRow');h+=(row?'<div class="aiRunRow" data-slide="'+s.id+'">':'')+'<p class="aiPrompt">'+esc(p.textContent.trim())+'</p><span class="aiRunBtn" data-slide="'+s.id+'">▶ 貼上故事，執行</span>'+(row?'</div>':'');});
   });
   R.innerHTML='<div class="rTop"><p class="rTitle">AI 加值｜<b>一個故事，變出 18 萬個</b></p><nav class="rNav">'+nav+'</nav></div>'+h;
   R.addEventListener('click',function(e){var a=e.target.closest('a[href^="#r-"]');if(!a)return;e.preventDefault();var t=document.getElementById(a.getAttribute('href').slice(1));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -368,7 +374,7 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
  }
  /* 掛在 window 捕捉階段：比投影片翻頁、同步、手機閱讀版的處理都早，避免打字或點按被當成翻頁 */
  window.addEventListener('click',function(e){
-  var r=e.target.closest&&e.target.closest('.aiRunBtn');
+  var r=e.target.closest&&e.target.closest('.aiRunBtn,.aiRunRow');
   if(r){e.preventDefault();e.stopPropagation();var id=r.dataset.slide||((r.closest('.slide')||{}).id);open(id);return;}
   if(!box.contains(e.target))return;
   e.stopPropagation();
@@ -381,7 +387,7 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
  ['keydown','keyup','keypress'].forEach(function(ev){window.addEventListener(ev,function(e){if(!box.classList.contains('open'))return;
   if(ev==='keydown'&&e.key==='Escape'){e.preventDefault();close();}
   e.stopImmediatePropagation();},true);});
- ['touchstart','touchend','contextmenu','mousedown','wheel'].forEach(function(ev){window.addEventListener(ev,function(e){if(box.contains(e.target)||(e.target.closest&&e.target.closest('.aiRunBtn')))e.stopImmediatePropagation();},{capture:true,passive:ev!=='contextmenu'});});
+ ['touchstart','touchend','contextmenu','mousedown','wheel'].forEach(function(ev){window.addEventListener(ev,function(e){if(box.contains(e.target)||(e.target.closest&&e.target.closest('.aiRunBtn,.aiRunRow')))e.stopImmediatePropagation();},{capture:true,passive:ev!=='contextmenu'});});
  ta.addEventListener('input',function(){try{localStorage.setItem(KEY,ta.value);}catch(_){}preview();msg('');});
 })();
 </script>
