@@ -154,6 +154,8 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .aiRunRow:hover{border-color:#C41F27;box-shadow:0 6px 18px rgba(196,31,39,.12)}
 .aiRunRow .aiPrompt{background:none;border:0;padding:0}
 .aiRunRow .aiRunBtn{align-self:center}
+/* 換順序頁：名稱在前、改粗黑；數字在後 */
+#ai-order .aiOrd span{color:#1E1C1A;font-weight:900}
 /* 每一頁：滑鼠移到哪一格，哪一格就凸顯 */
 @media (hover:hover){
 .slide.ai .aiOrd,.slide.ai .aiC,.slide.ai .aiRow,.aiPlots .pl{transition:background .15s,border-color .15s,box-shadow .15s}
@@ -241,11 +243,11 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </div>
 <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:12px">
 <p class="aiH">五種常用排列</p>
-<div class="aiOrd"><b>1234567</b><span>傳統敘事</span><i>結構完整，適合初學</i></div>
-<div class="aiOrd"><b>5671234</b><span>結局先行</span><i>先給震撼，再回頭說</i></div>
-<div class="aiOrd"><b>2134567</b><span>情緒帶入</span><i>先丟困境，引發共鳴</i></div>
-<div class="aiOrd hot"><b>5612347</b><span>觀點主題</span><i>先吸睛，再建立觀點</i></div>
-<div class="aiOrd"><b>3412567</b><span>迷惑揭曉</span><i>先看結果，製造懸念</i></div>
+<div class="aiOrd"><span>傳統敘事</span><b>1234567</b><i>結構完整，適合初學</i></div>
+<div class="aiOrd"><span>結局先行</span><b>5671234</b><i>先給震撼，再回頭說</i></div>
+<div class="aiOrd"><span>情緒帶入</span><b>2134567</b><i>先丟困境，引發共鳴</i></div>
+<div class="aiOrd hot"><span>觀點主題</span><b>5612347</b><i>先吸睛，再建立觀點</i></div>
+<div class="aiOrd"><span>迷惑揭曉</span><b>3412567</b><i>先看結果，製造懸念</i></div>
 </div>
 </div>
 <div class="aiRunRow" data-slide="ai-order">
