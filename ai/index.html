@@ -153,6 +153,9 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .aiRunRow{display:flex;gap:28px;align-items:center;background:#FFFFFF;border:2px dashed #C9BFB1;border-radius:16px;padding:14px 16px 14px 26px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
 .aiRunRow:hover{border-color:#C41F27;box-shadow:0 6px 18px rgba(196,31,39,.12)}
 .aiRunRow .aiPrompt{background:none;border:0;padding:0}
+/* 提示詞裡選中的劇情模式，和上方選中的格子同色系 */
+.plotSel{color:#C41F27;font-weight:700;background:#FBEDEC;border:2px solid #C41F27;border-radius:8px;padding:0 6px;margin:0 2px;white-space:nowrap}
+#reader .plotSel{border-width:1.5px;border-radius:6px;padding:0 4px}
 #reader .aiRunRow{display:block;padding:10px 12px 12px;margin:4px 0 14px;border-radius:12px}
 #reader .aiRunRow .aiPrompt{margin:0 0 10px}
 #reader .aiRunRow .aiRunBtn{margin:0}
@@ -396,7 +399,7 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
  function nameOf(el){var i=el.querySelector('i');return {n:i?i.textContent.trim():'',name:el.textContent.replace(/^\s*\d+\s*/,'').trim()};}
  function pick(sel){window.__aiPlot=sel;
   document.querySelectorAll('.aiPlots .pl, #reader .card .pl').forEach(function(el){el.classList.toggle('hot',nameOf(el).name===sel.name);});
-  document.querySelectorAll('#ai-filter .aiPrompt, #reader .aiPrompt').forEach(function(p){if(/劇情模式「[^」]*」/.test(p.textContent))p.textContent=p.textContent.replace(/劇情模式「[^」]*」/,'劇情模式「'+sel.name+'」');});}
+  document.querySelectorAll('#ai-filter .aiPrompt, #reader .aiPrompt').forEach(function(p){var t=p.textContent;if(/劇情模式「[^」]*」/.test(t)){var e=function(x){return x.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});},m=t.match(/^([\s\S]*?劇情模式)「[^」]*」([\s\S]*)$/);p.innerHTML=e(m[1])+'<span class="plotSel">「'+sel.n+' '+e(sel.name)+'」</span>'+e(m[2]);}});}
  var first=document.querySelector('.aiPlots .pl.hot');window.__aiPlot=first?nameOf(first):{n:'22',name:'為愛情犧牲一切'};
  function sync(){pick(window.__aiPlot);}
  sync();setTimeout(sync,0);addEventListener('load',sync);
