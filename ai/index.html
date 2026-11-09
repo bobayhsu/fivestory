@@ -154,6 +154,11 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .aiRunRow:hover{border-color:#C41F27;box-shadow:0 6px 18px rgba(196,31,39,.12)}
 .aiRunRow .aiPrompt{background:none;border:0;padding:0}
 .aiRunRow .aiRunBtn{align-self:center}
+/* 靶心人頁：左右兩欄逐行對齊（同心結人頁） */
+#ai-bullseye .bxGrid{flex:1;display:grid;grid-template-columns:1fr 1.25fr;grid-auto-flow:row dense;gap:12px 48px;align-content:center;align-items:center}
+#ai-bullseye .bxEx,#ai-bullseye .bxQ{display:contents}
+#ai-bullseye .bxQ>*{grid-column:1} #ai-bullseye .bxEx>*{grid-column:2}
+#ai-bullseye .bxQ .aiQ{align-self:stretch;margin:0}
 /* 靶心人頁：標籤和內容同一個字級 */
 #ai-bullseye .aiL{font-size:38px} #ai-bullseye .aiS.sm{font-size:38px}
 /* 每一頁：滑鼠移到哪一格，哪一格就凸顯 */
@@ -194,8 +199,8 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 
 <section class="slide ai" id="ai-bullseye" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:24px">
 <h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人：三分鐘說一個完整的故事</h2>
-<div style="display:flex;flex-direction:row-reverse;gap:48px;flex:1">
-<div style="flex:1.25;display:flex;flex-direction:column;gap:12px">
+<div class="bxGrid">
+<div class="bxEx">
 <p class="aiSub">小美人魚的靶心人七步</p>
 <div class="aiRow"><p class="lbl aiL">1 目標</p><p class="step aiS sm" data-rl="1 目標">讓王子愛上自己。</p></div>
 <div class="aiRow"><p class="lbl aiL">2 阻礙</p><p class="step aiS sm" data-rl="2 阻礙">用聲音換了雙腿，說不出真相。</p></div>
@@ -205,7 +210,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <div class="aiRow"><p class="lbl aiL">6 轉彎</p><p class="step aiS sm" data-rl="6 轉彎">姊姊送來匕首，她卻把刀丟進海裡。</p></div>
 <div class="aiRow"><p class="lbl aiL">7 結局</p><p class="step aiS sm" data-rl="7 結局">化成泡沫，成為空氣的女兒。</p></div>
 </div>
-<div style="flex:1;display:flex;flex-direction:column;gap:10px">
+<div class="bxQ">
 <p class="aiSub">每一步，問一個問題</p>
 <div class="aiOrd aiQ"><b>1 目標</b><i>主角想要什麼？</i></div><div class="aiOrd aiQ"><b>2 阻礙</b><i>什麼擋住了他？</i></div><div class="aiOrd aiQ"><b>3 努力</b><i>他怎麼做？</i></div><div class="aiOrd aiQ"><b>4 結果</b><i>成功了嗎？</i></div><div class="aiOrd aiQ"><b>5 意外</b><i>發生什麼想不到的事？</i></div><div class="aiOrd aiQ"><b>6 轉彎</b><i>情節怎麼轉向？</i></div><div class="aiOrd aiQ"><b>7 結局</b><i>最後怎麼了？</i></div>
 </div>
