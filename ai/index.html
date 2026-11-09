@@ -117,8 +117,8 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 #aiRun.bull .arFilm{display:block}
 #aiRun .arFilm p{margin:0 0 6px;font-size:14px;font-weight:900;color:#1E1C1A}
 #aiRun .arFilm .fRow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-#aiRun .arFilm .fRow+.fRow{margin-top:10px;padding-top:10px;border-top:1px dashed #D9D1C5}
-#aiRun .arFilm .fName{flex:0 0 100%;font-size:16px;font-weight:900;color:#C41F27}
+#aiRun .arFilm .fRow+.fRow{margin-top:8px;padding-top:8px;border-top:1px dashed #D9D1C5}
+#aiRun .arFilm .fName{flex:1;font-size:17px;font-weight:900;color:#C41F27}
 #aiRun .arFilm input{flex:1 1 220px;min-width:0;font-size:15px;border:1px solid #D9D1C5;border-radius:8px;padding:7px 10px;background:#FFF;color:#1E1C1A;font-family:system-ui,-apple-system,sans-serif}
 #aiRun .arFilm button{font-size:14px;font-weight:900;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;color:#FBF8F3;background:#1E1C1A;flex:none}
 #aiRun .arFilm button[data-act="filmfill"]{background:#C41F27}
@@ -378,7 +378,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  var box=document.createElement('div');box.id='aiRun';box.setAttribute('aria-hidden','true');
  box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-labelledby="arTitle"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
   '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
-  '<div class="arFilm"><p>沒有故事？用微電影練習拆解</p>'+FILMS.map(function(f,k){return '<div class="fRow"><span class="fName">《'+f[0]+'》</span><input type="text" readonly value="'+f[1]+'" aria-label="'+f[0]+' 網址"><button type="button" data-act="filmcopy" data-film="'+k+'">複製網址</button><button type="button" data-act="filmfill" data-film="'+k+'">放進框裡</button></div>';}).join('')+'</div>'+
+  '<div class="arFilm"><p>沒有故事？用微電影練習拆解</p>'+FILMS.map(function(f,k){return '<div class="fRow"><span class="fName">《'+f[0]+'》</span><button type="button" data-act="filmcopy" data-film="'+k+'">複製網址</button></div>';}).join('')+'</div>'+
   '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……（也可以貼 YouTube 影片網址，請用 Gemini）"></textarea>'+
   '<p class="arYT">偵測到 YouTube 影片網址 ▶ 請用 <b>Gemini</b>，它能看影片。<br>ChatGPT、Claude、Meta AI 看不到影片內容，可能會照標題亂編；要用它們，請改貼逐字稿（YouTube 影片下方「…」→「顯示逐字稿」）。</p><details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
