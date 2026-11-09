@@ -116,11 +116,13 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 #aiRun .arFilm{display:none;margin:0 0 12px;background:#FBF9F6;border:2px solid #E4DED5;border-radius:12px;padding:10px 12px}
 #aiRun.bull .arFilm{display:block}
 #aiRun .arFilm p{margin:0 0 6px;font-size:14px;font-weight:900;color:#1E1C1A}
-#aiRun .arFilm .fRow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-#aiRun .arFilm .fPlay+.fRow{margin-top:8px;padding-top:8px;border-top:1px dashed #D9D1C5}
-#aiRun .arFilm button.fName{flex:1;text-align:left;font-size:17px;font-weight:900;color:#C41F27;background:none;padding:4px 0;border-radius:0}
+#aiRun .arFilm .fRow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+#aiRun .arFilm .fItem{display:flex;flex-direction:column;align-items:stretch;gap:6px;background:#FFF;border:1px solid #E4DED5;border-radius:10px;padding:8px}
+#aiRun .arFilm button.fName{flex:1;display:flex;align-items:center;justify-content:center;gap:2px;text-align:center;line-height:1.25;word-break:break-word;font-size:16px;font-weight:900;color:#C41F27;background:none;padding:4px 0;border-radius:0}
 #aiRun .arFilm button.fName i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#C41F27;color:#FBF8F3;font-size:11px;margin-right:6px;vertical-align:2px;padding-left:2px}
 #aiRun .arFilm button.fName:hover{text-decoration:underline}
+#aiRun .arFilm button.fName i{flex:none}
+@media (max-width:520px){#aiRun .arFilm .fRow{gap:6px}#aiRun .arFilm .fItem{padding:6px 4px}#aiRun .arFilm button.fName{flex-direction:column;font-size:13px;gap:4px}#aiRun .arFilm button.fName i{margin-right:0}#aiRun .arFilm button.fCopy{font-size:12px;padding:7px 4px}#aiRun .arFilm .br{display:none}}
 #aiRun .arFilm .fPlay{display:none;margin-top:8px;position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}
 #aiRun .arFilm .fPlay.on{display:block}
 #aiRun .arFilm .fPlay.txt{aspect-ratio:auto;background:#FFF;border:1px solid #E4DED5}
@@ -386,11 +388,11 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  var box=document.createElement('div');box.id='aiRun';box.setAttribute('aria-hidden','true');
  box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-labelledby="arTitle"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
   '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
-  '<div class="arFilm"><p>沒有故事？用這些故事練習拆解</p>'+FILMS.map(function(f,k){return '<div class="fRow"><button type="button" class="fName" data-act="filmplay" data-film="'+k+'" title="'+(f[2]?'看文章':'播放影片')+'"><i'+(f[2]?' class="t"':'')+'>'+(f[2]?'文':'▶')+'</i>《'+f[0]+'》</button><button type="button" data-act="filmcopy" data-film="'+k+'">'+(f[2]?'複製文字':'複製網址')+'</button></div><div class="fPlay" data-film="'+k+'"></div>';}).join('')+'</div>'+
+  '<div class="arFilm"><p>沒有故事？用這些故事練習拆解</p><div class="fRow">'+FILMS.map(function(f,k){return '<div class="fItem"><button type="button" class="fName" data-act="filmplay" data-film="'+k+'" title="'+(f[2]?'看文章':'播放影片')+'"><i'+(f[2]?' class="t"':'')+'>'+(f[2]?'文':'▶')+'</i><span><b class="br">《</b>'+f[0]+'<b class="br">》</b></span></button><button type="button" class="fCopy" data-act="filmcopy" data-film="'+k+'">'+(f[2]?'複製文字':'複製網址')+'</button></div>';}).join('')+'</div>'+FILMS.map(function(f,k){return '<div class="fPlay" data-film="'+k+'"></div>';}).join('')+'</div>'+
   '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……（也可以貼 YouTube 影片網址，請用 Gemini）"></textarea>'+
   '<p class="arYT">偵測到 YouTube 影片網址 ▶ 請用 <b>Gemini</b>，它能看影片。<br>ChatGPT、Claude、Meta AI 看不到影片內容，可能會照標題亂編；要用它們，請改貼逐字稿（YouTube 影片下方「…」→「顯示逐字稿」）。</p><details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
-  '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。故事會留在這台裝置，換頁還在。<br>提醒：真實客戶的名字、病名、店名，先改過再送出。</p></div>';
+  '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。<br>提醒：真實客戶的名字、病名、店名，先改過再送出。</p></div>';
  document.body.appendChild(box);
  var $=function(s){return box.querySelector(s);},ta=$('#arStory');
  ta.value=story;
@@ -402,7 +404,10 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function ytUI(){var yt=isYT();box.classList.toggle('yt',yt);}
  function preview(){$('.arPre').textContent=full();ytUI();}
  function msg(t,err){var m=$('.arMsg');m.textContent=t;m.classList.toggle('err',!!err);}
- function open(id){var t=TASKS[id];if(!t)return;cur=id;box.classList.toggle('bull',id==='ai-bullseye');$('#arTitle').textContent=t.name;$('.arTask').textContent=t.desc;
+ function open(id){var t=TASKS[id];if(!t)return;cur=id;
+  /* 2026-11-10 每次打開都回到初始狀態：故事框清空、影片／文章收起、提示詞收合 */
+  stopFilm();ta.value='';try{localStorage.removeItem(KEY);}catch(_){}var dt=box.querySelector('details');if(dt)dt.open=false;
+  box.classList.toggle('bull',id==='ai-bullseye');$('#arTitle').textContent=t.name;$('.arTask').textContent=t.desc;
   if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('#arTitle').textContent=t.name+'｜'+window.__aiPlot.n+' '+window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
   var rd=document.body.classList.contains('reader');
   if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.name+' '+window.__aiOrd.n;if(!rd){$('#arTitle').textContent=t.name+'｜'+window.__aiOrd.name+' '+window.__aiOrd.n;$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
@@ -451,7 +456,7 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   if(ev==='keydown'&&e.key==='Escape'){e.preventDefault();close();}
   e.stopImmediatePropagation();},true);});
  ['touchstart','touchend','contextmenu','mousedown','wheel'].forEach(function(ev){window.addEventListener(ev,function(e){if(box.contains(e.target)||(e.target.closest&&e.target.closest('.aiRunBtn,.aiRunRow')))e.stopImmediatePropagation();},{capture:true,passive:ev!=='contextmenu'});});
- ta.addEventListener('input',function(){try{localStorage.setItem(KEY,ta.value);}catch(_){}preview();msg('');});
+ ta.addEventListener('input',function(){preview();msg('');});
 })();
 </script>
 <script>/* 2026-11-09 套濾鏡：在投影片（或手機閱讀版）上直接點選劇情模式，提示詞跟著換，按「貼上故事，執行」就用這一種 */
