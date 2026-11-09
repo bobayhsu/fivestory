@@ -95,16 +95,17 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 #aiRun details{margin:10px 0 0;font-size:14px;color:#5E5850}
 #aiRun summary{cursor:pointer;font-weight:700}
 #aiRun pre{white-space:pre-wrap;font-family:inherit;font-size:14px;line-height:1.55;background:#FFF;border:1px dashed #C9BFB1;border-radius:10px;padding:10px 12px;margin:8px 0 0;max-height:180px;overflow:auto}
-#aiRun .arBtns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 8px}
+#aiRun .arBtns{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0 8px}
 #aiRun .arBtns button{font-size:16px;font-weight:900;border:0;border-radius:12px;padding:12px 6px;cursor:pointer;color:#FBF8F3;background:#1E1C1A}
 #aiRun .arBtns button[data-ai="chatgpt"]{background:#10A37F}
 #aiRun .arBtns button[data-ai="claude"]{background:#C96442}
 #aiRun .arBtns button[data-ai="gemini"]{background:#3B6FE0}
+#aiRun .arBtns button[data-ai="meta"]{background:linear-gradient(135deg,#0866FF,#9B3CF0)}
 #aiRun .arBtns button[data-ai="copy"]{background:#FBF8F3;color:#1E1C1A;border:2px solid #1E1C1A}
 #aiRun .arMsg{min-height:22px;font-size:14px;font-weight:700;color:#2E7D4F;margin:0}
 #aiRun .arMsg.err{color:#C41F27}
 #aiRun .arNote{font-size:13px;color:#8A847B;margin:6px 0 0;line-height:1.5}
-@media (max-width:520px){#aiRun .arBtns{grid-template-columns:repeat(2,1fr)}#aiRun .arCard{padding:18px 16px 14px}}
+@media (max-width:520px){#aiRun .arBtns{grid-template-columns:repeat(2,1fr)}#aiRun .arBtns button[data-ai="copy"]{grid-column:1/-1}#aiRun .arCard{padding:18px 16px 14px}}
 
 /* 底部圖示列（和五大類故事首頁一致） */
 #fsbar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 16px calc(8px + env(safe-area-inset-bottom));background:rgba(27,24,21,.92);transition:transform .3s ease,opacity .3s ease}
@@ -330,7 +331,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
   '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……"></textarea>'+
   '<details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
-  '<div class="arBtns"><button data-ai="chatgpt">ChatGPT</button><button data-ai="claude">Claude</button><button data-ai="gemini">Gemini</button><button data-ai="copy">只複製</button></div>'+
+  '<div class="arBtns"><button data-ai="chatgpt">ChatGPT</button><button data-ai="claude">Claude</button><button data-ai="gemini">Gemini</button><button data-ai="meta">Meta AI</button><button data-ai="copy">只複製</button></div>'+
   '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。故事會留在這台裝置，換頁還在。<br>提醒：真實客戶的名字、病名、店名，先改過再送出。</p></div>';
  document.body.appendChild(box);
  var $=function(s){return box.querySelector(s);},ta=$('#arStory');
@@ -351,9 +352,10 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   if(ai==='chatgpt')url='https://chatgpt.com/?q='+q;
   else if(ai==='claude')url='https://claude.ai/new?q='+q;
 else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
+  else if(ai==='meta')url='https://www.meta.ai/?q='+q;
   if(url){var w=null;try{w=window.open(url,'_blank','noopener');}catch(_){}
    if(ai==='gemini')msg(ok?'已複製！在 Gemini 的輸入框貼上，按送出。':'已打開 Gemini，請展開上方「完整提示詞」手動複製。',!ok);
-   else msg('已打開 '+(ai==='chatgpt'?'ChatGPT':'Claude')+'，按送出就開始。'+(ok?'（也已複製，沒帶過去就直接貼上）':''));
+   else msg('已打開 '+({chatgpt:'ChatGPT',claude:'Claude',meta:'Meta AI'}[ai])+'，按送出就開始。'+(ok?'（也已複製，沒帶過去就直接貼上）':''));
   }else msg(ok?'已複製！貼到任何一個 AI 都可以。':'複製失敗，請展開「完整提示詞」手動複製。',!ok);
  }
  /* 掛在 window 捕捉階段：比投影片翻頁、同步、手機閱讀版的處理都早，避免打字或點按被當成翻頁 */
