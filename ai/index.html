@@ -112,6 +112,14 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 
 #aiRun .arYT{display:none;margin:10px 0 0;font-size:14px;line-height:1.6;color:#4A3F30;background:#F3E7D2;border-left:5px solid #9A7430;border-radius:10px;padding:8px 12px}
 #aiRun.yt .arYT{display:block}
+/* 2026-11-10 靶心人對話框：練習用微電影網址（可複製、可直接放進框裡） */
+#aiRun .arFilm{display:none;margin:0 0 12px;background:#FBF9F6;border:2px solid #E4DED5;border-radius:12px;padding:10px 12px}
+#aiRun.bull .arFilm{display:block}
+#aiRun .arFilm p{margin:0 0 6px;font-size:14px;font-weight:900;color:#1E1C1A}
+#aiRun .arFilm .fRow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#aiRun .arFilm input{flex:1 1 220px;min-width:0;font-size:15px;border:1px solid #D9D1C5;border-radius:8px;padding:7px 10px;background:#FFF;color:#1E1C1A;font-family:system-ui,-apple-system,sans-serif}
+#aiRun .arFilm button{font-size:14px;font-weight:900;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;color:#FBF8F3;background:#1E1C1A;flex:none}
+#aiRun .arFilm button[data-act="filmfill"]{background:#C41F27}
 #aiRun .arBtns button{position:relative}
 #aiRun.yt .arBtns button[data-ai="gemini"]{outline:4px solid #E9B44C;outline-offset:2px}
 #aiRun.yt .arBtns button[data-ai="gemini"]::after{content:"推薦・能看影片";position:absolute;left:50%;top:-12px;transform:translateX(-50%);white-space:nowrap;font-size:11px;font-weight:900;background:#E9B44C;color:#1E1C1A;border-radius:999px;padding:1px 8px}
@@ -364,9 +372,11 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  };
  var KEY='fivestory-ai-story',story='';try{story=localStorage.getItem(KEY)||'';}catch(_){}
  var cur=null,opt={'ai-filter':'為愛情犧牲一切'}; /* 套濾鏡預設 22，和投影片一致 */
+ var FILM='https://www.youtube.com/watch?v=7s22HX18wDY'; /* 2026-11-10 靶心人練習用微電影 */
  var box=document.createElement('div');box.id='aiRun';box.setAttribute('aria-hidden','true');
  box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-labelledby="arTitle"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
   '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
+  '<div class="arFilm"><p>沒有故事？用這支微電影練習拆解</p><div class="fRow"><input type="text" readonly value="'+FILM+'" aria-label="練習用微電影網址"><button type="button" data-act="filmcopy">複製網址</button><button type="button" data-act="filmfill">放進框裡</button></div></div>'+
   '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……（也可以貼 YouTube 影片網址，請用 Gemini）"></textarea>'+
   '<p class="arYT">偵測到 YouTube 影片網址 ▶ 請用 <b>Gemini</b>，它能看影片。<br>ChatGPT、Claude、Meta AI 看不到影片內容，可能會照標題亂編；要用它們，請改貼逐字稿（YouTube 影片下方「…」→「顯示逐字稿」）。</p><details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
@@ -382,7 +392,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function ytUI(){var yt=isYT();box.classList.toggle('yt',yt);}
  function preview(){$('.arPre').textContent=full();ytUI();}
  function msg(t,err){var m=$('.arMsg');m.textContent=t;m.classList.toggle('err',!!err);}
- function open(id){var t=TASKS[id];if(!t)return;cur=id;$('#arTitle').textContent=t.name;$('.arTask').textContent=t.desc;
+ function open(id){var t=TASKS[id];if(!t)return;cur=id;box.classList.toggle('bull',id==='ai-bullseye');$('#arTitle').textContent=t.name;$('.arTask').textContent=t.desc;
   if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('#arTitle').textContent=t.name+'｜'+window.__aiPlot.n+' '+window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
   var rd=document.body.classList.contains('reader');
   if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.name+' '+window.__aiOrd.n;if(!rd){$('#arTitle').textContent=t.name+'｜'+window.__aiOrd.name+' '+window.__aiOrd.n;$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
@@ -414,6 +424,8 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   if(e.target===box){close();return;}
   var b=e.target.closest('button');if(!b)return;e.preventDefault();
   if(b.dataset.act==='close')close();
+  else if(b.dataset.act==='filmcopy'){var okc=copySync(FILM);msg(okc?'已複製微電影網址！可以貼到 Gemini，或貼進下面的框。':'複製失敗，請長按網址手動複製。',!okc);}
+  else if(b.dataset.act==='filmfill'){ta.value=FILM;ta.dispatchEvent(new Event('input',{bubbles:true}));preview();msg('已放進框裡。這是影片網址，建議按 Gemini（它能看影片）。');}
   else if(b.dataset.opt){opt[cur]=b.dataset.opt;box.querySelectorAll('.arOpt button').forEach(function(x){x.classList.toggle('on',x===b);});preview();}
   else if(b.dataset.ai)go(b.dataset.ai);
  },true);
