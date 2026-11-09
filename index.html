@@ -1001,7 +1001,7 @@ body.reader #reader{display:block;font-family:'Noto Sans TC',sans-serif;color:#1
 <div class="aiBox" style="width:640px">
 <p class="aiTag">提示詞</p>
 <p class="aiPrompt">我有一個故事：《刺激1995》安迪的信念故事——希望是好東西。<br>請從你擅長的角度提出觀點，同時模擬另外三種視角：結構邏輯、情感人性、文化哲理、現實應用。<br>最後做一張比較表，整合出一個最佳觀點。</p>
-<div class="aiCopy">複製提示詞</div>
+<div class="aiRunBtn">▶ 貼上故事，執行</div>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;gap:22px;justify-content:center">
 <div class="aiRow"><p class="lbl aiL">結構邏輯</p><p class="step aiS" data-rl="結構邏輯">意外是「瑞德真的去赴約」——信念的證明，<b><span style="color:#C41F27">落在別人身上</span></b>。</p></div>
@@ -1027,7 +1027,7 @@ body.reader #reader{display:block;font-family:'Noto Sans TC',sans-serif;color:#1
 </div>
 <div style="display:flex;gap:32px;align-items:center">
 <p class="aiPrompt sm" style="flex:1">把這個靶心人七步，改寫成角色內心曲線：渴望、恐懼、執著、失落、觸動、轉念、重啟，每一步寫一句他心裡的話。</p>
-<div class="aiCopy">複製提示詞</div>
+<div class="aiRunBtn">▶ 貼上故事，執行</div>
 </div>
 </section>
 
@@ -1052,7 +1052,7 @@ body.reader #reader{display:block;font-family:'Noto Sans TC',sans-serif;color:#1
 <div class="aiOrd hot"><b>5612347</b><span>觀點主題</span><i>先吸睛，再建立觀點</i></div>
 <div class="aiOrd"><b>3412567</b><span>迷惑揭曉</span><i>先看結果，製造懸念</i></div>
 <p class="aiPrompt sm">用 5612347 的順序（意外→轉彎→目標→阻礙→努力→結果→結局），把我的故事重新說一次。</p>
-<div class="aiCopy">複製提示詞</div>
+<div class="aiRunBtn">▶ 貼上故事，執行</div>
 </div>
 </div>
 </section>
@@ -1070,7 +1070,7 @@ body.reader #reader{display:block;font-family:'Noto Sans TC',sans-serif;color:#1
 </div>
 <div style="display:flex;gap:32px;align-items:center">
 <p class="aiPrompt sm" style="flex:1">把我的〔苦根〕故事套上劇情模式「錯誤判斷」重新改寫，保留七步結構，並說明改了哪裡。</p>
-<div class="aiCopy">複製提示詞</div>
+<div class="aiRunBtn">▶ 貼上故事，執行</div>
 </div>
 <p class="aiFoot">劇情模式源自法國劇作家喬治・波爾蒂（Georges Polti）的「36 種戲劇情境」。濾鏡不換骨架，換的是<b style="color:#C41F27">核心衝突</b>。</p>
 </section>
@@ -1087,7 +1087,7 @@ body.reader #reader{display:block;font-family:'Noto Sans TC',sans-serif;color:#1
 <p class="step aiCall" data-rl="回頭看看">回頭看看：你請 AI 改寫的每一個版本，<b><span style="color:#C41F27">是不是都用一句金句收尾？</span></b></p>
 <div style="display:flex;gap:32px;align-items:center">
 <p class="aiPrompt sm" style="flex:1">幫這段故事去除 AI 感：加入具體畫面與對話、刪掉金句式結尾，並逐條註明你改了哪裡。</p>
-<div class="aiCopy">複製提示詞</div>
+<div class="aiRunBtn">▶ 貼上故事，執行</div>
 </div>
 </section>
 
@@ -1554,7 +1554,7 @@ body.scrolled .toTop{opacity:1;pointer-events:auto;transform:none}
     var lab=el.getAttribute('data-rl');var cls=/^5|意外|觸動|回頭/.test(lab)?'key':'';
     var pre='';if(el.classList.contains('aiC')){var pv=el.previousElementSibling;if(pv&&pv.classList.contains('aiC')){var pb=pv.querySelector('b'),ps=pv.querySelector('span');pre='<span style="display:block;color:#8A847B;font-size:.85em;font-weight:400;margin-bottom:4px">靶心人｜'+esc(pb?pb.textContent:'')+'：'+esc(ps?ps.textContent:'')+'</span>';}}
     h+='<div class="card '+cls+'"><span class="lab">'+esc(lab)+'</span><p>'+pre+c.innerHTML+'</p></div>';});
-   s.querySelectorAll('.aiPrompt').forEach(function(p){h+='<div><p class="aiPrompt">'+esc(p.innerText.trim())+'</p><span class="aiCopy">複製提示詞</span></div>';});
+   s.querySelectorAll('.aiPrompt').forEach(function(p){h+='<div><p class="aiPrompt">'+esc(p.innerText.trim())+'</p><span class="aiRunBtn" data-slide="'+id+'">▶ 貼上故事，執行</span></div>';});
   });
   h+='</section>';
   var top=R.querySelector('.toTop');if(top)top.insertAdjacentHTML('beforebegin',h);else R.insertAdjacentHTML('beforeend',h);
@@ -1562,6 +1562,108 @@ body.scrolled .toTop{opacity:1;pointer-events:auto;transform:none}
  }
  addReader();
  new MutationObserver(function(){if(document.getElementById('reader'))addReader();}).observe(document.body,{childList:true});
+})();
+</script>
+<style id="ai-run-202611">/* 2026-11-09 AI 加值：貼上故事，一鍵送到 AI */
+.aiRunBtn{align-self:flex-start;flex:none;font-size:30px;font-weight:900;letter-spacing:3px;color:#FBF8F3;background:#C41F27;border-radius:999px;padding:12px 34px;cursor:pointer;box-shadow:0 6px 16px rgba(120,0,0,.25);transition:transform .2s;white-space:nowrap}
+.aiRunBtn:hover{transform:translateY(-3px)}
+#reader .aiRunBtn{display:inline-block;font-size:16px;padding:10px 20px;margin:0 0 16px;letter-spacing:1px}
+#aiRun{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;background:rgba(20,18,16,.62);padding:12px;-webkit-text-size-adjust:100%;text-size-adjust:100%;font-family:'Noto Sans TC',Arial,sans-serif}
+#aiRun.open{display:flex}
+#aiRun *{box-sizing:border-box;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+#aiRun .arCard{position:relative;width:100%;max-width:720px;max-height:100%;overflow:auto;background:#F7F5F1;color:#1E1C1A;border-radius:18px;padding:22px 22px 18px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+#aiRun .arTop{display:flex;align-items:center;gap:10px;margin:0 36px 6px 0}
+#aiRun .arTag{font-size:13px;font-weight:900;color:#FBF8F3;background:#C41F27;border-radius:999px;padding:3px 10px;letter-spacing:1px;flex:none}
+#aiRun h3{font-size:21px;font-weight:900;margin:0;line-height:1.35}
+#aiRun .arTask{font-size:15px;color:#5E5850;margin:4px 0 12px;line-height:1.55}
+#aiRun .arX{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:#E9E5DF;color:#1E1C1A;font-size:22px;line-height:36px;cursor:pointer}
+#aiRun .arOpt{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+#aiRun .arOpt button{font-size:15px;font-weight:700;border:2px solid #D9D1C5;background:#FFF;color:#2A2723;border-radius:999px;padding:6px 14px;cursor:pointer}
+#aiRun .arOpt button.on{background:#1E1C1A;border-color:#1E1C1A;color:#FBF8F3}
+#aiRun label{display:block;font-size:15px;font-weight:900;margin:0 0 6px}
+#aiRun textarea{width:100%;min-height:170px;font-size:16px;line-height:1.6;border:2px solid #D9D1C5;border-radius:12px;padding:10px 12px;background:#FFF;color:#1E1C1A;resize:vertical;font-family:inherit}
+#aiRun textarea:focus{outline:none;border-color:#C41F27}
+#aiRun details{margin:10px 0 0;font-size:14px;color:#5E5850}
+#aiRun summary{cursor:pointer;font-weight:700}
+#aiRun pre{white-space:pre-wrap;font-family:inherit;font-size:14px;line-height:1.55;background:#FFF;border:1px dashed #C9BFB1;border-radius:10px;padding:10px 12px;margin:8px 0 0;max-height:180px;overflow:auto}
+#aiRun .arBtns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 8px}
+#aiRun .arBtns button{font-size:16px;font-weight:900;border:0;border-radius:12px;padding:12px 6px;cursor:pointer;color:#FBF8F3;background:#1E1C1A}
+#aiRun .arBtns button[data-ai="chatgpt"]{background:#10A37F}
+#aiRun .arBtns button[data-ai="claude"]{background:#C96442}
+#aiRun .arBtns button[data-ai="gemini"]{background:#3B6FE0}
+#aiRun .arBtns button[data-ai="copy"]{background:#FBF8F3;color:#1E1C1A;border:2px solid #1E1C1A}
+#aiRun .arMsg{min-height:22px;font-size:14px;font-weight:700;color:#2E7D4F;margin:0}
+#aiRun .arMsg.err{color:#C41F27}
+#aiRun .arNote{font-size:13px;color:#8A847B;margin:6px 0 0;line-height:1.5}
+@media (max-width:520px){#aiRun .arBtns{grid-template-columns:repeat(2,1fr)}#aiRun .arCard{padding:18px 16px 14px}}
+</style>
+<script>/* 2026-11-09 AI 加值：貼上故事，一鍵送到 ChatGPT／Claude／Gemini（每台裝置各自操作，不同步） */
+(function(){
+ var TASKS={
+  'ai-multi':{name:'多 AI 交叉',desc:'從四種視角看你的故事，最後整合出一個最佳觀點。',
+   p:function(o,s){return '以下是我的故事。請從你擅長的角度提出觀點，同時模擬另外三種視角：結構邏輯、情感人性、文化哲理、現實應用。最後做一張比較表，並整合出一個最佳觀點。\n\n【我的故事】\n'+s;}},
+  'ai-curve':{name:'故事 vs. 人物',desc:'把靶心人七步，改寫成角色內心曲線。',
+   p:function(o,s){return '以下是我用靶心人公式（目標、阻礙、努力、結果、意外、轉彎、結局）寫的故事。請改寫成角色內心曲線：渴望、恐懼、執著、失落、觸動、轉念、重啟，每一步寫一句主角心裡的話，最後用表格對照原本的七步。\n\n【我的故事】\n'+s;}},
+  'ai-order':{name:'換順序',desc:'選一種排列，讓 AI 用新的順序重講你的故事。',
+   opts:['5612347 觀點主題','5671234 結局先行','2134567 情緒帶入','3412567 迷惑揭曉','1234567 傳統敘事'],
+   p:function(o,s){var n=o.split(' ')[0],N=['','目標','阻礙','努力','結果','意外','轉彎','結局'],seq=n.split('').map(function(d){return N[+d];}).join('→');
+    return '請用靶心人公式 '+n+' 的順序（'+seq+'），把我的故事重新說一次。每一段標出步驟名稱，說完後用兩、三句話說明這個順序帶來的效果。\n\n【我的故事】\n'+s;}},
+  'ai-filter':{name:'套濾鏡',desc:'選一種劇情模式，改寫你故事的核心衝突。',
+   opts:['揭露祕密','身分變形','災難降臨','錯誤判斷','升華','復權','反叛','復仇','救援','對抗命運'],
+   p:function(o,s){return '請把我的故事套上劇情模式「'+o+'」重新改寫：保留靶心人七步結構（目標、阻礙、努力、結果、意外、轉彎、結局），改變的是故事的核心衝突。最後逐條說明你改了哪裡。\n\n【我的故事】\n'+s;}},
+  'ai-human':{name:'去 AI 感',desc:'把 AI 寫的版本，改回有人味的樣子。',
+   p:function(o,s){return '幫這段故事去除 AI 感：加入具體畫面（在做什麼、聞到什麼、身體的反應）和不完美的對話，刪掉金句式結尾，保留一點矛盾與不確定。改完後逐條註明你改了哪裡。\n\n【我的故事】\n'+s;}}
+ };
+ var KEY='fivestory-ai-story',story='';try{story=localStorage.getItem(KEY)||'';}catch(_){}
+ var cur=null,opt={};
+ var box=document.createElement('div');box.id='aiRun';box.setAttribute('aria-hidden','true');
+ box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-labelledby="arTitle"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
+  '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
+  '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……"></textarea>'+
+  '<details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
+  '<div class="arBtns"><button data-ai="chatgpt">ChatGPT</button><button data-ai="claude">Claude</button><button data-ai="gemini">Gemini</button><button data-ai="copy">只複製</button></div>'+
+  '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。故事會留在這台裝置，換頁還在。<br>提醒：真實客戶的名字、病名、店名，先改過再送出。</p></div>';
+ document.body.appendChild(box);
+ var $=function(s){return box.querySelector(s);},ta=$('#arStory');
+ ta.value=story;
+ function full(){var t=TASKS[cur];return t?('請用繁體中文回答。\n'+t.p(opt[cur]||(t.opts&&t.opts[0])||'',ta.value.trim())):'';}
+ function preview(){$('.arPre').textContent=full();}
+ function msg(t,err){var m=$('.arMsg');m.textContent=t;m.classList.toggle('err',!!err);}
+ function open(id){var t=TASKS[id];if(!t)return;cur=id;$('#arTitle').textContent=t.name;$('.arTask').textContent=t.desc;
+  var o=$('.arOpt');o.innerHTML='';if(t.opts){var sel=opt[id]||t.opts[0];t.opts.forEach(function(x){var b=document.createElement('button');b.type='button';b.textContent=x;b.dataset.opt=x;if(x===sel)b.classList.add('on');o.appendChild(b);});o.style.display='';}else o.style.display='none';
+  msg('');preview();box.classList.add('open');box.setAttribute('aria-hidden','false');setTimeout(function(){try{ta.focus({preventScroll:true});}catch(_){}},60);}
+ function close(){box.classList.remove('open');box.setAttribute('aria-hidden','true');try{ta.blur();}catch(_){}}
+ window.__aiRunOpen=function(){return box.classList.contains('open');};
+ function copySync(t){var ok=false,x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.cssText='position:fixed;left:-9999px;top:0;opacity:0';box.appendChild(x);x.select();try{x.setSelectionRange(0,t.length);}catch(_){}try{ok=document.execCommand('copy');}catch(_){}x.remove();
+  if(!ok&&navigator.clipboard){try{navigator.clipboard.writeText(t);ok=true;}catch(_){}}return ok;}
+ function go(ai){
+  if(!ta.value.trim()){msg('請先貼上你的故事。',true);ta.focus();return;}
+  var t=full(),ok=copySync(t),q=encodeURIComponent(t),url='';
+  if(ai==='chatgpt')url='https://chatgpt.com/?q='+q;
+  else if(ai==='claude')url='https://claude.ai/new?q='+q;
+  else if(ai==='gemini')url='https://gemini.google.com/app';
+  if(url){var w=null;try{w=window.open(url,'_blank','noopener');}catch(_){}
+   if(ai==='gemini')msg(ok?'已複製！在 Gemini 的輸入框貼上，按送出。':'已打開 Gemini，請展開上方「完整提示詞」手動複製。',!ok);
+   else msg('已打開 '+(ai==='chatgpt'?'ChatGPT':'Claude')+'，按送出就開始。'+(ok?'（也已複製，沒帶過去就直接貼上）':''));
+  }else msg(ok?'已複製！貼到任何一個 AI 都可以。':'複製失敗，請展開「完整提示詞」手動複製。',!ok);
+ }
+ /* 掛在 window 捕捉階段：比投影片翻頁、同步、手機閱讀版的處理都早，避免打字或點按被當成翻頁 */
+ window.addEventListener('click',function(e){
+  var r=e.target.closest&&e.target.closest('.aiRunBtn');
+  if(r){e.preventDefault();e.stopPropagation();var id=r.dataset.slide||((r.closest('.slide')||{}).id);open(id);return;}
+  if(!box.contains(e.target))return;
+  e.stopPropagation();
+  if(e.target===box){close();return;}
+  var b=e.target.closest('button');if(!b)return;e.preventDefault();
+  if(b.dataset.act==='close')close();
+  else if(b.dataset.opt){opt[cur]=b.dataset.opt;box.querySelectorAll('.arOpt button').forEach(function(x){x.classList.toggle('on',x===b);});preview();}
+  else if(b.dataset.ai)go(b.dataset.ai);
+ },true);
+ ['keydown','keyup','keypress'].forEach(function(ev){window.addEventListener(ev,function(e){if(!box.classList.contains('open'))return;
+  if(ev==='keydown'&&e.key==='Escape'){e.preventDefault();close();}
+  e.stopImmediatePropagation();},true);});
+ ['touchstart','touchend','contextmenu','mousedown','wheel'].forEach(function(ev){window.addEventListener(ev,function(e){if(box.contains(e.target)||(e.target.closest&&e.target.closest('.aiRunBtn')))e.stopImmediatePropagation();},{capture:true,passive:ev!=='contextmenu'});});
+ ta.addEventListener('input',function(){try{localStorage.setItem(KEY,ta.value);}catch(_){}preview();msg('');});
 })();
 </script>
 </body></html>
