@@ -332,7 +332,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
    p:function(o,s){return '請把我的故事套上劇情模式「'+o+'」重新改寫：保留靶心人七步結構（目標、阻礙、努力、結果、意外、轉彎、結局），改變的是故事的核心衝突。最後逐條說明你改了哪裡。\n\n【我的故事】\n'+s;}}
  };
  var KEY='fivestory-ai-story',story='';try{story=localStorage.getItem(KEY)||'';}catch(_){}
- var cur=null,opt={};
+ var cur=null,opt={'ai-filter':'為愛情犧牲一切'}; /* 套濾鏡預設 22，和投影片一致 */
  var box=document.createElement('div');box.id='aiRun';box.setAttribute('aria-hidden','true');
  box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-labelledby="arTitle"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
   '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
