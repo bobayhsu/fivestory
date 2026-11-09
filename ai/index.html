@@ -345,8 +345,8 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   'ai-curve':{name:'心結人',desc:'把靶心人七步（事情轉彎），改寫成心結人七步（人物現形）。',
    p:function(o,s){return '以下是我用靶心人公式（目標、阻礙、努力、結果、意外、轉彎、結局）寫的故事。請改寫成心結人公式：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔。兩難要是兩個「都對」、卻不能兼得的價值；抗拒要寫出他如何拖延、逃避或假裝不用選；刺痛要刺中他最不願面對的地方；承擔要寫出他為選擇付出的代價。每一步寫一到兩句，最後用表格對照原本的靶心人七步。\n\n【我的故事】\n'+s;}},
   'ai-order':{name:'換順序',desc:'選一種排列，讓 AI 用新的順序重講你的故事。',
-   opts:['5612347 觀點主題','5671234 結局先行','2134567 情緒帶入','3412567 迷惑揭曉','1234567 傳統敘事'],
-   p:function(o,s){var n=o.split(' ')[0],N=['','目標','阻礙','努力','結果','意外','轉彎','結局'],seq=n.split('').map(function(d){return N[+d];}).join('→');
+   opts:['觀點主題 5612347','結局先行 5671234','情緒帶入 2134567','迷惑揭曉 3412567','傳統敘事 1234567'],
+   p:function(o,s){var n=(o.match(/\d{7}/)||['5612347'])[0],N=['','目標','阻礙','努力','結果','意外','轉彎','結局'],seq=n.split('').map(function(d){return N[+d];}).join('→');
     return '請用靶心人公式 '+n+' 的順序（'+seq+'），把我的故事重新說一次。每一段標出步驟名稱，說完後用兩、三句話說明這個順序帶來的效果。\n\n【我的故事】\n'+s;}},
   'ai-filter':{name:'套濾鏡',desc:'選一種劇情模式，改寫你故事的核心衝突。',
    opts:['哀求請託','援救','復仇','親族間的報復','逃亡者的追捕','災禍','不幸的遭遇','反抗（革命）','壯舉（征服）','拐劫','謎的解釋','獲取','骨肉仇恨','骨肉競爭','姦情殺害','瘋狂','因輕忽而招致損害','不知而犯的戀愛罪惡','無意中傷害自己所愛','為了主義而犧牲自己','為了所愛（骨肉親人）而犧牲自己','為愛情犧牲一切','有原因的犧牲所愛之人','兩種不均等的勢力鬥爭','奸通（外遇／偷情）','戀愛的罪惡','發現所愛之人有不名譽的事','戀愛發生阻礙','愛上自己的仇敵','野心','人與神的鬥爭','錯誤的嫉妒','錯誤的判斷','悔恨','親族的重逢','失去所愛之人'],
@@ -370,7 +370,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function open(id){var t=TASKS[id];if(!t)return;cur=id;$('#arTitle').textContent=t.name;$('.arTask').textContent=t.desc;
   if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('#arTitle').textContent=t.name+'｜'+window.__aiPlot.n+' '+window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
   var rd=document.body.classList.contains('reader');
-  if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.n+' '+window.__aiOrd.name;if(!rd){$('#arTitle').textContent=t.name+'｜'+window.__aiOrd.n+' '+window.__aiOrd.name;$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
+  if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.name+' '+window.__aiOrd.n;if(!rd){$('#arTitle').textContent=t.name+'｜'+window.__aiOrd.name+' '+window.__aiOrd.n;$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
   var o=$('.arOpt');o.innerHTML='';if(t.opts&&id!=='ai-filter'&&!(id==='ai-order'&&!rd)){var sel=opt[id]||t.opts[0];o.classList.toggle('plots',id==='ai-filter');t.opts.forEach(function(x,k){var b=document.createElement('button');b.type='button';if(id==='ai-filter')b.innerHTML='<i>'+(k+1)+'</i>'+x;else b.textContent=x;b.dataset.opt=x;if(x===sel)b.classList.add('on');o.appendChild(b);});o.style.display='';}else o.style.display='none';
   msg('');preview();box.classList.add('open');box.setAttribute('aria-hidden','false');setTimeout(function(){try{ta.focus({preventScroll:true});}catch(_){}},60);}
  function close(){box.classList.remove('open');box.setAttribute('aria-hidden','true');try{ta.blur();}catch(_){}}
@@ -429,12 +429,12 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
  function pick(sel){window.__aiOrd=sel;
   document.querySelectorAll('#ai-order .aiOrd').forEach(function(el){el.classList.toggle('hot',info(el).n===sel.n);});
   var seq=sel.n.split('').map(function(d){return N[+d];}).join('→');
-  var html='用<span class="plotSel">「'+sel.n+' '+sel.name+'」</span>的順序（'+seq+'），把我的故事重新說一次。';
+  var html='用<span class="plotSel">「'+sel.name+' '+sel.n+'」</span>的順序（'+seq+'），把我的故事重新說一次。';
   document.querySelectorAll('#ai-order .aiPrompt, #reader .aiRunRow[data-slide="ai-order"] .aiPrompt').forEach(function(p){p.innerHTML=html;});
   var first=document.querySelector('#ai-order .aiC.step');if(!first)return;var col=first.parentNode,rows={};
   col.querySelectorAll('.aiC.step').forEach(function(r){rows[r.querySelector('b').textContent.trim().charAt(0)]=r;});
   sel.n.split('').forEach(function(d){if(rows[d])col.appendChild(rows[d]);});
-  var hd=col.querySelector('.aiH.red');if(hd)hd.textContent='小美人魚的靶心人，改成 '+sel.n+'（'+sel.name+'）';}
+  var hd=col.querySelector('.aiH.red');if(hd)hd.textContent='小美人魚的靶心人，改成 '+sel.name+' '+sel.n;}
  var h=document.querySelector('#ai-order .aiOrd.hot');
  function init(){var x=document.querySelector('#ai-order .aiOrd.hot')||h;if(x)pick(info(x));}
  init();
