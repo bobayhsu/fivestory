@@ -1349,4 +1349,41 @@ body.scrolled .toTop{opacity:1;pointer-events:auto;transform:none}
 <style id="fsAutoHide">html.fs-idle #stage .navPill,html.fs-idle #stage #home,html.fs-idle #stage #backBtn,html.fs-idle #stage #endBtn,html.fs-idle #syncBottomBar button{opacity:0!important;visibility:hidden!important;transition:opacity .3s ease,visibility .3s}</style>
 <script>/* 2026-11-09 底部圖示列：不用 2.5 秒自動隱藏；滑鼠移到畫面下方、或手機點一下就出現 */(function(){var S='#stage .navPill,#stage #home,#stage #backBtn,#stage #endBtn,#syncBottomBar button',d=document.documentElement,t;var tch=0;addEventListener("touchstart",function(){tch=1},{passive:true,capture:true});function over(){if(tch)return false;try{return [].some.call(document.querySelectorAll(S),function(e){return e.matches(":hover")})}catch(_){return false}}function hide(){if(over()){clearTimeout(t);t=setTimeout(hide,1200);return}d.classList.add("fs-idle")}function show(){d.classList.remove("fs-idle");clearTimeout(t);t=setTimeout(hide,2500)}function hook(w){try{if(!w||w.__fsAH)return;w.__fsAH=1;w.addEventListener("mousemove",function(e){if(e.clientY>w.innerHeight-140)show()},{passive:true});w.addEventListener("touchstart",show,{passive:true});w.addEventListener("keydown",show)}catch(_){}}hook(window);setInterval(function(){var f=document.getElementById("syncExternalFrame");if(f)hook(f.contentWindow)},1000);show();})();</script>
 <style id="ai-icon-202611">/* 2026-11-09：左下新增「AI 加值」圖示（排在童話兩難後面），下載圖示往右移一格；圖示最大 130px，13 顆在小手機上才不會重疊 */#stage a.navPill[data-ai]{left:calc(20px + 6*(var(--nb) + 12px))!important;right:auto!important}#stage a.navPill[data-download]{left:calc(20px + 7*(var(--nb) + 12px))!important;right:auto!important}</style>
+<script>/* 2026-11-09 字體放大保護：有些手機的 App 內建瀏覽器（Messenger、LINE…）會跟著手機「字體大小」設定把字放大，
+   text-size-adjust 擋不住。這裡實際量出放大倍數，有放大才把首頁投影片（#stage）裡的字等比例縮回去；沒放大的裝置完全不動。
+   想看量到的數值：網址加 ?diag=1 */
+(function(){
+ var stage=document.getElementById('stage');if(!stage)return;
+ var probe=document.createElement('span');
+ probe.setAttribute('aria-hidden','true');
+ probe.style.cssText='position:absolute;left:0;top:0;visibility:hidden;pointer-events:none;white-space:nowrap;font:400 100px/1 Arial,sans-serif;padding:0;margin:0;border:0';
+ probe.textContent='國國國國國國國國國國';
+ stage.appendChild(probe);
+ var last=1;
+ function scaleOf(){var r=stage.getBoundingClientRect();return r.width/1920||1;}
+ function measure(){var s=scaleOf(),h=probe.getBoundingClientRect().height/s,k=parseFloat(getComputedStyle(probe).fontSize)/100||1;return {f:h/100,k:k};}
+ function apply(){
+  if(document.body.classList.contains('reader'))return;
+  var m=measure(),f=m.f;
+  if(!(f>0))return;
+  if(Math.abs(f-1)<0.04&&last===1)return;      /* 沒放大：完全不動 */
+  var els=stage.querySelectorAll('*');
+  for(var i=0;i<els.length;i++){var e=els[i];if(e===probe||e.closest('svg'))continue;
+   var want=e.getAttribute('data-fs0');
+   if(want===null){want=parseFloat(getComputedStyle(e).fontSize)/m.k;e.setAttribute('data-fs0',want);}
+   want=parseFloat(want);
+   if(Math.abs(f-1)<0.04)e.style.removeProperty('font-size');
+   else e.style.setProperty('font-size',(want/f).toFixed(2)+'px','important');}
+  last=Math.abs(f-1)<0.04?1:f;
+  diag(m);
+ }
+ function diag(m){if(!/[?&]diag=1/.test(location.search))return;var d=document.getElementById('fsDiag');if(!d){d=document.createElement('div');d.id='fsDiag';d.style.cssText='position:fixed;left:6px;top:6px;z-index:2147483647;background:#000;color:#0f0;font:12px/1.4 monospace;padding:6px 8px;border-radius:6px;max-width:90vw';document.body.appendChild(d);}
+  d.textContent='字體放大倍數 f='+m.f.toFixed(2)+'  computed k='+m.k.toFixed(2)+'  補償='+(last===1?'無':'1/'+last.toFixed(2))+'  '+innerWidth+'x'+innerHeight+' dpr'+devicePixelRatio;}
+ function run(){try{apply();var m=measure();diag(m);}catch(e){}}
+ var t;function later(){clearTimeout(t);t=setTimeout(run,200);}
+ run();addEventListener('load',run);addEventListener('resize',later);addEventListener('orientationchange',later);
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(run);
+ setTimeout(run,1500);
+})();
+</script>
 </body></html>
