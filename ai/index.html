@@ -66,7 +66,7 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 .aiTbl .ty{font-size:42px;font-weight:900;color:#C41F27;letter-spacing:6px;text-align:center;background:#FBF9F6;border:2px solid #E4DED5;border-radius:14px;padding:6px 0}
 .aiTbl .step{font-size:36px;font-weight:700;color:#1E1C1A}
 .aiTbl .ex{font-size:32px;color:#4A443D;font-family:'LXGW WenKai TC','BiauKai','DFKai-SB','標楷體',serif}
-.aiFoot{font-size:26px;color:#8A847B}
+.aiFoot{font-size:26px;color:#8A847B} .aiPlots{flex:1;display:grid;grid-template-columns:1fr 1fr 1.35fr 1fr;grid-template-rows:repeat(9,auto);grid-auto-flow:column;gap:6px 14px;align-content:center} .aiPlots .pl{font-size:28px;line-height:1.3;color:#2A2723;background:#FBF9F6;border:2px solid #E4DED5;border-radius:10px;padding:4px 12px;white-space:nowrap} .aiPlots .pl i{font-style:normal;font-weight:900;color:#C41F27;display:inline-block;min-width:44px} .aiPlots .pl.hot{border-color:#C41F27;background:#FBEDEC;font-weight:700} #reader .card .pl{display:inline-block;margin:3px 10px 3px 0;white-space:nowrap} #reader .card .pl i{font-style:normal;font-weight:900;color:#C41F27;margin-right:4px} #reader .card .pl.hot{color:#C41F27;font-weight:700}
 #ai-multi .aiS{font-size:40px}
 #ai-order .aiS.sm{font-size:36px}
 #ai-human .aiS.sm{font-size:46px}#ai-human .aiRow{gap:32px}#ai-human .aiL{width:230px;font-size:34px}
@@ -147,52 +147,32 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </head>
 <body>
 <div id="stage">
-<nav id="aiTop" aria-label="AI 加值單元"><div class="sd" data-go="ai-multi">多 AI</div><div class="sd" data-go="ai-curve">人物</div><div class="sd" data-go="ai-order">換順序</div><div class="sd" data-go="ai-filter">套濾鏡</div><div class="sd" data-go="ai-human">去 AI 感</div></nav>
+<nav id="aiTop" aria-label="AI 加值單元"><div class="sd" data-go="ai-curve">心結人</div><div class="sd" data-go="ai-order">換順序</div><div class="sd" data-go="ai-filter">套濾鏡</div></nav>
 <!-- ===== 2026-11-09 新章節：AI 加值（ai-*） ===== -->
 <section class="slide frame" id="ai-frame" data-transition="fade" style="background:#F7F5F1;color:#1E1C1A;font-family:'Noto Sans TC', Arial, sans-serif;padding:96px 128px;display:flex;flex-direction:column;justify-content:center;gap:36px">
 <h2 style="font-size:84px;font-weight:900;text-align:center;letter-spacing:6px;color:#1E1C1A">AI 加值：一個故事，變出 18 萬個</h2>
 <div style="display:flex;flex-direction:column;gap:18px">
-<div class="tab" data-go="ai-multi" style="display:flex;gap:44px;align-items:center;background:#FBF9F6;border:2px solid #E4DED5;border-radius:20px;padding:16px 48px"><p style="width:250px;font-size:52px;font-weight:900;color:#C41F27;letter-spacing:4px;text-align:center">多 AI</p><p style="font-size:38px;font-weight:700;color:#FBF8F3;background:#1E1C1A;padding:4px 22px;border-radius:10px;letter-spacing:4px">觀點</p><p style="flex:1;font-size:46px;color:#4A443D;font-family:'LXGW WenKai TC','BiauKai','DFKai-SB','標楷體',serif">同一個故事，四種眼睛</p></div>
-<div class="tab" data-go="ai-curve" style="display:flex;gap:44px;align-items:center;background:#FBF9F6;border:2px solid #E4DED5;border-radius:20px;padding:16px 48px"><p style="width:250px;font-size:52px;font-weight:900;color:#C41F27;letter-spacing:4px;text-align:center">人物</p><p style="font-size:38px;font-weight:700;color:#FBF8F3;background:#1E1C1A;padding:4px 22px;border-radius:10px;letter-spacing:4px">內心</p><p style="flex:1;font-size:46px;color:#4A443D;font-family:'LXGW WenKai TC','BiauKai','DFKai-SB','標楷體',serif">事件之外，再加上心裡的七步</p></div>
+<div class="tab" data-go="ai-curve" style="display:flex;gap:44px;align-items:center;background:#FBF9F6;border:2px solid #E4DED5;border-radius:20px;padding:16px 48px"><p style="width:250px;font-size:52px;font-weight:900;color:#C41F27;letter-spacing:4px;text-align:center">心結人</p><p style="font-size:38px;font-weight:700;color:#FBF8F3;background:#1E1C1A;padding:4px 22px;border-radius:10px;letter-spacing:4px">人物</p><p style="flex:1;font-size:46px;color:#4A443D;font-family:'LXGW WenKai TC','BiauKai','DFKai-SB','標楷體',serif">事情轉彎了，人呢？七步逼出人物</p></div>
 <div class="tab" data-go="ai-order" style="display:flex;gap:44px;align-items:center;background:#FBF9F6;border:2px solid #E4DED5;border-radius:20px;padding:16px 48px"><p style="width:250px;font-size:52px;font-weight:900;color:#C41F27;letter-spacing:4px;text-align:center">換順序</p><p style="font-size:38px;font-weight:700;color:#FBF8F3;background:#1E1C1A;padding:4px 22px;border-radius:10px;letter-spacing:4px">排列</p><p style="flex:1;font-size:46px;color:#4A443D;font-family:'LXGW WenKai TC','BiauKai','DFKai-SB','標楷體',serif">七步換個順序，就有 5040 種講法</p></div>
 <div class="tab" data-go="ai-filter" style="display:flex;gap:44px;align-items:center;background:#FBF9F6;border:2px solid #E4DED5;border-radius:20px;padding:16px 48px"><p style="width:250px;font-size:52px;font-weight:900;color:#C41F27;letter-spacing:4px;text-align:center">套濾鏡</p><p style="font-size:38px;font-weight:700;color:#FBF8F3;background:#1E1C1A;padding:4px 22px;border-radius:10px;letter-spacing:4px">劇情</p><p style="flex:1;font-size:46px;color:#4A443D;font-family:'LXGW WenKai TC','BiauKai','DFKai-SB','標楷體',serif">36 種劇情模式，改寫同一個故事</p></div>
-<div class="tab" data-go="ai-human" style="display:flex;gap:44px;align-items:center;background:#FBF9F6;border:2px solid #E4DED5;border-radius:20px;padding:16px 48px"><p style="width:250px;font-size:52px;font-weight:900;color:#C41F27;letter-spacing:4px;text-align:center">去 AI 感</p><p style="font-size:38px;font-weight:700;color:#FBF8F3;background:#1E1C1A;padding:4px 22px;border-radius:10px;letter-spacing:4px">人味</p><p style="flex:1;font-size:46px;color:#4A443D;font-family:'LXGW WenKai TC','BiauKai','DFKai-SB','標楷體',serif">最後，把你自己找回來</p></div>
 </div>
-<p class="step" data-rl="一句話" style="font-size:38px;color:#5E5850;text-align:center">五大類決定<b><span style="color:#C41F27">講什麼</span></b>，AI 決定<b><span style="color:#C41F27">怎麼變</span></b>，去 AI 感決定<b><span style="color:#C41F27">像不像你</span></b>。</p>
-</section>
-
-<section class="slide ai" id="ai-multi" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:84px 128px 72px;display:flex;flex-direction:column;gap:30px">
-<h2 style="font-size:68px;font-weight:900;letter-spacing:4px;color:#1E1C1A">多 AI 交叉：同一個故事，四種眼睛</h2>
-<div style="display:flex;gap:48px;align-items:stretch;flex:1">
-<div class="aiBox" style="width:640px">
-<p class="aiTag">提示詞</p>
-<p class="aiPrompt">我有一個故事：《小美人魚》的信念故事——愛，是不求回報。<br>請從你擅長的角度提出觀點，同時模擬另外三種視角：結構邏輯、情感人性、文化哲理、現實應用。<br>最後做一張比較表，整合出一個最佳觀點。</p>
-<div class="aiRunBtn">▶ 貼上故事，執行</div>
-</div>
-<div style="flex:1;display:flex;flex-direction:column;gap:22px;justify-content:center">
-<div class="aiRow"><p class="lbl aiL">結構邏輯</p><p class="step aiS" data-rl="結構邏輯">轉彎是「把刀丟進海裡」——信念的證明，<b><span style="color:#C41F27">是她選擇不做什麼</span></b>。</p></div>
-<div class="aiRow"><p class="lbl aiL">情感人性</p><p class="step aiS" data-rl="情感人性">她怕的不是死，是<b><span style="color:#C41F27">他永遠不知道是她救了他</span></b>。</p></div>
-<div class="aiRow"><p class="lbl aiL">文化哲理</p><p class="step aiS" data-rl="文化哲理">愛不是佔有，<b><span style="color:#C41F27">放手也是一種完成</span></b>。</p></div>
-<div class="aiRow"><p class="lbl aiL">現實應用</p><p class="step aiS" data-rl="現實應用">業務的信念故事，別講「我付出多少」，要講<b><span style="color:#C41F27">最難的時候，我選擇不做什麼</span></b>。</p></div>
-</div>
-</div>
-<p class="step aiNote" data-rl="提醒">一個 AI 模擬四種視角，是「角色扮演」；把同一題真的丟給兩、三個 AI，才看得到真正的差異——<b>還能互相抓錯</b>。</p>
+<p class="step" data-rl="一句話" style="font-size:38px;color:#5E5850;text-align:center">靶心人逼出<b><span style="color:#C41F27">故事</span></b>，心結人逼出<b><span style="color:#C41F27">人物</span></b>，換順序、套濾鏡讓它<b><span style="color:#C41F27">變出 18 萬個</span></b>。</p>
 </section>
 
 <section class="slide ai" id="ai-curve" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 60px;display:flex;flex-direction:column;gap:22px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">故事 vs. 人物：小美人魚的苦根，兩種講法</h2>
+<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">心結人：事情轉彎了，人呢？</h2>
 <div class="aiGrid">
-<p class="aiH">靶心人：發生了什麼</p><p class="aiH red">角色內心曲線：他心裡怎麼了</p>
-<p class="aiC"><b>目標</b><span>讓王子愛上自己</span></p><p class="aiC step" data-rl="渴望"><b>渴望</b><span>「我只想被他看見。」</span></p>
-<p class="aiC"><b>阻礙</b><span>用聲音換了雙腿，說不出真相</span></p><p class="aiC step" data-rl="恐懼"><b>恐懼</b><span>「如果他永遠不知道，我算什麼？」</span></p>
-<p class="aiC"><b>努力</b><span>忍著刀割般的痛，天天為他跳舞</span></p><p class="aiC step" data-rl="執著"><b>執著</b><span>「再痛也要跳，跳到他看見我。」</span></p>
-<p class="aiC"><b>結果</b><span>王子只把她當成可愛的小孤女</span></p><p class="aiC step" data-rl="失落"><b>失落</b><span>「原來陪伴，換不來愛。」</span></p>
-<p class="aiC"><b>意外</b><span>王子要娶鄰國公主，以為是她救了他</span></p><p class="aiC step" data-rl="觸動"><b>觸動</b><span>他愛錯了人，<span style="color:#C41F27">卻笑得那麼幸福</span>。</span></p>
-<p class="aiC"><b>轉彎</b><span>姊姊送來匕首，她卻丟進海裡</span></p><p class="aiC step" data-rl="轉念"><b>轉念</b><span>「我救過他一次，這次也不傷他。」</span></p>
-<p class="aiC"><b>結局</b><span>化成泡沫，成為空氣的女兒</span></p><p class="aiC step" data-rl="重啟"><b>重啟</b><span>她第一次覺得，<span style="color:#C41F27">自己是自由的</span>。</span></p>
+<p class="aiH">靶心人：事件線（事情轉彎）</p><p class="aiH red">心結人：人物線（人物現形）</p>
+<p class="aiC"><b>目標</b><span>讓王子愛上自己</span></p><p class="aiC step" data-rl="渴望"><b>渴望</b><span>只想留在王子身邊，得到他的愛</span></p>
+<p class="aiC"><b>阻礙</b><span>用聲音換了雙腿，說不出真相</span></p><p class="aiC step" data-rl="顧忌"><b>顧忌</b><span>他若娶了別人，天亮她就化成泡沫</span></p>
+<p class="aiC"><b>努力</b><span>忍著刀割般的痛，天天為他跳舞</span></p><p class="aiC step" data-rl="兩難"><b>兩難</b><span>殺了他，<span style="color:#C41F27">自己能活</span>；不殺，<span style="color:#C41F27">自己消失</span></span></p>
+<p class="aiC"><b>結果</b><span>王子只把她當成可愛的小孤女</span></p><p class="aiC step" data-rl="抗拒"><b>抗拒</b><span>握著刀告訴自己：「他不愛我了。」</span></p>
+<p class="aiC"><b>意外</b><span>王子要娶鄰國公主，以為是她救了他</span></p><p class="aiC step" data-rl="刺痛"><b>刺痛</b><span>熟睡的王子，在夢裡喊著新娘的名字</span></p>
+<p class="aiC"><b>轉彎</b><span>姊姊送來匕首，她卻丟進海裡</span></p><p class="aiC step" data-rl="抉擇"><b>抉擇</b><span>把刀丟進海裡——<span style="color:#C41F27">不拿他的命換</span></span></p>
+<p class="aiC"><b>結局</b><span>化成泡沫，成為空氣的女兒</span></p><p class="aiC step" data-rl="承擔"><b>承擔</b><span>太陽升起，她化成了泡沫</span></p>
 </div>
 <div style="display:flex;gap:32px;align-items:center">
-<p class="aiPrompt sm" style="flex:1">把這個靶心人七步，改寫成角色內心曲線：渴望、恐懼、執著、失落、觸動、轉念、重啟，每一步寫一句他心裡的話。</p>
+<p class="aiPrompt sm" style="flex:1">把這個靶心人七步，改寫成心結人七步：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔——看他最後選了什麼、付了什麼代價。</p>
 <div class="aiRunBtn">▶ 貼上故事，執行</div>
 </div>
 </section>
@@ -223,38 +203,15 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </div>
 </section>
 
-<section class="slide ai" id="ai-filter" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 60px;display:flex;flex-direction:column;gap:22px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">套濾鏡：36 種劇情模式 × 五大類</h2>
+<section class="slide ai" id="ai-filter" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:64px 128px 52px;display:flex;flex-direction:column;gap:18px">
+<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">套濾鏡：36 種劇情模式</h2>
 <p class="aiBig">5040 種順序 × 36 種劇情模式 ＝ 181,440 <span>≈ 18 萬個故事</span></p>
-<div class="aiTbl">
-<p class="aiH">五大類</p><p class="aiH">適合的劇情濾鏡</p><p class="aiH">小美人魚的例子</p>
-<p class="ty">起源</p><p class="step" data-rl="起源">揭露祕密、身分變形</p><p class="ex">「是我救了你」——這句話，她永遠說不出口</p>
-<p class="ty">苦根</p><p class="step" data-rl="苦根">災難降臨、錯誤判斷</p><p class="ex">用聲音換來雙腿，卻換不來他的愛</p>
-<p class="ty">重生</p><p class="step" data-rl="重生">升華、復權</p><p class="ex">從海上的泡沫，升成空氣的女兒</p>
-<p class="ty">打怪</p><p class="step" data-rl="打怪">反叛、復仇</p><p class="ex">真正的怪物，是那個想拿刀的自己</p>
-<p class="ty">信念</p><p class="step" data-rl="信念">救援、對抗命運</p><p class="ex">一把刀丟進海裡，救了他，也救了自己</p>
-</div>
+<p class="aiPlots step" data-rl="36 種劇情模式"><span class="pl"><i>1</i>哀求請託</span><span class="pl"><i>2</i>援救</span><span class="pl"><i>3</i>復仇</span><span class="pl"><i>4</i>親族間的報復</span><span class="pl"><i>5</i>逃亡者的追捕</span><span class="pl"><i>6</i>災禍</span><span class="pl"><i>7</i>不幸的遭遇</span><span class="pl"><i>8</i>反抗（革命）</span><span class="pl"><i>9</i>壯舉（征服）</span><span class="pl"><i>10</i>拐劫</span><span class="pl"><i>11</i>謎的解釋</span><span class="pl"><i>12</i>獲取</span><span class="pl"><i>13</i>骨肉仇恨</span><span class="pl"><i>14</i>骨肉競爭</span><span class="pl"><i>15</i>姦情殺害</span><span class="pl"><i>16</i>瘋狂</span><span class="pl"><i>17</i>因輕忽而招致損害</span><span class="pl"><i>18</i>不知而犯的戀愛罪惡</span><span class="pl"><i>19</i>無意中傷害自己所愛</span><span class="pl"><i>20</i>為了主義而犧牲自己</span><span class="pl"><i>21</i>為了所愛（骨肉親人）而犧牲自己</span><span class="pl hot"><i>22</i>為愛情犧牲一切</span><span class="pl"><i>23</i>有原因的犧牲所愛之人</span><span class="pl"><i>24</i>兩種不均等的勢力鬥爭</span><span class="pl"><i>25</i>奸通（外遇／偷情）</span><span class="pl"><i>26</i>戀愛的罪惡</span><span class="pl"><i>27</i>發現所愛之人有不名譽的事</span><span class="pl"><i>28</i>戀愛發生阻礙</span><span class="pl"><i>29</i>愛上自己的仇敵</span><span class="pl"><i>30</i>野心</span><span class="pl"><i>31</i>人與神的鬥爭</span><span class="pl"><i>32</i>錯誤的嫉妒</span><span class="pl"><i>33</i>錯誤的判斷</span><span class="pl"><i>34</i>悔恨</span><span class="pl"><i>35</i>親族的重逢</span><span class="pl"><i>36</i>失去所愛之人</span></p>
 <div style="display:flex;gap:32px;align-items:center">
-<p class="aiPrompt sm" style="flex:1">把我的〔苦根〕故事套上劇情模式「錯誤判斷」重新改寫，保留七步結構，並說明改了哪裡。</p>
+<p class="aiPrompt sm" style="flex:1">把我的故事套上劇情模式「錯誤的判斷」重新改寫，保留靶心人七步結構，改變的是核心衝突，最後逐條說明改了哪裡。</p>
 <div class="aiRunBtn">▶ 貼上故事，執行</div>
 </div>
-<p class="aiFoot">劇情模式源自法國劇作家喬治・波爾蒂（Georges Polti）的「36 種戲劇情境」。濾鏡不換骨架，換的是<b style="color:#C41F27">核心衝突</b>。</p>
-</section>
-
-<section class="slide ai" id="ai-human" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 60px;display:flex;flex-direction:column;justify-content:center;gap:30px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">去 AI 感：最後，把你自己找回來</h2>
-<div style="display:flex;flex-direction:column;gap:14px">
-<div class="aiRow"><p class="lbl aiL">具體畫面</p><p class="step aiS sm" data-rl="一 具體畫面">不寫「我很難過」，寫你<b><span style="color:#C41F27">在做什麼、聞到什麼、手在幹嘛</span></b>。</p></div>
-<div class="aiRow"><p class="lbl aiL">原汁對話</p><p class="step aiS sm" data-rl="二 原汁對話">讓人物開口，說<b><span style="color:#C41F27">不完整、帶情緒</span></b>的話。</p></div>
-<div class="aiRow"><p class="lbl aiL">刪掉金句</p><p class="step aiS sm" data-rl="三 刪掉金句">結尾不蓋章，留一點<b><span style="color:#C41F27">「我還在想」</span></b>。</p></div>
-<div class="aiRow"><p class="lbl aiL">保留矛盾</p><p class="step aiS sm" data-rl="四 保留矛盾">「說不上來是變堅強了，<b><span style="color:#C41F27">還是只是沒空再哭了</span></b>。」</p></div>
-<div class="aiRow"><p class="lbl aiL">你的偏見</p><p class="step aiS sm" data-rl="五 你的偏見">用你的口氣、判斷、碎念——<b><span style="color:#C41F27">那是你的指紋</span></b>。</p></div>
-</div>
-<p class="step aiCall" data-rl="回頭看看">回頭看看：你請 AI 改寫的每一個版本，<b><span style="color:#C41F27">是不是都用一句金句收尾？</span></b></p>
-<div style="display:flex;gap:32px;align-items:center">
-<p class="aiPrompt sm" style="flex:1">幫這段故事去除 AI 感：加入具體畫面與對話、刪掉金句式結尾，並逐條註明你改了哪裡。</p>
-<div class="aiRunBtn">▶ 貼上故事，執行</div>
-</div>
+<p class="aiFoot">源自波爾蒂「36 種戲劇情境」，例子見《故事課》附錄。濾鏡不換骨架，換的是核心衝突。<b style="color:#C41F27">小美人魚＝第 22 種。</b></p>
 </section>
 
 <section class="slide" id="ai-practice" data-transition="fade" style="background:#D2262E;color:#FBF8F3;font-family:'Noto Sans TC', Arial, sans-serif;padding:112px 128px;display:flex;flex-direction:column;justify-content:center;gap:56px">
@@ -268,12 +225,12 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <div style="flex:1;background:#FBF8F3;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:16px">
 <p style="font-size:72px;font-weight:900;color:#C41F27">2</p>
 <h3 class="lbl" style="font-size:48px;font-weight:700;color:#1E1C1A">讓 AI 加值</h3>
-<p class="step" data-rl="2 讓 AI 加值" style="font-size:36px;line-height:1.7;color:#3A3631">換順序、套濾鏡、加內心曲線，<b><span style="color:#C41F27">挑一種玩</span></b>。</p>
+<p class="step" data-rl="2 讓 AI 加值" style="font-size:36px;line-height:1.7;color:#3A3631">加心結人、換順序、套濾鏡，<b><span style="color:#C41F27">挑一種玩</span></b>。</p>
 </div>
 <div style="flex:1;background:#FBF8F3;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:16px">
 <p style="font-size:72px;font-weight:900;color:#C41F27">3</p>
 <h3 class="lbl" style="font-size:48px;font-weight:700;color:#1E1C1A">改回你自己</h3>
-<p class="step" data-rl="3 改回你自己" style="font-size:36px;line-height:1.7;color:#3A3631">去 AI 感，再用<b><span style="color:#C41F27">兩分鐘</span></b>講給隔壁的人聽。</p>
+<p class="step" data-rl="3 改回你自己" style="font-size:36px;line-height:1.7;color:#3A3631">用你的口氣改一遍，再用<b><span style="color:#C41F27">兩分鐘</span></b>講給隔壁的人聽。</p>
 </div>
 </div>
 <p class="step" data-rl="提醒" style="font-size:36px;color:#FBF8F3">提醒：真實客戶的名字、病名、店名，都要先改過，再交給 AI。</p>
@@ -329,7 +286,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
    var big=s.querySelector('.aiBig');if(big)h+='<p class="note"><b>'+esc(big.textContent.trim())+'</b></p>';
    s.querySelectorAll('[data-rl]').forEach(function(el){var c=el.cloneNode(true),pre='';
     if(el.classList.contains('aiC')){var b=c.querySelector(':scope > b');if(b)b.remove();var pv=el.previousElementSibling;if(pv&&pv.classList.contains('aiC')){var pb=pv.querySelector('b'),ps=pv.querySelector('span');pre='<span style="display:block;color:#8A847B;font-size:.9em;margin-bottom:4px">靶心人｜'+esc(pb?pb.textContent:'')+'：'+esc(ps?ps.textContent:'')+'</span>';}}
-    var lab=el.getAttribute('data-rl'),cls=/^5|意外|觸動|回頭/.test(lab)?'key':'';
+    var lab=el.getAttribute('data-rl'),cls=/^5|意外|觸動|回頭|兩難|刺痛|抉擇/.test(lab)?'key':'';
     h+='<div class="card '+cls+'"><span class="lab">'+esc(lab)+'</span><p>'+pre+c.innerHTML+'</p></div>';});
    s.querySelectorAll('.aiPrompt').forEach(function(p){h+='<p class="aiPrompt">'+esc(p.innerText.trim())+'</p><span class="aiRunBtn" data-slide="'+s.id+'">▶ 貼上故事，執行</span>';});
   });
@@ -353,19 +310,15 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
 <script>/* 2026-11-09 AI 加值：貼上故事，一鍵送到 ChatGPT／Claude／Gemini（每台裝置各自操作，不同步） */
 (function(){
  var TASKS={
-  'ai-multi':{name:'多 AI 交叉',desc:'從四種視角看你的故事，最後整合出一個最佳觀點。',
-   p:function(o,s){return '以下是我的故事。請從你擅長的角度提出觀點，同時模擬另外三種視角：結構邏輯、情感人性、文化哲理、現實應用。最後做一張比較表，並整合出一個最佳觀點。\n\n【我的故事】\n'+s;}},
-  'ai-curve':{name:'故事 vs. 人物',desc:'把靶心人七步，改寫成角色內心曲線。',
-   p:function(o,s){return '以下是我用靶心人公式（目標、阻礙、努力、結果、意外、轉彎、結局）寫的故事。請改寫成角色內心曲線：渴望、恐懼、執著、失落、觸動、轉念、重啟，每一步寫一句主角心裡的話，最後用表格對照原本的七步。\n\n【我的故事】\n'+s;}},
+  'ai-curve':{name:'心結人',desc:'把靶心人七步（事情轉彎），改寫成心結人七步（人物現形）。',
+   p:function(o,s){return '以下是我用靶心人公式（目標、阻礙、努力、結果、意外、轉彎、結局）寫的故事。請改寫成心結人公式：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔。兩難要是兩個「都對」、卻不能兼得的價值；抗拒要寫出他如何拖延、逃避或假裝不用選；刺痛要刺中他最不願面對的地方；承擔要寫出他為選擇付出的代價。每一步寫一到兩句，最後用表格對照原本的靶心人七步。\n\n【我的故事】\n'+s;}},
   'ai-order':{name:'換順序',desc:'選一種排列，讓 AI 用新的順序重講你的故事。',
    opts:['5612347 觀點主題','5671234 結局先行','2134567 情緒帶入','3412567 迷惑揭曉','1234567 傳統敘事'],
    p:function(o,s){var n=o.split(' ')[0],N=['','目標','阻礙','努力','結果','意外','轉彎','結局'],seq=n.split('').map(function(d){return N[+d];}).join('→');
     return '請用靶心人公式 '+n+' 的順序（'+seq+'），把我的故事重新說一次。每一段標出步驟名稱，說完後用兩、三句話說明這個順序帶來的效果。\n\n【我的故事】\n'+s;}},
   'ai-filter':{name:'套濾鏡',desc:'選一種劇情模式，改寫你故事的核心衝突。',
-   opts:['揭露祕密','身分變形','災難降臨','錯誤判斷','升華','復權','反叛','復仇','救援','對抗命運'],
-   p:function(o,s){return '請把我的故事套上劇情模式「'+o+'」重新改寫：保留靶心人七步結構（目標、阻礙、努力、結果、意外、轉彎、結局），改變的是故事的核心衝突。最後逐條說明你改了哪裡。\n\n【我的故事】\n'+s;}},
-  'ai-human':{name:'去 AI 感',desc:'把 AI 寫的版本，改回有人味的樣子。',
-   p:function(o,s){return '幫這段故事去除 AI 感：加入具體畫面（在做什麼、聞到什麼、身體的反應）和不完美的對話，刪掉金句式結尾，保留一點矛盾與不確定。改完後逐條註明你改了哪裡。\n\n【我的故事】\n'+s;}}
+   opts:['哀求請託','援救','復仇','親族間的報復','逃亡者的追捕','災禍','不幸的遭遇','反抗（革命）','壯舉（征服）','拐劫','謎的解釋','獲取','骨肉仇恨','骨肉競爭','姦情殺害','瘋狂','因輕忽而招致損害','不知而犯的戀愛罪惡','無意中傷害自己所愛','為了主義而犧牲自己','為了所愛（骨肉親人）而犧牲自己','為愛情犧牲一切','有原因的犧牲所愛之人','兩種不均等的勢力鬥爭','奸通（外遇／偷情）','戀愛的罪惡','發現所愛之人有不名譽的事','戀愛發生阻礙','愛上自己的仇敵','野心','人與神的鬥爭','錯誤的嫉妒','錯誤的判斷','悔恨','親族的重逢','失去所愛之人'],
+   p:function(o,s){return '請把我的故事套上劇情模式「'+o+'」重新改寫：保留靶心人七步結構（目標、阻礙、努力、結果、意外、轉彎、結局），改變的是故事的核心衝突。最後逐條說明你改了哪裡。\n\n【我的故事】\n'+s;}}
  };
  var KEY='fivestory-ai-story',story='';try{story=localStorage.getItem(KEY)||'';}catch(_){}
  var cur=null,opt={};
