@@ -110,6 +110,14 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 #aiRun .arBtns button[data-ai="gemini"]{background:#3B6FE0}
 #aiRun .arBtns button[data-ai="meta"]{background:linear-gradient(135deg,#0866FF,#9B3CF0)}
 
+#aiRun .arYT{display:none;margin:10px 0 0;font-size:14px;line-height:1.6;color:#4A3F30;background:#F3E7D2;border-left:5px solid #9A7430;border-radius:10px;padding:8px 12px}
+#aiRun.yt .arYT{display:block}
+#aiRun .arBtns button{position:relative}
+#aiRun.yt .arBtns button[data-ai="gemini"]{outline:4px solid #E9B44C;outline-offset:2px}
+#aiRun.yt .arBtns button[data-ai="gemini"]::after{content:"推薦・能看影片";position:absolute;left:50%;top:-12px;transform:translateX(-50%);white-space:nowrap;font-size:11px;font-weight:900;background:#E9B44C;color:#1E1C1A;border-radius:999px;padding:1px 8px}
+#aiRun.yt .arBtns button:not([data-ai="gemini"]){opacity:.55}
+#aiRun.yt .arBtns button:not([data-ai="gemini"])::after{content:"需貼逐字稿";position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);white-space:nowrap;font-size:10px;font-weight:700;background:#FBF8F3;color:#8A847B;border:1px solid #D9D1C5;border-radius:999px;padding:0 6px}
+#aiRun.yt .arBtns{margin-top:22px;margin-bottom:16px;row-gap:26px}
 #aiRun .arMsg{min-height:22px;font-size:14px;font-weight:700;color:#2E7D4F;margin:0}
 #aiRun .arMsg.err{color:#C41F27}
 #aiRun .arNote{font-size:13px;color:#8A847B;margin:6px 0 0;line-height:1.5}
@@ -359,15 +367,20 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  var box=document.createElement('div');box.id='aiRun';box.setAttribute('aria-hidden','true');
  box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-labelledby="arTitle"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
   '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
-  '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……"></textarea>'+
-  '<details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
+  '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……（也可以貼 YouTube 影片網址，請用 Gemini）"></textarea>'+
+  '<p class="arYT">偵測到 YouTube 影片網址 ▶ 請用 <b>Gemini</b>，它能看影片。<br>ChatGPT、Claude、Meta AI 看不到影片內容，可能會照標題亂編；要用它們，請改貼逐字稿（YouTube 影片下方「…」→「顯示逐字稿」）。</p><details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
   '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。故事會留在這台裝置，換頁還在。<br>提醒：真實客戶的名字、病名、店名，先改過再送出。</p></div>';
  document.body.appendChild(box);
  var $=function(s){return box.querySelector(s);},ta=$('#arStory');
  ta.value=story;
- function full(){var t=TASKS[cur];return t?('請用繁體中文回答。\n'+t.p(opt[cur]||(t.opts&&t.opts[0])||'',ta.value.trim())):'';}
- function preview(){$('.arPre').textContent=full();}
+ var YT=/(https?:\/\/)?(www\.|m\.)?(youtube\.com\/(watch\?|shorts\/|live\/)|youtu\.be\/)\S+/i;
+ function isYT(){return YT.test(ta.value.trim());}
+ function full(){var t=TASKS[cur];if(!t)return '';var yt=isYT();
+  var pre=yt?'我給你的是一支 YouTube 影片網址。請先看這支影片（畫面、聲音或字幕），把影片裡的故事用靶心人七步（目標、阻礙、努力、結果、意外、轉彎、結局）整理出來，再做下面的任務。\n如果你看不到影片內容，請直接告訴我「我看不到這支影片」，不要根據標題、說明欄或網址猜測內容。\n\n':'';
+  return '請用繁體中文回答。\n'+pre+t.p(opt[cur]||(t.opts&&t.opts[0])||'',ta.value.trim());}
+ function ytUI(){var yt=isYT();box.classList.toggle('yt',yt);}
+ function preview(){$('.arPre').textContent=full();ytUI();}
  function msg(t,err){var m=$('.arMsg');m.textContent=t;m.classList.toggle('err',!!err);}
  function open(id){var t=TASKS[id];if(!t)return;cur=id;$('#arTitle').textContent=t.name;$('.arTask').textContent=t.desc;
   if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('#arTitle').textContent=t.name+'｜'+window.__aiPlot.n+' '+window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
@@ -388,6 +401,7 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   else if(ai==='meta')url='https://www.meta.ai/?q='+q;
   if(url){var w=null;try{w=window.open(url,'_blank','noopener');}catch(_){}
    if(ai==='gemini')msg(ok?'已複製！在 Gemini 的輸入框貼上，按送出。':'已打開 Gemini，請展開上方「完整提示詞」手動複製。',!ok);
+   else if(isYT())msg('注意：'+({chatgpt:'ChatGPT',claude:'Claude',meta:'Meta AI'}[ai])+' 看不到影片內容，如果它說看不到，請改貼逐字稿，或改用 Gemini。',true);
    else msg('已打開 '+({chatgpt:'ChatGPT',claude:'Claude',meta:'Meta AI'}[ai])+'，按送出就開始。'+(ok?'（也已複製，沒帶過去就直接貼上）':''));
   }else msg(ok?'已複製！貼到任何一個 AI 都可以。':'複製失敗，請展開「完整提示詞」手動複製。',!ok);
  }
