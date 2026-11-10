@@ -544,6 +544,9 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .bsOwn:hover,.bsOwn:active,.bsOwn.on{background:#C41F27;border-color:#C41F27;color:#FBF8F3}
 .bsOwn:hover .bsI,.bsOwn:active .bsI,.bsOwn.on .bsI{background:#FBF8F3;color:#C41F27}
 #reader .bsOwn{font-size:14px;padding:6px 12px;margin-left:0;border:2px dashed #2B2926}
+
+/* 2026-11-11：桌機／同步投影模式已有右側 AI 輸入框，隱藏頁尾重複的提示詞與執行列；手機閱讀模式保留原操作入口 */
+#stage > .slide.ai > .aiRunRow{display:none!important}
 </style></head>
 <body>
 <div id="stage">
