@@ -144,7 +144,7 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 #aiRun.yt .arBtns button[data-ai="gemini"]{outline:4px solid #E9B44C;outline-offset:2px}
 #aiRun.yt .arBtns button[data-ai="gemini"]::after{content:"推薦・能看影片";position:absolute;left:50%;top:-12px;transform:translateX(-50%);white-space:nowrap;font-size:11px;font-weight:900;background:#E9B44C;color:#1E1C1A;border-radius:999px;padding:1px 8px}
 #aiRun.yt .arBtns button:not([data-ai="gemini"]){opacity:.55}
-#aiRun.yt .arBtns button:not([data-ai="gemini"])::after{content:"需貼逐字稿";position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);white-space:nowrap;font-size:10px;font-weight:700;background:#FBF8F3;color:#8A847B;border:1px solid #D9D1C5;border-radius:999px;padding:0 6px}
+#aiRun.yt .arBtns button:not([data-ai="gemini"])::after{content:"看不到影片";position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);white-space:nowrap;font-size:10px;font-weight:700;background:#FBF8F3;color:#8A847B;border:1px solid #D9D1C5;border-radius:999px;padding:0 6px}
 #aiRun.yt .arBtns{margin-top:22px;margin-bottom:16px;row-gap:26px}
 #aiRun .arMsg{min-height:22px;font-size:14px;font-weight:700;color:#2E7D4F;margin:0}
 #aiRun .arMsg.err{color:#C41F27}
@@ -398,7 +398,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
   '<div class="arFilm"><p>沒有故事？用這些故事練習拆解</p><div class="fRow">'+FILMS.map(function(f,k){return '<div class="fItem"><button type="button" class="fName" data-act="filmplay" data-film="'+k+'" title="'+(f[2]?'看文章':'播放影片')+'"><i'+(f[2]?' class="t"':'')+'>'+(f[2]?'文':'▶')+'</i><span><b class="br">《</b>'+f[0]+'<b class="br">》</b></span></button><button type="button" class="fCopy" data-act="filmcopy" data-film="'+k+'">'+(f[2]?'複製文字':'複製網址')+'</button></div>';}).join('')+'</div>'+FILMS.map(function(f,k){return '<div class="fPlay" data-film="'+k+'"></div>';}).join('')+'</div>'+
   '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……（也可以貼 YouTube 影片網址，請用 Gemini）"></textarea>'+
-  '<p class="arYT">偵測到 YouTube 影片網址 ▶ 請用 <b>Gemini</b>，它能看影片。<br>ChatGPT、Claude、Meta AI 看不到影片內容，可能會照標題亂編；要用它們，請改貼逐字稿（YouTube 影片下方「…」→「顯示逐字稿」）。</p><details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
+  '<p class="arYT">這是影片網址，請按 <b>Gemini</b>（它能看影片）。<br>其他 AI 看不到影片，會亂編。</p><details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
   '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。<br>提醒：真實客戶的名字、病名、店名，先改過再送出。</p></div>';
  document.body.appendChild(box);
@@ -437,7 +437,7 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   else if(ai==='meta')url='https://www.meta.ai/?q='+q;
   if(url){var w=null;try{w=window.open(url,'_blank','noopener');}catch(_){}
    if(ai==='gemini')msg(ok?'已複製！在 Gemini 的輸入框貼上，按送出。':'已打開 Gemini，請展開上方「完整提示詞」手動複製。',!ok);
-   else if(isYT())msg('注意：'+({chatgpt:'ChatGPT',claude:'Claude',meta:'Meta AI'}[ai])+' 看不到影片內容，如果它說看不到，請改貼逐字稿，或改用 Gemini。',true);
+   else if(isYT())msg('注意：'+({chatgpt:'ChatGPT',claude:'Claude',meta:'Meta AI'}[ai])+' 看不到影片，可能會亂編，建議改按 Gemini。',true);
    else msg('已打開 '+({chatgpt:'ChatGPT',claude:'Claude',meta:'Meta AI'}[ai])+'，按送出就開始。'+(ok?'（也已複製，沒帶過去就直接貼上）':''));
   }else msg(ok?'已複製！貼到任何一個 AI 都可以。':'複製失敗，請展開「完整提示詞」手動複製。',!ok);
  }
