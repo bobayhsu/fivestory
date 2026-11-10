@@ -658,6 +658,11 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   A.set=function(v){v=String(v);var m=v.match(/\|s(\d+)/),k=m?+m[1]:null;if(k!==window.__bsStory){window.__bsStory=k;render();}s0(v.split('|')[0]);
    var r=R();if(!r)return;var q=v.match(/\|r([^~|]*)~([^|]*)/);
    if(q){var id=decodeURIComponent(q[1]),tx=decodeURIComponent(q[2]);if(r.id()!==id)r.open(id);r.text(tx);}else if(r.id())r.close();};}
+ /* 2026-11-10 空格裡的影片網址：在同步視窗裡改用五大類同步播放器（兩台一起播），不另開 YouTube */
+ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.bsShow .bsUrl');if(!a)return;
+  var f=window.__bsStory!=null&&(window.__bsFilms||[])[window.__bsStory];
+  try{var P=window.parent;if(P!==window&&P.document.getElementById('fivestoryVideoPanel')){e.preventDefault();e.stopPropagation();P.postMessage({type:'fivestory-satir-video',url:a.getAttribute('href'),title:f?f[0]:'YouTube 影片'},location.origin);}}catch(_){}
+ },true);
  document.addEventListener('click',function(e){var c=e.target.closest&&e.target.closest('.bsChip');if(!c)return;e.preventDefault();e.stopPropagation();var k=+c.dataset.bs;window.__bsStory=window.__bsStory===k?null:k;render();},true);
 })();
 </script>
