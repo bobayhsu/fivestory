@@ -381,6 +381,24 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #reader .mJoke{font-size:13px;padding:14px 4px}#reader .mJT{font-size:11px}
 #reader .mToTop{font-size:13px}
 .mFrame .meta{display:flex;flex-direction:column;justify-content:center;padding-bottom:140px}
+/* ===== 2026-11-10 總覽改成箭頭版面：上排三卡＋往右箭頭，左邊往下箭頭「加深」，下排心結人＋大標 ===== */
+.mFrame .meta.mGrid{display:grid!important;grid-template-columns:230px repeat(3,1fr);grid-template-rows:150px auto auto;column-gap:30px;row-gap:56px;align-content:center;padding:40px 110px 150px 90px!important;overflow:hidden}
+.mGrid .mHArr{grid-column:2 / 5;grid-row:1;display:flex;align-items:center;padding-left:90px}
+.mGrid .mHA{width:100%;height:150px}
+.mGrid .mVArr{grid-column:1;grid-row:2 / 4;position:relative;display:flex;align-items:center;min-height:0}
+.mGrid .mVA{position:absolute;right:0;top:0;width:110px;height:100%}
+.mGrid .mDeep{align-self:center;font:400 84px/1.1 'Noto Serif TC','Noto Sans TC',serif;color:#1E1C1A}
+.mGrid .g-bullseye{grid-column:2;grid-row:2}.mGrid .g-order{grid-column:3;grid-row:2}.mGrid .g-filter{grid-column:4;grid-row:2}.mGrid .g-curve{grid-column:2;grid-row:3}
+.mGrid .mHero{grid-column:3 / 5;grid-row:3;align-self:end;text-align:center;padding-bottom:6px}
+.mGrid .mTitle{font-size:92px;margin:0!important;white-space:nowrap}
+.mGrid .mPill{margin-top:14px!important;font-size:30px;padding:16px 36px}
+/* 手機直式：大標在上，卡片兩欄，不放箭頭 */
+#reader .mGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#reader .mGrid .mHArr,#reader .mGrid .mVArr{display:none}
+#reader .mGrid .mCard{grid-column:auto!important;grid-row:auto!important}
+#reader .mGrid .mHero{grid-column:1 / 3!important;grid-row:auto!important;order:-1;margin-bottom:12px;text-align:center;align-self:auto}
+#reader .mGrid .mTitle{font-size:29px;white-space:normal}
+#reader .mGrid .mPill{font-size:18px;padding:12px 20px}
 </style></head>
 <body>
 <div id="stage">
@@ -388,14 +406,11 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <!-- ===== 2026-11-09 新章節：AI 加值（ai-*） ===== -->
 <section class="slide frame mFrame" id="ai-frame" data-transition="fade">
 <h2 class="mH2">AI 加值：一個故事，18 萬種變化</h2>
-<div class="meta" id="metaTop">
-<p class="mKick"><span>AI + STORYTELLING</span></p>
-<p class="mTitle">一個故事，<em>18 萬種變化</em></p>
-<p class="mPill">1 × 5,040 × 36 = 181,440</p>
-<p class="mSub">1 個故事 × 5040 種順序 × 36 種濾鏡</p>
-<div class="mCards"><div class="mCard" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">三分鐘說一個完整的故事</p></div><div class="mCard" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div></div>
-
-
+<div class="meta mGrid" id="metaTop">
+<div class="mHArr"><svg class="mHA" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,25 900,25 900,0 1000,50 900,100 900,75 0,75" fill="#1B5F82"/></svg></div>
+<div class="mVArr"><span class="mDeep">加<br>深</span><svg class="mVA" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true"><polygon points="25,0 75,0 75,820 100,820 50,1000 0,820 25,820" fill="#1B5F82"/></svg></div>
+<div class="mCard g-bullseye" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">三分鐘說一個完整的故事</p></div><div class="mCard g-order" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
+<div class="mHero"><p class="mTitle">一個故事，<em>18 萬種變化</em></p><p class="mPill">1 × 5,040 × 36 = 181,440</p></div>
 </div>
 </section>
 
@@ -519,7 +534,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   slides.forEach(function(s){var t=s.querySelector('h2'),title=t?t.textContent.trim():'';var short=title.split('：')[0];
    nav+='<a href="#r-'+s.id+'">'+esc(short)+'</a>';
    h+='<h3 id="r-'+s.id+'">'+esc(title)+'</h3>';
-   if(s.id==='ai-frame'){var mt=s.querySelector('.meta');if(mt)h+='<div class="meta">'+mt.innerHTML.replace(' id="metaTop"','')+'</div>';}
+   if(s.id==='ai-frame'){var mt=s.querySelector('.meta');if(mt)h+='<div class="'+mt.className+'">'+mt.innerHTML.replace(' id="metaTop"','')+'</div>';}
    if(s.id==='ai-frame')s.querySelectorAll('.tab').forEach(function(tb){var p=tb.querySelectorAll('p');h+='<div class="card"><div class="trow"><span class="ty">'+esc(p[0].textContent.trim())+'</span><span class="kw">'+esc(p[1].textContent.trim())+'</span><span>'+esc(p[2].textContent.trim())+'</span></div></div>';});
    var big=s.querySelector('.aiBig');if(big)h+='<p class="note"><b>'+esc(big.textContent.trim())+'</b></p>';
    s.querySelectorAll('[data-rl]').forEach(function(el){var c=el.cloneNode(true),pre='';
