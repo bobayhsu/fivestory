@@ -649,6 +649,10 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   h.parentNode.insertBefore(d,h.nextSibling);var bx=document.createElement('div');bx.className='bsShow';d.parentNode.insertBefore(bx,d.nextSibling);render();}
  readerChips();
  var R=document.getElementById('reader');if(R&&window.MutationObserver)new MutationObserver(readerChips).observe(R,{childList:true});
+ /* 2026-11-10 手機桌機同步：把選中的故事一起放進同步內容（例如 "1|s3" = 第 2 頁、選第 3 個故事） */
+ var A=window.AiSync;if(A&&!A.__bs){var g0=A.get,s0=A.set;A.__bs=1;
+  A.get=function(){return g0()+(window.__bsStory!=null?'|s'+window.__bsStory:'');};
+  A.set=function(v){v=String(v);var m=v.match(/\|s(\d+)/),k=m?+m[1]:null;if(k!==window.__bsStory){window.__bsStory=k;render();}s0(v.split('|')[0]);};}
  document.addEventListener('click',function(e){var c=e.target.closest&&e.target.closest('.bsChip');if(!c)return;e.preventDefault();e.stopPropagation();var k=+c.dataset.bs;window.__bsStory=window.__bsStory===k?null:k;render();},true);
 })();
 </script>
