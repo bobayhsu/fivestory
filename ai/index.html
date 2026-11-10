@@ -451,6 +451,18 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #reader .mGrid .mCard .mArr{width:28px!important;height:28px!important;font-size:14px!important}
 #reader .mGrid .mCard .mName{font-size:29px!important;margin-top:10px!important}
 #reader .mGrid .mCard .mDesc{font-size:15px!important;margin-top:8px!important}
+/* ===== 2026-11-10 黑色粗箭頭：L 形貼卡片，白字「加廣／加深」在箭頭裡 ===== */
+.mFrame .meta.mGrid{grid-template-columns:100px repeat(3,1fr)!important;grid-template-rows:100px auto auto!important;column-gap:24px!important;row-gap:0!important;padding:110px 120px 150px 120px!important;align-content:center}
+.mGrid .mHArr{grid-column:1 / 5!important;grid-row:1!important;position:relative!important;display:block!important;padding:0!important;z-index:2}
+.mGrid .hShape{position:absolute;left:0;right:0;top:-60px;height:220px;background:#141312;clip-path:polygon(0 60px,calc(100% - 200px) 60px,calc(100% - 200px) 0,100% 110px,calc(100% - 200px) 220px,calc(100% - 200px) 160px,0 160px)}
+.mGrid .mWide{position:absolute!important;left:auto!important;right:120px!important;top:50%!important;bottom:auto!important;transform:translateY(-50%);font:700 76px/1 'Noto Serif TC','Noto Sans TC',serif!important;color:#fff!important;letter-spacing:6px}
+.mGrid .mVArr{grid-column:1!important;grid-row:1 / 4!important;position:relative!important;z-index:2}
+.mGrid .vShape{position:absolute;left:-48px;width:220px;top:0;bottom:-60px;background:#141312;clip-path:polygon(48px 0,172px 0,172px calc(100% - 210px),220px calc(100% - 210px),110px 100%,0 calc(100% - 210px),48px calc(100% - 210px))}
+.mGrid .mDeep{position:absolute!important;left:62px!important;top:auto!important;bottom:-10px!important;transform:translateX(-50%)!important;font:700 76px/1.15 'Noto Serif TC','Noto Sans TC',serif!important;color:#fff!important;text-align:center}
+.mGrid .g-bullseye,.mGrid .g-order,.mGrid .g-filter{margin-bottom:56px!important}
+.mGrid .mCard{border-radius:0 0 14px 14px}
+.mGrid .g-curve{padding-left:76px!important}
+#reader .mGrid .g-curve{padding-left:14px!important}
 </style></head>
 <body>
 <div id="stage">
@@ -459,8 +471,8 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <section class="slide frame mFrame" id="ai-frame" data-transition="fade">
 <h2 class="mH2">AI 加值：一個故事，18 萬種變化</h2>
 <div class="meta mGrid" id="metaTop">
-<div class="mHArr"><span class="mWide">加廣</span><svg class="mHA" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,32 930,32 930,0 1000,60 930,120 930,88 0,88" fill="#1B5F82"/></svg></div>
-<div class="mVArr"><span class="mDeep">加<br>深</span><svg class="mVA" viewBox="0 0 120 1000" preserveAspectRatio="none" aria-hidden="true"><polygon points="32,0 88,0 88,920 120,920 60,1000 0,920 32,920" fill="#1B5F82"/></svg></div>
+<div class="mHArr"><div class="hShape"></div><span class="mWide">加廣</span></div>
+<div class="mVArr"><div class="vShape"></div><span class="mDeep">加<br>深</span></div>
 <div class="mCard g-bullseye" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">三分鐘說一個完整的故事</p></div><div class="mCard g-order" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
 <div class="mHero"><p class="mPill">5,040 × 36 = 181,440</p><p class="mTitle">一個故事，<em>18 萬種變化</em></p></div>
 </div>
