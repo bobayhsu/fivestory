@@ -421,6 +421,27 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .mGrid .mDeep{left:-10px!important}
 #reader .meta.mGrid{grid-template-columns:1fr 1fr!important;grid-template-rows:auto!important;gap:10px!important;padding:6px 2px 10px!important}
 #reader .mGrid .mHArr,#reader .mGrid .mVArr{display:none!important}
+/* ===== 2026-11-10 總覽美化：箭頭細一點、和卡片留空隙；加廣／加深與箭頭同色；公式與大標對齊 ===== */
+.mFrame{background:#F8F5EF!important}
+.mFrame .meta.mGrid{grid-template-columns:190px repeat(3,1fr)!important;grid-template-rows:190px auto auto!important;column-gap:28px!important;padding:30px 120px 150px 80px!important}
+.mGrid .mHA{left:106px!important;width:calc(100% - 106px)!important;height:120px!important;bottom:22px!important}
+.mGrid .mVA{left:58px!important;top:108px!important;width:120px!important;height:calc(100% - 108px + 10px)!important}
+.mGrid .mWide{right:auto!important;left:calc(100% - 330px)!important;bottom:150px!important;font:900 64px/1 'Noto Sans TC',Arial,sans-serif!important;color:#1B5F82!important;letter-spacing:10px}
+.mGrid .mDeep{left:-8px!important;top:55%!important;font:900 64px/1.25 'Noto Sans TC',Arial,sans-serif!important;color:#1B5F82!important}
+.mGrid .mCard{box-shadow:0 10px 28px rgba(30,28,26,.07);border-radius:0 0 14px 14px;min-height:230px;display:flex;flex-direction:column}
+.mGrid .mCard .mName{font-size:46px}
+.mGrid .mCard .mDesc{color:#5E5850}
+.mGrid .g-bullseye,.mGrid .g-order,.mGrid .g-filter{margin-bottom:44px!important}
+.mGrid .mHero{align-self:center!important;padding:0 0 0 40px!important}
+.mGrid .mPill{font-size:34px!important;padding:14px 34px!important;margin:0 0 18px!important;letter-spacing:3px;box-shadow:none!important}
+.mGrid .mTitle{font-size:92px!important;line-height:1.1;letter-spacing:1px}
+#reader .mGrid .mCard{min-height:0;border-radius:0 0 10px 10px}
+#reader .mGrid .mCard .mName{font-size:24px}
+#reader .mGrid .mPill{font-size:17px!important;padding:9px 18px!important}
+.mGrid .mHA{left:90px!important;width:calc(100% - 90px)!important}
+.mGrid .mVA{top:80px!important;height:calc(100% - 80px + 10px)!important}
+.mGrid .mWide{left:auto!important;right:150px!important;bottom:122px!important}
+#reader .mGrid .g-bullseye,#reader .mGrid .g-order,#reader .mGrid .g-filter{margin-bottom:0!important}
 </style></head>
 <body>
 <div id="stage">
@@ -429,8 +450,8 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <section class="slide frame mFrame" id="ai-frame" data-transition="fade">
 <h2 class="mH2">AI 加值：一個故事，18 萬種變化</h2>
 <div class="meta mGrid" id="metaTop">
-<div class="mHArr"><span class="mWide">加廣</span><svg class="mHA" viewBox="0 0 1000 150" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,80 900,80 900,30 1000,115 900,200 900,150 0,150" fill="#1B5F82"/></svg></div>
-<div class="mVArr"><span class="mDeep">加<br>深</span><svg class="mVA" viewBox="0 0 150 1000" preserveAspectRatio="none" aria-hidden="true"><polygon points="40,0 110,0 110,880 150,880 75,1000 0,880 40,880" fill="#1B5F82"/></svg></div>
+<div class="mHArr"><span class="mWide">加廣</span><svg class="mHA" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,32 930,32 930,0 1000,60 930,120 930,88 0,88" fill="#1B5F82"/></svg></div>
+<div class="mVArr"><span class="mDeep">加<br>深</span><svg class="mVA" viewBox="0 0 120 1000" preserveAspectRatio="none" aria-hidden="true"><polygon points="32,0 88,0 88,920 120,920 60,1000 0,920 32,920" fill="#1B5F82"/></svg></div>
 <div class="mCard g-bullseye" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">三分鐘說一個完整的故事</p></div><div class="mCard g-order" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
 <div class="mHero"><p class="mPill">5,040 × 36 = 181,440</p><p class="mTitle">一個故事，<em>18 萬種變化</em></p></div>
 </div>
