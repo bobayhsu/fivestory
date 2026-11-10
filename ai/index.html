@@ -468,7 +468,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiTop .sd.sdHome em{font-style:normal;color:#D2262E;font-family:'Noto Serif TC','Noto Sans TC',serif}
 #aiTop .sd.sdHome:hover,#aiTop .sd.sdHome:hover em{color:#C41F27!important;text-decoration:underline;text-underline-offset:6px}
 /* 2026-11-10 上方標籤改兩排：上排大標，下排四個標籤 */
-#aiTop{display:grid!important;grid-template-columns:repeat(4,auto);column-gap:10px;row-gap:6px;padding-top:10px!important}
+#aiTop{display:grid;grid-template-columns:repeat(4,auto);column-gap:10px;row-gap:6px;padding-top:10px!important}
 #aiTop .sd.sdHome{grid-column:1 / -1;justify-self:stretch;text-align:center;font-size:47px!important;line-height:1.15;letter-spacing:2px!important;padding:0 0 4px!important}
 /* ===== 2026-11-11 換順序、心結人、套濾鏡右欄：故事按鈕＋空格（和靶心人一樣） ===== */
 .aiGrid>.bsShow,.bsCol .bsShow{background:#FBF9F6;border:2px solid #E4DED5;border-radius:14px;padding:18px 26px;overflow:auto;font-size:20px;line-height:1.5;color:#2A2723;white-space:pre-wrap;min-height:0;contain:size}
@@ -481,6 +481,11 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #ai-filter .flRow .aiPlots{flex:1.55;grid-template-columns:1fr 1.25fr 1.25fr!important;grid-template-rows:repeat(12,auto)!important;gap:5px 12px!important}
 #ai-filter .flRow .aiPlots .pl{font-size:22px!important;padding:3px 10px!important}
 #ai-filter .flRow .bsCol{flex:1}
+/* 2026-11-11 總覽頁不顯示右上標籤；總覽大標整句紅字；單元頁右上大標紅字，滑鼠移過去變黑 */
+.mGrid .mTitle{color:#D2262E!important}
+#aiTop .sd.sdHome,#aiTop .sd.sdHome em{color:#D2262E!important;text-decoration:none!important}
+#aiTop .sd.sdHome:hover,#aiTop .sd.sdHome:hover em{color:#1E1C1A!important}
+#aiTop .sd.sdHome:active,#aiTop .sd.sdHome:active em{color:#1E1C1A!important}
 </style></head>
 <body>
 <div id="stage">
@@ -491,13 +496,13 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <div class="meta mGrid" id="metaTop">
 <div class="mHArr"><div class="hShape"></div><span class="mWide">加廣</span></div>
 <div class="mVArr"><div class="vShape"></div><span class="mDeep">加<br>深</span></div>
-<div class="mCard g-bullseye" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">三分鐘說一個完整的故事</p></div><div class="mCard g-order" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
+<div class="mCard g-bullseye" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說一個完整的故事</p></div><div class="mCard g-order" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
 <div class="mHero"><p class="mPill">5,040 × 36 = 181,440</p><p class="mTitle">一個故事，<em>18 萬種變化</em></p></div>
 </div>
 </section>
 
 <section class="slide ai" id="ai-bullseye" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:24px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人：三分鐘說一個完整的故事</h2>
+<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人：七步驟說一個完整的故事</h2>
 <div class="aiGrid">
 <p class="aiH">每一步，問一個問題</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div>
 <p class="aiC"><b>1 目標</b><span>主角想要什麼？</span></p><div class="bsShow" aria-live="polite"></div>
