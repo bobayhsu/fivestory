@@ -505,6 +505,27 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #ai-order .aiGrid,#ai-filter .aiGrid{height:656px;flex:none}
 #ai-filter .aiGrid>.aiPlots{gap:3px 10px!important}
 #ai-filter .aiGrid>.aiPlots .pl{font-size:19px!important;line-height:1.2!important}
+
+/* ===== 2026-11-11 執行介面放進右欄（電腦／投影） ===== */
+#aiRun.inPanel{position:absolute;inset:auto;z-index:6;padding:0;background:none;display:none;align-items:stretch;justify-content:stretch}
+#aiRun.inPanel.open{display:flex}
+#aiRun.inPanel .arCard{max-width:none;width:100%;height:100%;max-height:none;display:flex;flex-direction:column;border:2px solid #C41F27;border-radius:14px;box-shadow:0 8px 28px rgba(196,31,39,.18);padding:22px 28px 18px;background:#FBF9F6}
+#aiRun.inPanel .arFilm,#aiRun.inPanel .arNote,#aiRun.inPanel .arOpt,#aiRun.inPanel label{display:none!important}
+#aiRun.inPanel .arTop{margin:0 64px 4px 0}
+#aiRun.inPanel .arTag{font-size:20px;padding:4px 14px}
+#aiRun.inPanel h3{font-size:32px}
+#aiRun.inPanel .arTask{font-size:22px;margin:4px 0 12px}
+#aiRun.inPanel .arX{width:52px;height:52px;font-size:32px;line-height:52px;top:16px;right:16px}
+#aiRun.inPanel textarea{flex:1;min-height:0;font-size:24px;line-height:1.55;padding:14px 18px;resize:none}
+#aiRun.inPanel .arYT{font-size:20px;padding:10px 16px}
+#aiRun.inPanel details{font-size:20px;margin-top:10px}
+#aiRun.inPanel pre{font-size:18px;max-height:160px}
+#aiRun.inPanel .arBtns{gap:14px;margin:14px 0 6px}
+#aiRun.inPanel.yt .arBtns{margin-top:30px;row-gap:14px}
+#aiRun.inPanel .arBtns button{font-size:26px;padding:16px 8px;border-radius:14px}
+#aiRun.inPanel.yt .arBtns button[data-ai="gemini"]::after{font-size:16px;top:-16px;padding:2px 12px}
+#aiRun.inPanel.yt .arBtns button:not([data-ai="gemini"])::after{font-size:14px;bottom:-12px;padding:1px 10px}
+#aiRun.inPanel .arMsg{font-size:20px;min-height:28px}
 </style></head>
 <body>
 <div id="stage">
@@ -707,9 +728,19 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   var rd=document.body.classList.contains('reader');
   if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.name+' '+window.__aiOrd.n;if(!rd){$('#arTitle').textContent=t.name+'｜'+window.__aiOrd.name+' '+window.__aiOrd.n;$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
   var o=$('.arOpt');o.innerHTML='';if(t.opts&&id!=='ai-filter'&&!(id==='ai-order'&&!rd)){var sel=opt[id]||t.opts[0];o.classList.toggle('plots',id==='ai-filter');t.opts.forEach(function(x,k){var b=document.createElement('button');b.type='button';if(id==='ai-filter')b.innerHTML='<i>'+(k+1)+'</i>'+x;else b.textContent=x;b.dataset.opt=x;if(x===sel)b.classList.add('on');o.appendChild(b);});o.style.display='';}else o.style.display='none';
-  msg('');preview();box.classList.add('open');box.setAttribute('aria-hidden','false');setTimeout(function(){try{ta.focus({preventScroll:true});}catch(_){}},60);}
+  msg('');preview();placeBox(id);box.classList.add('open');box.setAttribute('aria-hidden','false');setTimeout(function(){try{ta.focus({preventScroll:true});}catch(_){}},60);}
+/* 2026-11-11 電腦／投影：在同一頁右欄（故事空格的位置）進行，不跳出對話框；手機直式閱讀版維持對話框 */
+ var watch=null;
+ function placeBox(id){var sl=document.getElementById(id),show=sl&&sl.querySelector('.aiGrid>.bsShow');
+  if(document.body.classList.contains('reader')||!show){unplace();return;}
+  if(box.parentNode!==sl)sl.appendChild(box);
+  var x=0,y=0,e=show;while(e&&e!==sl){x+=e.offsetLeft;y+=e.offsetTop;e=e.offsetParent;}
+  box.style.left=x+'px';box.style.top=y+'px';box.style.width=show.offsetWidth+'px';box.style.height=show.offsetHeight+'px';
+  box.classList.add('inPanel');
+  if(watch)watch.disconnect();watch=new MutationObserver(function(){if(!sl.classList.contains('active'))close();});watch.observe(sl,{attributes:true,attributeFilter:['class']});}
+ function unplace(){if(watch){watch.disconnect();watch=null;}box.classList.remove('inPanel');box.style.left=box.style.top=box.style.width=box.style.height='';if(box.parentNode!==document.body)document.body.appendChild(box);}
  function stopFilm(){box.querySelectorAll('.fPlay').forEach(function(x){x.classList.remove('on','txt');x.innerHTML='';});}
- function close(){stopFilm();box.classList.remove('open');box.setAttribute('aria-hidden','true');try{ta.blur();}catch(_){}}
+ function close(){stopFilm();box.classList.remove('open');box.setAttribute('aria-hidden','true');try{ta.blur();}catch(_){}unplace();}
  window.__aiRunOpen=function(){return box.classList.contains('open');};
  /* 2026-11-10 手機桌機同步用：讀取／設定對話框（打開哪一個、故事框文字） */
  window.__aiRun={open:open,close:close,id:function(){return box.classList.contains('open')?cur:null;},text:function(v){if(v===undefined)return ta.value;if(ta.value!==v){ta.value=v;preview();}}};
