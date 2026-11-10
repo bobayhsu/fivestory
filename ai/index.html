@@ -222,6 +222,15 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #reader .bsPickR .lab{width:100%;font-size:14px;font-weight:900;color:#5E5850}
 #reader .bsChip{flex:none;font-size:14px;padding:6px 12px;color:#C41F27;background:#FFF;border:2px solid #C41F27}
 #reader .bsChip.on{background:#C41F27;color:#FBF8F3}
+/* 2026-11-10 靶心人頁右欄：一個大空格，點故事就顯示網址或故事文字 */
+#ai-bullseye .aiGrid>.aiH:first-child,#ai-bullseye .aiGrid>.aiC{grid-column:1}
+#ai-bullseye .bsShow{grid-column:2;grid-row:2 / span 7;background:#FBF9F6;border:2px solid #E4DED5;border-radius:14px;padding:18px 26px;overflow:auto;font-size:20px;line-height:1.5;color:#2A2723;white-space:pre-wrap;min-height:0;contain:size}
+.bsShow:empty::before{content:'點上面的故事，網址或故事會出現在這裡';color:#B5ADA2;white-space:normal}
+.bsShow .bsUrl{display:block;margin-top:10px;font-size:30px;font-weight:700;color:#3B6FE0;word-break:break-all;text-decoration:underline}
+.bsShow .bsTag{display:inline-block;font-size:22px;font-weight:900;color:#FBF8F3;background:#C41F27;border-radius:999px;padding:2px 14px;letter-spacing:1px}
+#reader .bsShow{display:block;font-size:15px;line-height:1.6;white-space:pre-wrap;background:#FFF;border:1px solid #E4DED5;border-radius:12px;padding:10px 12px;margin:0 0 12px;max-height:50vh;overflow:auto}
+#reader .bsShow:empty{display:none}
+#reader .bsShow .bsUrl{font-size:15px}#reader .bsShow .bsTag{font-size:12px;padding:1px 8px}
 </style>
 </head>
 <body>
@@ -244,13 +253,13 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人：三分鐘說一個完整的故事</h2>
 <div class="aiGrid">
 <p class="aiH">每一步，問一個問題</p><p class="aiH red bsPick"><span class="bsLab">點故事</span><button type="button" class="bsChip" data-bs="0">Giving</button><button type="button" class="bsChip" data-bs="1">Violinist</button><button type="button" class="bsChip" data-bs="2">Woodpecker</button><button type="button" class="bsChip" data-bs="3">Christmas</button><button type="button" class="bsChip" data-bs="4">Puzzle</button></p>
-<p class="aiC"><b>1 目標</b><span>主角想要什麼？</span></p><p class="aiC step" data-rl="1 目標"><b>1 目標</b><span>讓王子愛上自己</span></p>
-<p class="aiC"><b>2 阻礙</b><span>什麼擋住了他？</span></p><p class="aiC step" data-rl="2 阻礙"><b>2 阻礙</b><span>用聲音換了雙腿，說不出真相</span></p>
-<p class="aiC"><b>3 努力</b><span>他怎麼做？</span></p><p class="aiC step" data-rl="3 努力"><b>3 努力</b><span>忍著刀割般的痛，天天為他跳舞</span></p>
-<p class="aiC"><b>4 結果</b><span>成功了嗎？</span></p><p class="aiC step" data-rl="4 結果"><b>4 結果</b><span>王子只把她當成可愛的小孤女</span></p>
-<p class="aiC"><b>5 意外</b><span>發生什麼想不到的事？</span></p><p class="aiC step" data-rl="5 意外"><b>5 意外</b><span>王子娶公主，<b><span style="color:#C41F27">以為是公主救了他</span></b></span></p>
-<p class="aiC"><b>6 轉彎</b><span>情節怎麼轉向？</span></p><p class="aiC step" data-rl="6 轉彎"><b>6 轉彎</b><span>姊姊送來匕首，她卻把刀丟進海裡</span></p>
-<p class="aiC"><b>7 結局</b><span>最後怎麼了？</span></p><p class="aiC step" data-rl="7 結局"><b>7 結局</b><span>化成泡沫，成為空氣的女兒</span></p>
+<p class="aiC"><b>1 目標</b><span>主角想要什麼？</span></p><div class="bsShow" aria-live="polite"></div>
+<p class="aiC"><b>2 阻礙</b><span>什麼擋住了他？</span></p>
+<p class="aiC"><b>3 努力</b><span>他怎麼做？</span></p>
+<p class="aiC"><b>4 結果</b><span>成功了嗎？</span></p>
+<p class="aiC"><b>5 意外</b><span>發生什麼想不到的事？</span></p>
+<p class="aiC"><b>6 轉彎</b><span>情節怎麼轉向？</span></p>
+<p class="aiC"><b>7 結局</b><span>最後怎麼了？</span></p>
 </div>
 <div class="aiRunRow" data-slide="ai-bullseye">
 <p class="aiPrompt sm" style="flex:1">把我的經歷整理成靶心人七步：目標、阻礙、努力、結果、意外、轉彎、結局，每一步一到兩句。</p>
@@ -403,6 +412,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  var KEY='fivestory-ai-story',story='';try{story=localStorage.getItem(KEY)||'';}catch(_){}
  var cur=null,opt={'ai-filter':'為愛情犧牲一切'}; /* 套濾鏡預設 22，和投影片一致 */
  var FILMS=[['Giving','https://www.youtube.com/watch?v=7s22HX18wDY'],['Violinist','https://www.youtube.com/watch?v=Ect56804xfA'],['Woodpecker','',"有天小明和小美出去約會，突然小明肚子一陣滾動，變得很想放屁。\n聰明的他靈機一動，想到了一個絕妙的掩飾方法，於是轉頭對小美說：\n「小美，妳知道啄木鳥是怎麼叫的嗎？」\n小美搖搖頭說：「不知道耶，怎麼叫？」\n小明得意地笑著說：「那我模仿給妳聽喔～」\n接著，小明一邊用嘴巴發出「答答答答答」的模仿聲，一邊順便偷偷放了一個大響屁！\n模仿完畢後，小明一臉輕鬆地問：「怎麼樣？現在妳知道啄木鳥是怎樣叫了吧！」\n此時，小美一臉尷尬地看著他，弱弱地說：\n「不好意思……你剛剛放屁太大聲了，我完全沒聽到你模仿的叫聲。」\n小明：……"],['Christmas','',"吉姆和黛拉是一對貧窮的年輕夫妻，夫妻倆各有一件值得驕傲的財富，一是吉姆祖傳的金錶，一是黛拉的秀髮。\n聖誕節前夕，妻子黛拉想幫丈夫買一件聖誕禮物，雖然認真存了好一陣子的錢，但顯然手邊的錢買不起任何東西。\n最後，黛拉做了一個痛苦的抉擇，她把自己最引以為豪的秀髮剪下，賣了出去，並用所得的錢幫吉姆買了一個白金錶鏈。黛拉對這個禮物非常得意，因為它可以用來搭配丈夫的金錶。\n丈夫吉姆回到家，看見妻子的頭髮，驚訝得說不出話來。不只是因為妻子的頭髮不見了，而是吉姆也為妻子買了一個聖誕禮物，一套玳瑁髮梳，但現在這個禮物失去用處了。\n黛拉看到吉姆買的禮物，先是高興地狂叫（這是她夢想中的禮物），繼而變成歇斯底里地哭泣和哀嚎（但現在這個禮物用不著了）。哭完之後，換黛拉拿出她的禮物，白金錶鏈。\n看到妻子買的禮物，吉姆笑了出來，這個禮物目前也用不著了，因為他送給妻子的髮梳，正是用賣掉金錶的錢買來的\n吉姆和黛拉為對方買的聖誕禮物，都是用自己最珍貴的東西換來的。原來，在他們心中，對方比長髮、金錶都重要，這才是最珍貴的聖誕禮物。"],['Puzzle','',"某天，一位牧師正在苦思明天的「演講題目」，\n可他的孩子卻在旁邊吵著要玩，\n於是父親拿出一把剪刀，\n將一張世界地圖剪成許多碎片，變成一副拼圖，\n然後對孩子說：\n「只要你把世界地圖拼好，爸爸就陪你玩。」\n父親以為孩子要花很多時間才能拼得出來，\n沒想到他只花了三分鐘就拼完了。\n父親難以置信，於是問孩子怎麼辦到的？\n孩子說：\n「這還不簡單，地圖背後有個人像，\n只要把人像拼好，翻過來不就是地圖了嗎？」\n牧師聽完，深受啟發，因而把明天的「演講題目」定為：\n「只要人對了，世界就對了」"]]; /* 2026-11-10 靶心人練習用微電影 */
+ window.__bsFilms=FILMS;
  var box=document.createElement('div');box.id='aiRun';box.setAttribute('aria-hidden','true');
  box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-labelledby="arTitle"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
   '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
@@ -557,11 +567,14 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
  function render(){var k=window.__bsStory,c=document.querySelector('#ai-bullseye .bsChip[data-bs="'+k+'"]'),name=c?c.textContent:'';
   document.querySelectorAll('.bsChip').forEach(function(x){x.classList.toggle('on',k!==null&&+x.dataset.bs===k);});
   var html=k===null?'把我的經歷'+BASE:'把<span class="plotSel">《'+name+'》</span>'+BASE;
-  document.querySelectorAll('#ai-bullseye .aiPrompt, #reader .aiRunRow[data-slide="ai-bullseye"] .aiPrompt').forEach(function(p){p.innerHTML=html;});}
+  document.querySelectorAll('#ai-bullseye .aiPrompt, #reader .aiRunRow[data-slide="ai-bullseye"] .aiPrompt').forEach(function(p){p.innerHTML=html;});
+  var f=k===null?null:(window.__bsFilms||[])[k],e=function(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+  var box=!f?'':(f[2]?e(f[2]):'<span class="bsTag">▶ 影片網址</span><a class="bsUrl" href="'+e(f[1])+'" target="_blank" rel="noopener">'+e(f[1])+'</a>');
+  document.querySelectorAll('.bsShow').forEach(function(b){b.innerHTML=box;b.scrollTop=0;});}
  function readerChips(){var h=document.getElementById('r-ai-bullseye');if(!h||document.querySelector('#reader .bsPickR'))return;
   var d=document.createElement('div');d.className='bsPickR';
   d.innerHTML='<span class="lab">點一個故事，提示詞就換成它</span>'+[].map.call(document.querySelectorAll('#ai-bullseye .bsChip'),function(c){return '<button type="button" class="bsChip" data-bs="'+c.dataset.bs+'">'+c.textContent+'</button>';}).join('');
-  h.parentNode.insertBefore(d,h.nextSibling);render();}
+  h.parentNode.insertBefore(d,h.nextSibling);var bx=document.createElement('div');bx.className='bsShow';d.parentNode.insertBefore(bx,d.nextSibling);render();}
  readerChips();
  var R=document.getElementById('reader');if(R&&window.MutationObserver)new MutationObserver(readerChips).observe(R,{childList:true});
  document.addEventListener('click',function(e){var c=e.target.closest&&e.target.closest('.bsChip');if(!c)return;e.preventDefault();e.stopPropagation();var k=+c.dataset.bs;window.__bsStory=window.__bsStory===k?null:k;render();},true);
