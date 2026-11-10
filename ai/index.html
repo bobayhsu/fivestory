@@ -120,6 +120,7 @@ html.embedded #stage{border-radius:0;box-shadow:none}
 #aiRun.bull .arCard{max-width:none;width:100%;height:100%;max-height:none;border-radius:0;padding:28px max(28px,4vw) 22px}
 #aiRun.bull .arFilm .fRow{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
 #aiRun.bull .arFilm .fText{max-height:45vh}
+#aiRun.bull .arFilm{margin:18px 0 0}
 #aiRun.bull .arFilm .fPlay{max-width:960px;margin-left:auto;margin-right:auto}
 #aiRun.bull .arFilm .fPlay.txt{max-width:none}
 #aiRun .arFilm p{margin:0 0 6px;font-size:14px;font-weight:900;color:#1E1C1A}
@@ -401,6 +402,8 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
   '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。<br>提醒：真實客戶的名字、病名、店名，先改過再送出。</p></div>';
  document.body.appendChild(box);
+ /* 2026-11-10 練習故事移到對話框最下方（滿版時下方的空白處） */
+ box.querySelector('.arCard').appendChild(box.querySelector('.arFilm'));
  var $=function(s){return box.querySelector(s);},ta=$('#arStory');
  ta.value=story;
  var YT=/(https?:\/\/)?(www\.|m\.)?(youtube\.com\/(watch\?|shorts\/|live\/)|youtu\.be\/)\S+/i;
