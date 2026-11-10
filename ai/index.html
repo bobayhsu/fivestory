@@ -660,7 +660,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
  stage.addEventListener('touchend',function(e){var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5&&Date.now()-st<800){e.preventDefault();if(dx<0)next();else prev();}},{passive:false});
  /* 手機桌機同步：五大類故事的同步程式（ai-sync.js）透過 window.AiSync 讀取、設定目前頁面 */
  window.AiSync={get:function(){return String(cur);},set:function(v){var n=parseInt(v,10);if(isNaN(n)||n===cur)return;show(n,true);},onChange:function(f){listeners.push(f);}};
- show((parseInt(location.hash.slice(1),10)||1)-1,true);
+ show((parseInt(location.hash.slice(1),10)||2)-1,true);
 
  /* 手機直式閱讀版 */
  var built=false;
@@ -942,5 +942,11 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
  },true);
 })();
 </script>
+<!-- 2026-11-11 AI 加值：初次進入靶心人時預先展開右欄 -->
+<script>(function(){
+  if(document.querySelector('#stage > #ai-bullseye.slide.active')){
+    window.__aiRun?.open('ai-bullseye');
+  }
+})();</script>
 </body>
 </html>
