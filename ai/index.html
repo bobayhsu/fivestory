@@ -640,7 +640,17 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   [].forEach.call(document.querySelectorAll('#aiTop .sd'),function(d){d.classList.toggle('on',d.dataset.go===slides[i].id);});
   var tp=document.getElementById('aiTop');if(tp)tp.style.display=slides[i].id==='ai-frame'?'none':'';
   try{history.replaceState(null,'','#'+(i+1));}catch(_){}
-  if(!silent)listeners.forEach(function(f){try{f(String(cur));}catch(_){}});}
+  if(!silent){
+    listeners.forEach(function(f){try{f(String(cur));}catch(_){}});
+    /* 切換四個 AI 單元後，自動展開該單元右側輸入欄；等舊頁的觀察器關閉後再開啟 */
+    var target=slides[i].id;
+    if(/^ai-(bullseye|order|filter|curve)$/.test(target)){
+      setTimeout(function(){
+        if(document.getElementById(target)?.classList.contains('active') &&
+           window.__aiRun && window.__aiRun.id()!==target)window.__aiRun.open(target);
+      },0);
+    }
+   }}
  function go(id){var k=slides.findIndex(function(s){return s.id===id;});if(k>=0)show(k);}
  var next=function(){if(cur<slides.length-1)show(cur+1);},prev=function(){if(cur>0)show(cur-1);};
  stage.addEventListener('click',function(e){
@@ -942,10 +952,11 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
  },true);
 })();
 </script>
-<!-- 2026-11-11 AI 加值：初次進入靶心人時預先展開右欄 -->
+<!-- 2026-11-11 AI 加值：直接連結進入四個單元時，自動展開對應輸入欄 -->
 <script>(function(){
-  if(document.querySelector('#stage > #ai-bullseye.slide.active')){
-    window.__aiRun?.open('ai-bullseye');
+  var active=document.querySelector('#stage > .slide.active');
+  if(active && /^ai-(bullseye|order|filter|curve)$/.test(active.id)){
+    window.__aiRun?.open(active.id);
   }
 })();</script>
 </body>
