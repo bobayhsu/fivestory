@@ -518,6 +518,8 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function stopFilm(){box.querySelectorAll('.fPlay').forEach(function(x){x.classList.remove('on','txt');x.innerHTML='';});}
  function close(){stopFilm();box.classList.remove('open');box.setAttribute('aria-hidden','true');try{ta.blur();}catch(_){}}
  window.__aiRunOpen=function(){return box.classList.contains('open');};
+ /* 2026-11-10 手機桌機同步用：讀取／設定對話框（打開哪一個、故事框文字） */
+ window.__aiRun={open:open,close:close,id:function(){return box.classList.contains('open')?cur:null;},text:function(v){if(v===undefined)return ta.value;if(ta.value!==v){ta.value=v;preview();}}};
  function copySync(t){var ok=false,x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.cssText='position:fixed;left:-9999px;top:0;opacity:0';box.appendChild(x);x.select();try{x.setSelectionRange(0,t.length);}catch(_){}try{ok=document.execCommand('copy');}catch(_){}x.remove();
   if(!ok&&navigator.clipboard){try{navigator.clipboard.writeText(t);ok=true;}catch(_){}}return ok;}
  function go(ai){
@@ -651,8 +653,11 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
  var R=document.getElementById('reader');if(R&&window.MutationObserver)new MutationObserver(readerChips).observe(R,{childList:true});
  /* 2026-11-10 手機桌機同步：把選中的故事一起放進同步內容（例如 "1|s3" = 第 2 頁、選第 3 個故事） */
  var A=window.AiSync;if(A&&!A.__bs){var g0=A.get,s0=A.set;A.__bs=1;
-  A.get=function(){return g0()+(window.__bsStory!=null?'|s'+window.__bsStory:'');};
-  A.set=function(v){v=String(v);var m=v.match(/\|s(\d+)/),k=m?+m[1]:null;if(k!==window.__bsStory){window.__bsStory=k;render();}s0(v.split('|')[0]);};}
+  var R=function(){return window.__aiRun;};
+  A.get=function(){var r=R(),id=r&&r.id();return g0()+(window.__bsStory!=null?'|s'+window.__bsStory:'')+(id?'|r'+encodeURIComponent(id)+'~'+encodeURIComponent(r.text()):'');};
+  A.set=function(v){v=String(v);var m=v.match(/\|s(\d+)/),k=m?+m[1]:null;if(k!==window.__bsStory){window.__bsStory=k;render();}s0(v.split('|')[0]);
+   var r=R();if(!r)return;var q=v.match(/\|r([^~|]*)~([^|]*)/);
+   if(q){var id=decodeURIComponent(q[1]),tx=decodeURIComponent(q[2]);if(r.id()!==id)r.open(id);r.text(tx);}else if(r.id())r.close();};}
  document.addEventListener('click',function(e){var c=e.target.closest&&e.target.closest('.bsChip');if(!c)return;e.preventDefault();e.stopPropagation();var k=+c.dataset.bs;window.__bsStory=window.__bsStory===k?null:k;render();},true);
 })();
 </script>
