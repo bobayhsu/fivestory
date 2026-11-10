@@ -467,6 +467,9 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiTop .sd.sdHome,#aiTop .sd.sdHome:hover,#aiTop .sd.sdHome:active{background:none!important;border-color:transparent!important;box-shadow:none!important;color:#1E1C1A!important;font-weight:900;letter-spacing:1px;padding-left:4px;padding-right:10px}
 #aiTop .sd.sdHome em{font-style:normal;color:#D2262E;font-family:'Noto Serif TC','Noto Sans TC',serif}
 #aiTop .sd.sdHome:hover,#aiTop .sd.sdHome:hover em{color:#C41F27!important;text-decoration:underline;text-underline-offset:6px}
+/* 2026-11-10 上方標籤改兩排：上排大標，下排四個標籤 */
+#aiTop{display:grid!important;grid-template-columns:repeat(4,auto);column-gap:10px;row-gap:6px;padding-top:10px!important}
+#aiTop .sd.sdHome{grid-column:1 / -1;justify-self:stretch;text-align:center;font-size:47px!important;line-height:1.15;letter-spacing:2px!important;padding:0 0 4px!important}
 </style></head>
 <body>
 <div id="stage">
