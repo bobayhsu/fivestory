@@ -46,7 +46,7 @@ const timer=setInterval(()=>{
   const group=()=>{const g=document.createElement('div');g.style.cssText='display:flex;gap:12px;align-items:center';return g;};
   const L=group(),R=group();
   /* 2026-11-04：遊戲已搬到獨立的 games 專案，「遊戲」圖示和其他藍色圖示一樣，由 sync.js 開在同步視窗裡。 */
-  ['a.navPill[data-sync-video=resources]','a.navPill[href="https://bobayhsu.github.io/bullseye/"]','a.navPill[href="https://bobayhsu.github.io/practice/"]','a.navPill[data-games]','a.navPill[data-satir]','a.navPill[data-dilemma]','a.navPill[data-ai]','a.navPill[data-download]'].forEach(sel=>{const b=mk(sel,'#1F5FA8');if(!b)return;L.appendChild(b);
+  ['a.navPill[data-sync-video=resources]','a.navPill[href="https://bobayhsu.github.io/bullseye/"]','a.navPill[href="https://bobayhsu.github.io/practice/"]','a.navPill[data-games]','a.navPill[data-satir]','a.navPill[data-dilemma]','a.navPill[data-ai]','a.navPill[data-download]'].forEach(sel=>{const b=mk(sel,sel==='a.navPill[data-ai]'?'#D2262E':'#1F5FA8');if(!b)return;L.appendChild(b); /* 2026-11-10 AI 加值鈕紅底 */
     b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();
       const h=b._src.getAttribute('href');
       if((h===BASE||h==='https://bobayhsu.github.io/games/'||h==='https://bobayhsu.github.io/fivestory/satir/')&&document.getElementById('syncExternalOpen')?.href===h){if(h.endsWith('/satir/')){try{frame.contentWindow.location.hash='home';}catch(_){frame.src=h+'?v=6';}return;}frame.src=h;return;}
