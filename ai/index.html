@@ -486,6 +486,25 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiTop .sd.sdHome,#aiTop .sd.sdHome em{color:#D2262E!important;text-decoration:none!important}
 #aiTop .sd.sdHome:hover,#aiTop .sd.sdHome:hover em{color:#1E1C1A!important}
 #aiTop .sd.sdHome:active,#aiTop .sd.sdHome:active em{color:#1E1C1A!important}
+
+/* ===== 2026-11-11 四個單元頁同一格式：左欄黑標題列＋清單，右欄故事按鈕＋大空格，左右邊界對齊 ===== */
+.slide.ai{gap:24px!important}
+.aiGrid>.aiH:first-child,.aiGrid>.aiC,.aiGrid>.aiOrd,.aiGrid>.aiPlots{grid-column:1}
+.aiGrid>.aiH.bsPick{grid-column:2;grid-row:1}
+#ai-order .aiGrid{grid-template-rows:auto repeat(5,1fr);align-content:stretch}
+#ai-order .aiGrid>.bsShow{grid-column:2;grid-row:2 / span 5}
+#ai-order .aiGrid>.aiOrd{margin:0;padding:10px 22px;gap:18px;font-size:30px}
+#ai-order .aiGrid>.aiOrd b{font-size:32px;width:150px}
+#ai-order .aiGrid>.aiOrd span{width:132px}
+#ai-filter .aiGrid{grid-template-rows:auto 1fr;align-content:stretch}
+#ai-filter .aiGrid>.bsShow{grid-column:2;grid-row:2}
+#ai-filter .aiGrid>.aiPlots{grid-row:2;grid-template-columns:1fr 1fr!important;grid-template-rows:repeat(18,1fr)!important;grid-auto-flow:column;gap:4px 10px!important;align-content:stretch;margin:0;min-height:0}
+#ai-filter .aiGrid>.aiPlots .pl{font-size:20px!important;padding:0 10px!important;display:flex;align-items:center;overflow:hidden;text-overflow:ellipsis}
+#ai-filter .aiGrid>.aiPlots .pl i{min-width:36px}
+#ai-curve .aiGrid>.bsShow{grid-column:2;grid-row:2 / span 7}
+#ai-order .aiGrid,#ai-filter .aiGrid{height:656px;flex:none}
+#ai-filter .aiGrid>.aiPlots{gap:3px 10px!important}
+#ai-filter .aiGrid>.aiPlots .pl{font-size:19px!important;line-height:1.2!important}
 </style></head>
 <body>
 <div id="stage">
@@ -502,9 +521,9 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </section>
 
 <section class="slide ai" id="ai-bullseye" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:24px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人：七步驟說一個完整的故事</h2>
+<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人</h2>
 <div class="aiGrid">
-<p class="aiH">每一步，問一個問題</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div>
+<p class="aiH">七步驟說一個完整的故事</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div>
 <p class="aiC"><b>1 目標</b><span>主角想要什麼？</span></p><div class="bsShow" aria-live="polite"></div>
 <p class="aiC"><b>2 阻礙</b><span>什麼擋住了他？</span></p>
 <p class="aiC"><b>3 努力</b><span>他怎麼做？</span></p>
@@ -520,17 +539,14 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </section>
 
 <section class="slide ai" id="ai-order" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:24px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">換順序：七步排列，5040 種講法</h2>
-<div style="display:flex;flex-direction:row-reverse;gap:48px;flex:1">
-<div style="flex:1.25;display:flex;flex-direction:column;min-height:0"><div class="bsCol"><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div><div class="bsShow" aria-live="polite"></div></div></div>
-<div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:12px">
-<p class="aiH">五種常用排列</p>
-<div class="aiOrd"><span>傳統敘事</span><b>1234567</b><i>結構完整，適合初學</i></div>
+<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">換順序</h2>
+<div class="aiGrid">
+<p class="aiH">七步排列，5040 種講法</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div>
+<div class="aiOrd"><span>傳統敘事</span><b>1234567</b><i>結構完整，適合初學</i></div><div class="bsShow" aria-live="polite"></div>
 <div class="aiOrd"><span>結局先行</span><b>5671234</b><i>先給震撼，再回頭說</i></div>
 <div class="aiOrd"><span>情緒帶入</span><b>2134567</b><i>先丟困境，引發共鳴</i></div>
 <div class="aiOrd hot"><span>觀點主題</span><b>5612347</b><i>先吸睛，再建立觀點</i></div>
 <div class="aiOrd"><span>迷惑揭曉</span><b>3412567</b><i>先看結果，製造懸念</i></div>
-</div>
 </div>
 <div class="aiRunRow" data-slide="ai-order">
 <p class="aiPrompt sm" style="flex:1">用 5612347 的順序（意外→轉彎→目標→阻礙→努力→結果→結局），把我的故事重新說一次。</p>
@@ -538,9 +554,12 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </div>
 </section>
 
-<section class="slide ai" id="ai-filter" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:64px 128px 135px;display:flex;flex-direction:column;gap:18px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">套濾鏡：36 種劇情模式</h2>
-<div class="flRow"><p class="aiPlots step" data-rl="36 種劇情模式"><span class="pl"><i>1</i>哀求請託</span><span class="pl"><i>2</i>援救</span><span class="pl"><i>3</i>復仇</span><span class="pl"><i>4</i>親族間的報復</span><span class="pl"><i>5</i>逃亡者的追捕</span><span class="pl"><i>6</i>災禍</span><span class="pl"><i>7</i>不幸的遭遇</span><span class="pl"><i>8</i>反抗（革命）</span><span class="pl"><i>9</i>壯舉（征服）</span><span class="pl"><i>10</i>拐劫</span><span class="pl"><i>11</i>謎的解釋</span><span class="pl"><i>12</i>獲取</span><span class="pl"><i>13</i>骨肉仇恨</span><span class="pl"><i>14</i>骨肉競爭</span><span class="pl"><i>15</i>姦情殺害</span><span class="pl"><i>16</i>瘋狂</span><span class="pl"><i>17</i>因輕忽而招致損害</span><span class="pl"><i>18</i>不知而犯的戀愛罪惡</span><span class="pl"><i>19</i>無意中傷害自己所愛</span><span class="pl"><i>20</i>為了主義而犧牲自己</span><span class="pl"><i>21</i>為了所愛（骨肉親人）而犧牲自己</span><span class="pl hot"><i>22</i>為愛情犧牲一切</span><span class="pl"><i>23</i>有原因的犧牲所愛之人</span><span class="pl"><i>24</i>兩種不均等的勢力鬥爭</span><span class="pl"><i>25</i>奸通（外遇／偷情）</span><span class="pl"><i>26</i>戀愛的罪惡</span><span class="pl"><i>27</i>發現所愛之人有不名譽的事</span><span class="pl"><i>28</i>戀愛發生阻礙</span><span class="pl"><i>29</i>愛上自己的仇敵</span><span class="pl"><i>30</i>野心</span><span class="pl"><i>31</i>人與神的鬥爭</span><span class="pl"><i>32</i>錯誤的嫉妒</span><span class="pl"><i>33</i>錯誤的判斷</span><span class="pl"><i>34</i>悔恨</span><span class="pl"><i>35</i>親族的重逢</span><span class="pl"><i>36</i>失去所愛之人</span></p><div class="bsCol"><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div><div class="bsShow" aria-live="polite"></div></div></div>
+<section class="slide ai" id="ai-filter" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:18px">
+<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">套濾鏡</h2>
+<div class="aiGrid">
+<p class="aiH">36 種劇情模式</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div>
+<p class="aiPlots step" data-rl="36 種劇情模式"><span class="pl"><i>1</i>哀求請託</span><span class="pl"><i>2</i>援救</span><span class="pl"><i>3</i>復仇</span><span class="pl"><i>4</i>親族間的報復</span><span class="pl"><i>5</i>逃亡者的追捕</span><span class="pl"><i>6</i>災禍</span><span class="pl"><i>7</i>不幸的遭遇</span><span class="pl"><i>8</i>反抗（革命）</span><span class="pl"><i>9</i>壯舉（征服）</span><span class="pl"><i>10</i>拐劫</span><span class="pl"><i>11</i>謎的解釋</span><span class="pl"><i>12</i>獲取</span><span class="pl"><i>13</i>骨肉仇恨</span><span class="pl"><i>14</i>骨肉競爭</span><span class="pl"><i>15</i>姦情殺害</span><span class="pl"><i>16</i>瘋狂</span><span class="pl"><i>17</i>因輕忽而招致損害</span><span class="pl"><i>18</i>不知而犯的戀愛罪惡</span><span class="pl"><i>19</i>無意中傷害自己所愛</span><span class="pl"><i>20</i>為了主義而犧牲自己</span><span class="pl"><i>21</i>為了所愛（骨肉親人）而犧牲自己</span><span class="pl hot"><i>22</i>為愛情犧牲一切</span><span class="pl"><i>23</i>有原因的犧牲所愛之人</span><span class="pl"><i>24</i>兩種不均等的勢力鬥爭</span><span class="pl"><i>25</i>奸通（外遇／偷情）</span><span class="pl"><i>26</i>戀愛的罪惡</span><span class="pl"><i>27</i>發現所愛之人有不名譽的事</span><span class="pl"><i>28</i>戀愛發生阻礙</span><span class="pl"><i>29</i>愛上自己的仇敵</span><span class="pl"><i>30</i>野心</span><span class="pl"><i>31</i>人與神的鬥爭</span><span class="pl"><i>32</i>錯誤的嫉妒</span><span class="pl"><i>33</i>錯誤的判斷</span><span class="pl"><i>34</i>悔恨</span><span class="pl"><i>35</i>親族的重逢</span><span class="pl"><i>36</i>失去所愛之人</span></p><div class="bsShow" aria-live="polite"></div>
+</div>
 <div class="aiRunRow" data-slide="ai-filter">
 <p class="aiPrompt sm" style="flex:1">把我的故事套上劇情模式「1-36」重新改寫，保留靶心人七步結構，改變的是核心衝突，最後逐條說明改了哪裡。</p>
 <div class="aiRunBtn">▶ 貼上故事，執行</div>
@@ -548,16 +567,16 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </section>
 
 <section class="slide ai" id="ai-curve" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:22px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">心結人：事情轉彎了，人呢？</h2>
+<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">心結人</h2>
 <div class="aiGrid">
-<p class="aiH">靶心人：事件線（事情轉彎）</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div>
-<p class="aiC"><b>1 目標</b><span>讓王子愛上自己</span></p><div class="bsShow" aria-live="polite"></div>
-<p class="aiC"><b>2 阻礙</b><span>用聲音換了雙腿，說不出真相</span></p>
-<p class="aiC"><b>3 努力</b><span>忍著刀割般的痛，天天為他跳舞</span></p>
-<p class="aiC"><b>4 結果</b><span>王子只把她當成可愛的小孤女</span></p>
-<p class="aiC"><b>5 意外</b><span>王子娶公主，以為是公主救了他</span></p>
-<p class="aiC"><b>6 轉彎</b><span>姊姊送來匕首，她卻把刀丟進海裡</span></p>
-<p class="aiC"><b>7 結局</b><span>化成泡沫，成為空氣的女兒</span></p>
+<p class="aiH">事情轉彎了，人呢？</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div>
+<p class="aiC"><b>1 渴望</b><span>主角最想要什麼？</span></p><div class="bsShow" aria-live="polite"></div>
+<p class="aiC"><b>2 顧忌</b><span>他最怕失去什麼？</span></p>
+<p class="aiC"><b>3 兩難</b><span>兩個都對，卻只能選一個？</span></p>
+<p class="aiC"><b>4 抗拒</b><span>他怎麼拖延、逃避？</span></p>
+<p class="aiC"><b>5 刺痛</b><span>什麼刺中他最痛的地方？</span></p>
+<p class="aiC"><b>6 抉擇</b><span>他最後選了什麼？</span></p>
+<p class="aiC"><b>7 承擔</b><span>他付出了什麼代價？</span></p>
 </div>
 <div class="aiRunRow" data-slide="ai-curve">
 <p class="aiPrompt sm" style="flex:1">把這個靶心人七步，改寫成心結人七步：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔——看他最後選了什麼、付了什麼代價。</p>
