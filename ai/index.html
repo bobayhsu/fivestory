@@ -283,6 +283,26 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #reader .bsChip.on .bsI{background:#F6F2EA;color:#2B2926}
 #aiRun .arTag{background:#2B2926}
 #aiRun textarea:focus{border-color:#2B2926}
+/* ===== 2026-11-10 可以點的地方，滑鼠移過去一律變紅 ===== */
+@media (hover:hover){
+#aiTop .sd:hover,#aiTop .sd.on:hover{background:#C41F27;border-color:#C41F27;color:#FBF8F3}
+.frame .tab:hover{background:#C41F27!important;border-color:#C41F27!important}
+.frame .tab:hover p,.frame .tab:hover p[style*="color:#C41F27"]{color:#FBF8F3!important}
+.frame .tab:hover p[style*="background:#1E1C1A"]{background:#FBF8F3!important;color:#C41F27!important}
+.slide.ai .aiOrd:hover,.aiPlots .pl:hover,#reader .card .pl:hover{border-color:#C41F27;background:#FBEDEC;box-shadow:0 4px 14px rgba(196,31,39,.15)}
+#ai-order .aiOrd:hover span,.aiPlots .pl:hover i{color:#C41F27}
+.aiRunRow:hover{border-color:#C41F27;box-shadow:0 6px 18px rgba(196,31,39,.15)}
+.aiRunRow:hover .aiPrompt::before{color:#C41F27}
+.aiRunBtn:hover{background:#A3161D}
+.bsChip:hover,.bsChip.on:hover{background:#C41F27;border-color:#C41F27;color:#FBF8F3}
+.bsChip:hover .bsI{background:#FBF8F3;color:#C41F27}
+#reader .bsChip:hover{background:#C41F27;border-color:#C41F27;color:#FBF8F3}
+.bsShow .bsUrl:hover{color:#C41F27}
+#aiRun .arOpt button:hover,#aiRun .arOpt.plots button:hover{border-color:#C41F27;background:#FBEDEC;color:#C41F27}
+#aiRun .arOpt.plots button:hover i{color:#C41F27}
+#aiRun .arX:hover{background:#C41F27;color:#FBF8F3}
+#aiRun details summary:hover{color:#C41F27}
+}
 </style>
 </head>
 <body>
