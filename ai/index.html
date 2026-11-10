@@ -470,6 +470,17 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 /* 2026-11-10 上方標籤改兩排：上排大標，下排四個標籤 */
 #aiTop{display:grid!important;grid-template-columns:repeat(4,auto);column-gap:10px;row-gap:6px;padding-top:10px!important}
 #aiTop .sd.sdHome{grid-column:1 / -1;justify-self:stretch;text-align:center;font-size:47px!important;line-height:1.15;letter-spacing:2px!important;padding:0 0 4px!important}
+/* ===== 2026-11-11 換順序、心結人、套濾鏡右欄：故事按鈕＋空格（和靶心人一樣） ===== */
+.aiGrid>.bsShow,.bsCol .bsShow{background:#FBF9F6;border:2px solid #E4DED5;border-radius:14px;padding:18px 26px;overflow:auto;font-size:20px;line-height:1.5;color:#2A2723;white-space:pre-wrap;min-height:0;contain:size}
+#ai-curve .aiGrid>.bsShow{grid-column:2;grid-row:2 / span 7}
+#ai-curve .aiGrid>.aiH:first-child,#ai-curve .aiGrid>.aiC{grid-column:1}
+.bsCol{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
+.bsCol .bsShow{flex:1}
+.bsCol .aiH.bsPick{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:8px 12px;background:#2B2926;color:#FBF8F3;border-radius:12px}
+.flRow{flex:1;display:flex;gap:28px;min-height:0}
+#ai-filter .flRow .aiPlots{flex:1.55;grid-template-columns:1fr 1.25fr 1.25fr!important;grid-template-rows:repeat(12,auto)!important;gap:5px 12px!important}
+#ai-filter .flRow .aiPlots .pl{font-size:22px!important;padding:3px 10px!important}
+#ai-filter .flRow .bsCol{flex:1}
 </style></head>
 <body>
 <div id="stage">
@@ -506,16 +517,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <section class="slide ai" id="ai-order" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:24px">
 <h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">換順序：七步排列，5040 種講法</h2>
 <div style="display:flex;flex-direction:row-reverse;gap:48px;flex:1">
-<div style="flex:1.25;display:flex;flex-direction:column;justify-content:space-between;gap:10px">
-<p class="aiH red">小美人魚的靶心人，改成 5612347（先講意外）</p>
-<p class="aiC step" data-rl="5 意外"><b>5 意外</b><span>王子娶公主，<b><span style="color:#C41F27">以為是公主救了他</span></b></span></p>
-<p class="aiC step" data-rl="6 轉彎"><b>6 轉彎</b><span>姊姊送來匕首，她卻把刀丟進海裡</span></p>
-<p class="aiC step" data-rl="1 目標"><b>1 目標</b><span>讓王子愛上自己</span></p>
-<p class="aiC step" data-rl="2 阻礙"><b>2 阻礙</b><span>用聲音換了雙腿，說不出真相</span></p>
-<p class="aiC step" data-rl="3 努力"><b>3 努力</b><span>忍著刀割般的痛，天天為他跳舞</span></p>
-<p class="aiC step" data-rl="4 結果"><b>4 結果</b><span>王子只把她當成可愛的小孤女</span></p>
-<p class="aiC step" data-rl="7 結局"><b>7 結局</b><span>化成泡沫，成為空氣的女兒</span></p>
-</div>
+<div style="flex:1.25;display:flex;flex-direction:column;min-height:0"><div class="bsCol"><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div><div class="bsShow" aria-live="polite"></div></div></div>
 <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:12px">
 <p class="aiH">五種常用排列</p>
 <div class="aiOrd"><span>傳統敘事</span><b>1234567</b><i>結構完整，適合初學</i></div>
@@ -533,7 +535,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 
 <section class="slide ai" id="ai-filter" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:64px 128px 135px;display:flex;flex-direction:column;gap:18px">
 <h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">套濾鏡：36 種劇情模式</h2>
-<p class="aiPlots step" data-rl="36 種劇情模式"><span class="pl"><i>1</i>哀求請託</span><span class="pl"><i>2</i>援救</span><span class="pl"><i>3</i>復仇</span><span class="pl"><i>4</i>親族間的報復</span><span class="pl"><i>5</i>逃亡者的追捕</span><span class="pl"><i>6</i>災禍</span><span class="pl"><i>7</i>不幸的遭遇</span><span class="pl"><i>8</i>反抗（革命）</span><span class="pl"><i>9</i>壯舉（征服）</span><span class="pl"><i>10</i>拐劫</span><span class="pl"><i>11</i>謎的解釋</span><span class="pl"><i>12</i>獲取</span><span class="pl"><i>13</i>骨肉仇恨</span><span class="pl"><i>14</i>骨肉競爭</span><span class="pl"><i>15</i>姦情殺害</span><span class="pl"><i>16</i>瘋狂</span><span class="pl"><i>17</i>因輕忽而招致損害</span><span class="pl"><i>18</i>不知而犯的戀愛罪惡</span><span class="pl"><i>19</i>無意中傷害自己所愛</span><span class="pl"><i>20</i>為了主義而犧牲自己</span><span class="pl"><i>21</i>為了所愛（骨肉親人）而犧牲自己</span><span class="pl hot"><i>22</i>為愛情犧牲一切</span><span class="pl"><i>23</i>有原因的犧牲所愛之人</span><span class="pl"><i>24</i>兩種不均等的勢力鬥爭</span><span class="pl"><i>25</i>奸通（外遇／偷情）</span><span class="pl"><i>26</i>戀愛的罪惡</span><span class="pl"><i>27</i>發現所愛之人有不名譽的事</span><span class="pl"><i>28</i>戀愛發生阻礙</span><span class="pl"><i>29</i>愛上自己的仇敵</span><span class="pl"><i>30</i>野心</span><span class="pl"><i>31</i>人與神的鬥爭</span><span class="pl"><i>32</i>錯誤的嫉妒</span><span class="pl"><i>33</i>錯誤的判斷</span><span class="pl"><i>34</i>悔恨</span><span class="pl"><i>35</i>親族的重逢</span><span class="pl"><i>36</i>失去所愛之人</span></p>
+<div class="flRow"><p class="aiPlots step" data-rl="36 種劇情模式"><span class="pl"><i>1</i>哀求請託</span><span class="pl"><i>2</i>援救</span><span class="pl"><i>3</i>復仇</span><span class="pl"><i>4</i>親族間的報復</span><span class="pl"><i>5</i>逃亡者的追捕</span><span class="pl"><i>6</i>災禍</span><span class="pl"><i>7</i>不幸的遭遇</span><span class="pl"><i>8</i>反抗（革命）</span><span class="pl"><i>9</i>壯舉（征服）</span><span class="pl"><i>10</i>拐劫</span><span class="pl"><i>11</i>謎的解釋</span><span class="pl"><i>12</i>獲取</span><span class="pl"><i>13</i>骨肉仇恨</span><span class="pl"><i>14</i>骨肉競爭</span><span class="pl"><i>15</i>姦情殺害</span><span class="pl"><i>16</i>瘋狂</span><span class="pl"><i>17</i>因輕忽而招致損害</span><span class="pl"><i>18</i>不知而犯的戀愛罪惡</span><span class="pl"><i>19</i>無意中傷害自己所愛</span><span class="pl"><i>20</i>為了主義而犧牲自己</span><span class="pl"><i>21</i>為了所愛（骨肉親人）而犧牲自己</span><span class="pl hot"><i>22</i>為愛情犧牲一切</span><span class="pl"><i>23</i>有原因的犧牲所愛之人</span><span class="pl"><i>24</i>兩種不均等的勢力鬥爭</span><span class="pl"><i>25</i>奸通（外遇／偷情）</span><span class="pl"><i>26</i>戀愛的罪惡</span><span class="pl"><i>27</i>發現所愛之人有不名譽的事</span><span class="pl"><i>28</i>戀愛發生阻礙</span><span class="pl"><i>29</i>愛上自己的仇敵</span><span class="pl"><i>30</i>野心</span><span class="pl"><i>31</i>人與神的鬥爭</span><span class="pl"><i>32</i>錯誤的嫉妒</span><span class="pl"><i>33</i>錯誤的判斷</span><span class="pl"><i>34</i>悔恨</span><span class="pl"><i>35</i>親族的重逢</span><span class="pl"><i>36</i>失去所愛之人</span></p><div class="bsCol"><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div><div class="bsShow" aria-live="polite"></div></div></div>
 <div class="aiRunRow" data-slide="ai-filter">
 <p class="aiPrompt sm" style="flex:1">把我的故事套上劇情模式「1-36」重新改寫，保留靶心人七步結構，改變的是核心衝突，最後逐條說明改了哪裡。</p>
 <div class="aiRunBtn">▶ 貼上故事，執行</div>
@@ -543,14 +545,14 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <section class="slide ai" id="ai-curve" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:22px">
 <h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">心結人：事情轉彎了，人呢？</h2>
 <div class="aiGrid">
-<p class="aiH">靶心人：事件線（事情轉彎）</p><p class="aiH red">心結人：人物線（人物現形）</p>
-<p class="aiC"><b>1 目標</b><span>讓王子愛上自己</span></p><p class="aiC step" data-rl="1 渴望"><b>1 渴望</b><span>只想留在王子身邊，得到他的愛</span></p>
-<p class="aiC"><b>2 阻礙</b><span>用聲音換了雙腿，說不出真相</span></p><p class="aiC step" data-rl="2 顧忌"><b>2 顧忌</b><span>他若娶了別人，天亮她就化成泡沫</span></p>
-<p class="aiC"><b>3 努力</b><span>忍著刀割般的痛，天天為他跳舞</span></p><p class="aiC step" data-rl="3 兩難"><b>3 兩難</b><span>殺了他，<span style="color:#C41F27">自己能活</span>；不殺，<span style="color:#C41F27">自己消失</span></span></p>
-<p class="aiC"><b>4 結果</b><span>王子只把她當成可愛的小孤女</span></p><p class="aiC step" data-rl="4 抗拒"><b>4 抗拒</b><span>握著刀告訴自己：「他不愛我了。」</span></p>
-<p class="aiC"><b>5 意外</b><span>王子娶公主，以為是公主救了他</span></p><p class="aiC step" data-rl="5 刺痛"><b>5 刺痛</b><span>熟睡的王子，在夢裡喊著新娘的名字</span></p>
-<p class="aiC"><b>6 轉彎</b><span>姊姊送來匕首，她卻把刀丟進海裡</span></p><p class="aiC step" data-rl="6 抉擇"><b>6 抉擇</b><span>把刀丟進海裡——<span style="color:#C41F27">不拿他的命換</span></span></p>
-<p class="aiC"><b>7 結局</b><span>化成泡沫，成為空氣的女兒</span></p><p class="aiC step" data-rl="7 承擔"><b>7 承擔</b><span>太陽升起，她化成了泡沫</span></p>
+<p class="aiH">靶心人：事件線（事情轉彎）</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button></div></div>
+<p class="aiC"><b>1 目標</b><span>讓王子愛上自己</span></p><div class="bsShow" aria-live="polite"></div>
+<p class="aiC"><b>2 阻礙</b><span>用聲音換了雙腿，說不出真相</span></p>
+<p class="aiC"><b>3 努力</b><span>忍著刀割般的痛，天天為他跳舞</span></p>
+<p class="aiC"><b>4 結果</b><span>王子只把她當成可愛的小孤女</span></p>
+<p class="aiC"><b>5 意外</b><span>王子娶公主，以為是公主救了他</span></p>
+<p class="aiC"><b>6 轉彎</b><span>姊姊送來匕首，她卻把刀丟進海裡</span></p>
+<p class="aiC"><b>7 結局</b><span>化成泡沫，成為空氣的女兒</span></p>
 </div>
 <div class="aiRunRow" data-slide="ai-curve">
 <p class="aiPrompt sm" style="flex:1">把這個靶心人七步，改寫成心結人七步：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔——看他最後選了什麼、付了什麼代價。</p>
@@ -646,6 +648,8 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
    opts:['哀求請託','援救','復仇','親族間的報復','逃亡者的追捕','災禍','不幸的遭遇','反抗（革命）','壯舉（征服）','拐劫','謎的解釋','獲取','骨肉仇恨','骨肉競爭','姦情殺害','瘋狂','因輕忽而招致損害','不知而犯的戀愛罪惡','無意中傷害自己所愛','為了主義而犧牲自己','為了所愛（骨肉親人）而犧牲自己','為愛情犧牲一切','有原因的犧牲所愛之人','兩種不均等的勢力鬥爭','奸通（外遇／偷情）','戀愛的罪惡','發現所愛之人有不名譽的事','戀愛發生阻礙','愛上自己的仇敵','野心','人與神的鬥爭','錯誤的嫉妒','錯誤的判斷','悔恨','親族的重逢','失去所愛之人'],
    p:function(o,s){return '請把我的故事套上劇情模式「'+o+'」重新改寫：保留靶心人七步結構（目標、阻礙、努力、結果、意外、轉彎、結局），改變的是故事的核心衝突。最後逐條說明你改了哪裡。\n\n【我的故事】\n'+s;}}
  };
+ /* 2026-11-11 換順序、套濾鏡、心結人：選了練習故事，送出的提示詞也換成《故事名》 */
+ ['ai-order','ai-filter','ai-curve'].forEach(function(k){var f0=TASKS[k].p;TASKS[k].p=function(o,s){var r=f0(o,s),f=window.__bsStory!=null&&FILMS[window.__bsStory];return f?r.replace(/我的故事/g,'《'+f[0]+'》'):r;};});
  var KEY='fivestory-ai-story',story='';try{story=localStorage.getItem(KEY)||'';}catch(_){}
  var cur=null,opt={'ai-filter':'為愛情犧牲一切'}; /* 套濾鏡預設 22，和投影片一致 */
  var FILMS=[['Giving','https://www.youtube.com/watch?v=7s22HX18wDY'],['Violinist','https://www.youtube.com/watch?v=Ect56804xfA'],['Snake','https://www.youtube.com/watch?v=CSuwxPxaJSQ'],['Woodpecker','',"有天小明和小美出去約會，突然小明肚子一陣滾動，變得很想放屁。\n聰明的他靈機一動，想到了一個絕妙的掩飾方法，於是轉頭對小美說：\n「小美，妳知道啄木鳥是怎麼叫的嗎？」\n小美搖搖頭說：「不知道耶，怎麼叫？」\n小明得意地笑著說：「那我模仿給妳聽喔～」\n接著，小明一邊用嘴巴發出「答答答答答」的模仿聲，一邊順便偷偷放了一個大響屁！\n模仿完畢後，小明一臉輕鬆地問：「怎麼樣？現在妳知道啄木鳥是怎樣叫了吧！」\n此時，小美一臉尷尬地看著他，弱弱地說：\n「不好意思……你剛剛放屁太大聲了，我完全沒聽到你模仿的叫聲。」\n小明：……"],['Christmas','',"吉姆和黛拉是一對貧窮的年輕夫妻，夫妻倆各有一件值得驕傲的財富，一是吉姆祖傳的金錶，一是黛拉的秀髮。\n聖誕節前夕，妻子黛拉想幫丈夫買一件聖誕禮物，雖然認真存了好一陣子的錢，但顯然手邊的錢買不起任何東西。\n最後，黛拉做了一個痛苦的抉擇，她把自己最引以為豪的秀髮剪下，賣了出去，並用所得的錢幫吉姆買了一個白金錶鏈。黛拉對這個禮物非常得意，因為它可以用來搭配丈夫的金錶。\n丈夫吉姆回到家，看見妻子的頭髮，驚訝得說不出話來。不只是因為妻子的頭髮不見了，而是吉姆也為妻子買了一個聖誕禮物，一套玳瑁髮梳，但現在這個禮物失去用處了。\n黛拉看到吉姆買的禮物，先是高興地狂叫（這是她夢想中的禮物），繼而變成歇斯底里地哭泣和哀嚎（但現在這個禮物用不著了）。哭完之後，換黛拉拿出她的禮物，白金錶鏈。\n看到妻子買的禮物，吉姆笑了出來，這個禮物目前也用不著了，因為他送給妻子的髮梳，正是用賣掉金錶的錢買來的\n吉姆和黛拉為對方買的聖誕禮物，都是用自己最珍貴的東西換來的。原來，在他們心中，對方比長髮、金錶都重要，這才是最珍貴的聖誕禮物。"],['Puzzle','',"某天，一位牧師正在苦思明天的「演講題目」，\n可他的孩子卻在旁邊吵著要玩，\n於是父親拿出一把剪刀，\n將一張世界地圖剪成許多碎片，變成一副拼圖，\n然後對孩子說：\n「只要你把世界地圖拼好，爸爸就陪你玩。」\n父親以為孩子要花很多時間才能拼得出來，\n沒想到他只花了三分鐘就拼完了。\n父親難以置信，於是問孩子怎麼辦到的？\n孩子說：\n「這還不簡單，地圖背後有個人像，\n只要把人像拼好，翻過來不就是地圖了嗎？」\n牧師聽完，深受啟發，因而把明天的「演講題目」定為：\n「只要人對了，世界就對了」"],['Star','',"2004年，李安正在籌拍《斷背山》，面試了一堆女演員，當時還是個小咖的女星安海瑟薇也在其中。\n安海瑟薇面試完之後，導演李安問了她一句話：「你會騎馬嗎？」\n「會！我會騎馬。」安海瑟薇說。\n很平常的問與答，但安海瑟薇卻微微發著抖，因為她撒了一個謊。\n安海瑟薇不會騎馬，但她記得父母告訴她的話：\n「人生最難的是機會，最簡單的是學習。如果有人問你能不能做某件事，一定要回答可以，而且要在兩週內把那件事學起來。」\n回家之後，安海瑟薇開始學騎馬。\n學著、學著，有一天，馬背上的安海瑟薇，電話突然響了起來。\n電話那頭傳來的是李安的聲音，安海瑟薇屏住呼吸，隨後她聽到──恭喜你，你錄取了。"],['Titus','https://www.youtube.com/watch?v=zTNnvuWkdTo']]; /* 2026-11-10 靶心人練習用微電影 */
@@ -673,7 +677,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function msg(t,err){var m=$('.arMsg');m.textContent=t;m.classList.toggle('err',!!err);}
  function open(id){var t=TASKS[id];if(!t)return;cur=id;
   /* 2026-11-10 每次打開都回到初始狀態：故事框清空、影片／文章收起、提示詞收合 */
-  stopFilm();ta.value='';if(id==='ai-bullseye'&&window.__bsStory!=null){var bf=FILMS[window.__bsStory];if(bf)ta.value=bf[2]||bf[1];}try{localStorage.removeItem(KEY);}catch(_){}var dt=box.querySelector('details');if(dt)dt.open=false;
+  stopFilm();ta.value='';if(window.__bsStory!=null&&/^ai-(bullseye|order|filter|curve)$/.test(id)){var bf=FILMS[window.__bsStory];if(bf)ta.value=bf[2]||bf[1];}try{localStorage.removeItem(KEY);}catch(_){}var dt=box.querySelector('details');if(dt)dt.open=false;
   box.classList.toggle('bull',id==='ai-bullseye');$('#arTitle').textContent=t.name;$('.arTask').textContent=t.desc;
   if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('#arTitle').textContent=t.name+'｜'+window.__aiPlot.n+' '+window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
   var rd=document.body.classList.contains('reader');
@@ -809,11 +813,19 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   document.querySelectorAll('#ai-bullseye .aiPrompt, #reader .aiRunRow[data-slide="ai-bullseye"] .aiPrompt').forEach(function(p){p.innerHTML=html;});
   var f=k===null?null:(window.__bsFilms||[])[k],e=function(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
   var box=!f?'':(f[2]?e(f[2]):'<span class="bsTag">▶ 影片網址</span><a class="bsUrl" href="'+e(f[1])+'" target="_blank" rel="noopener">'+e(f[1])+'</a>');
-  document.querySelectorAll('.bsShow').forEach(function(b){b.innerHTML=box;b.scrollTop=0;});}
- function readerChips(){var h=document.getElementById('r-ai-bullseye');if(!h||document.querySelector('#reader .bsPickR'))return;
+  document.querySelectorAll('.bsShow').forEach(function(b){b.innerHTML=box;b.scrollTop=0;});if(window.__bsPrompts)window.__bsPrompts();}
+ /* 2026-11-11 換順序、套濾鏡、心結人的提示詞：把「我的故事」換成《故事名》 */
+ function bsPrompts(){var k=window.__bsStory,f=k===null?null:(window.__bsFilms||[])[k],nm=f?'<span class="plotSel bsNm">《'+f[0]+'》</span>':null;
+  document.querySelectorAll('#ai-order .aiPrompt,#ai-filter .aiPrompt,#ai-curve .aiPrompt,#reader .aiRunRow[data-slide="ai-order"] .aiPrompt,#reader .aiRunRow[data-slide="ai-filter"] .aiPrompt,#reader .aiRunRow[data-slide="ai-curve"] .aiPrompt').forEach(function(p){
+   var h=p.innerHTML.replace(/<span class="plotSel bsNm">《[^<]*》<\/span>(的靶心人七步)?/g,function(m0,g){return g?'這個靶心人七步':'我的故事';});
+   if(nm)h=h.replace(/我的故事/g,nm).replace(/這個靶心人七步/g,nm+'的靶心人七步');
+   if(h!==p.innerHTML)p.innerHTML=h;});}
+ window.__bsPrompts=bsPrompts;
+ document.addEventListener('click',function(){setTimeout(bsPrompts,0);});
+ function readerChips(){['ai-bullseye','ai-order','ai-curve','ai-filter'].forEach(function(id){var h=document.getElementById('r-'+id);if(!h||(h.nextSibling&&h.nextSibling.classList&&h.nextSibling.classList.contains('bsPickR')))return;
   var d=document.createElement('div');d.className='bsPickR';
   d.innerHTML='<span class="lab">點一個故事，提示詞就換成它</span>'+[].map.call(document.querySelectorAll('#ai-bullseye .bsRow'),function(r){return '<div class="bsRowR">'+r.innerHTML+'</div>';}).join('');
-  h.parentNode.insertBefore(d,h.nextSibling);var bx=document.createElement('div');bx.className='bsShow';d.parentNode.insertBefore(bx,d.nextSibling);render();}
+  h.parentNode.insertBefore(d,h.nextSibling);var bx=document.createElement('div');bx.className='bsShow';d.parentNode.insertBefore(bx,d.nextSibling);});render();}
  readerChips();
  var R=document.getElementById('reader');if(R&&window.MutationObserver)new MutationObserver(readerChips).observe(R,{childList:true});
  /* 2026-11-10 手機桌機同步：把選中的故事一起放進同步內容（例如 "1|s3" = 第 2 頁、選第 3 個故事） */
