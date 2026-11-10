@@ -526,6 +526,9 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiRun.inPanel.yt .arBtns button[data-ai="gemini"]::after{font-size:16px;top:-16px;padding:2px 12px}
 #aiRun.inPanel.yt .arBtns button:not([data-ai="gemini"])::after{font-size:14px;bottom:-12px;padding:1px 10px}
 #aiRun.inPanel .arMsg{font-size:20px;min-height:28px}
+
+/* 2026-11-11 右上大標「一個故事，18 萬種變化」字型粗細統一（不再用沒載入的宋體） */
+#aiTop .sd.sdHome em{font-family:inherit!important;font-weight:inherit!important}
 </style></head>
 <body>
 <div id="stage">
@@ -626,7 +629,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
  function go(id){var k=slides.findIndex(function(s){return s.id===id;});if(k>=0)show(k);}
  var next=function(){if(cur<slides.length-1)show(cur+1);},prev=function(){if(cur>0)show(cur-1);};
  stage.addEventListener('click',function(e){
-  if(window.__aiRunOpen&&window.__aiRunOpen())return;
+  if(window.__aiRunOpen&&window.__aiRunOpen()&&!document.querySelector('#aiRun.inPanel'))return; /* 2026-11-11 右欄模式時，右上標籤等照常可按 */
   if(e.target.closest('#aiTop')&&!e.target.closest('[data-go]'))return;
   var t=e.target.closest('[data-go]');if(t){go(t.dataset.go);return;}
   /* 2026-11-09 除了按鈕之外，按到畫面其他地方都不翻頁（鍵盤方向鍵、手機左右滑照常可用） */
@@ -718,7 +721,15 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   var pre=yt?'我給你的是一支 YouTube 影片網址。請先看這支影片（畫面、聲音或字幕），把影片裡的故事用靶心人七步（目標、阻礙、努力、結果、意外、轉彎、結局）整理出來，再做下面的任務。\n如果你看不到影片內容，請直接告訴我「我看不到這支影片」，不要根據標題、說明欄或網址猜測內容。\n\n':'';
   return '請用繁體中文回答。\n'+pre+t.p(opt[cur]||(t.opts&&t.opts[0])||'',ta.value.trim());}
  function ytUI(){var yt=isYT();box.classList.toggle('yt',yt);}
- function preview(){$('.arPre').textContent=full();ytUI();}
+ function refreshSel(){if(document.body.classList.contains('reader'))return;var t=TASKS[cur];if(!t)return;
+  if(cur==='ai-filter'&&window.__aiPlot){opt[cur]=window.__aiPlot.name;$('#arTitle').textContent=t.name+'｜'+window.__aiPlot.n+' '+window.__aiPlot.name;}
+  if(cur==='ai-order'&&window.__aiOrd){opt[cur]=window.__aiOrd.name+' '+window.__aiOrd.n;$('#arTitle').textContent=t.name+'｜'+window.__aiOrd.name+' '+window.__aiOrd.n;}}
+ function preview(){refreshSel();$('.arPre').textContent=full();ytUI();}
+ /* 2026-11-11 右欄模式時：點左邊的排列／劇情模式、上面的故事按鈕，右欄跟著更新 */
+ document.addEventListener('click',function(e){if(!box.classList.contains('open')||!box.classList.contains('inPanel'))return;
+  var c=e.target.closest&&e.target.closest('.bsChip');
+  if(c){setTimeout(function(){var bf=window.__bsStory!=null?FILMS[window.__bsStory]:null;ta.value=bf?(bf[2]||bf[1]):'';ta.dispatchEvent(new Event('input'));},0);return;}
+  if(e.target.closest&&e.target.closest('.aiOrd,.aiPlots .pl'))setTimeout(preview,0);},true);
  function msg(t,err){var m=$('.arMsg');m.textContent=t;m.classList.toggle('err',!!err);}
  function open(id){var t=TASKS[id];if(!t)return;cur=id;
   /* 2026-11-10 每次打開都回到初始狀態：故事框清空、影片／文章收起、提示詞收合 */
