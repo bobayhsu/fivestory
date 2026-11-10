@@ -400,7 +400,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……（也可以貼 YouTube 影片網址，請用 Gemini）"></textarea>'+
   '<p class="arYT">這是影片網址，請按 <b>Gemini</b>（它能看影片）。<br>其他 AI 看不到影片，會亂編。</p><details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
-  '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。<br>提醒：真實客戶的名字、病名、店名，先改過再送出。</p></div>';
+  '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。</p></div>';
  document.body.appendChild(box);
  /* 2026-11-10 練習故事移到對話框最下方（滿版時下方的空白處） */
  box.querySelector('.arCard').appendChild(box.querySelector('.arFilm'));
