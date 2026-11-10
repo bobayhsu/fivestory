@@ -316,7 +316,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 /* ===== 2026-11-10 總覽頁換成 meta_ai 設計（一個故事，18 萬種變化）：投影片內可往下捲 ===== */
 .mFrame{background:#F8F5EF!important;padding:0!important;display:block!important;color:#1E1C1A;font-family:'Noto Sans TC',Arial,sans-serif}
 .mH2{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.mFrame .meta{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;padding:56px 150px 200px;scrollbar-width:thin}
+.mFrame .meta{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;padding:64px 150px 100px;scrollbar-width:thin}
 .meta p{margin:0}
 .mKick{text-align:center;font-size:20px;letter-spacing:6px;color:#8A8072;font-weight:700}
 .mKick span::before,.mKick span::after{content:'';display:inline-block;width:46px;height:1px;background:#CFC6B8;vertical-align:middle;margin:0 18px}
@@ -330,7 +330,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .mTag{font-size:17px;font-weight:700;color:#5E5850;border:1px solid #DCD3C5;border-radius:999px;padding:3px 14px}
 .mArr{width:38px;height:38px;border-radius:50%;background:#F3EFE8;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900}
 .mName{font-size:44px;font-weight:900;margin-top:22px!important}
-.mDesc{font-size:21px;margin-top:10px!important;line-height:1.5;padding-bottom:18px;border-bottom:1px dashed #DCD3C5}
+.mDesc{font-size:21px;margin-top:10px!important;line-height:1.5}
 .mEx{font-size:19px;color:#8A8072;margin-top:16px!important}
 .mGo{display:inline-block;margin-top:18px;font-size:20px;font-weight:900;border-bottom:4px solid #F5C518;padding-bottom:2px}
 .mQuote{background:#121110;margin-top:44px;padding:48px 60px 34px;text-align:center}
@@ -367,7 +367,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #reader .mCard{padding:14px 14px 14px}
 #reader .mTag{font-size:11px;padding:2px 9px}#reader .mArr{width:26px;height:26px;font-size:13px}
 #reader .mName{font-size:24px;margin-top:12px!important}
-#reader .mDesc{font-size:13px;padding-bottom:10px}
+#reader .mDesc{font-size:13px}
 #reader .mEx{font-size:12px;margin-top:10px!important}
 #reader .mGo{font-size:13px;margin-top:10px;border-bottom-width:3px}
 #reader .mQuote{padding:24px 18px 18px;margin-top:22px}
@@ -392,16 +392,9 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <p class="mTitle">一個故事，<em>18 萬種變化</em></p>
 <p class="mPill">1 × 5,040 × 36 = 181,440</p>
 <p class="mSub">1 個故事 × 5040 種順序 × 36 種濾鏡</p>
-<div class="mCards"><div class="mCard" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">七步說出一個完整的故事</p><p class="mEx">小明約會想放屁</p><span class="mGo">看小明 7 步 →</span></div><div class="mCard" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步換個順序，就有 5040 種講法</p><p class="mEx">先講屁太大聲，再倒回去</p><span class="mGo">看換順序 →</span></div><div class="mCard" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式，改寫同一個故事</p><p class="mEx">同一個屁，換到圖書館、電梯</p><span class="mGo">看套濾鏡 →</span></div><div class="mCard" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？七步逼出人物</p><p class="mEx">他怕的不是放屁，是怕不體面</p><span class="mGo">看心結人 →</span></div></div>
+<div class="mCards"><div class="mCard" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">七步說出一個完整的故事</p></div><div class="mCard" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步換個順序，就有 5040 種講法</p></div><div class="mCard" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式，改寫同一個故事</p></div><div class="mCard" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？七步逼出人物</p></div></div>
 <div class="mQuote"><p class="q1">靶心人講故事，換順序講得好聽；</p><p class="q2">套濾鏡講得像樣，心結人講到心裡。</p><p class="q3">一個故事，變出 18 萬個，心結人讓它變強。</p></div>
-<div class="mBox mSteps"><p class="mBT">靶心人 <em>7 步</em><small>ONE STORY · SEVEN STEPS</small></p><div class="mStRow"><span class="mSt"><i>1</i><b>目標</b>想留好印象</span><span class="mAr">→</span><span class="mSt"><i>2</i><b>阻礙</b>肚子滾動</span><span class="mAr">→</span><span class="mSt"><i>3</i><b>努力</b>用啄木鳥叫掩飾</span><span class="mAr">→</span><span class="mSt"><i>4</i><b>結果</b>答答答＋大響屁</span><span class="mAr">→</span><span class="mSt"><i>5</i><b>意外</b>小美說屁太大聲</span><span class="mAr">→</span><span class="mSt"><i>6</i><b>轉彎</b>掩飾被屁蓋過</span><span class="mAr">→</span><span class="mSt"><i>7</i><b>結局</b>小明：……</span></div></div>
-<div class="mThree">
-<div class="mBox"><p class="mBT">換順序</p><p class="mRed">倒敘版｜懸念版｜結局先行版</p><p class="mGray">順序一換，聽眾等的地方就不一樣。</p></div>
-<div class="mBox"><p class="mBT">套濾鏡</p><p class="mRed">自作聰明｜約會災難｜冤枉｜英雄｜旁觀者｜時間</p><p class="mGray">同一個故事，換濾鏡就變新故事。</p></div>
-<div class="mBox"><p class="mBT">心結人</p><p class="mInk">小明怕的不是放屁，是怕在喜歡的人面前不體面。越掩飾，記得越清楚。</p><p class="mGray">沒有心結人 = 好笑 3 秒，有心結人 = 記得 3 年。</p></div>
-</div>
-<div class="mJoke"><p class="mJT">完整笑話 · 參考原文</p><p>小明和小美出去約會，肚子一陣滾動很想放屁，靈機一動說「小美，妳知道啄木鳥是怎麼叫的嗎？」一邊「答答答答答」一邊偷偷放了大響屁，問「知道啄木鳥怎麼叫了吧！」小美說「你放屁太大聲，我完全沒聽到。」小明：……</p></div>
-<p class="mBack"><span class="mToTop">↑ 回到頂部</span></p>
+
 </div>
 </section>
 
