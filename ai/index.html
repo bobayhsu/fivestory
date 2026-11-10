@@ -251,6 +251,38 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .aiGrid>.aiH:first-child{display:flex;align-items:center}
 #reader .bsRowR{display:flex;flex-wrap:wrap;gap:6px;align-items:center;width:100%}
 #reader .bsRowR .bsLab{font-size:13px;font-weight:900;color:#5E5850;width:2.6em}
+/* ===== 2026-11-10 配色 A「紙本雜誌」：標題列改炭黑，紅色只留給意外、選中的故事名、執行鈕 ===== */
+.aiGrid .aiH.red,#ai-order .aiH.red{background:#2B2926}
+.aiC.step>b{color:#8A8072}
+.aiC.step[data-rl^="5"]>b{color:#C41F27}
+.aiOrd span{color:#2B2926}
+.aiOrd.hot{border-color:#2B2926;background:#EFE8DC}
+.aiPlots .pl i,#reader .card .pl i,#aiRun .arOpt.plots button i{color:#8A8072}
+.aiPlots .pl.hot,#reader .card p:has(> .pl) .pl.hot,#aiRun .arOpt.plots button.on{border-color:#2B2926;background:#EFE8DC;color:#1E1C1A}
+#reader .card .pl.hot{color:#1E1C1A}
+@media (hover:hover){.slide.ai .aiOrd:hover,.slide.ai .aiC:hover,.aiPlots .pl:hover{border-color:#2B2926;background:#EFE8DC;box-shadow:0 4px 14px rgba(30,28,26,.12)}}
+.aiRunRow{background:#FFFDF9;border:2px solid #D8CFC1}
+.aiRunRow:hover{border-color:#2B2926;box-shadow:0 6px 18px rgba(30,28,26,.10)}
+.aiPrompt::before{color:#2B2926}
+.plotSel,#reader .plotSel{color:#C41F27;background:none;border-color:transparent;font-weight:900}
+.bsChip.on{background:#F6F2EA;color:#2B2926;border-color:#F6F2EA}
+.bsChip .bsI,.bsChip:not(.on) .bsI{background:#F6F2EA;color:#2B2926}
+.bsChip.on .bsI{background:#2B2926;color:#F6F2EA}
+.bsShow .bsTag{background:#2B2926}
+#aiTop .sd{color:#2B2926}
+#aiTop .sd:hover,#aiTop .sd.on:hover{background:#2B2926;border-color:#2B2926;color:#F6F2EA}
+#aiTop .sd.on{background:#EFE8DC;border-color:#2B2926}
+.frame .tab p[style*="color:#C41F27"]{color:#2B2926!important}
+.frame .tab:hover{background:#2B2926!important;border-color:#2B2926!important}
+.frame .tab:hover p[style*="color:#C41F27"]{color:#F6F2EA!important}
+.frame .tab:hover p[style*="background:#1E1C1A"]{color:#2B2926!important}
+#reader h3,#reader .rTitle b,#reader .trow .ty{color:#2B2926}
+#reader .bsChip{color:#2B2926;border-color:#2B2926}
+#reader .bsChip.on{background:#2B2926;color:#F6F2EA}
+#reader .bsChip:not(.on) .bsI{background:#2B2926;color:#F6F2EA}
+#reader .bsChip.on .bsI{background:#F6F2EA;color:#2B2926}
+#aiRun .arTag{background:#2B2926}
+#aiRun textarea:focus{border-color:#2B2926}
 </style>
 </head>
 <body>
