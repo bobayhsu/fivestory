@@ -765,6 +765,16 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   overflow:hidden;
   text-overflow:clip;
 }
+
+/* 2026-11-11 完整提示詞中的 YouTube 網址可直接點擊播放 */
+#aiRun .arEditorWrap{background:#fff}
+#aiRun .arEditorWrap .arMirror{z-index:2!important;background:transparent!important;pointer-events:none!important}
+#aiRun .arEditorWrap textarea{z-index:1!important}
+#aiRun .arEditorWrap .arVideoLink{
+  color:#1465C0!important;text-decoration:underline!important;text-underline-offset:2px;
+  cursor:pointer!important;pointer-events:auto!important;font-weight:800;
+}
+#aiRun .arEditorWrap .arVideoLink:hover{color:#C41F27!important}
 </style></head>
 <body>
 <div id="stage">
@@ -956,7 +966,23 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   var found=[];
   terms.forEach(function(term){var from=0,k;while((k=raw.toLocaleLowerCase().indexOf(term.toLocaleLowerCase(),from))>=0){if(!found.some(function(v){return k<v[1]&&k+term.length>v[0];}))found.push([k,k+term.length]);from=k+term.length;}});
   found.sort(function(a,b){return a[0]-b[0];});
-  var html='',at=0;found.forEach(function(v){html+=escapeHtml(raw.slice(at,v[0]))+'<span class="arRedText">'+escapeHtml(raw.slice(v[0],v[1]))+'</span>';at=v[1];});
+  /* 找出所有 YouTube 網址，優先顯示成可點擊連結（不改動編輯框的文字） */
+  var linkRe=/https?:\/\/(?:www\.|m\.)?(?:youtube\.com\/(?:watch\?[^\s<>]*|shorts\/[\w-]+|live\/[\w-]+|embed\/[\w-]+)|youtu\.be\/[\w-]+)[^\s<>]*/gi,m;
+  while((m=linkRe.exec(raw))!==null){
+   var url=m[0].replace(/[，。；、）)\]】]+$/g,'');
+   var a=m.index,b=a+url.length;
+   if(!url)continue;
+   found=found.filter(function(v){return v[1]<=a||v[0]>=b;});
+   found.push([a,b,'video',url]);
+  }
+  found.sort(function(a,b){return a[0]-b[0];});
+  var html='',at=0;found.forEach(function(v){
+   if(v[0]<at)return;
+   html+=escapeHtml(raw.slice(at,v[0]));
+   if(v[2]==='video')html+='<a class="arVideoLink" data-video-url="'+escapeHtml(v[3])+'" href="'+escapeHtml(v[3])+'" title="點擊播放 YouTube 影片">'+escapeHtml(raw.slice(v[0],v[1]))+'</a>';
+   else html+='<span class="arRedText">'+escapeHtml(raw.slice(v[0],v[1]))+'</span>';
+   at=v[1];
+  });
   html+=escapeHtml(raw.slice(at));
   mirror.innerHTML=html+'\n';
   mirror.scrollTop=ta.scrollTop;mirror.scrollLeft=ta.scrollLeft;
@@ -1021,12 +1047,45 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
    else msg('已打開 '+({chatgpt:'ChatGPT',claude:'Claude',meta:'Meta AI'}[ai])+'，按送出就開始。'+(ok?'（也已複製，沒帶過去就直接貼上）':''));
   }else msg(ok?'已複製！貼到任何一個 AI 都可以。':'複製失敗，請直接複製上方輸入框的提示詞。',!ok);
  }
+ /* AI 四頁的提示詞內影片連結：同步視窗使用既有播放器，單頁則內嵌播放 */
+ function playPromptVideo(url){
+  var u,vid='';
+  try{
+   u=new URL(url);
+   var host=u.hostname.toLowerCase();
+   if(host==='youtu.be'||host==='www.youtu.be')vid=u.pathname.split('/')[1]||'';
+   else if(host==='youtube.com'||host==='www.youtube.com'||host==='m.youtube.com'||host==='youtube-nocookie.com'||host==='www.youtube-nocookie.com'){
+    vid=u.pathname==='/watch'?(u.searchParams.get('v')||''):(u.pathname.match(/^\/(?:shorts|live|embed)\/([\w-]+)/)||[])[1]||'';
+   }
+  }catch(_){}
+  if(!/^[\w-]{11}$/.test(vid)){msg('這不是有效的 YouTube 影片網址。',true);return;}
+  var canonical='https://www.youtube.com/watch?v='+vid;
+  try{
+   var P=window.parent;
+   if(P!==window&&P.document.getElementById('fivestoryVideoPanel')){
+    P.postMessage({type:'fivestory-satir-video',url:canonical,title:'影片'},location.origin);
+    msg('已將影片交給同步播放器。');return;
+   }
+  }catch(_){}
+  var layer=document.getElementById('aiPromptVideoPlayer');
+  if(!layer){
+   layer=document.createElement('div');layer.id='aiPromptVideoPlayer';
+   layer.style.cssText='position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.92);display:flex;flex-direction:column;color:#fff;font:700 18px sans-serif';
+   layer.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 18px"><span>影片播放</span><button type="button" aria-label="關閉影片" style="font:inherit;padding:8px 16px;cursor:pointer;border:0;border-radius:8px">關閉 ✕</button></div><iframe title="YouTube 影片" style="flex:1;width:100%;border:0" allow="autoplay;encrypted-media;picture-in-picture;fullscreen" allowfullscreen></iframe>';
+   layer.querySelector('button').addEventListener('click',function(){layer.querySelector('iframe').src='about:blank';layer.remove();});
+   document.body.appendChild(layer);
+  }
+  layer.querySelector('iframe').src='https://www.youtube-nocookie.com/embed/'+vid+'?autoplay=1&playsinline=1&rel=0';
+  msg('正在播放 YouTube 影片。');
+ }
  /* 掛在 window 捕捉階段：比投影片翻頁、同步、手機閱讀版的處理都早，避免打字或點按被當成翻頁 */
  window.addEventListener('click',function(e){
   var r=e.target.closest&&e.target.closest('.aiRunBtn,.aiRunRow');
   if(r){e.preventDefault();e.stopPropagation();var id=r.dataset.slide||((r.closest('.slide')||{}).id);open(id);return;}
   if(!box.contains(e.target))return;
   e.stopPropagation();
+  var videoLink=e.target.closest&&e.target.closest('.arVideoLink');
+  if(videoLink){e.preventDefault();playPromptVideo(videoLink.getAttribute('data-video-url'));return;}
   if(e.target===box){close();return;}
   var b=e.target.closest('button');if(!b)return;e.preventDefault();
   if(b.dataset.act==='close')close();
