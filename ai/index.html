@@ -1164,6 +1164,14 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #ai-frame .mGrid .mCard.g-order:not(:hover):not(:focus-visible):not(:active){
   box-shadow:none!important;
 }
+
+/* 2026-11-11 手機導覽修正：四個單元＋唯一回總覽圖示 */
+@media (max-width:1000px){
+  #aiTop{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:8px!important;padding:12px 18px 24px!important;max-width:100%!important}
+  #aiTop .sd{flex:0 0 auto!important}
+  #aiTop .sd.sdHome{display:inline-flex!important;position:relative!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;width:48px!important;height:48px!important;padding:0!important;margin:0!important;min-width:48px!important;grid-column:auto!important;white-space:nowrap!important}
+  #aiTop .sd.sdHome svg{display:block!important;width:27px!important;height:27px!important}
+}
 </style></head>
 <body>
 <div id="stage">
