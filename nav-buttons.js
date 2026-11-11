@@ -19,7 +19,8 @@ const timer=setInterval(()=>{
   close.style.cssText='order:99;width:48px;height:48px;padding:0;border:0;border-radius:50%;justify-content:center;background:#D2262E;color:#fff;display:inline-flex;align-items:center;gap:8px;font:900 18px "Noto Sans TC","Microsoft JhengHei",sans-serif;cursor:pointer;flex:none;box-shadow:0 3px 10px rgba(0,0,0,.4)';
   // 超連結出去的網頁：固定 16:9 大小，置中，不隨視窗拉長變形
   const st=document.createElement('style');
-  st.textContent='#fivestorySyncedExternal{background:#000!important}#syncExternalFrame{flex:none!important;width:min(100vw,calc((100vh - 68px)*16/9))!important;height:auto!important;aspect-ratio:16/9;margin:auto!important}';
+  st.textContent='#syncExternalClose{display:none!important}'+/* 2026-11-11 紅色返回故事（書本）圖示一律不顯示；按鈕保留在程式裡，底部首頁、返回等圖示靠它關閉視窗 */
+   '#fivestorySyncedExternal{background:#000!important}#syncExternalFrame{flex:none!important;width:min(100vw,calc((100vh - 68px)*16/9))!important;height:auto!important;aspect-ratio:16/9;margin:auto!important}';
   document.head.appendChild(st);
   const menu=document.createElement('button');
   menu.type='button';menu.id='syncPracticeMenu';menu.innerHTML=ICON_MENU;
