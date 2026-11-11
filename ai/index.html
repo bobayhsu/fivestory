@@ -1007,6 +1007,122 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   stroke-width:2.6!important;
 }
 #reader .mGrid .mFlowArrow{display:none!important}
+
+/* 2026-11-11 AI 總覽四張流程卡：黑框常態、移入紅框，靶心人雙箭頭 */
+#ai-frame>.meta.mGrid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-template-rows:250px 250px!important;
+  gap:80px 50px!important;
+  align-content:center!important;
+  padding:108px 120px 120px!important;
+  overflow:visible!important;
+}
+#ai-frame .mGrid .mHArr,#ai-frame .mGrid .mVArr{display:none!important}
+#ai-frame .mGrid .g-bullseye{grid-column:1!important;grid-row:1!important}
+#ai-frame .mGrid .g-order{grid-column:2!important;grid-row:1!important}
+#ai-frame .mGrid .g-filter{grid-column:3!important;grid-row:1!important}
+#ai-frame .mGrid .g-curve{grid-column:1!important;grid-row:2!important}
+#ai-frame .mGrid .mHero{
+  grid-column:2/4!important;grid-row:2!important;
+  align-self:center!important;justify-self:center!important;
+  padding:0!important;margin:0!important;
+}
+#ai-frame .mGrid .mCard{
+  position:relative!important;
+  isolation:isolate;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  min-height:0!important;height:250px!important;
+  box-sizing:border-box!important;
+  padding:26px 28px!important;
+  margin:0!important;
+  background:#fff!important;
+  border:5px solid #171717!important;
+  border-radius:22px!important;
+  box-shadow:0 10px 24px rgba(30,28,26,.12)!important;
+  outline:none!important;
+  color:#171717!important;
+  transition:border-color .16s ease,box-shadow .16s ease!important;
+  cursor:pointer;
+}
+#ai-frame .mGrid .mCard.g-bullseye,
+#ai-frame .mGrid .mCard.g-order{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#ai-frame .mGrid .mCardShape{
+  position:absolute;left:0;top:0;
+  display:block!important;
+  z-index:-1;
+  pointer-events:none!important;
+  overflow:visible!important;
+  filter:drop-shadow(0 10px 14px rgba(30,28,26,.12));
+}
+#ai-frame .mGrid .mCardShapeFork{
+  width:calc(100% + 50px)!important;
+  height:calc(100% + 80px)!important;
+}
+#ai-frame .mGrid .mCardShapeRight{
+  width:calc(100% + 50px)!important;
+  height:100%!important;
+}
+#ai-frame .mGrid .mCardShape path{
+  fill:#fff;
+  stroke:#171717;
+  stroke-width:5.5;
+  vector-effect:non-scaling-stroke;
+  stroke-linejoin:round;
+  transition:stroke .16s ease;
+}
+#ai-frame .mGrid .mCard:is(:hover,:focus-visible,:active){
+  outline:none!important;
+  border-color:#C41F27!important;
+  box-shadow:0 10px 24px rgba(196,31,39,.16)!important;
+}
+#ai-frame .mGrid .mCard:is(:hover,:focus-visible,:active) .mCardShape path{
+  stroke:#C41F27!important;
+}
+#ai-frame .mGrid .mCard.g-bullseye:is(:hover,:focus-visible,:active),
+#ai-frame .mGrid .mCard.g-order:is(:hover,:focus-visible,:active){
+  box-shadow:none!important;
+}
+#ai-frame .mGrid .mCard .mTop,
+#ai-frame .mGrid .mCard .mName,
+#ai-frame .mGrid .mCard .mDesc{
+  position:relative;z-index:1;
+}
+#ai-frame .mGrid .mCard .mTop{min-height:auto!important}
+#ai-frame .mGrid .mCard .mTag{
+  border:0!important;background:#F3E5D7!important;
+  padding:5px 15px!important;font-size:24px!important;
+}
+#ai-frame .mGrid .mCard .mName{
+  color:#171717!important;font-size:64px!important;
+  margin-top:14px!important;line-height:1.15!important;
+}
+#ai-frame .mGrid .mCard .mDesc{
+  color:#4A453F!important;font-size:30px!important;
+  margin-top:10px!important;line-height:1.35!important;
+}
+#ai-frame .mGrid .mFlowArrow{display:none!important}
+#reader .mGrid .mCardShape{display:none!important}
+#reader .mGrid .mCard{
+  background:#fff!important;
+  border:2px solid #171717!important;
+  border-radius:12px!important;
+  box-shadow:0 5px 12px rgba(0,0,0,.07)!important;
+  height:auto!important;min-height:0!important;
+  padding:14px!important;margin:0!important;
+}
+#reader .mGrid .mCard.g-bullseye,
+#reader .mGrid .mCard.g-order{
+  background:#fff!important;border:2px solid #171717!important;
+  border-radius:12px!important;
+}
 </style></head>
 <body>
 <div id="stage">
@@ -1015,9 +1131,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <section class="slide frame mFrame" id="ai-frame" data-transition="fade">
 <h2 class="mH2">AI 加值：一個故事，18 萬種變化</h2>
 <div class="meta mGrid" id="metaTop">
-<div class="mHArr"><div class="hShape"></div><span class="mWide">加廣</span></div>
-<div class="mVArr"><div class="vShape"></div><span class="mDeep">加<br>深</span></div>
-<div class="mCard g-bullseye" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說一個完整的故事</p><svg class="mFlowArrow mFlowRight" viewBox="0 0 88 24" aria-hidden="true"><path d="M4 12 H64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-dasharray="7 5"/><path d="M62 4 L84 12 L62 20 Z" fill="currentColor"/></svg><svg class="mFlowArrow mFlowDown" viewBox="0 0 22 52" aria-hidden="true"><path d="M11 4 V34" fill="none" stroke="currentColor" stroke-width="2.6" stroke-dasharray="7 5"/><path d="M4 34 L11 48 L18 34 Z" fill="currentColor"/></svg></div><div class="mCard g-order" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p><svg class="mFlowArrow mFlowRight" viewBox="0 0 88 24" aria-hidden="true"><path d="M4 12 H64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-dasharray="7 5"/><path d="M62 4 L84 12 L62 20 Z" fill="currentColor"/></svg></div><div class="mCard g-filter" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
+<div class="mCard g-bullseye" data-go="ai-bullseye"><svg class="mCardShape mCardShapeFork" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V82 H375 L398 114 L375 146 H365 V225 H199 V236 H215 L180 298 L145 236 H161 V225 H16 Q4 225 4 212 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">故事</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說一個完整的故事</p></div><div class="mCard g-order" data-go="ai-order"><svg class="mCardShape mCardShapeRight" viewBox="0 0 400 230" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V82 H375 L398 114 L375 146 H365 V212 Q365 225 352 225 H16 Q4 225 4 212 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">排列</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter"><div class="mTop"><span class="mTag">劇情</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve"><div class="mTop"><span class="mTag">人物</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
 <div class="mHero"><p class="mTitle"><span class="mPrefix">一個故事，</span><span class="mEndGroup"><em>18 萬種變化</em><span class="mPill">5,040 × 36 = 181,440</span></span></p></div>
 </div>
 </section>
