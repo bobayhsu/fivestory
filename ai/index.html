@@ -979,32 +979,32 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 }
 #ai-frame .mGrid .g-curve{position:relative;z-index:3}
 
-/* 2026-11-11 流程箭頭放大，跨越卡片邊緣清楚顯示 */
+/* 2026-11-11 流程箭頭避開文字：水平箭頭上移，向下箭頭縮短 */
 #ai-frame .mGrid .mFlowArrow{
   position:absolute!important;
   display:block!important;
   z-index:10!important;
-  color:#302D29!important;
+  color:#3B3732!important;
   pointer-events:none!important;
   overflow:visible!important;
   filter:drop-shadow(0 1px 1px rgba(255,255,255,.92));
 }
 #ai-frame .mGrid .mFlowRight{
-  width:110px!important;
-  height:30px!important;
-  top:50%!important;
-  left:calc(100% - 22px)!important;
-  transform:translateY(-50%)!important;
+  width:88px!important;
+  height:24px!important;
+  top:46px!important;
+  left:calc(100% - 10px)!important;
+  transform:none!important;
 }
 #ai-frame .mGrid .mFlowDown{
-  width:28px!important;
-  height:92px!important;
-  top:calc(100% - 18px)!important;
+  width:22px!important;
+  height:52px!important;
+  top:calc(100% - 6px)!important;
   left:50%!important;
   transform:translateX(-50%)!important;
 }
 #ai-frame .mGrid .mFlowArrow path[stroke]{
-  stroke-width:2.8!important;
+  stroke-width:2.6!important;
 }
 #reader .mGrid .mFlowArrow{display:none!important}
 </style></head>
@@ -1017,7 +1017,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <div class="meta mGrid" id="metaTop">
 <div class="mHArr"><div class="hShape"></div><span class="mWide">加廣</span></div>
 <div class="mVArr"><div class="vShape"></div><span class="mDeep">加<br>深</span></div>
-<div class="mCard g-bullseye" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說一個完整的故事</p><svg class="mFlowArrow mFlowRight" viewBox="0 0 110 30" aria-hidden="true"><path d="M4 15 H82" fill="none" stroke="currentColor" stroke-width="2.8" stroke-dasharray="8 6"/><path d="M80 5 L106 15 L80 25 Z" fill="currentColor"/></svg><svg class="mFlowArrow mFlowDown" viewBox="0 0 28 92" aria-hidden="true"><path d="M14 4 V68" fill="none" stroke="currentColor" stroke-width="2.8" stroke-dasharray="8 6"/><path d="M4 66 L14 88 L24 66 Z" fill="currentColor"/></svg></div><div class="mCard g-order" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p><svg class="mFlowArrow mFlowRight" viewBox="0 0 110 30" aria-hidden="true"><path d="M4 15 H82" fill="none" stroke="currentColor" stroke-width="2.8" stroke-dasharray="8 6"/><path d="M80 5 L106 15 L80 25 Z" fill="currentColor"/></svg></div><div class="mCard g-filter" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
+<div class="mCard g-bullseye" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說一個完整的故事</p><svg class="mFlowArrow mFlowRight" viewBox="0 0 88 24" aria-hidden="true"><path d="M4 12 H64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-dasharray="7 5"/><path d="M62 4 L84 12 L62 20 Z" fill="currentColor"/></svg><svg class="mFlowArrow mFlowDown" viewBox="0 0 22 52" aria-hidden="true"><path d="M11 4 V34" fill="none" stroke="currentColor" stroke-width="2.6" stroke-dasharray="7 5"/><path d="M4 34 L11 48 L18 34 Z" fill="currentColor"/></svg></div><div class="mCard g-order" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p><svg class="mFlowArrow mFlowRight" viewBox="0 0 88 24" aria-hidden="true"><path d="M4 12 H64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-dasharray="7 5"/><path d="M62 4 L84 12 L62 20 Z" fill="currentColor"/></svg></div><div class="mCard g-filter" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
 <div class="mHero"><p class="mTitle"><span class="mPrefix">一個故事，</span><span class="mEndGroup"><em>18 萬種變化</em><span class="mPill">5,040 × 36 = 181,440</span></span></p></div>
 </div>
 </section>
