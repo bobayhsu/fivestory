@@ -588,7 +588,6 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   min-height:0!important;
   align-content:stretch!important;
 }
-#stage > .slide.ai #aiRun.inPanel .arTop{display:none!important}
 #stage > .slide.ai #aiRun.inPanel .arTask{
   margin-top:0!important;
   padding-right:52px;
@@ -760,8 +759,8 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  var FILMS=[['Giving','https://www.youtube.com/watch?v=7s22HX18wDY'],['Violinist','https://www.youtube.com/watch?v=Ect56804xfA'],['Snake','https://www.youtube.com/watch?v=CSuwxPxaJSQ'],['Woodpecker','',"有天小明和小美出去約會，突然小明肚子一陣滾動，變得很想放屁。\n聰明的他靈機一動，想到了一個絕妙的掩飾方法，於是轉頭對小美說：\n「小美，妳知道啄木鳥是怎麼叫的嗎？」\n小美搖搖頭說：「不知道耶，怎麼叫？」\n小明得意地笑著說：「那我模仿給妳聽喔～」\n接著，小明一邊用嘴巴發出「答答答答答」的模仿聲，一邊順便偷偷放了一個大響屁！\n模仿完畢後，小明一臉輕鬆地問：「怎麼樣？現在妳知道啄木鳥是怎樣叫了吧！」\n此時，小美一臉尷尬地看著他，弱弱地說：\n「不好意思……你剛剛放屁太大聲了，我完全沒聽到你模仿的叫聲。」\n小明：……"],['Christmas','',"吉姆和黛拉是一對貧窮的年輕夫妻，夫妻倆各有一件值得驕傲的財富，一是吉姆祖傳的金錶，一是黛拉的秀髮。\n聖誕節前夕，妻子黛拉想幫丈夫買一件聖誕禮物，雖然認真存了好一陣子的錢，但顯然手邊的錢買不起任何東西。\n最後，黛拉做了一個痛苦的抉擇，她把自己最引以為豪的秀髮剪下，賣了出去，並用所得的錢幫吉姆買了一個白金錶鏈。黛拉對這個禮物非常得意，因為它可以用來搭配丈夫的金錶。\n丈夫吉姆回到家，看見妻子的頭髮，驚訝得說不出話來。不只是因為妻子的頭髮不見了，而是吉姆也為妻子買了一個聖誕禮物，一套玳瑁髮梳，但現在這個禮物失去用處了。\n黛拉看到吉姆買的禮物，先是高興地狂叫（這是她夢想中的禮物），繼而變成歇斯底里地哭泣和哀嚎（但現在這個禮物用不著了）。哭完之後，換黛拉拿出她的禮物，白金錶鏈。\n看到妻子買的禮物，吉姆笑了出來，這個禮物目前也用不著了，因為他送給妻子的髮梳，正是用賣掉金錶的錢買來的\n吉姆和黛拉為對方買的聖誕禮物，都是用自己最珍貴的東西換來的。原來，在他們心中，對方比長髮、金錶都重要，這才是最珍貴的聖誕禮物。"],['Puzzle','',"某天，一位牧師正在苦思明天的「演講題目」，\n可他的孩子卻在旁邊吵著要玩，\n於是父親拿出一把剪刀，\n將一張世界地圖剪成許多碎片，變成一副拼圖，\n然後對孩子說：\n「只要你把世界地圖拼好，爸爸就陪你玩。」\n父親以為孩子要花很多時間才能拼得出來，\n沒想到他只花了三分鐘就拼完了。\n父親難以置信，於是問孩子怎麼辦到的？\n孩子說：\n「這還不簡單，地圖背後有個人像，\n只要把人像拼好，翻過來不就是地圖了嗎？」\n牧師聽完，深受啟發，因而把明天的「演講題目」定為：\n「只要人對了，世界就對了」"],['Star','',"2004年，李安正在籌拍《斷背山》，面試了一堆女演員，當時還是個小咖的女星安海瑟薇也在其中。\n安海瑟薇面試完之後，導演李安問了她一句話：「你會騎馬嗎？」\n「會！我會騎馬。」安海瑟薇說。\n很平常的問與答，但安海瑟薇卻微微發著抖，因為她撒了一個謊。\n安海瑟薇不會騎馬，但她記得父母告訴她的話：\n「人生最難的是機會，最簡單的是學習。如果有人問你能不能做某件事，一定要回答可以，而且要在兩週內把那件事學起來。」\n回家之後，安海瑟薇開始學騎馬。\n學著、學著，有一天，馬背上的安海瑟薇，電話突然響了起來。\n電話那頭傳來的是李安的聲音，安海瑟薇屏住呼吸，隨後她聽到──恭喜你，你錄取了。"],['Titus','https://www.youtube.com/watch?v=zTNnvuWkdTo']]; /* 2026-11-10 靶心人練習用微電影 */
  window.__bsFilms=FILMS;
  var box=document.createElement('div');box.id='aiRun';box.setAttribute('aria-hidden','true');
- box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-labelledby="arTitle"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
-  '<div class="arTop"><span class="arTag">AI 加值</span><h3 id="arTitle"></h3></div><p class="arTask"></p><div class="arOpt"></div>'+
+ box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-label="AI 加值故事輸入"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
+  '<p class="arTask"></p><div class="arOpt"></div>'+
   '<div class="arFilm"><p>沒有故事？用這些故事練習拆解</p><div class="fRow">'+FILMS.map(function(f,k){return '<div class="fItem"><button type="button" class="fName" data-act="filmplay" data-film="'+k+'" title="'+(f[2]?'看文章':'播放影片')+'"><i'+(f[2]?' class="t"':'')+'>'+(f[2]?'文':'▶')+'</i><span><b class="br">《</b>'+f[0]+'<b class="br">》</b></span></button><button type="button" class="fCopy" data-act="filmcopy" data-film="'+k+'">'+(f[2]?'複製文字':'複製網址')+'</button></div>';}).join('')+'</div>'+FILMS.map(function(f,k){return '<div class="fPlay" data-film="'+k+'"></div>';}).join('')+'</div>'+
   '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……（也可以貼 YouTube 影片網址，請用 Gemini）"></textarea>'+
   '<p class="arYT">這是影片網址，請按 <b>Gemini</b>（它能看影片），其他 AI 看不到影片，會亂編。</p><details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
@@ -779,8 +778,8 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   return '請用繁體中文回答。\n'+pre+t.p(opt[cur]||(t.opts&&t.opts[0])||'',ta.value.trim());}
  function ytUI(){var yt=isYT();box.classList.toggle('yt',yt);}
  function refreshSel(){if(document.body.classList.contains('reader'))return;var t=TASKS[cur];if(!t)return;
-  if(cur==='ai-filter'&&window.__aiPlot){opt[cur]=window.__aiPlot.name;$('#arTitle').textContent=t.name+'｜'+window.__aiPlot.n+' '+window.__aiPlot.name;}
-  if(cur==='ai-order'&&window.__aiOrd){opt[cur]=window.__aiOrd.name+' '+window.__aiOrd.n;$('#arTitle').textContent=t.name+'｜'+window.__aiOrd.name+' '+window.__aiOrd.n;}}
+  if(cur==='ai-filter'&&window.__aiPlot){opt[cur]=window.__aiPlot.name;}
+  if(cur==='ai-order'&&window.__aiOrd){opt[cur]=window.__aiOrd.name+' '+window.__aiOrd.n;}}
  function preview(){refreshSel();$('.arPre').textContent=full();ytUI();}
  /* 2026-11-11 右欄模式時：點左邊的排列／劇情模式、上面的故事按鈕，右欄跟著更新 */
  document.addEventListener('click',function(e){if(!box.classList.contains('open')||!box.classList.contains('inPanel'))return;
@@ -791,10 +790,10 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function open(id){var t=TASKS[id];if(!t)return;cur=id;
   /* 2026-11-10 每次打開都回到初始狀態：故事框清空、影片／文章收起、提示詞收合 */
   stopFilm();ta.value='';if(window.__bsStory!=null&&/^ai-(bullseye|order|filter|curve)$/.test(id)){var bf=FILMS[window.__bsStory];if(bf)ta.value=bf[2]||bf[1];}try{localStorage.removeItem(KEY);}catch(_){}var dt=box.querySelector('details');if(dt)dt.open=false;
-  box.classList.toggle('bull',id==='ai-bullseye');$('#arTitle').textContent=t.name;$('.arTask').textContent=t.desc;
-  if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('#arTitle').textContent=t.name+'｜'+window.__aiPlot.n+' '+window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
+  box.classList.toggle('bull',id==='ai-bullseye');box.querySelector('.arCard').setAttribute('aria-label','AI 加值｜'+t.name);$('.arTask').textContent=t.desc;
+  if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
   var rd=document.body.classList.contains('reader');
-  if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.name+' '+window.__aiOrd.n;if(!rd){$('#arTitle').textContent=t.name+'｜'+window.__aiOrd.name+' '+window.__aiOrd.n;$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
+  if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.name+' '+window.__aiOrd.n;if(!rd){/* 標題列已移除，保留排列與提示詞同步 */$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
   var o=$('.arOpt');o.innerHTML='';if(t.opts&&id!=='ai-filter'&&!(id==='ai-order'&&!rd)){var sel=opt[id]||t.opts[0];o.classList.toggle('plots',id==='ai-filter');t.opts.forEach(function(x,k){var b=document.createElement('button');b.type='button';if(id==='ai-filter')b.innerHTML='<i>'+(k+1)+'</i>'+x;else b.textContent=x;b.dataset.opt=x;if(x===sel)b.classList.add('on');o.appendChild(b);});o.style.display='';}else o.style.display='none';
   msg('');preview();placeBox(id);box.classList.add('open');box.setAttribute('aria-hidden','false');setTimeout(function(){try{ta.focus({preventScroll:true});}catch(_){}},60);}
 /* 2026-11-11 電腦／投影：在同一頁右欄（故事空格的位置）進行，不跳出對話框；手機直式閱讀版維持對話框 */
