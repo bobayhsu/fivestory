@@ -309,6 +309,37 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .mGrid .mPill {
   font-family: 'Noto Sans TC', Arial, sans-serif !important;
 }
+
+/* 2026-11-11 四個 AI 單元：左右雙欄同時放大，使用移除頁尾後的空間 */
+#stage > .slide.ai{
+  padding:54px 76px 54px!important;
+  gap:16px!important;
+}
+#stage > .slide.ai > h2{font-size:70px!important}
+#stage > .slide.ai > .aiGrid{
+  flex:1 1 auto!important;
+  height:auto!important;
+  min-height:0;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+  gap:10px 26px;
+  align-content:stretch;
+}
+#stage > .slide.ai .aiGrid>.aiH:first-child{
+  font-size:42px!important;
+  padding:11px 25px;
+}
+#stage > .slide.ai .aiC{font-size:39px;padding:12px 24px}
+#stage > .slide.ai .aiC>b{font-size:31px;width:104px}
+#stage > #ai-order .aiGrid>.aiOrd{font-size:35px;padding:13px 22px}
+#stage > #ai-order .aiGrid>.aiOrd b{font-size:36px;width:154px}
+#stage > #ai-order .aiGrid>.aiOrd span{width:136px}
+#stage > #ai-filter .aiGrid>.aiPlots .pl{font-size:23px!important}
+#stage > .slide.ai .aiGrid>.bsShow{min-height:0}
+#stage > .slide.ai #aiRun.inPanel .arCard{padding:25px 30px 20px}
+#stage > .slide.ai #aiRun.inPanel h3{font-size:35px}
+#stage > .slide.ai #aiRun.inPanel .arTask{font-size:24px}
+#stage > .slide.ai #aiRun.inPanel textarea{font-size:28px}
+#stage > .slide.ai #aiRun.inPanel .arBtns button{font-size:29px;padding:18px 8px}
 </style>
 <style>/* 2026-11-10 AI 加值圖示：只留紅字、紅底，排在最右邊 */#fsbar .fb.red{background:#D2262E}#fsbar .fb.red:hover,#fsbar .fb.red:focus-visible{background:#A3161D}/* ===== 2026-11-10 手機沒有滑鼠：手指按下去也變紅（和電腦滑鼠移過去一樣） ===== */
 #aiTop .sd:active,.bsChip:active,#reader .bsChip:active,#reader .rNav a:active{background:#C41F27!important;border-color:#C41F27!important;color:#FBF8F3!important}
