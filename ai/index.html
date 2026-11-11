@@ -592,10 +592,16 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   margin-top:0!important;
   padding-right:52px;
 }
+
+/* 2026-11-11 導覽列：四單元之後接回總覽圖示，移除上方大標題 */
+#aiTop{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;grid-template-columns:none!important;padding:14px 24px 30px 40px!important}
+#aiTop .sd.sdHome{display:flex!important;align-items:center!important;justify-content:center!important;grid-column:auto!important;justify-self:auto!important;font-size:24px!important;line-height:1!important;padding:8px 12px!important;letter-spacing:0!important;background:#FBF9F6!important;border:2px solid #E4DED5!important;border-radius:12px!important;box-shadow:0 3px 10px rgba(30,28,26,.08)!important;color:#2B2926!important}
+#aiTop .sd.sdHome:hover,#aiTop .sd.sdHome:focus-visible{background:#C41F27!important;border-color:#C41F27!important;color:#FFFFFF!important;text-decoration:none!important}
+#aiTop .sd.sdHome:active{background:#A3161D!important;color:#FFFFFF!important}
 </style></head>
 <body>
 <div id="stage">
-<nav id="aiTop" aria-label="AI 加值單元"><div class="sd sdHome" data-go="ai-frame">一個故事，<em>18 萬種變化</em></div><div class="sd" data-go="ai-bullseye">靶心人</div><div class="sd" data-go="ai-order">換順序</div><div class="sd" data-go="ai-filter">套濾鏡</div><div class="sd" data-go="ai-curve">心結人</div></nav>
+<nav id="aiTop" aria-label="AI 加值單元"><div class="sd" data-go="ai-bullseye">靶心人</div><div class="sd" data-go="ai-order">換順序</div><div class="sd" data-go="ai-filter">套濾鏡</div><div class="sd" data-go="ai-curve">心結人</div><div class="sd sdHome" data-go="ai-frame" role="button" tabindex="0" aria-label="回總覽" title="回總覽"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div></nav>
 <!-- ===== 2026-11-09 新章節：AI 加值（ai-*） ===== -->
 <section class="slide frame mFrame" id="ai-frame" data-transition="fade">
 <h2 class="mH2">AI 加值：一個故事，18 萬種變化</h2>
