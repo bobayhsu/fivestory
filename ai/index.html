@@ -879,8 +879,8 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
    p:function(o,s){return '以下是我用靶心人公式（目標、阻礙、努力、結果、意外、轉彎、結局）寫的故事。請改寫成心結人公式：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔。兩難要是兩個「都對」、卻不能兼得的價值；抗拒要寫出他如何拖延、逃避或假裝不用選；刺痛要刺中他最不願面對的地方；承擔要寫出他為選擇付出的代價。每一步寫一到兩句，最後用表格對照原本的靶心人七步。\n\n【我的故事】\n'+s;}},
   'ai-order':{name:'換順序',desc:'選一種排列，讓 AI 用新的順序重講你的故事。',
    opts:['觀點主題 5612347','結局先行 5671234','情緒帶入 2134567','迷惑揭曉 3412567','傳統敘事 1234567'],
-   p:function(o,s){var n=(o.match(/\d{7}/)||['5612347'])[0],N=['','目標','阻礙','努力','結果','意外','轉彎','結局'],seq=n.split('').map(function(d){return N[+d];}).join('→');
-    return '請用靶心人公式 '+n+' 的順序（'+seq+'），把我的故事重新說一次。每一段標出步驟名稱，說完後用兩、三句話說明這個順序帶來的效果。\n\n【我的故事】\n'+s;}},
+   p:function(o,s){var n=(o.match(/\d{7}/)||['5612347'])[0],name=o.replace(/\s*\d{7}.*/, '').trim()||'觀點主題',N=['','目標','阻礙','努力','結果','意外','轉彎','結局'],seq=n.split('').map(function(d){return N[+d];}).join('→');
+    return '請用靶心人公式「'+name+' '+n+'」的順序（'+seq+'），把我的故事重新說一次。每一段標出步驟名稱，說完後用兩、三句話說明這個順序帶來的效果。\n\n【我的故事】\n'+s;}},
   'ai-filter':{name:'套濾鏡',desc:'選一種劇情模式，改寫你故事的核心衝突。',
    opts:['哀求請託','援救','復仇','親族間的報復','逃亡者的追捕','災禍','不幸的遭遇','反抗（革命）','壯舉（征服）','拐劫','謎的解釋','獲取','骨肉仇恨','骨肉競爭','姦情殺害','瘋狂','因輕忽而招致損害','不知而犯的戀愛罪惡','無意中傷害自己所愛','為了主義而犧牲自己','為了所愛（骨肉親人）而犧牲自己','為愛情犧牲一切','有原因的犧牲所愛之人','兩種不均等的勢力鬥爭','奸通（外遇／偷情）','戀愛的罪惡','發現所愛之人有不名譽的事','戀愛發生阻礙','愛上自己的仇敵','野心','人與神的鬥爭','錯誤的嫉妒','錯誤的判斷','悔恨','親族的重逢','失去所愛之人'],
    p:function(o,s){return '請把我的故事套上劇情模式「'+o+'」重新改寫：保留靶心人七步結構（目標、阻礙、努力、結果、意外、轉彎、結局），改變的是故事的核心衝突。最後逐條說明你改了哪裡。\n\n【我的故事】\n'+s;}}
@@ -908,7 +908,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   if(!mirror)return;
   var raw=ta.value,terms=[];
   if(cur==='ai-filter'&&window.__aiPlot)terms.push(window.__aiPlot.name);
-  if(cur==='ai-order'&&window.__aiOrd)terms.push(window.__aiOrd.name);
+  if(cur==='ai-order'&&window.__aiOrd){terms.push(window.__aiOrd.name);terms.push(window.__aiOrd.n);}
   if(cur==='ai-bullseye')terms.push('靶心人');
   if(cur==='ai-curve')terms.push('心結人');
   if(window.__bsStory!=null&&window.__bsFilms&&window.__bsFilms[window.__bsStory])terms.push(window.__bsFilms[window.__bsStory][0]);
