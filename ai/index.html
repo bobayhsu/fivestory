@@ -606,6 +606,34 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 /* 2026-11-11 完整提示詞單一可編輯輸入框：移除下方獨立預覽區 */
 #aiRun .arPre{display:none!important}
 #aiRun.inPanel textarea{flex:1 1 auto;min-height:0}
+
+/* 2026-11-11 右欄提示詞最大化、AI 按鈕固定底部 */
+#aiRun.inPanel .arCard{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  min-height:0;
+}
+#aiRun.inPanel textarea{
+  flex:1 1 auto!important;
+  height:auto!important;
+  min-height:0!important;
+}
+#aiRun.inPanel .arTask{
+  flex:0 0 auto;
+  font-size:18px;
+  line-height:1.35;
+  margin:0 52px 6px 0;
+}
+#aiRun.inPanel .arYT{flex:0 0 auto;margin:6px 0 0}
+#aiRun.inPanel .arMsg{flex:0 0 auto;min-height:0;margin:3px 0}
+#aiRun.inPanel .arBtns{
+  flex:0 0 auto;
+  margin:auto 0 0!important;
+  gap:14px;
+}
+#aiRun.inPanel.yt .arBtns{margin-top:auto!important;row-gap:14px}
+#aiRun.inPanel .arNote{display:none!important}
 </style></head>
 <body>
 <div id="stage">
