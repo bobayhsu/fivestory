@@ -914,19 +914,19 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
 (function(){
  var TASKS={
   'ai-bullseye':{name:'靶心人',desc:'',
-   p:function(o,s){var f=window.__bsStory!=null&&FILMS[window.__bsStory],w=f?'《'+f[0]+'》':'我的故事';return '請把'+w+'整理成靶心人公式七步：目標、阻礙、努力、結果、意外、轉彎、結局。每一步標出步驟名稱，寫一到兩句，用口語、具體的畫面，不要加金句結尾。\n\n【'+w+'】\n'+s;}},
+   p:function(o,s){var f=window.__bsStory!=null&&FILMS[window.__bsStory],w=f?f[0]:'我的故事';return '請把'+w+'整理成靶心人公式七步：目標、阻礙、努力、結果、意外、轉彎、結局。每一步標出步驟名稱，寫一到兩句，用口語、具體的畫面，不要加金句結尾。\n\n'+w+'\n'+s;}},
   'ai-curve':{name:'心結人',desc:'把靶心人七步（事情轉彎），改寫成心結人七步（人物現形）。',
-   p:function(o,s){return '以下是我用靶心人公式（目標、阻礙、努力、結果、意外、轉彎、結局）寫的故事。請改寫成心結人公式：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔。兩難要是兩個「都對」、卻不能兼得的價值；抗拒要寫出他如何拖延、逃避或假裝不用選；刺痛要刺中他最不願面對的地方；承擔要寫出他為選擇付出的代價。每一步寫一到兩句，最後用表格對照原本的靶心人七步。\n\n【我的故事】\n'+s;}},
+   p:function(o,s){return '以下是我用靶心人公式（目標、阻礙、努力、結果、意外、轉彎、結局）寫的故事。請改寫成心結人公式：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔。兩難要是兩個「都對」、卻不能兼得的價值；抗拒要寫出他如何拖延、逃避或假裝不用選；刺痛要刺中他最不願面對的地方；承擔要寫出他為選擇付出的代價。每一步寫一到兩句，最後用表格對照原本的靶心人七步。\n\n我的故事\n'+s;}},
   'ai-order':{name:'換順序',desc:'選一種排列，讓 AI 用新的順序重講你的故事。',
    opts:['觀點主題 5612347','結局先行 5671234','情緒帶入 2134567','迷惑揭曉 3412567','傳統敘事 1234567'],
    p:function(o,s){var n=(o.match(/\d{7}/)||['5612347'])[0],name=o.replace(/\s*\d{7}.*/, '').trim()||'觀點主題',N=['','目標','阻礙','努力','結果','意外','轉彎','結局'],seq=n.split('').map(function(d){return N[+d];}).join('→');
-    return '請用靶心人公式「'+name+' '+n+'」的順序（'+seq+'），把我的故事重新說一次。每一段標出步驟名稱，說完後用兩、三句話說明這個順序帶來的效果。\n\n【我的故事】\n'+s;}},
+    return '請用靶心人公式「'+name+' '+n+'」的順序（'+seq+'），把我的故事重新說一次。每一段標出步驟名稱，說完後用兩、三句話說明這個順序帶來的效果。\n\n我的故事\n'+s;}},
   'ai-filter':{name:'套濾鏡',desc:'選一種劇情模式，改寫你故事的核心衝突。',
    opts:['哀求請託','援救','復仇','親族間的報復','逃亡者的追捕','災禍','不幸的遭遇','反抗（革命）','壯舉（征服）','拐劫','謎的解釋','獲取','骨肉仇恨','骨肉競爭','姦情殺害','瘋狂','因輕忽而招致損害','不知而犯的戀愛罪惡','無意中傷害自己所愛','為了主義而犧牲自己','為了所愛（骨肉親人）而犧牲自己','為愛情犧牲一切','有原因的犧牲所愛之人','兩種不均等的勢力鬥爭','奸通（外遇／偷情）','戀愛的罪惡','發現所愛之人有不名譽的事','戀愛發生阻礙','愛上自己的仇敵','野心','人與神的鬥爭','錯誤的嫉妒','錯誤的判斷','悔恨','親族的重逢','失去所愛之人'],
-   p:function(o,s){return '請把我的故事套上劇情模式「'+o+'」重新改寫：保留靶心人七步結構（目標、阻礙、努力、結果、意外、轉彎、結局），改變的是故事的核心衝突。最後逐條說明你改了哪裡。\n\n【我的故事】\n'+s;}}
+   p:function(o,s){return '請把我的故事套上劇情模式「'+o+'」重新改寫：保留靶心人七步結構（目標、阻礙、努力、結果、意外、轉彎、結局），改變的是故事的核心衝突。最後逐條說明你改了哪裡。\n\n我的故事\n'+s;}}
  };
  /* 2026-11-11 換順序、套濾鏡、心結人：選了練習故事，送出的提示詞也換成《故事名》 */
- ['ai-order','ai-filter','ai-curve'].forEach(function(k){var f0=TASKS[k].p;TASKS[k].p=function(o,s){var r=f0(o,s),f=window.__bsStory!=null&&FILMS[window.__bsStory];return f?r.replace(/我的故事/g,'《'+f[0]+'》'):r;};});
+ ['ai-order','ai-filter','ai-curve'].forEach(function(k){var f0=TASKS[k].p;TASKS[k].p=function(o,s){var r=f0(o,s),f=window.__bsStory!=null&&FILMS[window.__bsStory];return f?r.replace(/我的故事/g,f[0]):r;};});
  var KEY='fivestory-ai-story',story='';try{story=localStorage.getItem(KEY)||'';}catch(_){}
  var cur=null,opt={'ai-filter':'為愛情犧牲一切'}; /* 套濾鏡預設 22，和投影片一致 */
  var FILMS=[['Giving','https://www.youtube.com/watch?v=7s22HX18wDY'],['Violinist','https://www.youtube.com/watch?v=Ect56804xfA'],['Snake','https://www.youtube.com/watch?v=CSuwxPxaJSQ'],['Woodpecker','',"有天小明和小美出去約會，突然小明肚子一陣滾動，變得很想放屁。\n聰明的他靈機一動，想到了一個絕妙的掩飾方法，於是轉頭對小美說：\n「小美，妳知道啄木鳥是怎麼叫的嗎？」\n小美搖搖頭說：「不知道耶，怎麼叫？」\n小明得意地笑著說：「那我模仿給妳聽喔～」\n接著，小明一邊用嘴巴發出「答答答答答」的模仿聲，一邊順便偷偷放了一個大響屁！\n模仿完畢後，小明一臉輕鬆地問：「怎麼樣？現在妳知道啄木鳥是怎樣叫了吧！」\n此時，小美一臉尷尬地看著他，弱弱地說：\n「不好意思……你剛剛放屁太大聲了，我完全沒聽到你模仿的叫聲。」\n小明：……"],['Christmas','',"吉姆和黛拉是一對貧窮的年輕夫妻，夫妻倆各有一件值得驕傲的財富，一是吉姆祖傳的金錶，一是黛拉的秀髮。\n聖誕節前夕，妻子黛拉想幫丈夫買一件聖誕禮物，雖然認真存了好一陣子的錢，但顯然手邊的錢買不起任何東西。\n最後，黛拉做了一個痛苦的抉擇，她把自己最引以為豪的秀髮剪下，賣了出去，並用所得的錢幫吉姆買了一個白金錶鏈。黛拉對這個禮物非常得意，因為它可以用來搭配丈夫的金錶。\n丈夫吉姆回到家，看見妻子的頭髮，驚訝得說不出話來。不只是因為妻子的頭髮不見了，而是吉姆也為妻子買了一個聖誕禮物，一套玳瑁髮梳，但現在這個禮物失去用處了。\n黛拉看到吉姆買的禮物，先是高興地狂叫（這是她夢想中的禮物），繼而變成歇斯底里地哭泣和哀嚎（但現在這個禮物用不著了）。哭完之後，換黛拉拿出她的禮物，白金錶鏈。\n看到妻子買的禮物，吉姆笑了出來，這個禮物目前也用不著了，因為他送給妻子的髮梳，正是用賣掉金錶的錢買來的\n吉姆和黛拉為對方買的聖誕禮物，都是用自己最珍貴的東西換來的。原來，在他們心中，對方比長髮、金錶都重要，這才是最珍貴的聖誕禮物。"],['Puzzle','',"某天，一位牧師正在苦思明天的「演講題目」，\n可他的孩子卻在旁邊吵著要玩，\n於是父親拿出一把剪刀，\n將一張世界地圖剪成許多碎片，變成一副拼圖，\n然後對孩子說：\n「只要你把世界地圖拼好，爸爸就陪你玩。」\n父親以為孩子要花很多時間才能拼得出來，\n沒想到他只花了三分鐘就拼完了。\n父親難以置信，於是問孩子怎麼辦到的？\n孩子說：\n「這還不簡單，地圖背後有個人像，\n只要把人像拼好，翻過來不就是地圖了嗎？」\n牧師聽完，深受啟發，因而把明天的「演講題目」定為：\n「只要人對了，世界就對了」"],['Star','',"2004年，李安正在籌拍《斷背山》，面試了一堆女演員，當時還是個小咖的女星安海瑟薇也在其中。\n安海瑟薇面試完之後，導演李安問了她一句話：「你會騎馬嗎？」\n「會！我會騎馬。」安海瑟薇說。\n很平常的問與答，但安海瑟薇卻微微發著抖，因為她撒了一個謊。\n安海瑟薇不會騎馬，但她記得父母告訴她的話：\n「人生最難的是機會，最簡單的是學習。如果有人問你能不能做某件事，一定要回答可以，而且要在兩週內把那件事學起來。」\n回家之後，安海瑟薇開始學騎馬。\n學著、學著，有一天，馬背上的安海瑟薇，電話突然響了起來。\n電話那頭傳來的是李安的聲音，安海瑟薇屏住呼吸，隨後她聽到──恭喜你，你錄取了。"],['Titus','https://www.youtube.com/watch?v=zTNnvuWkdTo']]; /* 2026-11-10 靶心人練習用微電影 */
@@ -935,7 +935,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-label="AI 加值故事輸入"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
   '<p class="arTask"></p><div class="arOpt"></div>'+
   '<div class="arFilm"><p>沒有故事？用這些故事練習拆解</p><div class="fRow">'+FILMS.map(function(f,k){return '<div class="fItem"><button type="button" class="fName" data-act="filmplay" data-film="'+k+'" title="'+(f[2]?'看文章':'播放影片')+'"><i'+(f[2]?' class="t"':'')+'>'+(f[2]?'文':'▶')+'</i><span><b class="br">《</b>'+f[0]+'<b class="br">》</b></span></button><button type="button" class="fCopy" data-act="filmcopy" data-film="'+k+'">'+(f[2]?'複製文字':'複製網址')+'</button></div>';}).join('')+'</div>'+FILMS.map(function(f,k){return '<div class="fPlay" data-film="'+k+'"></div>';}).join('')+'</div>'+
-  '<label for="arStory">直接編輯完整提示詞，並在故事段落貼上內容</label><div class="arEditorWrap"><div class="arMirror" aria-hidden="true"></div><textarea id="arStory" placeholder="可直接修改提示詞，在【我的故事】下面貼上故事或 YouTube 影片網址"></textarea></div>'+
+  '<label for="arStory">直接編輯完整提示詞，並在故事段落貼上內容</label><div class="arEditorWrap"><div class="arMirror" aria-hidden="true"></div><textarea id="arStory" placeholder="可直接修改提示詞，在故事名稱下面貼上故事或 YouTube 影片網址"></textarea></div>'+
   '<p class="arYT">這是影片網址，請按 <b>Gemini</b>（它能看影片），其他 AI 看不到影片，會亂編。</p>'+
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
   '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。</p></div>';
@@ -966,7 +966,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  var YT=/(https?:\/\/)?(www\.|m\.)?(youtube\.com\/(watch\?|shorts\/|live\/)|youtu\.be\/)\S+/i;
  function isYT(){return YT.test(ta.value.trim());}
  function full(){return ta.value.trim();}
- function editorStory(){var m=ta.value.match(/\n【(?:我的故事|《[^】]+》)】\n/);return m?ta.value.slice(m.index+m[0].length):'';}
+ function editorStory(){var m=ta.value.match(/\n\n(?:我的故事|Giving|Violinist|Snake|Woodpecker|Christmas|Puzzle|Star|Titus|【我的故事】|【《[^】]+》】)\n/);return m?ta.value.slice(m.index+m[0].length):'';}
  function compose(storyText){var t=TASKS[cur];if(!t)return '';refreshSel();var yt=YT.test(storyText);
   var pre=yt?'我給你的是一支 YouTube 影片網址。請先看這支影片（畫面、聲音或字幕），把影片裡的故事用靶心人七步（目標、阻礙、努力、結果、意外、轉彎、結局）整理出來，再做下面的任務。\n如果你看不到影片內容，請直接告訴我「我看不到這支影片」，不要根據標題、說明欄或網址猜測內容。\n\n':'';
   return '請用繁體中文回答。\n'+pre+t.p(opt[cur]||(t.opts&&t.opts[0])||'',storyText||'');}
