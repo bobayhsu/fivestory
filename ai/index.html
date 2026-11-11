@@ -670,6 +670,61 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiRun.inPanel .arNote,
 #aiRun.inPanel .arOpt,
 #aiRun.inPanel label{display:none!important}
+
+/* 2026-11-11 四單元選取項目統一紅色，提示詞同步標示選中名稱 */
+#stage > .slide.ai .aiPlots .pl.hot,
+#reader .card .pl.hot,
+#stage > .slide.ai .aiOrd.hot{
+  color:#C41F27!important;
+  border-color:#C41F27!important;
+  background:#FFF0F0!important;
+  font-weight:900!important;
+}
+#stage > .slide.ai .aiPlots .pl.hot i,
+#stage > .slide.ai .aiOrd.hot span,
+#stage > .slide.ai .aiOrd.hot b{color:#C41F27!important}
+#stage > .slide.ai .bsChip.on,
+#reader .bsChip.on{
+  background:#C41F27!important;
+  border-color:#C41F27!important;
+  color:#FFFFFF!important;
+}
+#stage > .slide.ai #aiRun .arEditorWrap{
+  order:1;position:relative;flex:1 1 0%!important;
+  min-height:0!important;height:0!important;
+  border-radius:12px;overflow:hidden;
+}
+#aiRun .arEditorWrap{position:relative;min-height:170px}
+#aiRun .arEditorWrap textarea,#aiRun .arEditorWrap .arMirror{
+  position:absolute!important;inset:0;width:100%!important;height:100%!important;
+  box-sizing:border-box;margin:0!important;
+  padding:10px 12px;font-size:16px;line-height:1.6;
+  font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+  white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word;
+}
+#aiRun .arEditorWrap .arMirror{
+  border:2px solid transparent;background:#FFFFFF;color:#1E1C1A;
+  pointer-events:none;overflow:hidden;z-index:0;
+}
+#aiRun .arEditorWrap .arMirror .arRedText{color:#C41F27;font-weight:900}
+#aiRun .arEditorWrap textarea{
+  z-index:1;resize:none!important;min-height:0!important;
+  background:transparent!important;color:transparent!important;
+  -webkit-text-fill-color:transparent!important;
+  caret-color:#1E1C1A!important;
+}
+#aiRun .arEditorWrap textarea::placeholder{
+  color:#8A847B!important;-webkit-text-fill-color:#8A847B!important
+}
+#aiRun .arEditorWrap textarea::selection{background:rgba(196,31,39,.2)}
+#aiRun.inPanel .arEditorWrap textarea,
+#aiRun.inPanel .arEditorWrap .arMirror{
+  padding:14px 18px;font-size:24px;line-height:1.55;
+}
+#stage > .slide.ai #aiRun.inPanel .arEditorWrap textarea,
+#stage > .slide.ai #aiRun.inPanel .arEditorWrap .arMirror{
+  font-size:28px!important;line-height:1.55!important;
+}
 </style></head>
 <body>
 <div id="stage">
@@ -840,14 +895,33 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  box.innerHTML='<div class="arCard" role="dialog" aria-modal="true" aria-label="AI 加值故事輸入"><button class="arX" data-act="close" aria-label="關閉">×</button>'+
   '<p class="arTask"></p><div class="arOpt"></div>'+
   '<div class="arFilm"><p>沒有故事？用這些故事練習拆解</p><div class="fRow">'+FILMS.map(function(f,k){return '<div class="fItem"><button type="button" class="fName" data-act="filmplay" data-film="'+k+'" title="'+(f[2]?'看文章':'播放影片')+'"><i'+(f[2]?' class="t"':'')+'>'+(f[2]?'文':'▶')+'</i><span><b class="br">《</b>'+f[0]+'<b class="br">》</b></span></button><button type="button" class="fCopy" data-act="filmcopy" data-film="'+k+'">'+(f[2]?'複製文字':'複製網址')+'</button></div>';}).join('')+'</div>'+FILMS.map(function(f,k){return '<div class="fPlay" data-film="'+k+'"></div>';}).join('')+'</div>'+
-  '<label for="arStory">直接編輯完整提示詞，並在故事段落貼上內容</label><textarea id="arStory" placeholder="可直接修改提示詞，在【我的故事】下面貼上故事或 YouTube 影片網址"></textarea>'+
+  '<label for="arStory">直接編輯完整提示詞，並在故事段落貼上內容</label><div class="arEditorWrap"><div class="arMirror" aria-hidden="true"></div><textarea id="arStory" placeholder="可直接修改提示詞，在【我的故事】下面貼上故事或 YouTube 影片網址"></textarea></div>'+
   '<p class="arYT">這是影片網址，請按 <b>Gemini</b>（它能看影片），其他 AI 看不到影片，會亂編。</p>'+
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
   '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。</p></div>';
  document.body.appendChild(box);
  /* 2026-11-10 練習故事移到對話框最下方（滿版時下方的空白處） */
  box.querySelector('.arCard').appendChild(box.querySelector('.arFilm'));
- var $=function(s){return box.querySelector(s);},ta=$('#arStory');
+ var $=function(s){return box.querySelector(s);},ta=$('#arStory'),mirror=$('.arMirror');
+ function escapeHtml(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+ function paintPrompt(){
+  if(!mirror)return;
+  var raw=ta.value,terms=[];
+  if(cur==='ai-filter'&&window.__aiPlot)terms.push(window.__aiPlot.name);
+  if(cur==='ai-order'&&window.__aiOrd)terms.push(window.__aiOrd.name);
+  if(cur==='ai-bullseye')terms.push('靶心人');
+  if(cur==='ai-curve')terms.push('心結人');
+  if(window.__bsStory!=null&&window.__bsFilms&&window.__bsFilms[window.__bsStory])terms.push(window.__bsFilms[window.__bsStory][0]);
+  terms=terms.filter(Boolean).sort(function(a,b){return b.length-a.length;});
+  var found=[];
+  terms.forEach(function(term){var from=0,k;while((k=raw.toLocaleLowerCase().indexOf(term.toLocaleLowerCase(),from))>=0){if(!found.some(function(v){return k<v[1]&&k+term.length>v[0];}))found.push([k,k+term.length]);from=k+term.length;}});
+  found.sort(function(a,b){return a[0]-b[0];});
+  var html='',at=0;found.forEach(function(v){html+=escapeHtml(raw.slice(at,v[0]))+'<span class="arRedText">'+escapeHtml(raw.slice(v[0],v[1]))+'</span>';at=v[1];});
+  html+=escapeHtml(raw.slice(at));
+  mirror.innerHTML=html+'\n';
+  mirror.scrollTop=ta.scrollTop;mirror.scrollLeft=ta.scrollLeft;
+ }
+ ta.addEventListener('scroll',function(){mirror.scrollTop=ta.scrollTop;mirror.scrollLeft=ta.scrollLeft;},{passive:true});
  ta.value=story;
  var YT=/(https?:\/\/)?(www\.|m\.)?(youtube\.com\/(watch\?|shorts\/|live\/)|youtu\.be\/)\S+/i;
  function isYT(){return YT.test(ta.value.trim());}
@@ -856,12 +930,12 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function compose(storyText){var t=TASKS[cur];if(!t)return '';refreshSel();var yt=YT.test(storyText);
   var pre=yt?'我給你的是一支 YouTube 影片網址。請先看這支影片（畫面、聲音或字幕），把影片裡的故事用靶心人七步（目標、阻礙、努力、結果、意外、轉彎、結局）整理出來，再做下面的任務。\n如果你看不到影片內容，請直接告訴我「我看不到這支影片」，不要根據標題、說明欄或網址猜測內容。\n\n':'';
   return '請用繁體中文回答。\n'+pre+t.p(opt[cur]||(t.opts&&t.opts[0])||'',storyText||'');}
- function setStory(storyText){ta.value=compose(storyText||'');ytUI();}
+ function setStory(storyText){ta.value=compose(storyText||'');ytUI();paintPrompt();}
  function ytUI(){var yt=isYT();box.classList.toggle('yt',yt);}
  function refreshSel(){if(document.body.classList.contains('reader'))return;var t=TASKS[cur];if(!t)return;
   if(cur==='ai-filter'&&window.__aiPlot){opt[cur]=window.__aiPlot.name;}
   if(cur==='ai-order'&&window.__aiOrd){opt[cur]=window.__aiOrd.name+' '+window.__aiOrd.n;}}
- function preview(){ytUI();}
+ function preview(){ytUI();paintPrompt();}
  /* 2026-11-11 右欄模式時：點左邊的排列／劇情模式、上面的故事按鈕，右欄跟著更新 */
  document.addEventListener('click',function(e){if(!box.classList.contains('open')||!box.classList.contains('inPanel'))return;
   var c=e.target.closest&&e.target.closest('.bsChip');
