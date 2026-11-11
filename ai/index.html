@@ -866,6 +866,40 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   padding:9px 10px!important;
   margin-top:7px!important;
 }
+
+/* 2026-11-11 總覽精修：群組視覺置中、下排卡片與標題垂直對齊 */
+#ai-frame > .meta.mGrid{
+  align-content:center!important;
+  grid-template-rows:100px auto auto!important;
+  row-gap:28px!important;
+  padding:62px 120px 102px 120px!important;
+}
+#ai-frame .mGrid .g-bullseye,
+#ai-frame .mGrid .g-order,
+#ai-frame .mGrid .g-filter{
+  margin-bottom:0!important;
+}
+#ai-frame .mGrid .g-curve{
+  grid-row:3!important;
+  align-self:center!important;
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+#ai-frame .mGrid .mHero{
+  grid-row:3!important;
+  align-self:center!important;
+  justify-self:start!important;
+  justify-content:center!important;
+  margin:0!important;
+}
+#reader .meta.mGrid{
+  grid-template-rows:auto!important;
+  row-gap:10px!important;
+  padding:6px 2px 10px!important;
+}
+#reader .mGrid .g-bullseye,
+#reader .mGrid .g-order,
+#reader .mGrid .g-filter{margin-bottom:0!important}
 </style></head>
 <body>
 <div id="stage">
