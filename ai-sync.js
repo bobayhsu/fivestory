@@ -18,7 +18,7 @@ const ref=firebase.database().ref('rooms/'+room+'/screen/aiNav');
 const node='ai-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
 let seen='', remote=null, latestAction='', firstSnapshot=true;
 const active=()=>layer.style.display!=='none'&&frame.getAttribute('src')!==null&&
-  document.getElementById('syncExternalOpen')?.href===HOME;
+  (document.getElementById('syncExternalOpen')?.href||'').startsWith(HOME); /* 2026-11-11 圖示網址改成 ai/#1 後也算 */
 const api=()=>{try{return frame.contentWindow.AiSync||null}catch(_){return null}};
 function publish(s){
  ref.set({state:s,source:node,at:firebase.database.ServerValue.TIMESTAMP})
