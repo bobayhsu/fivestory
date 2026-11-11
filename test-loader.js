@@ -21,7 +21,7 @@ ready(async function(){
   await load('./games-nav-sync.js?v=1');
   await load('./satir-sync.js?v=2');
   await load('./dilemma-sync.js?v=2');
-  await load('./ai-sync.js?v=2');
+  await load('./ai-sync.js?v=3');
   await load('./practice-timer-sync.js?v=6');
   await load('./nav-buttons.js?v=26');
   if(badge.textContent==='同步：正在載入…')badge.textContent='同步主程式尚未啟動';

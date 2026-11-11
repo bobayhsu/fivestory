@@ -39,7 +39,9 @@ function observe(){
 }
 /* 2026-11-09：開著童話兩難時，不顯示右上角紅色「返回故事」圖示（同薩提爾；改用底部圖示回去） */
 const hide=document.createElement('style');
-hide.textContent='#fivestorySyncedExternal.aiOn #syncExternalClose{display:none!important}';
+hide.textContent='#fivestorySyncedExternal.aiOn #syncExternalClose{display:none!important}'+
+ /* 2026-11-11 不等每 0.3 秒的檢查：開的網址是 AI 加值，書本從第一個畫面起就不顯示（不再閃一下） */
+ '#fivestorySyncedExternal:has(#syncExternalOpen[href^="https://bobayhsu.github.io/fivestory/ai/"]) #syncExternalClose{display:none!important}';
 document.head.appendChild(hide);
 setInterval(()=>layer.classList.toggle('aiOn',active()),300);
 frame.addEventListener('load',()=>{seen='';setTimeout(()=>{if(remote)apply();},300);});
