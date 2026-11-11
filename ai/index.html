@@ -816,6 +816,56 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #reader .mGrid .mHero .mPill{
   margin:10px auto 0!important;
 }
+
+/* 2026-11-11 總覽：公式與「18 萬種變化」同寬、正下方對齊 */
+#ai-frame .mGrid .mHero .mTitle{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  width:max-content;
+  max-width:none;
+  white-space:nowrap!important;
+  line-height:1.05!important;
+}
+#ai-frame .mGrid .mHero .mPrefix{flex:none;white-space:nowrap}
+#ai-frame .mGrid .mHero .mEndGroup{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:stretch;
+  flex:none;
+  width:max-content;
+  white-space:nowrap;
+}
+#ai-frame .mGrid .mHero .mEndGroup em{
+  display:block;
+  white-space:nowrap;
+}
+#ai-frame .mGrid .mHero .mEndGroup .mPill{
+  box-sizing:border-box!important;
+  display:block!important;
+  align-self:stretch!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:12px 0 0!important;
+  padding:13px 12px!important;
+  text-align:center!important;
+  font-size:34px!important;
+  letter-spacing:2px!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+}
+#reader .mGrid .mHero .mTitle{
+  width:100%;
+  justify-content:center!important;
+  flex-wrap:wrap;
+}
+#reader .mGrid .mHero .mEndGroup .mPill{
+  font-size:16px!important;
+  letter-spacing:0!important;
+  padding:9px 10px!important;
+  margin-top:7px!important;
+}
 </style></head>
 <body>
 <div id="stage">
@@ -827,7 +877,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <div class="mHArr"><div class="hShape"></div><span class="mWide">加廣</span></div>
 <div class="mVArr"><div class="vShape"></div><span class="mDeep">加<br>深</span></div>
 <div class="mCard g-bullseye" data-go="ai-bullseye" style="--c:#1F3A5F"><div class="mTop"><span class="mTag">故事</span><span class="mArr">↗</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說一個完整的故事</p></div><div class="mCard g-order" data-go="ai-order" style="--c:#E8822A"><div class="mTop"><span class="mTag">排列</span><span class="mArr">↗</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter" style="--c:#D2262E"><div class="mTop"><span class="mTag">劇情</span><span class="mArr">↗</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve" style="--c:#8E1F2B"><div class="mTop"><span class="mTag">人物</span><span class="mArr">↗</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
-<div class="mHero"><p class="mTitle">一個故事，<em>18 萬種變化</em></p><p class="mPill">5,040 × 36 = 181,440</p></div>
+<div class="mHero"><p class="mTitle"><span class="mPrefix">一個故事，</span><span class="mEndGroup"><em>18 萬種變化</em><span class="mPill">5,040 × 36 = 181,440</span></span></p></div>
 </div>
 </section>
 
