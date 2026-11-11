@@ -1123,6 +1123,17 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   background:#fff!important;border:2px solid #171717!important;
   border-radius:12px!important;
 }
+
+/* 修正舊版預設紅色上框覆蓋新版黑框 */
+#ai-frame .mGrid .mCard:not(:hover):not(:focus-visible):not(:active){
+  border-color:#171717!important;
+  border-top-color:#171717!important;
+  box-shadow:0 10px 24px rgba(30,28,26,.12)!important;
+}
+#ai-frame .mGrid .mCard.g-bullseye:not(:hover):not(:focus-visible):not(:active),
+#ai-frame .mGrid .mCard.g-order:not(:hover):not(:focus-visible):not(:active){
+  box-shadow:none!important;
+}
 </style></head>
 <body>
 <div id="stage">
