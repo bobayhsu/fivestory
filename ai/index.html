@@ -1173,6 +1173,14 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   #aiTop .sd.sdHome svg{display:block!important;width:27px!important;height:27px!important}
 }
 
+
+/* 手機橫向：總覽標題同一行、兩段字體同尺寸，保留黃色公式於下方 */
+@media (max-width:1000px) and (orientation:landscape){
+  #ai-frame .mGrid .mHero .mTitle{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:flex-start!important;justify-content:center!important;width:max-content!important;max-width:none!important;white-space:nowrap!important;font-size:70px!important;line-height:1.12!important;letter-spacing:0!important}
+  #ai-frame .mGrid .mHero .mTitle .mPrefix,
+  #ai-frame .mGrid .mHero .mTitle .mEndGroup em{font-size:70px!important;line-height:1.12!important;font-weight:900!important;letter-spacing:0!important;white-space:nowrap!important}
+  #ai-frame .mGrid .mHero .mEndGroup{flex:none!important;width:max-content!important}
+}
 </style></head>
 <body>
 <div id="stage">
