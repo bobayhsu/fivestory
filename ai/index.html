@@ -962,6 +962,22 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   outline-offset:0;
 }
 #reader .mGrid .mFlowArrow{display:none!important}
+
+/* 2026-11-11 總覽：加深箭頭避開心結人卡片 */
+#ai-frame .mGrid .mVArr{overflow:visible!important}
+#ai-frame .mGrid .vShape{
+  left:-42px!important;
+  right:auto!important;
+  width:160px!important;
+  clip-path:polygon(26% 0,74% 0,74% calc(100% - 180px),100% calc(100% - 180px),50% 100%,0 calc(100% - 180px),26% calc(100% - 180px))!important;
+}
+#ai-frame .mGrid .mDeep{
+  left:38px!important;
+  font-size:68px!important;
+  line-height:1.15!important;
+  z-index:2!important;
+}
+#ai-frame .mGrid .g-curve{position:relative;z-index:3}
 </style></head>
 <body>
 <div id="stage">
