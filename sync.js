@@ -31,7 +31,7 @@ const externalTargets={
   'https://bobayhsu.github.io/practice/':{title:'練習',frame:'https://bobayhsu.github.io/practice/'},
   'https://bobayhsu.github.io/games/':{title:'遊戲',frame:'https://bobayhsu.github.io/games/'},
   'https://bobayhsu.github.io/fivestory/satir/':{title:'薩提爾',frame:'https://bobayhsu.github.io/fivestory/satir/?v=12'},
-  'https://bobayhsu.github.io/fivestory/ai/#1':{title:'AI 加值',frame:'https://bobayhsu.github.io/fivestory/ai/?v=83#1'},
+  'https://bobayhsu.github.io/fivestory/ai/#1':{title:'AI 加值',frame:'https://bobayhsu.github.io/fivestory/ai/?v=84#1'},
   'https://bobayhsu.github.io/fivestory/ai/':{title:'AI 加值',frame:'https://bobayhsu.github.io/fivestory/ai/?v=80#1'},  /* AI 加值改版時 ?v= 加 1 */
   'https://bobayhsu.github.io/fivestory/dilemma/':{title:'童話兩難',frame:'https://bobayhsu.github.io/fivestory/dilemma/?v=10'},  /* 童話兩難改版時 ?v= 加 1 */  /* ?v= 讓瀏覽器每次都拿最新版；薩提爾改版時加 1 */
  'https://www.youtube.com/watch?v=CSuwxPxaJSQ':{title:'看影片',frame:'https://www.youtube-nocookie.com/embed/CSuwxPxaJSQ?rel=0'},
