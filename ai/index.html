@@ -900,6 +900,40 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #reader .mGrid .g-bullseye,
 #reader .mGrid .g-order,
 #reader .mGrid .g-filter{margin-bottom:0!important}
+
+/* 2026-11-11 總覽第二階段：卡片統一規格與兩支箭頭減重 */
+#ai-frame .mGrid .mCard{
+  box-sizing:border-box!important;
+  min-height:230px!important;
+  padding:26px 28px 24px!important;
+  border-top:6px solid #C41F27!important;
+  border-radius:0 0 14px 14px!important;
+  box-shadow:0 8px 22px rgba(30,28,26,.075)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-start!important;
+}
+#ai-frame .mGrid .g-curve{padding-left:28px!important}
+#ai-frame .mGrid .mCard .mTop{min-height:46px!important}
+#ai-frame .mGrid .mCard .mName{
+  font-weight:900!important;
+  line-height:1.15!important;
+  margin-top:16px!important;
+}
+#ai-frame .mGrid .mCard .mDesc{
+  line-height:1.4!important;
+  margin-top:10px!important;
+}
+#ai-frame .mGrid .hShape{
+  clip-path:polygon(0 70px,calc(100% - 200px) 70px,calc(100% - 200px) 0,100% 110px,calc(100% - 200px) 220px,calc(100% - 200px) 150px,0 150px)!important;
+}
+#ai-frame .mGrid .vShape{
+  clip-path:polygon(58px 0,162px 0,162px calc(100% - 180px),220px calc(100% - 180px),110px 100%,0 calc(100% - 180px),58px calc(100% - 180px))!important;
+}
+#reader .mGrid .mCard{
+  min-height:0!important;
+  padding:14px!important;
+}
 </style></head>
 <body>
 <div id="stage">
