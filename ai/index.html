@@ -634,6 +634,42 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 }
 #aiRun.inPanel.yt .arBtns{margin-top:auto!important;row-gap:14px}
 #aiRun.inPanel .arNote{display:none!important}
+
+/* 2026-11-11 真正固定四個 AI 按鈕貼底，去掉底部留白 */
+#aiRun.inPanel .arCard{
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-start!important;
+  min-height:0!important;
+  height:100%!important;
+  padding:10px 12px 3px!important;
+  overflow:hidden!important;
+}
+#aiRun.inPanel .arTask{order:0;flex:0 0 auto;margin:0 46px 4px 0!important}
+#aiRun.inPanel textarea{
+  order:1;
+  display:block;
+  flex:1 1 0%!important;
+  min-height:0!important;
+  height:0!important;
+  margin:0!important;
+  resize:none!important;
+}
+#aiRun.inPanel .arYT{order:2;flex:0 0 auto;margin:4px 0 0!important}
+#aiRun.inPanel .arMsg{order:3;flex:0 0 auto;margin:0!important;min-height:0!important}
+#aiRun.inPanel .arMsg:empty{display:none!important}
+#aiRun.inPanel .arBtns{
+  order:4;
+  flex:0 0 auto!important;
+  margin:4px 0 0!important;
+  padding:0!important;
+  align-self:stretch;
+}
+#aiRun.inPanel.yt .arBtns{margin:18px 0 0!important;row-gap:14px}
+#aiRun.inPanel .arFilm,
+#aiRun.inPanel .arNote,
+#aiRun.inPanel .arOpt,
+#aiRun.inPanel label{display:none!important}
 </style></head>
 <body>
 <div id="stage">
