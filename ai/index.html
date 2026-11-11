@@ -598,6 +598,10 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiTop .sd.sdHome{display:flex!important;align-items:center!important;justify-content:center!important;grid-column:auto!important;justify-self:auto!important;font-size:24px!important;line-height:1!important;padding:8px 12px!important;letter-spacing:0!important;background:#FBF9F6!important;border:2px solid #E4DED5!important;border-radius:12px!important;box-shadow:0 3px 10px rgba(30,28,26,.08)!important;color:#2B2926!important}
 #aiTop .sd.sdHome:hover,#aiTop .sd.sdHome:focus-visible{background:#C41F27!important;border-color:#C41F27!important;color:#FFFFFF!important;text-decoration:none!important}
 #aiTop .sd.sdHome:active{background:#A3161D!important;color:#FFFFFF!important}
+
+/* 2026-11-11 AI 完整提示詞：直接呈現在右側，移除展開收合操作 */
+#aiRun .arPre{display:block;white-space:pre-wrap;overflow-wrap:anywhere;overflow-y:auto;min-height:68px;max-height:160px;margin:10px 0 2px;padding:10px 12px;border:1px solid #D3CBBF;border-radius:10px;background:#F4F0E9;color:#2B2926}
+#aiRun.inPanel .arPre{flex:0 0 auto;max-height:142px;min-height:64px;font-size:18px;line-height:1.5;margin-top:12px;margin-bottom:0;padding:12px 16px}
 </style></head>
 <body>
 <div id="stage">
@@ -769,7 +773,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   '<p class="arTask"></p><div class="arOpt"></div>'+
   '<div class="arFilm"><p>沒有故事？用這些故事練習拆解</p><div class="fRow">'+FILMS.map(function(f,k){return '<div class="fItem"><button type="button" class="fName" data-act="filmplay" data-film="'+k+'" title="'+(f[2]?'看文章':'播放影片')+'"><i'+(f[2]?' class="t"':'')+'>'+(f[2]?'文':'▶')+'</i><span><b class="br">《</b>'+f[0]+'<b class="br">》</b></span></button><button type="button" class="fCopy" data-act="filmcopy" data-film="'+k+'">'+(f[2]?'複製文字':'複製網址')+'</button></div>';}).join('')+'</div>'+FILMS.map(function(f,k){return '<div class="fPlay" data-film="'+k+'"></div>';}).join('')+'</div>'+
   '<label for="arStory">貼上你的故事（靶心人七步最好）</label><textarea id="arStory" placeholder="把你的故事貼在這裡……（也可以貼 YouTube 影片網址，請用 Gemini）"></textarea>'+
-  '<p class="arYT">這是影片網址，請按 <b>Gemini</b>（它能看影片），其他 AI 看不到影片，會亂編。</p><details><summary>看看要送出的完整提示詞</summary><pre class="arPre"></pre></details>'+
+  '<p class="arYT">這是影片網址，請按 <b>Gemini</b>（它能看影片），其他 AI 看不到影片，會亂編。</p><pre class="arPre" aria-label="完整提示詞"></pre>'+
   '<div class="arBtns"><button data-ai="claude">Claude</button><button data-ai="meta">Meta AI</button><button data-ai="gemini">Gemini</button><button data-ai="chatgpt">ChatGPT</button></div>'+
   '<p class="arMsg" role="status"></p><p class="arNote">按下按鈕會在新分頁打開 AI，並把「任務＋你的故事」帶過去；同時也會複製一份，帶不過去時直接貼上即可。</p></div>';
  document.body.appendChild(box);
@@ -795,7 +799,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function msg(t,err){var m=$('.arMsg');m.textContent=t;m.classList.toggle('err',!!err);}
  function open(id){var t=TASKS[id];if(!t)return;cur=id;
   /* 2026-11-10 每次打開都回到初始狀態：故事框清空、影片／文章收起、提示詞收合 */
-  stopFilm();ta.value='';if(window.__bsStory!=null&&/^ai-(bullseye|order|filter|curve)$/.test(id)){var bf=FILMS[window.__bsStory];if(bf)ta.value=bf[2]||bf[1];}try{localStorage.removeItem(KEY);}catch(_){}var dt=box.querySelector('details');if(dt)dt.open=false;
+  stopFilm();ta.value='';if(window.__bsStory!=null&&/^ai-(bullseye|order|filter|curve)$/.test(id)){var bf=FILMS[window.__bsStory];if(bf)ta.value=bf[2]||bf[1];}try{localStorage.removeItem(KEY);}catch(_){}
   box.classList.toggle('bull',id==='ai-bullseye');box.querySelector('.arCard').setAttribute('aria-label','AI 加值｜'+t.name);$('.arTask').textContent=t.desc;$('.arTask').style.display=t.desc?'':'none';
   if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
   var rd=document.body.classList.contains('reader');
