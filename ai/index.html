@@ -1273,6 +1273,13 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
  /* 手機桌機同步：五大類故事的同步程式（ai-sync.js）透過 window.AiSync 讀取、設定目前頁面 */
  window.AiSync={get:function(){return String(cur);},set:function(v){var n=parseInt(v,10);if(isNaN(n)||n===cur)return;show(n,true);},onChange:function(f){listeners.push(f);}};
  show((parseInt(location.hash.slice(1),10)||1)-1,true);
+ /* 底部 AI 按鈕：在四個單元內也能返回總覽，並關閉輸入面板 */
+ var aiHomeBtn=document.querySelector('#fsbar .fb.red.here');
+ if(aiHomeBtn)aiHomeBtn.addEventListener('click',function(e){
+   e.preventDefault();
+   if(window.__aiRun&&window.__aiRun.close)window.__aiRun.close();
+   show(0);
+ });
 
  /* 手機直式閱讀版 */
  var built=false;
