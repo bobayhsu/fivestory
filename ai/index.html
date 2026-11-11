@@ -576,6 +576,23 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .bsOwn:hover .bsI,.bsOwn:active .bsI,.bsOwn.on .bsI{background:#FBF8F3;color:#C41F27}
 #reader .bsOwn{font-size:14px;padding:6px 12px;margin-left:0;border:2px dashed #2B2926}
 
+
+/* 2026-11-11 四單元：去除右側重複標題列，左右欄向上下延伸 */
+#stage > .slide.ai{
+  padding:28px 64px 28px!important;
+  gap:8px!important;
+}
+#stage > .slide.ai > .aiGrid{
+  flex:1 1 auto!important;
+  height:auto!important;
+  min-height:0!important;
+  align-content:stretch!important;
+}
+#stage > .slide.ai #aiRun.inPanel .arTop{display:none!important}
+#stage > .slide.ai #aiRun.inPanel .arTask{
+  margin-top:0!important;
+  padding-right:52px;
+}
 </style></head>
 <body>
 <div id="stage">
