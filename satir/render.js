@@ -20,6 +20,7 @@
     });
     return '<svg class="pie" viewBox="0 0 100 100">' + s + t + '</svg>';
   }
+  window.__satirPie = pie;
   function menu(){
     return '<div class="wbs"><button class="wbs-btn" type="button">' + esc(D['選單']['按鈕']) + '</button>\n<div class="wbs-menu">' +
       D['選單']['項目'].map(function(x){ if (Array.isArray(x[1])) return '<div class="wsub"><button type="button" class="wsub-btn">' + esc(x[0]) + '<span>▸</span></button><div class="wsub-menu">' + x[1].map(function(y){ return '<a href="#' + PAGE[y[1]] + '">' + esc(y[0]) + '</a>'; }).join('') + '</div></div>'; return '<a href="#' + PAGE[x[1]] + '">' + esc(x[0]) + '</a>'; }).join('') + '</div></div>';
@@ -71,7 +72,7 @@
   pages.push([PAGE.home, '<div class="cover2"><h1 class="ctitle">' + titleHtml + '</h1>\n' + menu() + '\n<div class="stances">' +
     D['四種姿態'].map(function(s){
       return '<div class="st"><div class="fig"><div class="sname">' + esc(s['名稱']) + '</div><img src="' + esc(s['圖']) + '" alt="' + esc(s['名稱']) + '姿態" style="height:' + s['高度'] + '%"></div><div class="stag">' + esc(s['標籤']) + '</div>' + pie(s['忽略']) + '</div>';
-    }).join('') + '</div>\n</div>']);
+    }).join('') + '</div>\n<button type="button" class="conBtn">第五種：<b>一致型</b> ▸</button>\n</div>']);
 
   /* 小說原文 */
   var N = D['小說原文'];
@@ -105,6 +106,7 @@
       var ps = l['姿態'] || who[l['人']] || '';
       if (l['人'] != null) h += '<p class="step say ' + sk(ps) + '"><i>' + short(ps || '?') + '</i><span><em class="who">' + esc(l['人']) + '：</em>' + esc(l['說']) + '</span></p>';
       else if (l['問題'] != null) h += '<p class="step ask">' + esc(l['問題']) + '</p>';
+      else if (l['一致'] != null) h += '<p class="step conH">' + esc(l['一致']) + '</p>';
       else h += '<p class="step act">' + esc(l['動作']) + '</p>';
     });
     pages.push([pair[1], h + '</div><span class=\'hint\'>點一下，出現下一句</span></div>']);
@@ -124,3 +126,15 @@ document.addEventListener('click', function(e){
   var b = e.target.closest && e.target.closest('.wsub-btn'); if (!b) return;
   e.stopPropagation(); e.preventDefault(); b.parentNode.classList.toggle('open');
 }, true);
+
+/* 對話太長時，點出下一句會自動捲到看得到的位置 */
+document.addEventListener('click', function(){
+  setTimeout(function(){
+    var a = document.querySelector('.slide.on .shaw') || document.querySelector('.shaw:not([hidden])');
+    [].forEach.call(document.querySelectorAll('.shaw'), function(sh){
+      var last = [].slice.call(sh.querySelectorAll('.lines p.shown')).pop(); if (!last || !sh.offsetParent) return;
+      var r = last.getBoundingClientRect(), R = sh.getBoundingClientRect(), nb = innerHeight * 0.12;
+      if (r.bottom > R.bottom - nb) sh.scrollTop += r.bottom - (R.bottom - nb);
+    });
+  }, 60);
+});

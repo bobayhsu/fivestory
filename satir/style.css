@@ -286,3 +286,18 @@ body.embedded #fsbar{display:none}   /* 在五大類故事的同步視窗裡，�
 .wsub-menu a+a{border-top:1px dashed var(--line)}
 @media (orientation:portrait) and (max-width:820px){.wsub-btn{font-size:4.4cqw;padding:3.4cqw 5cqw}.wsub-menu a{padding-left:9cqw!important;font-size:4.2cqw!important}}
 .wbs-menu > a{font-weight:700}
+/* 2026-11-13 第五種：一致型（綠） */
+.say.s0 i{background:#2E8B57}.say.s0 .who{color:#2E8B57}
+.shaw .lines p.say.s0 span{color:#1F5E3B}
+.shaw .lines p.conH{display:block;margin-top:1.4cqh;padding:.8cqh 1.6cqw;background:#2E8B57;color:#fff;font-weight:900;border-radius:1cqh;font-size:3cqh}
+.conBtn{position:absolute;left:2cqw;top:2.6cqh;z-index:6;font:inherit;font-size:2.8cqh;font-weight:700;color:#fff;background:#2E8B57;border:0;border-radius:999px;padding:.9cqh 2.6cqw;cursor:pointer;box-shadow:0 .6cqh 1.6cqh rgba(46,139,87,.35)}
+.conBtn b{font-weight:900;color:#FFE27A}
+.conBtn:hover,.conBtn.on{background:#24724A}
+.cover2.hov .conBtn:not(.on){opacity:.15}
+.stTip.con h4{background:#2E8B57}
+.stTip.con h4 em{color:#FFE27A}
+.stTip.con h5{background:#2E8B57}
+.stTip.con li.r{color:#2E8B57}
+.stTip.con p.ex b{color:#2E8B57}
+.stTip .cpie{float:right;width:14cqh;height:14cqh;margin:1cqh 2cqh 0 1cqh}
+@media (orientation:portrait) and (max-width:900px){.conBtn{left:3cqw;top:3cqw;font-size:4cqw;padding:1.6cqw 3.6cqw}.stTip .cpie{width:22vw;height:22vw}}
