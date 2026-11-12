@@ -1252,8 +1252,10 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){font-size:36px!important;padding:10px 24px 12px!important;margin-left:-16px;letter-spacing:2px}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome):first-child{margin-left:0}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome){padding-bottom:16px!important}
-#stage:has(> .slide.ai.v2.active) #aiTop .sd.sdHome{margin:0 0 14px 10px!important;width:50px!important;height:50px!important;padding:0!important;font-size:24px!important}
-#stage:has(> .slide.ai.v2.active) #aiTop .sd.sdHome svg{width:26px!important;height:26px!important;display:block!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.sdHome{margin:0 0 8px 10px!important;width:66px!important;height:66px!important;min-width:66px!important;padding:0!important;font-size:24px!important;border-radius:14px!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.sdHome svg{width:38px!important;height:38px!important;display:block!important}
+/* 總覽頁不需要右上角分頁 */
+#stage:has(> #ai-frame.active) #aiTop{display:none!important}
 #stage > .slide.ai.v2{padding-top:40px!important}
 #stage > .slide.ai.v2::before{top:var(--v2line,114px)!important;right:auto!important;width:var(--v2lw,680px)!important}
 #stage > .slide.ai.v2 > .aiGrid{align-content:stretch!important}
