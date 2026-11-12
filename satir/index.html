@@ -15,7 +15,7 @@
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 <style>/* 2026-11-10 AI 加值圖示：只留紅字、紅底，排在最右邊 */#fsbar .fb.red{background:#D2262E}#fsbar .fb.red:hover,#fsbar .fb.red:focus-visible{background:#A3161D}</style></head>
 <body>
 <div id="app">
@@ -27,5 +27,20 @@
 <script src="nav.js?v=4"></script>
 <style id="fsAutoHide">html.fs-idle #fsbar{opacity:0!important;visibility:hidden!important;transition:opacity .3s ease,visibility .3s}</style>
 <script>/* 2026-11-09 底部圖示列：不用 2.5 秒自動隱藏；滑鼠移到畫面下方、或手機點一下就出現 */(function(){var S='#fsbar',d=document.documentElement,t;var tch=0;addEventListener("touchstart",function(){tch=1},{passive:true,capture:true});function over(){if(tch)return false;try{return [].some.call(document.querySelectorAll(S),function(e){return e.matches(":hover")})}catch(_){return false}}function hide(){if(over()){clearTimeout(t);t=setTimeout(hide,1200);return}d.classList.add("fs-idle")}function show(){d.classList.remove("fs-idle");clearTimeout(t);t=setTimeout(hide,2500)}function hook(w){try{if(!w||w.__fsAH)return;w.__fsAH=1;w.addEventListener("mousemove",function(e){if(e.clientY>w.innerHeight-140)show()},{passive:true});w.addEventListener("touchstart",show,{passive:true});w.addEventListener("keydown",show)}catch(_){}}hook(window);setInterval(function(){var f=document.getElementById("syncExternalFrame");if(f)hook(f.contentWindow)},1000);show();})();</script>
+<script>/* 2026-11-12 首頁：滑鼠移到人物，跳出說明卡（內容改這裡） */
+(function(){var D=[["指責", "批判、控制、恐嚇", "反社會", ["這都是你的錯", "你從來沒做對過", "你永遠做不好任何事", "你到底怎麼搞的？", "我沒問題"]], ["討好", "讓步、懇求、取悅他人", "神經質", ["這都是我的錯", "我沒有你就不行", "沒有了你，我就一文不值", "你喜歡什麼？", "我只想要讓你高興", "沒事，沒事", "我不值得", "我不重要", "我很可憐"]], ["超理智", "客觀、說教、好辯", "自閉症", ["理智，邏輯而客觀的", "強調學術性", "!重視規則和正確性", "使用抽象字眼及冗長的解釋", "避開有關個人或情緒上的話題", "複雜的語術：「人一定要講邏輯。」"]], ["打岔", "傻氣、插嘴、擾亂", "精神混亂", ["<b>改變話題</b>以分散注意力", "不能專注於一件事上", "避開有關個人或情緒上的話題", "講笑話／言不及義", "打斷話題", "!抓不到重點", "避開感受"]]];
+if(!matchMedia('(hover:hover)').matches)return;
+var tip=null;
+function hide(){if(tip)tip.classList.remove('on');}
+document.addEventListener('mouseover',function(e){var f=e.target.closest&&e.target.closest('.cover2 .fig');if(!f){hide();return;}
+ var st=f.closest('.st'),all=[].slice.call(document.querySelectorAll('.cover2 .st')),k=all.indexOf(st),d=D[k];if(!d){hide();return;}
+ var stage=f.closest('.stage');if(!tip||tip.parentNode!==stage){tip=document.createElement('div');tip.className='stTip';stage.appendChild(tip);}
+ tip.innerHTML='<h4>'+d[0]+'：'+d[1]+' → <em>'+d[2]+'</em></h4><ul>'+d[3].map(function(x){return x.charAt(0)==='!'?'<li class="r">'+x.slice(1)+'</li>':'<li>'+x+'</li>';}).join('')+'</ul>';
+ var S=stage.getBoundingClientRect(),sc=S.width/stage.offsetWidth,R=f.getBoundingClientRect();
+ var x=k<2?(R.right-S.left)/sc+8:(R.left-S.left)/sc-tip.offsetWidth-8;
+ var y=Math.max(10,Math.min((R.top-S.top)/sc,stage.offsetHeight-tip.offsetHeight-10));
+ tip.style.left=x+'px';tip.style.top=y+'px';tip.classList.add('on');});
+})();
+</script>
 </body>
 </html>
