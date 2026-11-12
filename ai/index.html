@@ -1247,6 +1247,23 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome){z-index:9!important;background:#1E1C1A!important;border-color:#1E1C1A!important;color:#FBF8F3!important;padding-bottom:20px!important;box-shadow:0 -4px 14px rgba(30,28,26,.22)!important}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.sdHome{margin:0 0 14px 22px!important;align-self:flex-end}
 #stage > .slide.ai.v2::before{content:'';position:absolute;left:64px;right:64px;top:132px;height:8px;background:#1E1C1A;border-radius:4px;z-index:1}
+/* 分頁縮進左欄、右欄上提與分頁同高 */
+#stage:has(> .slide.ai.v2.active) #aiTop{top:40px!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){font-size:36px!important;padding:10px 24px 12px!important;margin-left:-16px;letter-spacing:2px}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome):first-child{margin-left:0}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome){padding-bottom:16px!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.sdHome{margin:0 0 14px 10px!important;width:50px!important;height:50px!important;padding:0!important;font-size:24px!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.sdHome svg{width:26px!important;height:26px!important;display:block!important}
+#stage > .slide.ai.v2{padding-top:40px!important}
+#stage > .slide.ai.v2::before{top:var(--v2line,114px)!important;right:auto!important;width:var(--v2lw,680px)!important}
+#stage > .slide.ai.v2 > .aiGrid{align-content:stretch!important}
+#stage > .slide.ai.v2 .aiGrid>.aiH:first-child{margin-top:var(--v2top,104px)!important;align-self:end!important}
+#stage > .slide.ai.v2 .aiGrid>.aiH.bsPick{align-self:start!important;z-index:3}
+#stage > .slide.ai.v2 .aiGrid>.bsShow{margin-top:var(--v2pick,92px)!important}
+#stage > #ai-bullseye.v2 > .aiGrid,#stage > #ai-curve.v2 > .aiGrid{grid-template-rows:auto repeat(7,1fr)!important}
+#ai-bullseye.v2 .aiGrid>.bsShow,#ai-curve.v2 .aiGrid>.bsShow{grid-row:1 / span 8!important}
+#ai-order.v2 .aiGrid>.bsShow{grid-row:1 / span 6!important}
+#ai-filter.v2 .aiGrid>.bsShow{grid-row:1 / span 2!important}
 #stage > .slide.ai.v2 .aiGrid .aiH.bsPick{flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:18px!important;padding:12px 20px!important}
 #stage > .slide.ai.v2 .aiGrid .aiH.bsPick .bsOwn{display:none!important}
 #stage > .slide.ai.v2 .aiGrid .aiH.bsPick .bsRow{display:none!important}
