@@ -68,6 +68,9 @@ body.embedded #fsbar{display:none}   /* 在五大類故事的同步視窗裡，�
 .pie{height:14cqh;flex:none;overflow:visible}
 .pie path{stroke:#333;stroke-width:1.6}
 .pie text{font-size:12px;fill:#555;text-anchor:middle}
+/* 2026-11-13 被忽略的區塊改成鏤空：不填色、虛線、淡字 */
+.pie path.ig{fill:none;stroke:#8f8a82;stroke-width:1.4;stroke-dasharray:4 3}
+.pie text.ig{fill:#a39d94}
 /* 2026-11-12 首頁：人物縮小、圓放大（桌機） */
 @media not ((orientation:portrait) and (max-width:900px)){.cover2 .pie{height:29cqh}.cover2 .stag{margin:.6cqh 0 1.6cqh}}
 /* 2026-11-12 首頁：滑鼠移到人物，跳出說明卡 */

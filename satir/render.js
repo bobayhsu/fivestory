@@ -14,8 +14,9 @@
     var secs = [['自我',150,270,-20,-10],['他人',270,390,20,-10],['情境',30,150,0,26]], s = '', t = '';
     secs.forEach(function(x){
       var p0 = P(x[1]), p1 = P(x[2]);
-      s += '<path d="M50 50 L' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + ' A' + r + ' ' + r + ' 0 0 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + ' Z" fill="' + (ignored.indexOf(x[0]) >= 0 ? '#bdb8b0' : '#fff') + '"/>';
-      t += '<text x="' + (50 + x[3]) + '" y="' + (50 + x[4] + 4) + '">' + x[0] + '</text>';
+      var seg = '<path d="M50 50 L' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + ' A' + r + ' ' + r + ' 0 0 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + ' Z"' + (ignored.indexOf(x[0]) >= 0 ? ' class="ig" fill="none"' : ' fill="#fff"') + '/>';
+      if (ignored.indexOf(x[0]) >= 0) s = seg + s; else s += seg;  /* 鏤空的先畫，實心的邊線蓋在上面 */
+      t += '<text x="' + (50 + x[3]) + '" y="' + (50 + x[4] + 4) + '"' + (ignored.indexOf(x[0]) >= 0 ? ' class="ig"' : '') + '>' + x[0] + '</text>';
     });
     return '<svg class="pie" viewBox="0 0 100 100">' + s + t + '</svg>';
   }
