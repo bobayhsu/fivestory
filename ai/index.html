@@ -1560,7 +1560,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  var YT=/(https?:\/\/)?(www\.|m\.)?(youtube\.com\/(watch\?|shorts\/|live\/)|youtu\.be\/)\S+/i;
  function isYT(){return YT.test(ta.value.trim());}
  function full(){return ta.value.trim();}
- function editorStory(){var m=ta.value.match(/\n\n(?:我的故事|Giving|Violinist|Snake|Woodpecker|Christmas|Puzzle|Star|Titus|【我的故事】|【《[^】]+》】)\n/);return m?ta.value.slice(m.index+m[0].length):'';}
+ function editorStory(){var nm=FILMS.map(function(f){return f[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}).join('|');var m=ta.value.match(new RegExp('\\n\\n(?:我的故事|'+nm+'|Giving|Violinist|Snake|Woodpecker|Christmas|Puzzle|Star|Titus|Fish|Leave me|【我的故事】|【《[^】]+》】)\\n'));return m?ta.value.slice(m.index+m[0].length):'';}
  function compose(storyText){var t=TASKS[cur];if(!t)return '';refreshSel();var yt=YT.test(storyText);
   var pre=yt?'我給你的是一支 YouTube 影片網址。請先看這支影片（畫面、聲音或字幕），把影片裡的故事用靶心人七步（目標、阻礙、努力、結果、意外、轉彎、結局）整理出來，再做下面的任務。\n如果你看不到影片內容，請直接告訴我「我看不到這支影片」，不要根據標題、說明欄或網址猜測內容。\n\n':'';
   return '請用繁體中文回答。\n'+pre+t.p(opt[cur]||(t.opts&&t.opts[0])||'',storyText||'');}
@@ -1599,7 +1599,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function close(){stopFilm();box.classList.remove('open');box.setAttribute('aria-hidden','true');try{ta.blur();}catch(_){}unplace();}
  window.__aiRunOpen=function(){return box.classList.contains('open');};
  /* 2026-11-10 手機桌機同步用：讀取／設定對話框（打開哪一個、故事框文字） */
- window.__aiRun={open:open,close:close,id:function(){return box.classList.contains('open')?cur:null;},text:function(v){if(v===undefined)return ta.value;if(ta.value!==v){ta.value=v;preview();}},setStory:setStory};
+ window.__aiRun={open:open,close:close,id:function(){return box.classList.contains('open')?cur:null;},text:function(v){if(v===undefined)return ta.value;if(ta.value!==v){ta.value=v;preview();}/* 同步收到時，新版面的故事框也要跟著顯示 */try{var es=editorStory();if(v2own.value!==es)v2own.value=es;v2mini_();}catch(_){}},setStory:setStory};
  function copySync(t){var ok=false,x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.cssText='position:fixed;left:-9999px;top:0;opacity:0';box.appendChild(x);x.select();try{x.setSelectionRange(0,t.length);}catch(_){}try{ok=document.execCommand('copy');}catch(_){}x.remove();
   if(!ok&&navigator.clipboard){try{navigator.clipboard.writeText(t);ok=true;}catch(_){}}return ok;}
  function go(ai){
