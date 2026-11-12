@@ -1262,7 +1262,11 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage > .slide.ai.v2 .aiGrid>.bsShow{margin-top:var(--v2pick,92px)!important}
 #stage > #ai-bullseye.v2 > .aiGrid,#stage > #ai-curve.v2 > .aiGrid{grid-template-rows:auto repeat(7,1fr)!important}
 #ai-bullseye.v2 .aiGrid>.bsShow,#ai-curve.v2 .aiGrid>.bsShow{grid-row:1 / span 8!important}
-#ai-order.v2 .aiGrid>.bsShow{grid-row:1 / span 6!important}
+#ai-order.v2 .aiGrid>.bsShow{grid-row:1 / span 8!important}
+#stage > #ai-order.v2 > .aiGrid{grid-template-rows:auto repeat(7,1fr)!important;height:auto!important;flex:1!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd{flex-wrap:wrap!important;row-gap:2px!important;padding:6px 16px!important;align-content:center!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd small{flex:0 0 100%;font-size:22px;line-height:1.3;color:#8A8278;font-weight:400;white-space:nowrap;overflow:hidden}
+#stage > #ai-order.v2 .aiGrid > .aiOrd.hot small{color:#C41F27}
 #ai-filter.v2 .aiGrid>.bsShow{grid-row:1 / span 2!important}
 #stage > .slide.ai.v2 .aiGrid .aiH.bsPick{flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:18px!important;padding:12px 20px!important}
 #stage > .slide.ai.v2 .aiGrid .aiH.bsPick .bsOwn{display:none!important}
@@ -1311,11 +1315,13 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">換順序</h2>
 <div class="aiGrid">
 <p class="aiH">七步排列，5040 種講法</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button><button type="button" class="bsChip" data-bs="9"><i class="bsI">▶</i>Leave me</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button><button type="button" class="bsChip" data-bs="8"><i class="bsI t">文</i>Fish</button><button type="button" class="bsOwn" title="自己的故事：輸入文字或 YouTube 網址" aria-label="自己的故事"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg></button></div></div>
-<div class="aiOrd"><span>傳統敘事</span><b>1234567</b><i>結構完整，適合初學</i></div><div class="bsShow" aria-live="polite"></div>
-<div class="aiOrd"><span>結局先行</span><b>5671234</b><i>先給震撼，再回頭說</i></div>
-<div class="aiOrd"><span>情緒帶入</span><b>2134567</b><i>先丟困境，引發共鳴</i></div>
-<div class="aiOrd hot"><span>觀點主題</span><b>5612347</b><i>先吸睛，再建立觀點</i></div>
-<div class="aiOrd"><span>迷惑揭曉</span><b>3412567</b><i>先看結果，製造懸念</i></div>
+<div class="aiOrd"><span>傳統敘事</span><b>1234567</b><i>結構完整，適合初學</i><small>適合：童話、勵志成長、初學練習</small></div><div class="bsShow" aria-live="polite"></div>
+<div class="aiOrd"><span>結局先行</span><b>5671234</b><i>先給震撼，再回頭說</i><small>適合：新聞事件、社會案件、品牌危機</small></div>
+<div class="aiOrd"><span>情緒帶入</span><b>2134567</b><i>先丟困境，引發共鳴</i><small>適合：親情、療癒、公益募款</small></div>
+<div class="aiOrd hot"><span>觀點主題</span><b>5612347</b><i>先吸睛，再建立觀點</i><small>適合：演講、簡報開場、TED</small></div>
+<div class="aiOrd"><span>迷惑揭曉</span><b>3412567</b><i>先看結果，製造懸念</i><small>適合：懸疑推理、廣告、短影音</small></div>
+<div class="aiOrd"><span>動作開場</span><b>3124567</b><i>直接從行動切入</i><small>適合：冒險、運動競賽、創業奮鬥</small></div>
+<div class="aiOrd"><span>答案先揭</span><b>7123456</b><i>先說結局，再倒推原因</i><small>適合：人物傳記、成功案例、回憶錄</small></div>
 </div>
 </section>
 
@@ -1438,7 +1444,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   'ai-curve':{name:'心結人',desc:'把靶心人七步（事情轉彎），改寫成心結人七步（人物現形）。',
    p:function(o,s){return '以下是我用靶心人公式（目標、阻礙、努力、結果、意外、轉彎、結局）寫的故事。請改寫成心結人公式：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔。兩難要是兩個「都對」、卻不能兼得的價值；抗拒要寫出他如何拖延、逃避或假裝不用選；刺痛要刺中他最不願面對的地方；承擔要寫出他為選擇付出的代價。每一步寫一到兩句，最後用表格對照原本的靶心人七步。\n\n我的故事\n'+s;}},
   'ai-order':{name:'換順序',desc:'選一種排列，讓 AI 用新的順序重講你的故事。',
-   opts:['觀點主題 5612347','結局先行 5671234','情緒帶入 2134567','迷惑揭曉 3412567','傳統敘事 1234567'],
+   opts:['觀點主題 5612347','結局先行 5671234','情緒帶入 2134567','迷惑揭曉 3412567','傳統敘事 1234567','動作開場 3124567','答案先揭 7123456'],
    p:function(o,s){var n=(o.match(/\d{7}/)||['5612347'])[0],name=o.replace(/\s*\d{7}.*/, '').trim()||'觀點主題',N=['','目標','阻礙','努力','結果','意外','轉彎','結局'],seq=n.split('').map(function(d){return N[+d];}).join('→');
     return '請用靶心人公式「'+name+' '+n+'」的順序（'+seq+'），把我的故事重新說一次。每一段標出步驟名稱，說完後用兩、三句話說明這個順序帶來的效果。\n\n我的故事\n'+s;}},
   'ai-filter':{name:'套濾鏡',desc:'選一種劇情模式，改寫你故事的核心衝突。',
