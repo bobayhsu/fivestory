@@ -22,7 +22,7 @@
   }
   function menu(){
     return '<div class="wbs"><button class="wbs-btn" type="button">' + esc(D['選單']['按鈕']) + '</button>\n<div class="wbs-menu">' +
-      D['選單']['項目'].map(function(x){ return '<a href="#' + PAGE[x[1]] + '">' + esc(x[0]) + '</a>'; }).join('') + '</div></div>';
+      D['選單']['項目'].map(function(x){ if (Array.isArray(x[1])) return '<div class="wsub"><button type="button" class="wsub-btn">' + esc(x[0]) + '<span>▸</span></button><div class="wsub-menu">' + x[1].map(function(y){ return '<a href="#' + PAGE[y[1]] + '">' + esc(y[0]) + '</a>'; }).join('') + '</div></div>'; return '<a href="#' + PAGE[x[1]] + '">' + esc(x[0]) + '</a>'; }).join('') + '</div></div>';
   }
   function dialog(item){
     var h = '<div class="roles"><span class="role rf"><b>女</b>' + esc(item['女']) + '</span><span class="role rm"><b>男</b>' + esc(item['男']) + '</span></div><div class=\'lines\'>';
@@ -119,3 +119,8 @@
   }).join('');
   var cnt = document.getElementById('count'); if (cnt) cnt.textContent = '1 / ' + pages.length;
 })();
+/* 選單裡的子選單（白象似的群山）：點一下展開／收起 */
+document.addEventListener('click', function(e){
+  var b = e.target.closest && e.target.closest('.wsub-btn'); if (!b) return;
+  e.stopPropagation(); e.preventDefault(); b.parentNode.classList.toggle('open');
+}, true);
