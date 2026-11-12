@@ -69,10 +69,14 @@
   var titleHtml = T.indexOf(L['文字']) === 0
     ? '<a class="tlink" href="#video" data-video="' + esc(L['網址']) + '" data-title="' + esc(L['說明'].replace(/（YouTube）$/, '')) + '" title="' + esc(L['說明']) + '">' + esc(L['文字']) + '</a>' + esc(T.slice(L['文字'].length))
     : esc(T);
-  pages.push([PAGE.home, '<div class="cover2"><h1 class="ctitle">' + titleHtml + '</h1>\n' + menu() + '\n<div class="stances">' +
-    D['四種姿態'].map(function(s){
+  var stHtml = function(s){
       return '<div class="st"><div class="fig"><div class="sname">' + esc(s['名稱']) + '</div><img src="' + esc(s['圖']) + '" alt="' + esc(s['名稱']) + '姿態" style="height:' + s['高度'] + '%"></div><div class="stag">' + esc(s['標籤']) + '</div>' + pie(s['忽略']) + '</div>';
-    }).join('') + '</div>\n<button type="button" class="conBtn">第五種：<b>一致型</b> ▸</button>\n</div>']);
+  };
+  /* 2026-11-13 前四種放第一屏；第五種（一致型）放在下面，往下拉才看得到 */
+  var ST = D['四種姿態'];
+  pages.push([PAGE.home, '<div class="cover2"><div class="scr1"><h1 class="ctitle">' + titleHtml + '</h1>\n' + menu() + '\n<div class="stances">' +
+    ST.slice(0, 4).map(stHtml).join('') + '</div></div>' +
+    (ST.length > 4 ? '\n<div class="five">' + ST.slice(4).map(stHtml).join('') + '</div>' : '') + '\n</div>']);
 
   /* 小說原文 */
   var N = D['小說原文'];
