@@ -233,3 +233,27 @@ body.embedded #fsbar{display:none}   /* 在五大類故事的同步視窗裡，�
   .vtitle{font-size:6cqw;margin-bottom:4cqw}
   .vbox{flex:none;width:94cqw}
 }
+
+/* 2026-11-13 刺激1995：四個人、四種姿態 */
+.shaw{justify-content:flex-start!important;padding-top:3.5cqh;padding-right:14cqw;overflow:auto}
+.shaw .shT{margin:0 0 1.4cqh;line-height:1.2;font-family:"Noto Serif TC",serif;font-size:5cqh;font-weight:900}
+.shaw .shT small{margin-left:1.6cqw;font-family:"Noto Sans TC",sans-serif;font-size:2.6cqh;font-weight:700;color:#8A8278}
+.shaw .roles{margin-bottom:2.2cqh}
+.shaw .role{font-size:2.8cqh}
+.shaw .role b{width:4.4cqh;height:4.4cqh;font-size:2.4cqh}
+.shaw .lines p{font-size:3.3cqh;margin-bottom:1cqh;line-height:1.4}
+.shaw .say i{width:4.6cqh;height:4.6cqh;font-size:2.4cqh;margin-top:0}
+.shaw .who{font-style:normal;font-weight:900}
+.shaw .lines p.act{font-size:3cqh;margin-top:.4cqh;padding-top:1cqh}
+.role.s1,.say.s1 i{background:#D2262E}.role.s1 b{color:#D2262E}
+.role.s2,.say.s2 i{background:#C9771F}.role.s2 b{color:#C9771F}
+.role.s3,.say.s3 i{background:#2F5DA8}.role.s3 b{color:#2F5DA8}
+.role.s4,.say.s4 i{background:#6B4FA0}.role.s4 b{color:#6B4FA0}
+.say.s1 .who{color:#D2262E}.say.s2 .who{color:#C9771F}.say.s3 .who{color:#2F5DA8}.say.s4 .who{color:#6B4FA0}
+@media (orientation:portrait) and (max-width:820px){
+  .shaw{padding:26cqw 5cqw calc(var(--nb)*1.2) 5cqw!important}
+  .shaw .shT{font-size:6.4cqw}.shaw .shT small{display:block;margin:1cqw 0 0;font-size:3.6cqw}
+  .shaw .role{font-size:3.6cqw}.shaw .role b{width:6cqw;height:6cqw;font-size:3.2cqw}
+  .shaw .lines p{font-size:4.6cqw;margin-bottom:2.4cqw}.shaw .say i{width:6.4cqw;height:6.4cqw;font-size:3.2cqw}
+  .shaw .lines p.act{font-size:4cqw}
+}

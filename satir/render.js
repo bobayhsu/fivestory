@@ -5,7 +5,7 @@
   var POSES = ['指責','討好','超理智','打岔'];
   var short = function(p){ return p === '超理智' ? '超' : p.charAt(0); };
   /* 頁面代號 */
-  var PAGE = { home:'home', novel:'novel', combos:'combos', scenes:'scenes' };
+  var PAGE = { home:'home', novel:'novel', combos:'combos', scenes:'scenes', shawshank:'shawshank' };
   var comboId = function(i){ return 'combo-' + (i + 1); };
   var sceneId = function(i){ return 'scene-' + (i + 1); };
 
@@ -93,6 +93,20 @@
     pages.push([sceneId(i), '<div class="scene" style="--bg:url(' + esc(s['背景圖']) + ')"><div class="shade"></div><div class="dlg photo"><span class="no">' + (i + 1) + '</span>' +
       mini(i, scenes, sceneId, sceneTitle) + '<h3 class="loc">' + esc(s['地點'] + ' - ' + s['意象']) + '</h3>' + dialog(s) + '</div></div>']);
   });
+
+  /* 刺激1995：四種姿態、四個人的對話 */
+  var SH = D['刺激1995'];
+  if (SH){
+    var who = {}; SH['角色'].forEach(function(r){ who[r['名']] = r['姿態']; });
+    var sk = function(p){ return 's' + (POSES.indexOf(p) + 1); };
+    var h = '<div class="dlg plain shaw"><h2 class="shT">' + esc(SH['標題']) + '<small>' + esc(SH['場景']) + '</small></h2><div class="roles">' +
+      SH['角色'].map(function(r){ return '<span class="role ' + sk(r['姿態']) + '"><b>' + short(r['姿態']) + '</b>' + esc(r['名']) + '・' + esc(r['姿態']) + '</span>'; }).join('') + '</div><div class=\'lines\'>';
+    SH['台詞'].forEach(function(l){
+      if (l['人'] != null) h += '<p class="step say ' + sk(who[l['人']] || '') + '"><i>' + short(who[l['人']] || '?') + '</i><span><em class="who">' + esc(l['人']) + '：</em>' + esc(l['說']) + '</span></p>';
+      else h += '<p class="step act">' + esc(l['動作']) + '</p>';
+    });
+    pages.push([PAGE.shawshank, h + '</div><span class=\'hint\'>點一下，出現下一句</span></div>']);
+  }
 
   /* 影片頁：點標題「薩提爾」進來，在網頁裡播放（同步模式下兩台一起） */
   var vid = (L['網址'].match(/[?&]v=([\w-]{11})/) || [])[1];
