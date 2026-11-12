@@ -1269,6 +1269,17 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage > #ai-order.v2 .aiGrid > .aiOrd i{font-size:24px!important;color:#BDB4A8!important}
 #stage > #ai-order.v2 .aiGrid > .aiOrd small{font-size:19px!important;color:#8E857A!important}
 #stage > #ai-order.v2 .aiGrid > .aiOrd.hot span,#stage > #ai-order.v2 .aiGrid > .aiOrd.hot b,#stage > #ai-order.v2 .aiGrid > .aiOrd.hot i,#stage > #ai-order.v2 .aiGrid > .aiOrd.hot small{color:#FF6A6F!important}
+/* 拿掉方格按鈕、左欄再變窄 */
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.sdHome{display:none!important}
+#stage > .slide.ai.v2 > .aiGrid{grid-template-columns:minmax(0,1fr) minmax(0,2fr)!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){font-size:34px!important;padding:10px 20px 12px!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome){padding-bottom:22px!important}
+#stage > .slide.ai.v2::after{width:629px!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd span{flex:0 0 178px!important;width:178px!important;font-size:33px!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd b{flex:0 0 122px!important;width:122px!important;font-size:27px!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd i{font-size:22px!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd small{font-size:18px!important}
+#stage > .slide.ai.v2 .aiGrid > .aiC > b{flex:0 0 150px!important;font-size:34px!important}
 /* 總覽頁不需要右上角分頁 */
 #stage:has(> #ai-frame.active) #aiTop{display:none!important}
 #stage > .slide.ai.v2{padding-top:40px!important}
