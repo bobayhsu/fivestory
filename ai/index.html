@@ -1286,6 +1286,12 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome):hover{color:#EDE7DD!important;background:transparent!important}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome){color:#F5C518!important;border-bottom:6px solid #F5C518!important;padding-bottom:9px!important;background:transparent!important;box-shadow:none!important}
 #stage > .slide.ai.v2::after{top:40px!important;border-radius:18px!important}
+#plTip{position:absolute;z-index:60;transform:translateY(-50%);background:#FBF8F3;color:#1E1C1A;border:3px solid #F5C518;border-radius:14px;padding:12px 20px;box-shadow:0 10px 28px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:4px;pointer-events:none;opacity:0;transition:opacity .12s;min-width:260px}
+#plTip.on{opacity:1}
+#plTip b{font-size:26px;font-weight:900;color:#C41F27}
+#plTip span{font-size:18px;color:#8A8278}
+#plTip em{font-style:normal;font-size:28px;font-weight:700;line-height:1.35}
+#plTip::before{content:'';position:absolute;left:-12px;top:calc(50% + var(--ay,0px));margin-top:-10px;border:10px solid transparent;border-right-color:#F5C518;border-left:0}
 /* 總覽頁不需要右上角分頁 */
 #stage:has(> #ai-frame.active) #aiTop{display:none!important}
 #stage > .slide.ai.v2{padding-top:40px!important}
@@ -1857,6 +1863,20 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
 <script>/* 新版面：劇情模式太長的那幾條自動縮字，不截斷 */
 (function(){function fit(){document.querySelectorAll('.slide.ai.v2.active .aiPlots .pl').forEach(function(e){if(!e.clientWidth)return;e.style.fontSize='';e.style.letterSpacing='';var sw=e.scrollWidth,cw=e.clientWidth;if(sw>cw+1){var f=parseFloat(getComputedStyle(e).fontSize);e.style.setProperty('font-size',Math.floor(f*(cw-6)/sw*10)/10+'px','important');}});}
 var last='';setInterval(function(){var a=document.querySelector('.slide.ai.v2.active');var k=a?a.id+innerWidth+'x'+innerHeight:'';if(k!==last){last=k;setTimeout(fit,60);}},400);addEventListener('resize',function(){last='';});})();
+</script>
+<script>/* 套濾鏡：滑鼠移到劇情模式，跳出兩個範例作品 */
+(function(){var EX=[["教父", "伊索寓言：獅子與老鼠"], ["搶救雷恩大兵", "神隱少女"], ["基度山恩仇記", "追殺比爾"], ["獅子王", "哈姆雷特"], ["絕命追殺令", "悲慘世界"], ["明天過後", "2012"], ["活著", "賣火柴的小女孩"], ["V怪客", "賽德克・巴萊"], ["魔戒", "阿波羅13"], ["即刻救援", "海底總動員"], ["福爾摩斯", "達文西密碼"], ["瞞天過海", "金銀島"], ["李爾王", "伊甸園東"], ["該隱與亞伯", "雷神索爾"], ["郵差總按兩次鈴", "水滸傳（潘金蓮）"], ["鬥陣俱樂部", "小丑"], ["潘朵拉的盒子", "羅密歐與茱麗葉"], ["雷雨", "伊底帕斯王"], ["天龍八部（蕭峰誤殺阿朱）", "羅密歐與茱麗葉"], ["勇敢的心", "辛德勒的名單"], ["飢餓遊戲", "美麗人生"], ["鐵達尼號", "倩女幽魂"], ["蘇菲的抉擇", "亞伯拉罕獻以撒"], ["大衛與歌利亞", "洛基"], ["包法利夫人", "安娜・卡列尼娜"], ["色，戒", "白蛇傳"], ["控制", "教父第二集"], ["梁山伯與祝英台", "羅馬假期"], ["史密斯任務", "美女與野獸"], ["馬克白", "紙牌屋"], ["西遊記（大鬧天宮）", "普羅米修斯盜火"], ["奧賽羅", "冬天的故事"], ["贖罪", "十二怒漢"], ["罪與罰", "追風箏的孩子"], ["尋母三千里", "可可夜總會"], ["天外奇蹟", "父後七日"]];
+var tip=document.createElement('div');tip.id='plTip';
+function hide(){tip.classList.remove('on');}
+document.addEventListener('mouseover',function(e){var p=e.target.closest&&e.target.closest('#ai-filter .aiPlots .pl');if(!p){hide();return;}
+ var sec=document.getElementById('ai-filter');if(tip.parentNode!==sec)sec.appendChild(tip);
+ var n=parseInt((p.querySelector('i')||{}).textContent,10),ex=EX[n-1];if(!ex){hide();return;}
+ var name=p.textContent.replace(/^\s*\d+/,'').trim();
+ tip.innerHTML='<b>'+n+' '+name+'</b><span>例如</span><em>《'+ex[0]+'》</em><em>《'+ex[1]+'》</em>';
+ var st=document.getElementById('stage'),sc=st?st.getBoundingClientRect().width/st.offsetWidth:1,R=sec.getBoundingClientRect(),q=p.getBoundingClientRect();
+ var col=p.closest('.aiPlots').getBoundingClientRect();var x=(col.right-R.left)/sc+22,y=(q.top-R.top)/sc+(q.height/sc)/2;
+ tip.style.left=x+'px';tip.classList.add('on');var h=tip.offsetHeight,yy=Math.max(h/2+30,Math.min(y,900-h/2));tip.style.top=yy+'px';tip.style.setProperty('--ay',(y-yy)+'px');});
+document.addEventListener('mouseleave',hide);})();
 </script>
 </body>
 </html>
