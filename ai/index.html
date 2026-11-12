@@ -1258,6 +1258,15 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage > .slide.ai.v2 .aiGrid > .aiC > b{color:#FFFFFF!important;font-size:36px!important;font-weight:900!important;flex:0 0 170px!important;letter-spacing:1px}
 #stage > .slide.ai.v2 .aiGrid > .aiC > span{color:#BDB4A8!important;font-size:26px!important}
 #stage > .slide.ai.v2 .aiGrid > .aiC:hover > b{color:#FFFFFF!important}
+/* 換順序：編號 1-7，名稱反白放大、說明縮小 */
+#stage > #ai-order.v2 .aiGrid{counter-reset:ord}
+#stage > #ai-order.v2 .aiGrid > .aiOrd{counter-increment:ord;column-gap:14px!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd span{flex:0 0 200px!important;width:200px!important;font-size:36px!important;font-weight:900!important;color:#FFFFFF!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd span::before{content:counter(ord) " ";}
+#stage > #ai-order.v2 .aiGrid > .aiOrd b{flex:0 0 140px!important;width:140px!important;font-size:30px!important;font-weight:700!important;color:#D9D1C5!important;letter-spacing:1px!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd i{font-size:24px!important;color:#BDB4A8!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd small{font-size:19px!important;color:#8E857A!important}
+#stage > #ai-order.v2 .aiGrid > .aiOrd.hot span,#stage > #ai-order.v2 .aiGrid > .aiOrd.hot b,#stage > #ai-order.v2 .aiGrid > .aiOrd.hot i,#stage > #ai-order.v2 .aiGrid > .aiOrd.hot small{color:#FF6A6F!important}
 /* 總覽頁不需要右上角分頁 */
 #stage:has(> #ai-frame.active) #aiTop{display:none!important}
 #stage > .slide.ai.v2{padding-top:40px!important}
