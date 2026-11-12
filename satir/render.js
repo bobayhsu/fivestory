@@ -100,9 +100,11 @@
     var who = {}; SH['角色'].forEach(function(r){ who[r['名']] = r['姿態']; });
     var sk = function(p){ return 's' + (POSES.indexOf(p) + 1); };
     var h = '<div class="dlg plain shaw"><h2 class="shT">' + esc(SH['標題']) + '<small>' + esc(SH['場景']) + '</small></h2><div class="roles">' +
-      SH['角色'].map(function(r){ return '<span class="role ' + sk(r['姿態']) + '"><b>' + short(r['姿態']) + '</b>' + esc(r['名']) + '・' + esc(r['姿態']) + '</span>'; }).join('') + '</div><div class=\'lines\'>';
+      SH['角色'].map(function(r){ var two = r['實則'] || r['先']; if (!two) return '<span class="role ' + sk(r['姿態']) + '"><b>' + short(r['姿態']) + '</b>' + esc(r['名']) + '・' + esc(r['姿態']) + '</span>'; var a = r['實則'] ? r['姿態'] : r['先'], z = r['實則'] ? r['實則'] : r['姿態'], lab = r['實則'] ? '表面' + a + '／實則' + z : a + ' → ' + z; return '<span class="role two ' + sk(a) + ' ' + sk(z).replace('s','t') + '"><b>' + short(a) + '</b>' + esc(r['名']) + '・' + esc(lab) + '</span>'; }).join('') + '</div><div class=\'lines\'>';
     SH['台詞'].forEach(function(l){
-      if (l['人'] != null) h += '<p class="step say ' + sk(who[l['人']] || '') + '"><i>' + short(who[l['人']] || '?') + '</i><span><em class="who">' + esc(l['人']) + '：</em>' + esc(l['說']) + '</span></p>';
+      var ps = l['姿態'] || who[l['人']] || '';
+      if (l['人'] != null) h += '<p class="step say ' + sk(ps) + '"><i>' + short(ps || '?') + '</i><span><em class="who">' + esc(l['人']) + '：</em>' + esc(l['說']) + '</span></p>';
+      else if (l['問題'] != null) h += '<p class="step ask">' + esc(l['問題']) + '</p>';
       else h += '<p class="step act">' + esc(l['動作']) + '</p>';
     });
     pages.push([pair[1], h + '</div><span class=\'hint\'>點一下，出現下一句</span></div>']);

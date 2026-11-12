@@ -257,3 +257,20 @@ body.embedded #fsbar{display:none}   /* 在五大類故事的同步視窗裡，�
   .shaw .lines p{font-size:4.6cqw;margin-bottom:2.4cqw}.shaw .say i{width:6.4cqw;height:6.4cqw;font-size:3.2cqw}
   .shaw .lines p.act{font-size:4cqw}
 }
+/* 姿態轉變：雙色標籤、討論題 */
+.role.two.s1{--c0:#D2262E}.role.two.s2{--c0:#C9771F}.role.two.s3{--c0:#2F5DA8}.role.two.s4{--c0:#6B4FA0}
+.role.two.t1{background:linear-gradient(90deg,var(--c0) 45%,#D2262E 55%)}
+.role.two.t3{background:linear-gradient(90deg,var(--c0) 45%,#2F5DA8 55%)}
+.shaw .lines p.ask{margin-top:1.2cqh;padding:1.2cqh 1.6cqw;background:#1E1C1A;color:#FFD23F;font-weight:900;border-radius:1cqh;display:block}
+#stillwalking .shaw{padding-top:2.6cqh}
+#stillwalking .shaw .shT{font-size:4.4cqh;margin-bottom:1cqh}
+#stillwalking .shaw .roles{margin-bottom:1.2cqh}
+#stillwalking .shaw .lines p{font-size:2.85cqh;margin-bottom:.55cqh;line-height:1.35}
+#stillwalking .shaw .say i{width:3.9cqh;height:3.9cqh;font-size:2.1cqh}
+#stillwalking .shaw .lines p.act{font-size:2.6cqh;padding-top:.6cqh;margin-top:.2cqh}
+#stillwalking .shaw .lines p.ask{font-size:3cqh;padding:.9cqh 1.4cqw;margin-top:.8cqh}
+#stillwalking .shaw{padding-right:3cqw}
+#stillwalking .shaw .roles{gap:.8cqw;flex-wrap:nowrap}
+#stillwalking .shaw .role{font-size:2.4cqh;padding:.45cqh 1.2cqw .45cqh .45cqh;white-space:nowrap}
+#stillwalking .shaw .role b{width:3.8cqh;height:3.8cqh;font-size:2cqh}
+#stillwalking .shaw .lines{max-width:86cqw}
