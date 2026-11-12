@@ -1827,8 +1827,11 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   var drop=wrap.querySelector('.bsDrop');
   drop.addEventListener('click',function(e){e.stopPropagation();});
   drop.addEventListener('change',function(){var v=drop.value,curS=window.__bsStory;
-   if(v===''){if(curS!=null){var c=pk.querySelector('.bsChip[data-bs="'+curS+'"]');if(c)c.click();}return;}
-   if(String(curS)!==v){var c2=pk.querySelector('.bsChip[data-bs="'+v+'"]');if(c2)c2.click();}});
+   if(v===''){if(curS!=null){var c=pk.querySelector('.bsChip[data-bs="'+curS+'"]');if(c)c.click();}setTimeout(fillNow,40);return;}
+   if(String(curS)!==v){var c2=pk.querySelector('.bsChip[data-bs="'+v+'"]');if(c2)c2.click();}
+   /* 保險：直接把選到的故事填進右欄（避免偶爾沒填上） */
+   setTimeout(fillNow,40);setTimeout(fillNow,400);});
+  function fillNow(){var R=window.__aiRun,sl=pk.closest('.slide'),id=sl&&sl.id;if(!R||!id)return;var k=window.__bsStory,f=k!=null&&(window.__bsFilms||[])[k];var want=f?(f[2]||f[1]):'';var own=document.getElementById('arOwn');if(own&&own.value.trim()===want.trim())return;if(R.id()!==id)R.open(id);R.setStory(want);var t=document.getElementById('arStory');if(t)t.dispatchEvent(new Event('input'));}
   own.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var b=pk.querySelector('.bsOwn');if(b)b.click();drop.value='';});
   setInterval(function(){var want=window.__bsStory==null?'':String(window.__bsStory);if(drop.value!==want&&document.activeElement!==drop)drop.value=want;},300);
  });
