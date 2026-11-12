@@ -1181,6 +1181,67 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
   #ai-frame .mGrid .mHero .mTitle .mEndGroup em{font-size:70px!important;line-height:1.12!important;font-weight:900!important;letter-spacing:0!important;white-space:nowrap!important}
   #ai-frame .mGrid .mHero .mEndGroup{flex:none!important;width:max-content!important}
 }
+
+/* ===== 2026-11-12 新版面（先用在靶心人，section 加 class="v2"） ===== */
+/* 標籤當大標：放大移到左上，原本的大標藏起來 */
+#stage:has(> #ai-bullseye.v2.active) #aiTop{left:128px!important;right:auto!important;top:46px!important;gap:14px!important}
+#stage:has(> #ai-bullseye.v2.active) #aiTop .sd{font-size:34px!important;padding:12px 30px!important;border-radius:14px!important}
+#stage:has(> #ai-bullseye.v2.active) #aiTop .sd.on{background:#1E1C1A!important;color:#FBF8F3!important;border-color:#1E1C1A!important}
+#stage:has(> #ai-bullseye.v2.active) #aiTop .sd.sdHome{font-size:30px!important;padding:12px 18px!important}
+.slide.ai.v2{padding-top:150px!important}
+.slide.ai.v2>h2{display:none!important}
+/* 左欄變窄 */
+.slide.ai.v2 .aiGrid{grid-template-columns:1fr 1.6fr!important}
+.slide.ai.v2 .aiGrid>.aiH:first-child{font-size:34px!important}
+.slide.ai.v2 .aiC{font-size:30px!important}
+.slide.ai.v2 .aiC b{font-size:24px!important}
+/* ① 選故事：下拉選單＋自己寫（原本的故事按鈕藏起來，程式照用） */
+.slide.ai.v2 .bsPick .bsRow{display:none!important}
+.slide.ai.v2 .bsPick{display:flex!important;align-items:center;gap:18px;padding:14px 22px!important}
+.bsSel{display:flex;align-items:center;gap:16px;flex:1;min-width:0}
+.bsStepL{font:900 28px/1 'Noto Sans TC',Arial,sans-serif;color:#FBF8F3;white-space:nowrap}
+.bsDrop{flex:1;min-width:0;font:700 26px/1.2 'Noto Sans TC',Arial,sans-serif;color:#1E1C1A;background:#FBF8F3;border:0;border-radius:12px;padding:10px 16px;cursor:pointer}
+.bsDrop:hover{outline:3px solid #C41F27}
+.slide.ai.v2 .bsPick .bsOwn2{flex:none;font:900 26px/1 'Noto Sans TC',Arial,sans-serif;color:#FBF8F3;background:#C41F27;border:0;border-radius:12px;padding:12px 22px;cursor:pointer;white-space:nowrap}
+.slide.ai.v2 .bsPick .bsOwn2:hover{background:#A3161D}
+/* 右欄：② 你的故事、小字提示詞、③ 選 AI */
+#aiRun .arStepH,#aiRun #arOwn,#aiRun .arMini{display:none}
+#aiRun.v2.inPanel .arStepH{display:block;font:900 24px/1.2 'Noto Sans TC',Arial,sans-serif;color:#1E1C1A;margin:0 0 8px}
+#aiRun.v2.inPanel .arStepH.s3{margin:10px 0 0}
+#aiRun.v2.inPanel #arOwn{display:block;flex:1;min-height:0;width:100%;font:400 28px/1.55 'Noto Sans TC',Arial,sans-serif;color:#1E1C1A;background:#FFF;border:2px solid #D9D1C5;border-radius:12px;padding:14px 18px;resize:none;user-select:text;-webkit-user-select:text}
+#aiRun.v2.inPanel #arOwn:focus{outline:none;border-color:#C41F27}
+#aiRun.v2.inPanel .arMini{display:flex;align-items:center;gap:12px;margin:10px 0 0;font:400 19px/1.45 'Noto Sans TC',Arial,sans-serif;color:#6B655D}
+#aiRun.v2.inPanel .arMiniL{flex:none;font-weight:900;color:#1E1C1A}
+#aiRun.v2.inPanel .arMiniT{flex:1;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#aiRun.v2.inPanel .arMiniE{flex:none;font:700 18px/1 'Noto Sans TC',Arial,sans-serif;color:#1E1C1A;background:#ECE8E1;border:1px solid #D3CBBF;border-radius:999px;padding:8px 14px;cursor:pointer}
+#aiRun.v2.inPanel .arMiniE:hover{background:#C41F27;border-color:#C41F27;color:#FBF8F3}
+#aiRun.v2.inPanel .arEditorWrap{display:none!important}
+#aiRun.v2.inPanel.pedit .arEditorWrap{display:block!important;flex:1;min-height:0}
+#aiRun.v2.inPanel.pedit #arOwn,#aiRun.v2.inPanel.pedit .arStepH:not(.s3){display:none}
+#aiRun.v2.inPanel.pedit .arMiniT,#aiRun.v2.inPanel.pedit .arMiniL{visibility:hidden}
+
+/* ===== 2026-11-12 新版面修正：用和既有規則一樣強的選擇器 ===== */
+#stage > .slide.ai.v2{padding:126px 64px 104px!important;gap:0!important}
+#stage > .slide.ai.v2 > .aiGrid{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr)!important}
+#stage > .slide.ai.v2 .aiC{font-size:32px!important;padding:10px 22px!important}
+#stage > .slide.ai.v2 .aiC b{font-size:26px!important;flex:0 0 96px}
+#stage > .slide.ai.v2 .aiGrid>.aiH:first-child{font-size:40px!important}
+#stage > .slide.ai.v2 .aiGrid .aiH.bsPick{flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:18px!important;padding:12px 20px!important}
+#stage > .slide.ai.v2 .aiGrid .aiH.bsPick .bsOwn{display:none!important}
+#stage > .slide.ai.v2 .aiGrid .aiH.bsPick .bsRow{display:none!important}
+/* 右欄順序：② 你的故事 → 故事框 → 提示詞小字 → ③ 選 AI → 按鈕 */
+#aiRun.v2.inPanel .arStepH{order:1}
+#aiRun.v2.inPanel #arOwn{order:2;flex:1 1 0%!important;height:0!important;min-height:0!important}
+#aiRun.v2.inPanel .arEditorWrap{order:2}
+#aiRun.v2.inPanel .arMini{order:3}
+#aiRun.v2.inPanel .arStepH.s3{order:4;margin:12px 0 6px!important}
+#aiRun.v2.inPanel .arYT{order:5}
+#aiRun.v2.inPanel .arMsg{order:6}
+#aiRun.v2.inPanel .arBtns{order:7}
+#aiRun.v2.inPanel .arStepH:not(.s3){margin:0 56px 8px 0!important}
+
+#stage:has(> #ai-bullseye.v2.active) #aiTop{left:33px!important}
+#stage > .slide.ai.v2 #aiRun.v2.inPanel .arX{width:40px!important;height:40px!important;font-size:24px!important;line-height:40px!important;top:8px!important;right:10px!important}
 </style></head>
 <body>
 <div id="stage">
@@ -1194,7 +1255,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </div>
 </section>
 
-<section class="slide ai" id="ai-bullseye" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:24px">
+<section class="slide ai v2" id="ai-bullseye" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:24px">
 <h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人</h2>
 <div class="aiGrid">
 <p class="aiH">七步驟說一個完整的故事</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>Giving</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>Violinist</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>Snake</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>Titus</button><button type="button" class="bsChip" data-bs="9"><i class="bsI">▶</i>Leave me</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>Woodpecker</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>Christmas</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>Puzzle</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>Star</button><button type="button" class="bsChip" data-bs="8"><i class="bsI t">文</i>Fish</button><button type="button" class="bsOwn" title="自己的故事：輸入文字或 YouTube 網址" aria-label="自己的故事"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg></button></div></div>
@@ -1364,6 +1425,16 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  /* 2026-11-10 練習故事移到對話框最下方（滿版時下方的空白處） */
  box.querySelector('.arCard').appendChild(box.querySelector('.arFilm'));
  var $=function(s){return box.querySelector(s);},ta=$('#arStory'),mirror=$('.arMirror');
+ /* 2026-11-12 新版面（先用在靶心人）：② 你的故事 只放故事；提示詞小字顯示、可展開修改；③ 選一個 AI 執行 */
+ var v2own=document.createElement('textarea');v2own.id='arOwn';v2own.placeholder='在這裡打字，或貼上故事、YouTube 影片網址……（也可以從上面選練習故事）';
+ var v2h2=document.createElement('p');v2h2.className='arStepH';v2h2.textContent='② 你的故事';
+ var v2mini=document.createElement('div');v2mini.className='arMini';v2mini.innerHTML='<span class="arMiniL">提示詞</span><span class="arMiniT"></span><button type="button" class="arMiniE" data-act="editp">修改提示詞</button>';
+ var v2h3=document.createElement('p');v2h3.className='arStepH s3';v2h3.textContent='③ 選一個 AI 執行';
+ (function(){var w=$('.arEditorWrap'),bt=$('.arBtns');w.parentNode.insertBefore(v2h2,w);w.parentNode.insertBefore(v2own,w);w.parentNode.insertBefore(v2mini,w);bt.parentNode.insertBefore(v2h3,bt);})();
+ function v2on(){return box.classList.contains('v2');}
+ function v2mini_(){var t=$('.arMiniT');if(!t)return;var full=ta.value,st=v2own.value.trim();var p=st&&full.lastIndexOf(st)>0?full.slice(0,full.lastIndexOf(st)):full;t.textContent=p.replace(/\s+/g,' ').trim();}
+ v2own.addEventListener('input',function(){ta.value=compose(v2own.value);ytUI();paintPrompt();v2mini_();ta.dispatchEvent(new Event('input'));});
+ ta.addEventListener('input',function(){if(document.activeElement!==v2own&&!box.classList.contains('pedit'))v2own.value=editorStory();v2mini_();});
  function escapeHtml(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
  function paintPrompt(){
   if(!mirror)return;
@@ -1407,7 +1478,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function compose(storyText){var t=TASKS[cur];if(!t)return '';refreshSel();var yt=YT.test(storyText);
   var pre=yt?'我給你的是一支 YouTube 影片網址。請先看這支影片（畫面、聲音或字幕），把影片裡的故事用靶心人七步（目標、阻礙、努力、結果、意外、轉彎、結局）整理出來，再做下面的任務。\n如果你看不到影片內容，請直接告訴我「我看不到這支影片」，不要根據標題、說明欄或網址猜測內容。\n\n':'';
   return '請用繁體中文回答。\n'+pre+t.p(opt[cur]||(t.opts&&t.opts[0])||'',storyText||'');}
- function setStory(storyText){ta.value=compose(storyText||'');ytUI();paintPrompt();}
+ function setStory(storyText){ta.value=compose(storyText||'');ytUI();paintPrompt();if(typeof v2own!=='undefined')v2own.value=storyText||'';if(typeof v2mini_==='function')v2mini_();}
  function ytUI(){var yt=isYT();box.classList.toggle('yt',yt);}
  function refreshSel(){if(document.body.classList.contains('reader'))return;var t=TASKS[cur];if(!t)return;
   if(cur==='ai-filter'&&window.__aiPlot){opt[cur]=window.__aiPlot.name;}
@@ -1422,12 +1493,12 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function open(id){var t=TASKS[id];if(!t)return;cur=id;
   /* 2026-11-10 每次打開都回到初始狀態：故事框清空、影片／文章收起、提示詞收合 */
   stopFilm();var chosenStory='';if(window.__bsStory!=null&&/^ai-(bullseye|order|filter|curve)$/.test(id)){var bf=FILMS[window.__bsStory];if(bf)chosenStory=bf[2]||bf[1];}try{localStorage.removeItem(KEY);}catch(_){}
-  box.classList.toggle('bull',id==='ai-bullseye');box.querySelector('.arCard').setAttribute('aria-label','AI 加值｜'+t.name);$('.arTask').textContent=t.desc;$('.arTask').style.display=t.desc?'':'none';
+  box.classList.toggle('bull',id==='ai-bullseye');var sec0=document.getElementById(id);box.classList.toggle('v2',!!(sec0&&sec0.classList.contains('v2'))&&!document.body.classList.contains('reader'));box.classList.remove('pedit');var pe=box.querySelector('.arMiniE');if(pe)pe.textContent='修改提示詞';box.querySelector('.arCard').setAttribute('aria-label','AI 加值｜'+t.name);$('.arTask').textContent=t.desc;$('.arTask').style.display=t.desc?'':'none';
   if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
   var rd=document.body.classList.contains('reader');
   if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.name+' '+window.__aiOrd.n;if(!rd){/* 標題列已移除，保留排列與提示詞同步 */$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
   var o=$('.arOpt');o.innerHTML='';if(t.opts&&id!=='ai-filter'&&!(id==='ai-order'&&!rd)){var sel=opt[id]||t.opts[0];o.classList.toggle('plots',id==='ai-filter');t.opts.forEach(function(x,k){var b=document.createElement('button');b.type='button';if(id==='ai-filter')b.innerHTML='<i>'+(k+1)+'</i>'+x;else b.textContent=x;b.dataset.opt=x;if(x===sel)b.classList.add('on');o.appendChild(b);});o.style.display='';}else o.style.display='none';
-  msg('');setStory(chosenStory);placeBox(id);box.classList.add('open');box.setAttribute('aria-hidden','false');setTimeout(function(){try{ta.focus({preventScroll:true});}catch(_){}},60);}
+  msg('');setStory(chosenStory);placeBox(id);box.classList.add('open');box.setAttribute('aria-hidden','false');setTimeout(function(){try{(v2on()&&!box.classList.contains('pedit')?v2own:ta).focus({preventScroll:true});}catch(_){}},60);}
 /* 2026-11-11 電腦／投影：在同一頁右欄（故事空格的位置）進行，不跳出對話框；手機直式閱讀版維持對話框 */
  var watch=null;
  function placeBox(id){var sl=document.getElementById(id),show=sl&&sl.querySelector('.aiGrid>.bsShow');
@@ -1446,7 +1517,8 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function copySync(t){var ok=false,x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.cssText='position:fixed;left:-9999px;top:0;opacity:0';box.appendChild(x);x.select();try{x.setSelectionRange(0,t.length);}catch(_){}try{ok=document.execCommand('copy');}catch(_){}x.remove();
   if(!ok&&navigator.clipboard){try{navigator.clipboard.writeText(t);ok=true;}catch(_){}}return ok;}
  function go(ai){
-  if(!ta.value.trim()){msg('請先輸入提示詞。',true);ta.focus();return;}
+  if(v2on()&&!box.classList.contains('pedit')&&!v2own.value.trim()){msg('請先在「② 你的故事」打字或貼上故事，或從上面選一個練習故事。',true);v2own.focus();return;}
+     if(!ta.value.trim()){msg('請先輸入提示詞。',true);ta.focus();return;}
   var t=full(),ok=copySync(t),q=encodeURIComponent(t),url='';
   if(ai==='chatgpt')url='https://chatgpt.com/?q='+q;
   else if(ai==='claude')url='https://claude.ai/new?q='+q;
@@ -1499,7 +1571,8 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   if(videoLink){e.preventDefault();playPromptVideo(videoLink.getAttribute('data-video-url'));return;}
   if(e.target===box){close();return;}
   var b=e.target.closest('button');if(!b)return;e.preventDefault();
-  if(b.dataset.act==='close')close();
+  if(b.dataset.act==='editp'){box.classList.toggle('pedit');b.textContent=box.classList.contains('pedit')?'收起提示詞':'修改提示詞';if(!box.classList.contains('pedit'))v2own.value=editorStory();setTimeout(function(){try{(box.classList.contains('pedit')?ta:v2own).focus();}catch(_){}},30);}
+  else if(b.dataset.act==='close')close();
   else if(b.dataset.act==='filmplay'){var F=FILMS[+b.dataset.film]||FILMS[0];
    if(F[2]){var pt=box.querySelector('.fPlay[data-film="'+b.dataset.film+'"]'),wt=pt.classList.contains('on');stopFilm();if(!wt){var d=document.createElement('div');d.className='fText';d.textContent=F[2];pt.appendChild(d);pt.classList.add('on','txt');msg('再點一次《'+F[0]+'》收起。');}else msg('');return;}
    var vid=(F[1].match(/[?&]v=([\w-]{11})/)||[])[1];if(!vid)return;
@@ -1655,5 +1728,25 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
     window.__aiRun?.open(active.id);
   }
 })();</script>
+<script>/* 2026-11-12 新版面（靶心人）：① 選故事 下拉選單、✎ 自己寫；選單和原本（藏起來的）故事按鈕連動 */
+(function(){
+ document.querySelectorAll('#stage > .slide.ai.v2 .bsPick').forEach(function(pk){
+  var chips=[].slice.call(pk.querySelectorAll('.bsChip'));
+  var vid=chips.filter(function(c){return c.querySelector('.bsI:not(.t)');}),txt=chips.filter(function(c){return c.querySelector('.bsI.t');});
+  var opt=function(c){return '<option value="'+c.dataset.bs+'">'+c.textContent.replace(/^[▶文]/,'').trim()+'</option>';};
+  var wrap=document.createElement('div');wrap.className='bsSel';
+  wrap.innerHTML='<span class="bsStepL">① 選故事</span><select class="bsDrop" aria-label="選練習故事"><option value="">── 選一個練習故事 ──</option><optgroup label="影片（請用 Gemini）">'+vid.map(opt).join('')+'</optgroup><optgroup label="文字">'+txt.map(opt).join('')+'</optgroup></select>';
+  var own=document.createElement('button');own.type='button';own.className='bsOwn2';own.textContent='✎ 自己寫';own.title='自己打字、貼上文字故事或 YouTube 網址';
+  pk.insertBefore(own,pk.firstChild);pk.insertBefore(wrap,pk.firstChild);
+  var drop=wrap.querySelector('.bsDrop');
+  drop.addEventListener('click',function(e){e.stopPropagation();});
+  drop.addEventListener('change',function(){var v=drop.value,curS=window.__bsStory;
+   if(v===''){if(curS!=null){var c=pk.querySelector('.bsChip[data-bs="'+curS+'"]');if(c)c.click();}return;}
+   if(String(curS)!==v){var c2=pk.querySelector('.bsChip[data-bs="'+v+'"]');if(c2)c2.click();}});
+  own.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var b=pk.querySelector('.bsOwn');if(b)b.click();drop.value='';});
+  setInterval(function(){var want=window.__bsStory==null?'':String(window.__bsStory);if(drop.value!==want&&document.activeElement!==drop)drop.value=want;},300);
+ });
+})();
+</script>
 </body>
 </html>
