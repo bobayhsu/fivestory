@@ -1280,6 +1280,12 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage > #ai-order.v2 .aiGrid > .aiOrd i{font-size:22px!important}
 #stage > #ai-order.v2 .aiGrid > .aiOrd small{font-size:18px!important}
 #stage > .slide.ai.v2 .aiGrid > .aiC > b{flex:0 0 150px!important;font-size:34px!important}
+/* 分頁重做：做在黑面板頂端，等寬、選中黃字黃底線 */
+#stage:has(> .slide.ai.v2.active) #aiTop{left:64px!important;top:40px!important;width:589px!important;gap:0!important;align-items:stretch!important;padding:0!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){flex:1 1 0!important;margin:0!important;border:0!important;border-radius:0!important;border-bottom:3px solid #3D3935!important;background:transparent!important;color:#8E857A!important;box-shadow:none!important;font-size:34px!important;font-weight:900!important;letter-spacing:3px!important;padding:18px 0 12px!important;line-height:1.15!important;height:auto!important;text-align:center!important;justify-content:center!important;z-index:auto!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome):hover{color:#EDE7DD!important;background:transparent!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome){color:#F5C518!important;border-bottom:6px solid #F5C518!important;padding-bottom:9px!important;background:transparent!important;box-shadow:none!important}
+#stage > .slide.ai.v2::after{top:40px!important;border-radius:18px!important}
 /* 總覽頁不需要右上角分頁 */
 #stage:has(> #ai-frame.active) #aiTop{display:none!important}
 #stage > .slide.ai.v2{padding-top:40px!important}
