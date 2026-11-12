@@ -1299,6 +1299,16 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 
 #stage:has(> .slide.ai.v2.active) #aiTop{left:64px!important}
 #stage > .slide.ai.v2 #aiRun.v2.inPanel .arX{width:40px!important;height:40px!important;font-size:24px!important;line-height:40px!important;top:8px!important;right:10px!important}
+/* 指令併入故事框：上半灰底指令、下半打故事 */
+#aiRun.v2.inPanel .arMini{order:2!important;margin:0!important;flex-wrap:wrap;align-items:center;gap:4px 10px;background:#F1ECE4;border:2px solid #D9D1C5;border-bottom:2px dashed #CFC6B8;border-radius:12px 12px 0 0;padding:10px 16px 12px;font-size:20px!important}
+#aiRun.v2.inPanel .arMiniL{order:1;font-size:18px;color:#8A8278!important;letter-spacing:1px}
+#aiRun.v2.inPanel .arMiniE{order:2;margin-left:auto;padding:6px 14px!important;font-size:17px!important}
+#aiRun.v2.inPanel .arMiniT{order:3;flex:0 0 100%!important;-webkit-line-clamp:3!important;color:#5E5850}
+#aiRun.v2.inPanel #arOwn{order:3!important;border-top:0!important;border-radius:0 0 12px 12px!important}
+#aiRun.v2.inPanel:has(#arOwn:focus) .arMini,#aiRun.v2.inPanel:has(#arOwn:focus) #arOwn{border-color:#C41F27}
+#aiRun.v2.inPanel:has(#arOwn:focus) .arMini{border-bottom-color:#E7B8B5}
+#aiRun.v2.inPanel .arEditorWrap{order:3!important}
+#aiRun.v2.inPanel.pedit .arMini{order:4!important;background:none;border:0;padding:6px 0 0}
 </style></head>
 <body>
 <div id="stage">
@@ -1487,7 +1497,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  /* 2026-11-12 新版面（先用在靶心人）：② 你的故事 只放故事；提示詞小字顯示、可展開修改；③ 選一個 AI 執行 */
  var v2own=document.createElement('textarea');v2own.id='arOwn';v2own.placeholder='在這裡打字，或貼上故事、YouTube 影片網址……（也可以從上面選練習故事）';
  var v2h2=document.createElement('p');v2h2.className='arStepH';v2h2.textContent='② 你的故事';
- var v2mini=document.createElement('div');v2mini.className='arMini';v2mini.innerHTML='<span class="arMiniL">提示詞</span><span class="arMiniT"></span><button type="button" class="arMiniE" data-act="editp">修改提示詞</button>';
+ var v2mini=document.createElement('div');v2mini.className='arMini';v2mini.innerHTML='<span class="arMiniL">給 AI 的指令</span><span class="arMiniT"></span><button type="button" class="arMiniE" data-act="editp">修改指令</button>';
  var v2h3=document.createElement('p');v2h3.className='arStepH s3';v2h3.textContent='③ 選一個 AI 執行';
  (function(){var w=$('.arEditorWrap'),bt=$('.arBtns');w.parentNode.insertBefore(v2h2,w);w.parentNode.insertBefore(v2own,w);w.parentNode.insertBefore(v2mini,w);bt.parentNode.insertBefore(v2h3,bt);})();
  function v2on(){return box.classList.contains('v2');}
@@ -1552,7 +1562,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  function open(id){var t=TASKS[id];if(!t)return;cur=id;
   /* 2026-11-10 每次打開都回到初始狀態：故事框清空、影片／文章收起、提示詞收合 */
   stopFilm();var chosenStory='';if(window.__bsStory!=null&&/^ai-(bullseye|order|filter|curve)$/.test(id)){var bf=FILMS[window.__bsStory];if(bf)chosenStory=bf[2]||bf[1];}try{localStorage.removeItem(KEY);}catch(_){}
-  box.classList.toggle('bull',id==='ai-bullseye');var sec0=document.getElementById(id);box.classList.toggle('v2',!!(sec0&&sec0.classList.contains('v2'))&&!document.body.classList.contains('reader'));box.classList.remove('pedit');var pe=box.querySelector('.arMiniE');if(pe)pe.textContent='修改提示詞';box.querySelector('.arCard').setAttribute('aria-label','AI 加值｜'+t.name);$('.arTask').textContent=t.desc;$('.arTask').style.display=t.desc?'':'none';
+  box.classList.toggle('bull',id==='ai-bullseye');var sec0=document.getElementById(id);box.classList.toggle('v2',!!(sec0&&sec0.classList.contains('v2'))&&!document.body.classList.contains('reader'));box.classList.remove('pedit');var pe=box.querySelector('.arMiniE');if(pe)pe.textContent='修改指令';box.querySelector('.arCard').setAttribute('aria-label','AI 加值｜'+t.name);$('.arTask').textContent=t.desc;$('.arTask').style.display=t.desc?'':'none';
   if(id==='ai-filter'&&window.__aiPlot){opt[id]=window.__aiPlot.name;$('.arTask').textContent='用你在頁面上選好的劇情模式，改寫你故事的核心衝突。';}
   var rd=document.body.classList.contains('reader');
   if(id==='ai-order'&&window.__aiOrd){opt[id]=window.__aiOrd.name+' '+window.__aiOrd.n;if(!rd){/* 標題列已移除，保留排列與提示詞同步 */$('.arTask').textContent='用你在頁面上選好的排列，讓 AI 用新的順序重講你的故事。';}}
@@ -1630,7 +1640,7 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   if(videoLink){e.preventDefault();playPromptVideo(videoLink.getAttribute('data-video-url'));return;}
   if(e.target===box){close();return;}
   var b=e.target.closest('button');if(!b)return;e.preventDefault();
-  if(b.dataset.act==='editp'){box.classList.toggle('pedit');b.textContent=box.classList.contains('pedit')?'收起提示詞':'修改提示詞';if(!box.classList.contains('pedit'))v2own.value=editorStory();setTimeout(function(){try{(box.classList.contains('pedit')?ta:v2own).focus();}catch(_){}},30);}
+  if(b.dataset.act==='editp'){box.classList.toggle('pedit');b.textContent=box.classList.contains('pedit')?'收起':'修改指令';if(!box.classList.contains('pedit'))v2own.value=editorStory();setTimeout(function(){try{(box.classList.contains('pedit')?ta:v2own).focus();}catch(_){}},30);}
   else if(b.dataset.act==='close')close();
   else if(b.dataset.act==='filmplay'){var F=FILMS[+b.dataset.film]||FILMS[0];
    if(F[2]){var pt=box.querySelector('.fPlay[data-film="'+b.dataset.film+'"]'),wt=pt.classList.contains('on');stopFilm();if(!wt){var d=document.createElement('div');d.className='fText';d.textContent=F[2];pt.appendChild(d);pt.classList.add('on','txt');msg('再點一次《'+F[0]+'》收起。');}else msg('');return;}
