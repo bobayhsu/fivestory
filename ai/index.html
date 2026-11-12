@@ -1254,6 +1254,10 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome){padding-bottom:16px!important}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.sdHome{margin:0 0 8px 10px!important;width:66px!important;height:66px!important;min-width:66px!important;padding:0!important;font-size:24px!important;border-radius:14px!important}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.sdHome svg{width:38px!important;height:38px!important;display:block!important}
+/* 步驟名稱反白放大、說明縮小 */
+#stage > .slide.ai.v2 .aiGrid > .aiC > b{color:#FFFFFF!important;font-size:36px!important;font-weight:900!important;flex:0 0 170px!important;letter-spacing:1px}
+#stage > .slide.ai.v2 .aiGrid > .aiC > span{color:#BDB4A8!important;font-size:26px!important}
+#stage > .slide.ai.v2 .aiGrid > .aiC:hover > b{color:#FFFFFF!important}
 /* 總覽頁不需要右上角分頁 */
 #stage:has(> #ai-frame.active) #aiTop{display:none!important}
 #stage > .slide.ai.v2{padding-top:40px!important}
@@ -1278,8 +1282,8 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage > .slide.ai.v2 .aiGrid>.aiH:first-child{color:#F5C518!important}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome){color:#F5C518!important}
 #stage > .slide.ai.v2 .aiGrid > .aiC,#stage > .slide.ai.v2 .aiGrid > .aiOrd,#stage > .slide.ai.v2 .aiGrid .aiPlots .pl{background:#2B2926!important;border-color:#3D3935!important;color:#F3EEE6!important;box-shadow:none!important}
-#stage > .slide.ai.v2 .aiGrid > .aiC span,#stage > .slide.ai.v2 .aiGrid > .aiOrd span,#stage > .slide.ai.v2 .aiGrid > .aiOrd b{color:#F3EEE6!important}
-#stage > .slide.ai.v2 .aiGrid > .aiC > b,#stage > .slide.ai.v2 .aiGrid .aiPlots .pl i{color:#A39A8E!important}
+#stage > .slide.ai.v2 .aiGrid > .aiOrd span,#stage > .slide.ai.v2 .aiGrid > .aiOrd b{color:#F3EEE6!important}
+#stage > .slide.ai.v2 .aiGrid .aiPlots .pl i{color:#A39A8E!important}
 #stage > .slide.ai.v2 .aiGrid > .aiOrd i{color:#C9C0B4!important}
 #stage > .slide.ai.v2 .aiGrid > .aiOrd small{color:#8E857A!important}
 #stage > .slide.ai.v2 .aiGrid > .aiC:hover,#stage > .slide.ai.v2 .aiGrid > .aiOrd:hover,#stage > .slide.ai.v2 .aiGrid .aiPlots .pl:hover{background:#36322E!important;border-color:#C41F27!important}
