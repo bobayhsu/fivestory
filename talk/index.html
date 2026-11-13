@@ -31,11 +31,13 @@ body.home #cover{display:flex}
 body.home .bar,body.home #notes{display:none!important}
 #cover small{font-size:clamp(14px,2.2vh,22px);letter-spacing:.3em;color:#C9C0B4}
 #cover h1{margin:0;font-size:clamp(34px,7.5vh,84px);font-weight:900;letter-spacing:.12em;color:#F5C518;line-height:1.1}
-#cover .card{position:relative;display:block;width:min(86vw,calc(62vh*16/9));aspect-ratio:16/9;border:0;padding:0;border-radius:16px;overflow:hidden;cursor:pointer;background:#000;box-shadow:0 18px 50px rgba(0,0,0,.6),0 0 0 3px rgba(245,197,24,.5);transition:transform .2s,box-shadow .2s}
+#cover .card{position:relative;display:block;width:min(86vw,calc(56vh*16/9));aspect-ratio:16/9;border:0;padding:0;border-radius:16px;overflow:hidden;cursor:pointer;background:#000;box-shadow:0 18px 50px rgba(0,0,0,.6),0 0 0 3px rgba(245,197,24,.5);transition:transform .2s,box-shadow .2s}
 #cover .card:hover{transform:scale(1.015);box-shadow:0 22px 60px rgba(0,0,0,.7),0 0 0 4px #F5C518}
 #cover .card img{width:100%;height:100%;object-fit:cover;display:block}
 #cover .card span{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);background:#F5C518;color:#1E1C1A;font-weight:900;font-size:clamp(16px,2.8vh,28px);padding:.5em 1.4em;border-radius:999px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.45)}
 @media (max-width:600px){#cover small{letter-spacing:.08em}#cover .card span{font-size:16px}}
+#cover .go{font:inherit;font-weight:900;font-size:clamp(16px,2.6vh,26px);color:#1E1C1A;background:#F5C518;border:0;border-radius:999px;padding:.55em 1.6em;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+#cover .go:hover{background:#FFD84A}
 #cover p{margin:0;font-size:clamp(14px,2.2vh,22px);color:#C9C0B4}
 </style>
 </head>
@@ -43,7 +45,8 @@ body.home .bar,body.home #notes{display:none!important}
 <div id="cover">
   <small>《I人理財》新書分享會｜2026.11.14</small>
   <h1>捕蟲人</h1>
-  <button type="button" class="card" aria-label="進入簡報"><img src="img/s09.webp?v=2" alt="抓蟲人"><span>▶ 點擊進入簡報</span></button>
+  <button type="button" class="card" aria-label="進入簡報"><img src="img/cover.webp" alt=""></button>
+  <button type="button" class="go">▶ 點擊進入簡報</button>
   <p>愛瑞克 × 熊美玲 × 許榮哲</p>
 </div>
 <div id="deck"><img id="slide" alt="" draggable="false"></div>
@@ -110,7 +113,7 @@ var uiT=0;function ui(){document.body.classList.add('ui');clearTimeout(uiT);uiT=
 addEventListener('mousemove',ui);addEventListener('touchstart',ui,{passive:true});
 /* 給主站同步用（talk-sync.js）：讀／設目前頁碼 */
 window.TalkSync={get:function(){return String(cur);},set:function(v){show(v);}};
-document.querySelector('#cover .card').addEventListener('click',function(e){e.stopPropagation();show(1);});
+[].forEach.call(document.querySelectorAll('#cover .card,#cover .go'),function(b){b.addEventListener('click',function(e){e.stopPropagation();show(1);});});
 show(location.hash.slice(1)||'0',true);
 })();
 </script>
