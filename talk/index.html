@@ -11,7 +11,7 @@ html,body{margin:0;height:100%;background:#0E0D0C;overflow:hidden;font-family:"N
 #slide{max-width:100vw;max-height:100vh;width:auto;height:auto;aspect-ratio:16/9;object-fit:contain;display:block;box-shadow:0 0 40px rgba(0,0,0,.6)}
 @supports (height:100dvh){#slide{max-height:100dvh}}
 .bar{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,rgba(0,0,0,.65));opacity:0;transition:opacity .25s;z-index:5}
-body:hover .bar,body.touch .bar,.bar:focus-within{opacity:1}
+body.ui .bar,.bar:hover,.bar:focus-within{opacity:1}
 .bar button{font:inherit;font-size:16px;font-weight:700;color:#FBF8F3;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:8px 16px;cursor:pointer;min-width:44px;min-height:40px}
 .bar button:hover{background:rgba(255,255,255,.28)}
 .bar button.on{background:#F5C518;color:#1E1C1A;border-color:#F5C518}
@@ -50,7 +50,7 @@ var NOTES={
  14:'<b>（0:50）</b>收尾。慢慢說：你以為自己在追光，還是有人正在用光追捕你？停五秒。再說：下一次看到最亮的那盞燈，先問一句：拿燈的是誰？即使沒有操控者，也要問：我是否正讓眼前的光，代替我判斷方向？謝謝。'
 };
 var N=TITLES.length,cur=1,img=document.getElementById('slide'),num=document.getElementById('num'),notes=document.getElementById('notes'),grid=document.getElementById('grid');
-function src(n){return 'img/s'+(n<10?'0':'')+n+'.webp';}
+function src(n){return 'img/s'+(n<10?'0':'')+n+'.webp?v=2';}
 var cache={};function pre(n){if(n>=1&&n<=N&&!cache[n]){cache[n]=new Image();cache[n].src=src(n);}}
 function show(n,fromHash){
   n=Math.max(1,Math.min(N,parseInt(n,10)||1));cur=n;
@@ -85,6 +85,9 @@ var sx=null,sy=0;
 addEventListener('touchstart',function(e){document.body.classList.add('touch');var t=e.touches[0];sx=t.clientX;sy=t.clientY;},{passive:true});
 addEventListener('touchend',function(e){if(sx===null)return;var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;sx=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){go(dx<0?1:-1);e.preventDefault();}},{passive:false});
 addEventListener('hashchange',function(){show(location.hash.slice(1),true);});
+/* 工具列：移動滑鼠或點畫面時出現，2.5 秒沒動作就自動收起，不擋到投影片的字 */
+var uiT=0;function ui(){document.body.classList.add('ui');clearTimeout(uiT);uiT=setTimeout(function(){if(!notes.classList.contains('on'))document.body.classList.remove('ui');},2500);}
+addEventListener('mousemove',ui);addEventListener('touchstart',ui,{passive:true});
 /* 給主站同步用（talk-sync.js）：讀／設目前頁碼 */
 window.TalkSync={get:function(){return String(cur);},set:function(v){show(v);}};
 show(location.hash.slice(1)||1,true);

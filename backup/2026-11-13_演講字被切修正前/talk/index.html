@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>捕蟲人｜《I人理財》新書分享會 2026.11.14</title>
+<style>
+/* 2026-11-13 演講投影片：14 頁原投影片轉成圖片，左右翻頁；N 顯示講者備註；可與 ?sync= 同步 */
+html,body{margin:0;height:100%;background:#0E0D0C;overflow:hidden;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+#deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;-webkit-user-select:none}
+#slide{max-width:100vw;max-height:100vh;width:auto;height:auto;aspect-ratio:16/9;object-fit:contain;display:block;box-shadow:0 0 40px rgba(0,0,0,.6)}
+@supports (height:100dvh){#slide{max-height:100dvh}}
+.bar{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,rgba(0,0,0,.65));opacity:0;transition:opacity .25s;z-index:5}
+body:hover .bar,body.touch .bar,.bar:focus-within{opacity:1}
+.bar button{font:inherit;font-size:16px;font-weight:700;color:#FBF8F3;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:8px 16px;cursor:pointer;min-width:44px;min-height:40px}
+.bar button:hover{background:rgba(255,255,255,.28)}
+.bar button.on{background:#F5C518;color:#1E1C1A;border-color:#F5C518}
+#num{color:#FBF8F3;font-size:16px;font-weight:700;min-width:64px;text-align:center}
+#notes{position:fixed;left:50%;bottom:72px;transform:translateX(-50%);width:min(900px,92vw);background:rgba(20,18,16,.92);color:#FBF8F3;border:2px solid #F5C518;border-radius:14px;padding:14px 20px;font-size:20px;line-height:1.6;z-index:6;display:none}
+#notes.on{display:block}
+#notes b{color:#F5C518}
+#grid{position:fixed;inset:0;z-index:8;background:rgba(14,13,12,.96);display:none;overflow:auto;padding:24px}
+#grid.on{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;align-content:start}
+#grid figure{margin:0;cursor:pointer;color:#FBF8F3;font-size:14px;text-align:center}
+#grid img{width:100%;aspect-ratio:16/9;object-fit:cover;border:3px solid transparent;border-radius:6px;display:block;margin-bottom:4px}
+#grid figure.cur img{border-color:#F5C518}
+#grid figure:hover img{border-color:#C41F27}
+</style>
+</head>
+<body>
+<div id="deck"><img id="slide" alt="" draggable="false"></div>
+<div id="notes"></div>
+<div id="grid"></div>
+<div class="bar">
+  <button type="button" data-act="prev" aria-label="上一頁">◀</button>
+  <span id="num"></span>
+  <button type="button" data-act="next" aria-label="下一頁">▶</button>
+  <button type="button" data-act="grid" title="全部頁面（G）">目錄</button>
+  <button type="button" data-act="notes" title="講者備註（N）">備註</button>
+  <button type="button" data-act="full" title="全螢幕（F）">全螢幕</button>
+</div>
+<script>
+(function(){
+var TITLES=['愛瑞克簡介','你是 I 人嗎？','光譜','熊美玲','許榮哲簡介','捕蟲人 1','捕蟲人 2','捕蟲人 3','抓蟲人','蛾','月光','燈光','呃，誰是蛾','脫離該死的轉圈慣性'];
+var NOTES={
+ 6:'<b>（0:40）</b>展示真實照片。說：我跟昆蟲老師去抓甲蟲，他懂樹種、習性，還帶了五層樓高的勾子。先問聽眾：你猜我們最後抓到幾隻？',
+ 7:'<b>（0:40）</b>展示真實照片。說：我跟昆蟲老師去抓甲蟲，他懂樹種、習性，還帶了五層樓高的勾子。先問聽眾：你猜我們最後抓到幾隻？',
+ 8:'<b>（0:40）</b>展示真實照片。說：我跟昆蟲老師去抓甲蟲，他懂樹種、習性，還帶了五層樓高的勾子。先問聽眾：你猜我們最後抓到幾隻？',
+ 13:'<b>（0:30）</b>老師拿長勾子晃樹枝，希望甲蟲掉落；他很專業、準備充足。停一下，說：最後只有一隻。此時先不評論哪個方法較好。',
+ 14:'<b>（0:50）</b>收尾。慢慢說：你以為自己在追光，還是有人正在用光追捕你？停五秒。再說：下一次看到最亮的那盞燈，先問一句：拿燈的是誰？即使沒有操控者，也要問：我是否正讓眼前的光，代替我判斷方向？謝謝。'
+};
+var N=TITLES.length,cur=1,img=document.getElementById('slide'),num=document.getElementById('num'),notes=document.getElementById('notes'),grid=document.getElementById('grid');
+function src(n){return 'img/s'+(n<10?'0':'')+n+'.webp';}
+var cache={};function pre(n){if(n>=1&&n<=N&&!cache[n]){cache[n]=new Image();cache[n].src=src(n);}}
+function show(n,fromHash){
+  n=Math.max(1,Math.min(N,parseInt(n,10)||1));cur=n;
+  img.src=src(n);img.alt=TITLES[n-1];num.textContent=n+' / '+N;
+  notes.innerHTML=NOTES[n]||'<span style="opacity:.6">（這一頁沒有備註）</span>';
+  [].forEach.call(grid.children,function(f,i){f.classList.toggle('cur',i+1===n);});
+  pre(n+1);pre(n+2);pre(n-1);
+  if(!fromHash&&location.hash!=='#'+n)history.replaceState(null,'','#'+n);
+}
+for(var i=1;i<=N;i++){var f=document.createElement('figure');f.dataset.n=i;f.innerHTML='<img loading="lazy" src="'+src(i)+'" alt=""><figcaption>'+i+'　'+TITLES[i-1]+'</figcaption>';grid.appendChild(f);}
+function go(d){show(cur+d);}
+function act(a){
+  if(a==='prev')go(-1);else if(a==='next')go(1);
+  else if(a==='notes'){notes.classList.toggle('on');sync();}
+  else if(a==='grid'){grid.classList.toggle('on');sync();}
+  else if(a==='full'){var d=document.documentElement;if(!document.fullscreenElement){(d.requestFullscreen||d.webkitRequestFullscreen||function(){}).call(d);}else{(document.exitFullscreen||document.webkitExitFullscreen).call(document);}}
+}
+function sync(){[].forEach.call(document.querySelectorAll('.bar button[data-act]'),function(b){var a=b.dataset.act;b.classList.toggle('on',(a==='notes'&&notes.classList.contains('on'))||(a==='grid'&&grid.classList.contains('on')));});}
+document.querySelector('.bar').addEventListener('click',function(e){var b=e.target.closest('button[data-act]');if(!b)return;e.stopPropagation();act(b.dataset.act);});
+grid.addEventListener('click',function(e){var f=e.target.closest('figure');if(f){show(f.dataset.n);}grid.classList.remove('on');sync();});
+document.getElementById('deck').addEventListener('click',function(e){go(e.clientX<innerWidth*0.3?-1:1);});
+addEventListener('keydown',function(e){
+  if(e.altKey||e.ctrlKey||e.metaKey)return;var k=e.key;
+  if(k==='ArrowRight'||k==='ArrowDown'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();go(1);}
+  else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||k==='Backspace'){e.preventDefault();go(-1);}
+  else if(k==='Home')show(1);else if(k==='End')show(N);
+  else if(k==='n'||k==='N')act('notes');else if(k==='g'||k==='G')act('grid');else if(k==='f'||k==='F')act('full');
+  else if(k==='Escape'){grid.classList.remove('on');sync();}
+});
+/* 手機：左右滑動翻頁 */
+var sx=null,sy=0;
+addEventListener('touchstart',function(e){document.body.classList.add('touch');var t=e.touches[0];sx=t.clientX;sy=t.clientY;},{passive:true});
+addEventListener('touchend',function(e){if(sx===null)return;var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;sx=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){go(dx<0?1:-1);e.preventDefault();}},{passive:false});
+addEventListener('hashchange',function(){show(location.hash.slice(1),true);});
+/* 給主站同步用（talk-sync.js）：讀／設目前頁碼 */
+window.TalkSync={get:function(){return String(cur);},set:function(v){show(v);}};
+show(location.hash.slice(1)||1,true);
+})();
+</script>
+</body>
+</html>
