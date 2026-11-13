@@ -12,7 +12,7 @@ ready(async function(){
   if(!window.firebase?.apps)await load('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js');
   if(!window.firebase?.database)await load('https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js');
   if(!window.FIVESTORY_FIREBASE_CONFIG)await load('./sync-config.js?v=independent1');
-  await load('./sync.js?v=independent136');
+  await load('./sync.js?v=independent137');
   await load('./bullseye-sync.js?v=independent1');
   await load('./video-sync.js?v=independent3');
   await load('./video-list-sync.js?v=independent1');
@@ -22,6 +22,7 @@ ready(async function(){
   await load('./satir-sync.js?v=2');
   await load('./dilemma-sync.js?v=2');
   await load('./ai-sync.js?v=3');
+  await load('./talk-sync.js?v=1');
   await load('./practice-timer-sync.js?v=6');
   await load('./nav-buttons.js?v=27');
   if(badge.textContent==='同步：正在載入…')badge.textContent='同步主程式尚未啟動';

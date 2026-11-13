@@ -47,11 +47,12 @@ const timer=setInterval(()=>{
   const group=()=>{const g=document.createElement('div');g.style.cssText='display:flex;gap:12px;align-items:center';return g;};
   const L=group(),R=group();
   /* 2026-11-04：遊戲已搬到獨立的 games 專案，「遊戲」圖示和其他藍色圖示一樣，由 sync.js 開在同步視窗裡。 */
-  ['a.navPill[data-sync-video=resources]','a.navPill[href="https://bobayhsu.github.io/bullseye/"]','a.navPill[href="https://bobayhsu.github.io/practice/"]','a.navPill[data-games]','a.navPill[data-satir]','a.navPill[data-dilemma]','a.navPill[data-ai]','a.navPill[data-download]'].forEach(sel=>{const b=mk(sel,sel==='a.navPill[data-ai]'?'#D2262E':'#1F5FA8');if(!b)return;L.appendChild(b); /* 2026-11-10 AI 加值鈕紅底 */
+  ['a.navPill[data-sync-video=resources]','a.navPill[href="https://bobayhsu.github.io/bullseye/"]','a.navPill[href="https://bobayhsu.github.io/practice/"]','a.navPill[data-games]','a.navPill[data-satir]','a.navPill[data-dilemma]','a.navPill[data-talk]','a.navPill[data-ai]','a.navPill[data-download]'].forEach(sel=>{const b=mk(sel,sel==='a.navPill[data-ai]'?'#D2262E':'#1F5FA8');if(!b)return;L.appendChild(b); /* 2026-11-10 AI 加值鈕紅底 */
     b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();
       const h=b._src.getAttribute('href');
       if((h===BASE||h==='https://bobayhsu.github.io/games/'||h==='https://bobayhsu.github.io/fivestory/satir/')&&document.getElementById('syncExternalOpen')?.href===h){if(h.endsWith('/satir/')){try{frame.contentWindow.location.hash='home';}catch(_){frame.src=h+'?v=6';}return;}frame.src=h;return;}
       if((h||'').startsWith('https://bobayhsu.github.io/fivestory/ai/')&&(document.getElementById('syncExternalOpen')?.href||'').startsWith('https://bobayhsu.github.io/fivestory/ai/')){try{const A=frame.contentWindow.AiSync;if(A){A.set('0');return;}}catch(_){}frame.src='https://bobayhsu.github.io/fivestory/ai/?v=86&r='+Date.now()+'#1';return;} // 2026-11-11 AI 加值已經開著：回到總覽（網址是 ai/ 或 ai/#1 都算；切到總覽後由 ai-sync 帶另一台一起回去）
+      if(h==='https://bobayhsu.github.io/fivestory/talk/'&&document.getElementById('syncExternalOpen')?.href===h){try{const T=frame.contentWindow.TalkSync;if(T){T.set('1');return;}}catch(_){}frame.src=h+'?v=1&r='+Date.now()+'#1';return;} // 2026-11-13 演講已經開著：回到第 1 頁
       if(h==='https://bobayhsu.github.io/fivestory/dilemma/'&&document.getElementById('syncExternalOpen')?.href===h){frame.src=h+'?v=5&r='+Date.now();return;} // 童話兩難已經開著：回到測驗首頁 // 已經開著：回到該網站的目錄
       b._src.click();});});
   ['div.navPill[data-jump=formula]','div.navPill[data-jump=types]','#endBtn','#backBtn','#home'].forEach(sel=>{const b=mk(sel,'#1E1C1A');if(!b)return;R.appendChild(b);
