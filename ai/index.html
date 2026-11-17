@@ -541,8 +541,8 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiTop .sd.sdHome{grid-column:1 / -1;justify-self:stretch;text-align:center;font-size:47px!important;line-height:1.15;letter-spacing:2px!important;padding:0 0 4px!important}
 /* ===== 2026-11-11 換順序、心結人、套濾鏡右欄：故事按鈕＋空格（和靶心人一樣） ===== */
 .aiGrid>.bsShow,.bsCol .bsShow{background:#FBF9F6;border:2px solid #E4DED5;border-radius:14px;padding:18px 26px;overflow:auto;font-size:20px;line-height:1.5;color:#2A2723;white-space:pre-wrap;min-height:0;contain:size}
-#ai-curve .aiGrid>.bsShow,#ai-compare .aiGrid>.bsShow{grid-column:2;grid-row:2 / span 7}
-#ai-curve .aiGrid>.aiH:first-child,#ai-curve .aiGrid>.aiC,#ai-compare .aiGrid>.aiH:first-child,#ai-compare .aiGrid>.aiC{grid-column:1}
+#ai-curve .aiGrid>.bsShow,#ai-compare .aiGrid>.bsShow,#ai-merge .aiGrid>.bsShow{grid-column:2;grid-row:2 / span 7}
+#ai-curve .aiGrid>.aiH:first-child,#ai-curve .aiGrid>.aiC,#ai-compare .aiGrid>.aiH:first-child,#ai-compare .aiGrid>.aiC,#ai-merge .aiGrid>.aiH:first-child,#ai-merge .aiGrid>.aiC{grid-column:1}
 .bsCol{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
 .bsCol .bsShow{flex:1}
 .bsCol .aiH.bsPick{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:8px 12px;background:#2B2926;color:#FBF8F3;border-radius:12px}
@@ -570,7 +570,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #ai-filter .aiGrid>.aiPlots{grid-row:2;grid-template-columns:1fr 1fr!important;grid-template-rows:repeat(18,1fr)!important;grid-auto-flow:column;gap:4px 10px!important;align-content:stretch;margin:0;min-height:0}
 #ai-filter .aiGrid>.aiPlots .pl{font-size:20px!important;padding:0 10px!important;display:flex;align-items:center;overflow:hidden;text-overflow:ellipsis}
 #ai-filter .aiGrid>.aiPlots .pl i{min-width:36px}
-#ai-curve .aiGrid>.bsShow,#ai-compare .aiGrid>.bsShow{grid-column:2;grid-row:2 / span 7}
+#ai-curve .aiGrid>.bsShow,#ai-compare .aiGrid>.bsShow,#ai-merge .aiGrid>.bsShow{grid-column:2;grid-row:2 / span 7}
 #ai-order .aiGrid,#ai-filter .aiGrid{height:656px;flex:none}
 #ai-filter .aiGrid>.aiPlots{gap:3px 10px!important}
 #ai-filter .aiGrid>.aiPlots .pl{font-size:19px!important;line-height:1.2!important}
@@ -1300,8 +1300,8 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage > .slide.ai.v2 .aiGrid>.aiH:first-child{margin-top:var(--v2top,104px)!important;align-self:end!important}
 #stage > .slide.ai.v2 .aiGrid>.aiH.bsPick{align-self:start!important;z-index:3}
 #stage > .slide.ai.v2 .aiGrid>.bsShow{margin-top:var(--v2pick,92px)!important}
-#stage > #ai-bullseye.v2 > .aiGrid,#stage > #ai-curve.v2 > .aiGrid,#stage > #ai-compare.v2 > .aiGrid{grid-template-rows:auto repeat(7,1fr)!important}
-#ai-bullseye.v2 .aiGrid>.bsShow,#ai-curve.v2 .aiGrid>.bsShow,#ai-compare.v2 .aiGrid>.bsShow{grid-row:1 / span 8!important}
+#stage > #ai-bullseye.v2 > .aiGrid,#stage > #ai-curve.v2 > .aiGrid,#stage > #ai-compare.v2 > .aiGrid,#stage > #ai-merge.v2 > .aiGrid{grid-template-rows:auto repeat(7,1fr)!important}
+#ai-bullseye.v2 .aiGrid>.bsShow,#ai-curve.v2 .aiGrid>.bsShow,#ai-compare.v2 .aiGrid>.bsShow,#ai-merge.v2 .aiGrid>.bsShow{grid-row:1 / span 8!important}
 #ai-order.v2 .aiGrid>.bsShow{grid-row:1 / span 8!important}
 #stage > #ai-order.v2 > .aiGrid{grid-template-rows:auto repeat(7,1fr)!important;height:auto!important;flex:1!important}
 #stage > #ai-order.v2 .aiGrid > .aiOrd{flex-wrap:wrap!important;row-gap:2px!important;padding:6px 16px!important;align-content:center!important}
@@ -1350,17 +1350,17 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiRun.v2.inPanel .arEditorWrap{order:3!important}
 #aiRun.v2.inPanel.pedit .arMini{order:4!important;background:none;border:0;padding:6px 0 0}
 /* 2026-11-17 第五頁「對比」：靶心人與心結人並列 */
-#stage > #ai-compare.v2 .aiGrid > .aiC.cmp{display:grid!important;grid-template-columns:44px 1fr 34px 1fr!important;align-items:center!important;column-gap:6px!important}
-#stage > #ai-compare.v2 .aiGrid > .aiC.cmp > b{flex:none!important;width:auto!important;font-size:30px!important;color:#8E857A!important;text-align:center}
-#stage > #ai-compare.v2 .aiGrid > .aiC.cmp .cL,#stage > #ai-compare.v2 .aiGrid > .aiC.cmp .cR{font-size:34px!important;font-weight:900!important;letter-spacing:4px;text-align:center;border-radius:10px;padding:2px 0}
-#stage > #ai-compare.v2 .aiGrid > .aiC.cmp .cL{color:#FFFFFF!important}
-#stage > #ai-compare.v2 .aiGrid > .aiC.cmp .cR{color:#F5C518!important}
-#stage > #ai-compare.v2 .aiGrid > .aiC.cmp i{font-style:normal;font-size:24px;color:#C41F27;text-align:center}
-#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){font-size:29px!important;letter-spacing:1px!important}
+#stage > .slide.ai.v2 .aiGrid > .aiC.cmp{display:grid!important;grid-template-columns:44px 1fr 34px 1fr!important;align-items:center!important;column-gap:6px!important}
+#stage > .slide.ai.v2 .aiGrid > .aiC.cmp > b{flex:none!important;width:auto!important;font-size:30px!important;color:#8E857A!important;text-align:center}
+#stage > .slide.ai.v2 .aiGrid > .aiC.cmp .cL,#stage > .slide.ai.v2 .aiGrid > .aiC.cmp .cR{font-size:34px!important;font-weight:900!important;letter-spacing:4px;text-align:center;border-radius:10px;padding:2px 0}
+#stage > .slide.ai.v2 .aiGrid > .aiC.cmp .cL{color:#FFFFFF!important}
+#stage > .slide.ai.v2 .aiGrid > .aiC.cmp .cR{color:#F5C518!important}
+#stage > .slide.ai.v2 .aiGrid > .aiC.cmp i{font-style:normal;font-size:24px;color:#C41F27;text-align:center}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){font-size:25px!important;letter-spacing:0!important;padding-left:0!important;padding-right:0!important}
 </style></head>
 <body>
 <div id="stage">
-<nav id="aiTop" aria-label="AI 加值單元"><div class="sd" data-go="ai-bullseye">靶心人</div><div class="sd" data-go="ai-order">換順序</div><div class="sd" data-go="ai-filter">套濾鏡</div><div class="sd" data-go="ai-curve">心結人</div><div class="sd" data-go="ai-compare">對比</div><div class="sd sdHome" data-go="ai-frame" role="button" tabindex="0" aria-label="回總覽" title="回總覽"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div></nav>
+<nav id="aiTop" aria-label="AI 加值單元"><div class="sd" data-go="ai-bullseye">靶心人</div><div class="sd" data-go="ai-order">換順序</div><div class="sd" data-go="ai-filter">套濾鏡</div><div class="sd" data-go="ai-curve">心結人</div><div class="sd" data-go="ai-compare">對比</div><div class="sd" data-go="ai-merge">揉合</div><div class="sd sdHome" data-go="ai-frame" role="button" tabindex="0" aria-label="回總覽" title="回總覽"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div></nav>
 <!-- ===== 2026-11-09 新章節：AI 加值（ai-*） ===== -->
 <section class="slide frame mFrame" id="ai-frame" data-transition="fade">
 <h2 class="mH2">AI 加值：一個故事，18 萬種變化</h2><div class="aiBrand" aria-hidden="true">AI <small>加值的</small> 故事課</div>
@@ -1430,6 +1430,19 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <p class="aiC cmp"><b>5</b><span class="cL">意外</span><i>⇄</i><span class="cR">刺痛</span></p>
 <p class="aiC cmp"><b>6</b><span class="cL">轉彎</span><i>⇄</i><span class="cR">抉擇</span></p>
 <p class="aiC cmp"><b>7</b><span class="cL">結局</span><i>⇄</i><span class="cR">承擔</span></p>
+</div>
+</section>
+<section class="slide ai v2" id="ai-merge" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:22px">
+<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人 ＋ 心結人 揉合</h2>
+<div class="aiGrid">
+<p class="aiH">外在行動 × 內在心理，一條龍</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>不求回報</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>潘婷廣告</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>田能久與大蛇精</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>天長地久</button><button type="button" class="bsChip" data-bs="9"><i class="bsI">▶</i>讓我留下</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>啄木鳥</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>聖誕禮物</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>世界拼圖</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>安海瑟薇</button><button type="button" class="bsChip" data-bs="8"><i class="bsI t">文</i>小美人魚</button><button type="button" class="bsChip" data-bs="10"><i class="bsI t">文</i>三隻小豬</button><button type="button" class="bsChip" data-bs="11"><i class="bsI t">文</i>刺激1995</button><button type="button" class="bsOwn" title="自己的故事：輸入文字或 YouTube 網址" aria-label="自己的故事"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg></button></div></div>
+<p class="aiC cmp"><b>1</b><span class="cL">目標</span><i>×</i><span class="cR">渴望</span></p><div class="bsShow" aria-live="polite"></div>
+<p class="aiC cmp"><b>2</b><span class="cL">阻礙</span><i>×</i><span class="cR">顧忌</span></p>
+<p class="aiC cmp"><b>3</b><span class="cL">努力</span><i>×</i><span class="cR">兩難</span></p>
+<p class="aiC cmp"><b>4</b><span class="cL">結果</span><i>×</i><span class="cR">抗拒</span></p>
+<p class="aiC cmp"><b>5</b><span class="cL">意外</span><i>×</i><span class="cR">刺痛</span></p>
+<p class="aiC cmp"><b>6</b><span class="cL">轉彎</span><i>×</i><span class="cR">抉擇</span></p>
+<p class="aiC cmp"><b>7</b><span class="cL">結局</span><i>×</i><span class="cR">承擔</span></p>
 </div>
 </section>
 
@@ -1531,6 +1544,8 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
    p:function(o,s){return '以下是我用靶心人公式（目標、阻礙、努力、結果、意外、轉彎、結局）寫的故事。請改寫成心結人公式：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔。兩難要是兩個「都對」、卻不能兼得的價值；抗拒要寫出他如何拖延、逃避或假裝不用選；刺痛要刺中他最不願面對的地方；承擔要寫出他為選擇付出的代價。每一步寫一到兩句，最後用表格對照原本的靶心人七步。\n\n我的故事\n'+s;}},
   'ai-compare':{name:'對比',desc:'同一個故事，用靶心人（事情）和心結人（人物）並列拆解。',
    p:function(o,s){return '請把我的故事，同時用兩個公式拆解，並列對比：\n左邊是靶心人公式（看事情怎麼轉）：目標、阻礙、努力、結果、意外、轉彎、結局。\n右邊是心結人公式（看人物怎麼變）：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔。\n請用一個七列的表格，第一欄是靶心人步驟與內容，第二欄是同一列對應的心結人步驟與內容，每格一到兩句，用口語、具體的畫面。表格後面用三、四句話說明：這個故事裡，「事情的轉彎」和「人物的轉變」是怎麼互相推動的？\n\n我的故事\n'+s;}},
+  'ai-merge':{name:'揉合',desc:'把靶心人（外在行動）和心結人（內在心理）揉成一條龍，同步推演。',
+   p:function(o,s){return '請把我的故事，用「靶心人公式」和「心結人公式」揉合在一起拆解。不要分兩欄，而是把「外在行動」和「內在心理」寫成同步推演的一條龍，讓人看出這個故事就是一個完整的微型劇本。\n請分成七點，每一點的標題依序是：\n1.【目標 × 渴望】\n2.【阻礙 × 顧忌】\n3.【努力 × 兩難】\n4.【結果 × 抗拒】\n5.【意外 × 刺痛】\n6.【轉彎 × 抉擇】\n7.【結局 × 承擔】\n每一點用兩、三句話，先寫外在發生的事，再寫主角內心的狀態，兩者要因果相連；句中在對應的地方用括號標出（目標）（渴望）等步驟名。用口語、具體的畫面。\n\n我的故事\n'+s;}},
   'ai-order':{name:'換順序',desc:'選一種排列，讓 AI 用新的順序重講你的故事。',
    opts:['觀點主題 5612347','結局先行 5671234','情緒帶入 2134567','迷惑揭曉 3412567','傳統敘事 1234567','動作開場 3124567','答案先揭 7123456'],
    p:function(o,s){var n=(o.match(/\d{7}/)||['5612347'])[0],name=o.replace(/\s*\d{7}.*/, '').trim()||'觀點主題',N=['','目標','阻礙','努力','結果','意外','轉彎','結局'],seq=n.split('').map(function(d){return N[+d];}).join('→');
@@ -1540,7 +1555,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
    p:function(o,s){return '請把我的故事套上劇情模式「'+o+'」重新改寫：保留靶心人七步結構（目標、阻礙、努力、結果、意外、轉彎、結局），改變的是故事的核心衝突。最後逐條說明你改了哪裡。\n\n我的故事\n'+s;}}
  };
  /* 2026-11-11 換順序、套濾鏡、心結人：選了練習故事，送出的提示詞也換成《故事名》 */
- ['ai-order','ai-filter','ai-curve','ai-compare'].forEach(function(k){var f0=TASKS[k].p;TASKS[k].p=function(o,s){var r=f0(o,s),f=window.__bsStory!=null&&FILMS[window.__bsStory];return f?r.replace(/我的故事/g,f[0]):r;};});
+ ['ai-order','ai-filter','ai-curve','ai-compare','ai-merge'].forEach(function(k){var f0=TASKS[k].p;TASKS[k].p=function(o,s){var r=f0(o,s),f=window.__bsStory!=null&&FILMS[window.__bsStory];return f?r.replace(/我的故事/g,f[0]):r;};});
  var KEY='fivestory-ai-story',story='';try{story=localStorage.getItem(KEY)||'';}catch(_){}
  var cur=null,opt={'ai-filter':'為愛情犧牲一切'}; /* 套濾鏡預設 22，和投影片一致 */
  var FILMS=[['不求回報','https://www.youtube.com/watch?v=7s22HX18wDY'],['潘婷廣告','https://www.youtube.com/watch?v=Ect56804xfA'],['田能久與大蛇精','https://www.youtube.com/watch?v=CSuwxPxaJSQ'],['啄木鳥','',"有天小明和小美出去約會，突然小明肚子一陣滾動，變得很想放屁。\n聰明的他靈機一動，想到了一個絕妙的掩飾方法，於是轉頭對小美說：\n「小美，妳知道啄木鳥是怎麼叫的嗎？」\n小美搖搖頭說：「不知道耶，怎麼叫？」\n小明得意地笑著說：「那我模仿給妳聽喔～」\n接著，小明一邊用嘴巴發出「答答答答答」的模仿聲，一邊順便偷偷放了一個大響屁！\n模仿完畢後，小明一臉輕鬆地問：「怎麼樣？現在妳知道啄木鳥是怎樣叫了吧！」\n此時，小美一臉尷尬地看著他，弱弱地說：\n「不好意思……你剛剛放屁太大聲了，我完全沒聽到你模仿的叫聲。」\n小明：……"],['聖誕禮物','',"吉姆和黛拉是一對貧窮的年輕夫妻，夫妻倆各有一件值得驕傲的財富，一是吉姆祖傳的金錶，一是黛拉的秀髮。\n聖誕節前夕，妻子黛拉想幫丈夫買一件聖誕禮物，雖然認真存了好一陣子的錢，但顯然手邊的錢買不起任何東西。\n最後，黛拉做了一個痛苦的抉擇，她把自己最引以為豪的秀髮剪下，賣了出去，並用所得的錢幫吉姆買了一個白金錶鏈。黛拉對這個禮物非常得意，因為它可以用來搭配丈夫的金錶。\n丈夫吉姆回到家，看見妻子的頭髮，驚訝得說不出話來。不只是因為妻子的頭髮不見了，而是吉姆也為妻子買了一個聖誕禮物，一套玳瑁髮梳，但現在這個禮物失去用處了。\n黛拉看到吉姆買的禮物，先是高興地狂叫（這是她夢想中的禮物），繼而變成歇斯底里地哭泣和哀嚎（但現在這個禮物用不著了）。哭完之後，換黛拉拿出她的禮物，白金錶鏈。\n看到妻子買的禮物，吉姆笑了出來，這個禮物目前也用不著了，因為他送給妻子的髮梳，正是用賣掉金錶的錢買來的\n吉姆和黛拉為對方買的聖誕禮物，都是用自己最珍貴的東西換來的。原來，在他們心中，對方比長髮、金錶都重要，這才是最珍貴的聖誕禮物。"],['世界拼圖','',"某天，一位牧師正在苦思明天的「演講題目」，\n可他的孩子卻在旁邊吵著要玩，\n於是父親拿出一把剪刀，\n將一張世界地圖剪成許多碎片，變成一副拼圖，\n然後對孩子說：\n「只要你把世界地圖拼好，爸爸就陪你玩。」\n父親以為孩子要花很多時間才能拼得出來，\n沒想到他只花了三分鐘就拼完了。\n父親難以置信，於是問孩子怎麼辦到的？\n孩子說：\n「這還不簡單，地圖背後有個人像，\n只要把人像拼好，翻過來不就是地圖了嗎？」\n牧師聽完，深受啟發，因而把明天的「演講題目」定為：\n「只要人對了，世界就對了」"],['安海瑟薇','',"2004年，李安正在籌拍《斷背山》，面試了一堆女演員，當時還是個小咖的女星安海瑟薇也在其中。\n安海瑟薇面試完之後，導演李安問了她一句話：「你會騎馬嗎？」\n「會！我會騎馬。」安海瑟薇說。\n很平常的問與答，但安海瑟薇卻微微發著抖，因為她撒了一個謊。\n安海瑟薇不會騎馬，但她記得父母告訴她的話：\n「人生最難的是機會，最簡單的是學習。如果有人問你能不能做某件事，一定要回答可以，而且要在兩週內把那件事學起來。」\n回家之後，安海瑟薇開始學騎馬。\n學著、學著，有一天，馬背上的安海瑟薇，電話突然響了起來。\n電話那頭傳來的是李安的聲音，安海瑟薇屏住呼吸，隨後她聽到──恭喜你，你錄取了。"],['天長地久','https://www.youtube.com/watch?v=zTNnvuWkdTo'],['小美人魚','',"一、目標：王子遭遇船難，美人魚救了他，並對他一見鍾情。她的目標是跟王子結婚。\n\n二、阻礙：美人魚有尾巴，無法像人類一樣用雙腳在陸地上生活。\n\n三、努力：美人魚向巫婆求助，以自己最美的嗓音交換一雙人類的腳，從此不能說話。巫婆警告：如果最後沒能與王子結婚，她就會化為泡沫死去。美人魚仍答應交換。\n\n四、結果：美人魚來到岸上，與王子度過一段短暫的美好時光。\n\n五、意外：王子興奮地宣布，終於找到當年在海上救他的女子——他誤以為那人是鄰國公主，並決定與公主結婚。真正救他的美人魚因失去聲音，無法說出真相。\n\n六、轉彎：姐姐們為救美人魚，用頭髮向巫婆換來一把匕首。只要美人魚殺死心愛的王子，就能活下來。深夜，她來到熟睡的王子身旁，舉起匕首，在愛情與自己的生命之間痛苦掙扎。\n\n七、結局：刀子還沒落下，眼淚先落下。美人魚丟掉匕首，選擇犧牲自己、成全王子，最後化為海上的泡沫。"],['讓我留下','https://www.youtube.com/watch?v=1ZrKxYUAyBQ'],['三隻小豬','',"豬媽媽老了，養不起三個孩子，於是對三隻小豬說：「你們長大了，該自己去蓋房子、過日子了。不過要小心，森林裡有一隻大野狼。」\n豬大哥最懶，隨便撿了一堆稻草，半天就蓋好一間草屋，然後躺著曬太陽。\n豬二哥也想偷懶，砍了幾根木頭，一天就蓋好一間木屋，然後跑去玩。\n豬小弟卻一塊一塊地搬磚頭、砌牆，忙了好多天才蓋好一間磚屋。兩個哥哥笑他：「傻瓜，那麼辛苦幹嘛？」\n有一天，大野狼來了。牠對著草屋吹一口氣，草屋就飛走了，豬大哥嚇得逃到二哥的木屋。\n大野狼追過來，用力一撞，木屋也垮了。兩隻小豬拚命跑，躲進弟弟的磚屋。\n大野狼又吹又撞，磚屋卻一動也不動。牠不甘心，爬上屋頂，想從煙囪溜進去。\n豬小弟早就料到了，在壁爐上燒了一大鍋滾燙的開水。大野狼一滑下煙囪，就「撲通」掉進鍋裡，燙得哇哇大叫，從此再也不敢來了。\n兩個哥哥終於明白，最辛苦蓋的房子，才是最安全的家。從此三隻小豬一起住在磚屋裡，過著平安的日子。"],['刺激1995','',"銀行家安迪被控殺害妻子和她的情夫，雖然他堅稱自己是清白的，還是被判兩個無期徒刑，關進了鯊堡監獄。\n獄中生活很殘酷：獄警暴力、獄霸欺凌，安迪一開始沉默寡言，只跟一個專門走私東西的老囚犯瑞德做朋友，向他買了一把小石鎚，說是要雕石頭。\n後來安迪靠著理財專長，幫獄警報稅、替典獄長管帳，慢慢在監獄裡站穩腳步。他還一年又一年寫信爭取經費，把破舊的圖書室變成像樣的圖書館。\n有一天，一個年輕的新囚犯湯米說，他在別的監獄聽過有人承認殺了安迪的妻子。安迪終於看到洗清冤屈的希望，去找典獄長幫忙。\n沒想到典獄長怕安迪出獄後揭發他洗錢的祕密，不但拒絕，還把安迪關進禁閉室，更暗中派人殺了湯米。\n大家都以為安迪的希望徹底破滅了。瑞德甚至擔心他會想不開。\n隔天早上點名，安迪的牢房卻空了。原來這十九年來，他每天晚上用那把小石鎚，在牆上海報後面挖出一條通道。那天夜裡，他爬過五百碼又臭又髒的下水道，逃了出去。\n安迪不只逃獄，還帶走了典獄長的帳本和黑錢，把罪證寄給報社。典獄長在警察上門前自殺。\n多年後，瑞德獲得假釋，照著安迪的約定，在一棵大樹下找到他留下的信和錢。瑞德最後來到墨西哥的海邊，看見安迪正在修一艘小船，兩個老朋友終於重逢。"]]; /* 2026-11-10 靶心人練習用微電影 */
@@ -1575,7 +1590,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   if(cur==='ai-order'&&window.__aiOrd){terms.push(window.__aiOrd.name);terms.push(window.__aiOrd.n);}
   if(cur==='ai-bullseye')terms.push('靶心人');
   if(cur==='ai-curve')terms.push('心結人');
-  if(cur==='ai-compare'){terms.push('靶心人公式');terms.push('心結人公式');}
+  if(cur==='ai-compare'||cur==='ai-merge'){terms.push('靶心人公式');terms.push('心結人公式');}
   if(window.__bsStory!=null&&window.__bsFilms&&window.__bsFilms[window.__bsStory])terms.push(window.__bsFilms[window.__bsStory][0]);
   terms=terms.filter(Boolean).sort(function(a,b){return b.length-a.length;});
   var found=[];
@@ -1815,7 +1830,7 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
    if(h!==p.innerHTML)p.innerHTML=h;});}
  window.__bsPrompts=bsPrompts;
  document.addEventListener('click',function(){setTimeout(bsPrompts,0);});
- function readerChips(){['ai-bullseye','ai-order','ai-curve','ai-compare','ai-filter'].forEach(function(id){var h=document.getElementById('r-'+id);if(!h||(h.nextSibling&&h.nextSibling.classList&&h.nextSibling.classList.contains('bsPickR')))return;
+ function readerChips(){['ai-bullseye','ai-order','ai-curve','ai-compare','ai-merge','ai-filter'].forEach(function(id){var h=document.getElementById('r-'+id);if(!h||(h.nextSibling&&h.nextSibling.classList&&h.nextSibling.classList.contains('bsPickR')))return;
   var d=document.createElement('div');d.className='bsPickR';
   d.innerHTML='<span class="lab">點一個故事，提示詞就換成它</span>'+[].map.call(document.querySelectorAll('#ai-bullseye .bsRow'),function(r){return '<div class="bsRowR">'+r.innerHTML+'</div>';}).join('');
   h.parentNode.insertBefore(d,h.nextSibling);var bx=document.createElement('div');bx.className='bsShow';d.parentNode.insertBefore(bx,d.nextSibling);});render();}
