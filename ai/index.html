@@ -1482,6 +1482,10 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .bsSel .bsPan{grid-template-columns:3fr 1fr}
 .bsPan .mic .bsColL{grid-template-columns:1fr 1fr 1fr}
 .bsPan .mic button{font-size:21px}
+/* 2026-11-17 影片欄：微電影用淡藍底區隔 */
+.bsPan button.m{background:#EAF1F8;border-color:#B9CCE0;color:#1F3A5A}
+.bsPan button.m:hover{border-color:#C41F27;color:#C41F27}
+.bsPan button.m.on{background:#FDF1F0;border-color:#C41F27;color:#C41F27}
 </style></head>
 <body>
 <div id="stage">
@@ -2003,7 +2007,7 @@ else if(ai==='gemini')url='https://gemini.google.com/app?prompt='+q;
   var drop=wrap.querySelector('.bsDrop');
   /* 2026-11-17 點選單改開大面板：影片｜微電影｜文字 三欄並排（原本的 select 保留，負責顯示與同步） */
   var nm=function(c){return c.textContent.replace(/^[▶文]/,'').trim();};
-  var col=function(t,list,cls){return '<div class="bsCol '+(cls||'')+'"><div class="bsColH">'+t+'</div><div class="bsColL">'+list.map(function(c){return '<button type="button" data-v="'+c.dataset.bs+'">'+nm(c)+'</button>';}).join('')+'</div></div>';};
+  var col=function(t,list,cls){return '<div class="bsCol '+(cls||'')+'"><div class="bsColH">'+t+'</div><div class="bsColL">'+list.map(function(c){return '<button type="button"'+(c.classList.contains('bsM')?' class="m"':'')+' data-v="'+c.dataset.bs+'">'+nm(c)+'</button>';}).join('')+'</div></div>';};
   var pan=document.createElement('div');pan.className='bsPan';pan.setAttribute('role','dialog');pan.setAttribute('aria-label','選一個練習故事');
   pan.innerHTML=col('影片<small>（請用 Gemini）</small>',vid,'mic')+col('文字',txt);
   wrap.appendChild(pan);
