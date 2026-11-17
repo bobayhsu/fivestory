@@ -1390,10 +1390,23 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #reader .mGrid .mCard.g-merge{border-width:3px!important}
 #reader .mGrid .mCard .mEnd{display:inline-block;margin-left:6px;font-size:12px;font-weight:900;color:#fff;background:#171717;border-radius:999px;padding:1px 8px}
 
-/* ===== 2026-11-17 內頁分頁改兩排（同總覽）：上排靶心人／換順序／套濾鏡，下排心結人／對比／揉合 ===== */
-#stage:has(> .slide.ai.v2.active) #aiTop{display:grid!important;grid-template-columns:repeat(3,1fr)!important;column-gap:0!important;row-gap:0!important}
-#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){font-size:28px!important;line-height:1.15!important;letter-spacing:4px!important;padding:6px 0 4px!important;border-bottom-width:2px!important}
-#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome){padding-bottom:1px!important;border-bottom-width:5px!important}
+/* ===== 2026-11-17 內頁分頁做成「迷你總覽」：兩排小卡＋箭頭，靶心人往下指心結人，揉合是終點 ===== */
+#stage:has(> .slide.ai.v2.active) #aiTop{display:grid!important;grid-template-columns:repeat(3,1fr)!important;column-gap:30px!important;row-gap:22px!important;padding:14px 22px 0!important;width:589px!important;box-sizing:border-box!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){position:relative!important;overflow:visible!important;font-size:25px!important;line-height:1.15!important;letter-spacing:3px!important;padding:6px 0!important;text-align:center!important;background:#2A2725!important;color:#CFC6B8!important;border:3px solid #6B645C!important;border-radius:10px!important;box-shadow:none!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome):hover{border-color:#C41F27!important;color:#FFFFFF!important;background:#2A2725!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome){color:#1E1C1A!important;background:#F5C518!important;border:3px solid #F5C518!important;padding:6px 0!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome):hover{border-color:#C41F27!important;color:#1E1C1A!important;background:#F5C518!important}
+/* 往右箭頭 */
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(1)::after,#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(2)::after,#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(4)::after,#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(5)::after{content:'';position:absolute;right:-24px;top:50%;margin-top:-9px;border-left:13px solid #8E857A;border-top:9px solid transparent;border-bottom:9px solid transparent;pointer-events:none}
+/* 靶心人往下箭頭 */
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(1)::before{content:'';position:absolute;left:50%;bottom:-21px;margin-left:-10px;border-top:14px solid #8E857A;border-left:10px solid transparent;border-right:10px solid transparent;pointer-events:none}
+/* 揉合＝終點 */
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(6){border-width:5px!important;padding:4px 0!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(6)::before{content:'終點';position:absolute;right:-10px;top:-14px;font-size:14px;line-height:1;letter-spacing:1px;font-weight:900;color:#1E1C1A;background:#EDE7DD;border-radius:999px;padding:4px 8px;pointer-events:none}
+/* 兩排分頁多佔的高度：左欄內容往下 48px，面板往下延伸 44px */
+#stage > .slide.ai.v2 > .aiGrid > .aiH:first-child{margin-top:152px!important}
+#stage > .slide.ai.v2{padding-bottom:60px!important}
+#stage > .slide.ai.v2::after{bottom:38px!important}
 </style></head>
 <body>
 <div id="stage">
