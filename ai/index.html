@@ -1414,18 +1414,45 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(1)::after,#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(2)::after,#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(4)::after,#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(5)::after{border-left-color:#FFFFFF!important}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(1)::before{border-top-color:#FFFFFF!important}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(6)::before{color:#FFFFFF!important;background:#171717!important;border:2px solid #FFFFFF}
+
+/* ===== 2026-11-17 改五格：靶心人直立在左，右邊 換順序／套濾鏡、心結人（對比頁）／二合一（揉合頁）；不用箭頭 ===== */
+#stage:has(> .slide.ai.v2.active) #aiTop{grid-template-columns:96px 1fr 1fr!important;grid-template-rows:auto auto!important;column-gap:18px!important;row-gap:14px!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd::before,#stage:has(> .slide.ai.v2.active) #aiTop .sd::after{content:none!important;display:none!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){border-width:3px!important;padding:7px 0!important;border-radius:12px!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.sdBs{grid-column:1!important;grid-row:1/3!important;writing-mode:vertical-rl!important;display:flex!important;align-items:center!important;justify-content:center!important;letter-spacing:4px!important;font-size:27px!important;line-height:1!important;padding:0!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(2){grid-column:2!important;grid-row:1!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(3){grid-column:3!important;grid-row:1!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(4){grid-column:2!important;grid-row:2!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(5){grid-column:3!important;grid-row:2!important}
+/* 總覽：同樣五格 */
+#ai-frame>.meta.mGrid.five{grid-template-columns:300px minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:64px 210px 84px 210px!important}
+#ai-frame .mGrid.five .mRowTop{grid-column:1/4!important;grid-row:1!important}
+#ai-frame .mGrid.five .mRowBot{grid-column:2/4!important;grid-row:3!important}
+#ai-frame .mGrid.five .g-bullseye{grid-column:1!important;grid-row:2/5!important;height:auto!important}
+#ai-frame .mGrid.five .g-order{grid-column:2!important;grid-row:2!important}
+#ai-frame .mGrid.five .g-filter{grid-column:3!important;grid-row:2!important}
+#ai-frame .mGrid.five .g-xin{grid-column:2!important;grid-row:4!important}
+#ai-frame .mGrid.five .g-two{grid-column:3!important;grid-row:4!important}
+#ai-frame .mGrid.five .mCard,#ai-frame .mGrid.five .mCard.g-bullseye,#ai-frame .mGrid.five .mCard.g-order{background:#FFFFFF!important;border:5px solid #171717!important;border-radius:22px!important;box-shadow:0 10px 24px rgba(30,28,26,.12)!important;padding:20px 28px!important}
+#ai-frame .mGrid.five .mCard:is(:hover,:focus-visible,:active),#ai-frame .mGrid.five .mCard.g-bullseye:is(:hover,:focus-visible,:active),#ai-frame .mGrid.five .mCard.g-order:is(:hover,:focus-visible,:active){border-color:#C41F27!important;box-shadow:0 10px 24px rgba(196,31,39,.16)!important}
+#ai-frame .mGrid.five .g-bullseye{align-items:center!important;justify-content:space-between!important;text-align:center!important;padding:26px 20px!important}
+#ai-frame .mGrid.five .g-bullseye .mName{writing-mode:vertical-rl;font-size:96px!important;letter-spacing:18px;margin:0!important;line-height:1!important}
+#ai-frame .mGrid.five .g-bullseye .mDesc{margin:0!important;font-size:28px!important}
+#ai-frame .mGrid.five .g-bullseye .aiCardIcon{right:22px!important;top:22px!important;font-size:56px!important}
+#reader .mGrid.five .mRowLab{grid-column:1/3!important}
+#reader .mGrid.five .g-bullseye{grid-column:1/3!important}
 </style></head>
 <body>
 <div id="stage">
-<nav id="aiTop" aria-label="AI 加值單元"><div class="sd" data-go="ai-bullseye">靶心人</div><div class="sd" data-go="ai-order">換順序</div><div class="sd" data-go="ai-filter">套濾鏡</div><div class="sd" data-go="ai-curve">心結人</div><div class="sd" data-go="ai-compare">對比</div><div class="sd" data-go="ai-merge">揉合</div><div class="sd sdHome" data-go="ai-frame" role="button" tabindex="0" aria-label="回總覽" title="回總覽"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div></nav>
+<nav id="aiTop" aria-label="AI 加值單元"><div class="sd sdBs" data-go="ai-bullseye">靶心人</div><div class="sd" data-go="ai-order">換順序</div><div class="sd" data-go="ai-filter">套濾鏡</div><div class="sd" data-go="ai-compare">心結人</div><div class="sd" data-go="ai-merge">二合一</div><div class="sd sdHome" data-go="ai-frame" role="button" tabindex="0" aria-label="回總覽" title="回總覽"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div></nav>
 <!-- ===== 2026-11-09 新章節：AI 加值（ai-*） ===== -->
 <section class="slide frame mFrame" id="ai-frame" data-transition="fade">
 <h2 class="mH2">AI 加值：一個故事，18 萬種變化</h2><div class="aiBrand" aria-hidden="true">AI <small>加值的</small> 故事課</div>
-<div class="meta mGrid" id="metaTop">
+<div class="meta mGrid five" id="metaTop">
 <div class="mRowLab mRowTop"><span class="mRowTag">變多</span><span class="mRowText">一個故事，<em>18 萬種變化</em></span><span class="mPill">5,040 × 36 = 181,440</span></div>
-<div class="mCard g-bullseye" data-go="ai-bullseye"><span class="aiCardIcon" aria-hidden="true">🎯</span><svg class="mCardShape mCardShapeFork" viewBox="0 0 400 330" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V73 H375 L398 105 L375 137 H365 V207 H199 V268 H215 L180 326 L145 268 H161 V207 H16 Q4 207 4 195 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">故事</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說一個完整的故事</p></div><div class="mCard g-order" data-go="ai-order"><span class="aiCardIcon" aria-hidden="true">🔢</span><svg class="mCardShape mCardShapeRight" viewBox="0 0 400 230" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V82 H375 L398 114 L375 146 H365 V212 Q365 225 352 225 H16 Q4 225 4 212 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">排列</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter"><span class="aiCardIcon" aria-hidden="true">🎬</span><div class="mTop"><span class="mTag">劇情</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div>
+<div class="mCard g-bullseye" data-go="ai-bullseye"><span class="aiCardIcon" aria-hidden="true">🎯</span><div class="mTop"><span class="mTag">故事</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說故事</p></div><div class="mCard g-order" data-go="ai-order"><span class="aiCardIcon" aria-hidden="true">🔢</span><div class="mTop"><span class="mTag">排列</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter"><span class="aiCardIcon" aria-hidden="true">🎬</span><div class="mTop"><span class="mTag">劇情</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div>
 <div class="mRowLab mRowBot"><span class="mRowTag">變深</span><span class="mRowText">事情會轉彎，<em>人也會轉變</em></span></div>
-<div class="mCard g-curve" data-go="ai-curve"><span class="aiCardIcon" aria-hidden="true">🧠</span><svg class="mCardShape mCardShapeRight" viewBox="0 0 400 230" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V82 H375 L398 114 L375 146 H365 V212 Q365 225 352 225 H16 Q4 225 4 212 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">人物</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div><div class="mCard g-compare" data-go="ai-compare"><span class="aiCardIcon" aria-hidden="true">⚖️</span><svg class="mCardShape mCardShapeRight" viewBox="0 0 400 230" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V82 H375 L398 114 L375 146 H365 V212 Q365 225 352 225 H16 Q4 225 4 212 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">並列</span></div><p class="mName">對比</p><p class="mDesc">看事情怎麼轉，看人物怎麼變</p></div><div class="mCard g-merge" data-go="ai-merge"><span class="aiCardIcon" aria-hidden="true">🧩</span><div class="mTop"><span class="mTag">合一</span><span class="mEnd">終點</span></div><p class="mName">揉合</p><p class="mDesc">讓事與人互相推動</p></div>
+<div class="mCard g-xin" data-go="ai-compare"><span class="aiCardIcon" aria-hidden="true">🧠</span><div class="mTop"><span class="mTag">人物</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div><div class="mCard g-two" data-go="ai-merge"><span class="aiCardIcon" aria-hidden="true">🧩</span><div class="mTop"><span class="mTag">合一</span></div><p class="mName">二合一</p><p class="mDesc">靶心人＋心結人，事與人互相推動</p></div>
 </div>
 </section>
 
@@ -1465,21 +1492,8 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </div>
 </section>
 
-<section class="slide ai v2" id="ai-curve" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:22px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">心結人</h2>
-<div class="aiGrid">
-<p class="aiH">事情轉彎了，人呢？</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>不求回報</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>潘婷廣告</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>田能久與大蛇精</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>天長地久</button><button type="button" class="bsChip" data-bs="9"><i class="bsI">▶</i>讓我留下</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>啄木鳥</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>聖誕禮物</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>世界拼圖</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>安海瑟薇</button><button type="button" class="bsChip" data-bs="8"><i class="bsI t">文</i>小美人魚</button><button type="button" class="bsChip" data-bs="10"><i class="bsI t">文</i>三隻小豬</button><button type="button" class="bsChip" data-bs="11"><i class="bsI t">文</i>刺激1995</button><button type="button" class="bsOwn" title="自己的故事：輸入文字或 YouTube 網址" aria-label="自己的故事"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg></button></div></div>
-<p class="aiC"><b>1 渴望</b><span>主角最想要什麼？</span></p><div class="bsShow" aria-live="polite"></div>
-<p class="aiC"><b>2 顧忌</b><span>他最怕失去什麼？</span></p>
-<p class="aiC"><b>3 兩難</b><span>兩個都對，卻只能選一個？</span></p>
-<p class="aiC"><b>4 抗拒</b><span>他怎麼拖延、逃避？</span></p>
-<p class="aiC"><b>5 刺痛</b><span>什麼刺中他最痛的地方？</span></p>
-<p class="aiC"><b>6 抉擇</b><span>他最後選了什麼？</span></p>
-<p class="aiC"><b>7 承擔</b><span>他付出了什麼代價？</span></p>
-</div>
-</section>
 <section class="slide ai v2" id="ai-compare" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:22px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人 × 心結人</h2>
+<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">心結人：靶心人 × 心結人</h2>
 <div class="aiGrid">
 <p class="aiH">事情怎麼轉？人怎麼變？</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>不求回報</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>潘婷廣告</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>田能久與大蛇精</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>天長地久</button><button type="button" class="bsChip" data-bs="9"><i class="bsI">▶</i>讓我留下</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>啄木鳥</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>聖誕禮物</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>世界拼圖</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>安海瑟薇</button><button type="button" class="bsChip" data-bs="8"><i class="bsI t">文</i>小美人魚</button><button type="button" class="bsChip" data-bs="10"><i class="bsI t">文</i>三隻小豬</button><button type="button" class="bsChip" data-bs="11"><i class="bsI t">文</i>刺激1995</button><button type="button" class="bsOwn" title="自己的故事：輸入文字或 YouTube 網址" aria-label="自己的故事"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg></button></div></div>
 <p class="aiC cmp"><b>1</b><span class="cL">目標</span><i>⇄</i><span class="cR">渴望</span></p><div class="bsShow" aria-live="polite"></div>
@@ -1492,7 +1506,7 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 </div>
 </section>
 <section class="slide ai v2" id="ai-merge" data-transition="fade" style="background:#F7F5F1;color:#2A2723;font-family:'Noto Sans TC', Arial, sans-serif;padding:72px 128px 135px;display:flex;flex-direction:column;gap:22px">
-<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">靶心人 ＋ 心結人 揉合</h2>
+<h2 style="font-size:64px;font-weight:900;letter-spacing:4px;color:#1E1C1A">二合一：靶心人 ＋ 心結人</h2>
 <div class="aiGrid">
 <p class="aiH">外在行動 × 內在心理，一條龍</p><div class="aiH red bsPick"><div class="bsRow"><span class="bsLab">影片</span><button type="button" class="bsChip" data-bs="0"><i class="bsI">▶</i>不求回報</button><button type="button" class="bsChip" data-bs="1"><i class="bsI">▶</i>潘婷廣告</button><button type="button" class="bsChip" data-bs="2"><i class="bsI">▶</i>田能久與大蛇精</button><button type="button" class="bsChip" data-bs="7"><i class="bsI">▶</i>天長地久</button><button type="button" class="bsChip" data-bs="9"><i class="bsI">▶</i>讓我留下</button></div><div class="bsRow"><span class="bsLab">文字</span><button type="button" class="bsChip" data-bs="3"><i class="bsI t">文</i>啄木鳥</button><button type="button" class="bsChip" data-bs="4"><i class="bsI t">文</i>聖誕禮物</button><button type="button" class="bsChip" data-bs="5"><i class="bsI t">文</i>世界拼圖</button><button type="button" class="bsChip" data-bs="6"><i class="bsI t">文</i>安海瑟薇</button><button type="button" class="bsChip" data-bs="8"><i class="bsI t">文</i>小美人魚</button><button type="button" class="bsChip" data-bs="10"><i class="bsI t">文</i>三隻小豬</button><button type="button" class="bsChip" data-bs="11"><i class="bsI t">文</i>刺激1995</button><button type="button" class="bsOwn" title="自己的故事：輸入文字或 YouTube 網址" aria-label="自己的故事"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg></button></div></div>
 <p class="aiC cmp"><b>1</b><span class="cL">目標</span><i>×</i><span class="cR">渴望</span></p><div class="bsShow" aria-live="polite"></div>
@@ -1601,9 +1615,9 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
    p:function(o,s){var f=window.__bsStory!=null&&FILMS[window.__bsStory],w=f?f[0]:'我的故事';return '請把'+w+'整理成靶心人公式七步：目標、阻礙、努力、結果、意外、轉彎、結局。每一步標出步驟名稱，寫一到兩句，用口語、具體的畫面，不要加金句結尾。\n\n'+w+'\n'+s;}},
   'ai-curve':{name:'心結人',desc:'把靶心人七步（事情轉彎），改寫成心結人七步（人物現形）。',
    p:function(o,s){return '以下是我用靶心人公式（目標、阻礙、努力、結果、意外、轉彎、結局）寫的故事。請改寫成心結人公式：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔。兩難要是兩個「都對」、卻不能兼得的價值；抗拒要寫出他如何拖延、逃避或假裝不用選；刺痛要刺中他最不願面對的地方；承擔要寫出他為選擇付出的代價。每一步寫一到兩句，最後用表格對照原本的靶心人七步。\n\n我的故事\n'+s;}},
-  'ai-compare':{name:'對比',desc:'同一個故事，用靶心人（事情）和心結人（人物）並列拆解。',
+  'ai-compare':{name:'心結人',desc:'同一個故事，用靶心人（事情）和心結人（人物）並列拆解。',
    p:function(o,s){return '請把我的故事，同時用兩個公式拆解，並列對比：\n左邊是靶心人公式（看事情怎麼轉）：目標、阻礙、努力、結果、意外、轉彎、結局。\n右邊是心結人公式（看人物怎麼變）：渴望、顧忌、兩難、抗拒、刺痛、抉擇、承擔。\n請用一個七列的表格，第一欄是靶心人步驟與內容，第二欄是同一列對應的心結人步驟與內容，每格一到兩句，用口語、具體的畫面。表格後面用三、四句話說明：這個故事裡，「事情的轉彎」和「人物的轉變」是怎麼互相推動的？\n\n我的故事\n'+s;}},
-  'ai-merge':{name:'揉合',desc:'把靶心人（外在行動）和心結人（內在心理）揉成一條龍，同步推演。',
+  'ai-merge':{name:'二合一',desc:'把靶心人（外在行動）和心結人（內在心理）揉成一條龍，同步推演。',
    p:function(o,s){return '請把我的故事，用「靶心人公式」和「心結人公式」揉合在一起拆解。不要分兩欄，而是把「外在行動」和「內在心理」寫成同步推演的一條龍，讓人看出這個故事就是一個完整的微型劇本。\n請分成七點，每一點的標題依序是：\n1.【目標 × 渴望】\n2.【阻礙 × 顧忌】\n3.【努力 × 兩難】\n4.【結果 × 抗拒】\n5.【意外 × 刺痛】\n6.【轉彎 × 抉擇】\n7.【結局 × 承擔】\n每一點用兩、三句話，先寫外在發生的事，再寫主角內心的狀態，兩者要因果相連；句中在對應的地方用括號標出（目標）（渴望）等步驟名。用口語、具體的畫面。\n\n我的故事\n'+s;}},
   'ai-order':{name:'換順序',desc:'選一種排列，讓 AI 用新的順序重講你的故事。',
    opts:['觀點主題 5612347','結局先行 5671234','情緒帶入 2134567','迷惑揭曉 3412567','傳統敘事 1234567','動作開場 3124567','答案先揭 7123456'],
