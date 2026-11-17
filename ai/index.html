@@ -1492,6 +1492,11 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .bsPan .mic button.on{background:#FDF1F0;border-color:#C41F27;color:#C41F27}
 /* 2026-11-17 選中的分頁：字色、底色、字級同黃色副標 */
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome),#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome):hover{color:#F5C518!important;background:#1E1C1A!important;font-size:28px!important;font-weight:700!important;border-color:#C41F27!important;box-shadow:none!important}
+/* 2026-11-17 三個統一黃字白框：選中的分頁、黃色副標、選中的劇情 */
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome),#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome):hover{border-color:#FFFFFF!important}
+#stage > .slide.ai.v2 .aiGrid>.aiH:first-child{border-left-color:#FFFFFF!important}
+#stage > .slide.ai.v2 .aiGrid .aiPlots .pl.hot,#stage > .slide.ai.v2 .aiGrid .aiPlots .pl.hot:hover{color:#F5C518!important;background:#1E1C1A!important;border-color:#FFFFFF!important;box-shadow:none!important}
+#stage > .slide.ai.v2 .aiGrid .aiPlots .pl.hot i{color:#F5C518!important}
 </style></head>
 <body>
 <div id="stage">
