@@ -1451,6 +1451,10 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #ai-frame .mGrid.five .g-order::before,#ai-frame .mGrid.five .g-xin::before{left:-42px}
 #ai-frame .mGrid.five .g-order::after,#ai-frame .mGrid.five .g-xin::after{right:-42px}
 #reader .mGrid.five .mCard::before,#reader .mGrid.five .mCard::after{display:none!important}
+/* 2026-11-17 總覽卡片拿掉插圖與小標，名稱置中靠上排列 */
+#ai-frame .mGrid.five .mCard{justify-content:center!important}
+#ai-frame .mGrid.five .mCard .mName{margin-top:0!important}
+#ai-frame .mGrid.five .g-bullseye{justify-content:center!important;gap:34px}
 </style></head>
 <body>
 <div id="stage">
@@ -1460,9 +1464,9 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <h2 class="mH2">AI 加值：一個故事，18 萬種變化</h2><div class="aiBrand" aria-hidden="true">AI <small>加值的</small> 故事課</div>
 <div class="meta mGrid five" id="metaTop">
 <div class="mRowLab mRowTop"><span class="mRowTag">變多</span><span class="mRowText">一個故事，<em>18 萬種變化</em></span><span class="mPill">5,040 × 36 = 181,440</span></div>
-<div class="mCard g-bullseye" data-go="ai-bullseye"><span class="aiCardIcon" aria-hidden="true">🎯</span><div class="mTop"><span class="mTag">故事</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說故事</p></div><div class="mCard g-order" data-go="ai-order"><span class="aiCardIcon" aria-hidden="true">🔢</span><div class="mTop"><span class="mTag">排列</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter"><span class="aiCardIcon" aria-hidden="true">🎬</span><div class="mTop"><span class="mTag">劇情</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div>
+<div class="mCard g-bullseye" data-go="ai-bullseye"><p class="mName">靶心人</p><p class="mDesc">七步驟說故事</p></div><div class="mCard g-order" data-go="ai-order"><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter"><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div>
 <div class="mRowLab mRowBot"><span class="mRowTag">變深</span><span class="mRowText">事情會轉彎，<em>人也會轉變</em></span></div>
-<div class="mCard g-xin" data-go="ai-compare"><span class="aiCardIcon" aria-hidden="true">🧠</span><div class="mTop"><span class="mTag">人物</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div><div class="mCard g-two" data-go="ai-merge"><span class="aiCardIcon" aria-hidden="true">🧩</span><div class="mTop"><span class="mTag">合一</span></div><p class="mName">二合一</p><p class="mDesc">靶心人＋心結人，事與人互相推動</p></div>
+<div class="mCard g-xin" data-go="ai-compare"><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div><div class="mCard g-two" data-go="ai-merge"><p class="mName">二合一</p><p class="mDesc">靶心人＋心結人，事與人互相推動</p></div>
 </div>
 </section>
 
