@@ -1407,6 +1407,13 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage > .slide.ai.v2 > .aiGrid > .aiH:first-child{margin-top:152px!important}
 #stage > .slide.ai.v2{padding-bottom:60px!important}
 #stage > .slide.ai.v2::after{bottom:38px!important}
+/* 2026-11-17 分頁顏色同總覽：白卡、黑框、黑字；選中紅框紅字；箭頭白色 */
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){background:#FFFFFF!important;color:#171717!important;border-color:#171717!important;box-shadow:0 0 0 2px #FFFFFF!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome):hover{background:#FFFFFF!important;color:#C41F27!important;border-color:#C41F27!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome),#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome):hover{background:#FDF1F0!important;color:#C41F27!important;border-color:#C41F27!important;box-shadow:0 0 0 2px #FDF1F0!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(1)::after,#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(2)::after,#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(4)::after,#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(5)::after{border-left-color:#FFFFFF!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(1)::before{border-top-color:#FFFFFF!important}
+#stage:has(> .slide.ai.v2.active) #aiTop .sd:nth-child(6)::before{color:#FFFFFF!important;background:#171717!important;border:2px solid #FFFFFF}
 </style></head>
 <body>
 <div id="stage">
