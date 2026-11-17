@@ -1357,6 +1357,38 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #stage > .slide.ai.v2 .aiGrid > .aiC.cmp .cR{color:#F5C518!important}
 #stage > .slide.ai.v2 .aiGrid > .aiC.cmp i{font-style:normal;font-size:24px;color:#C41F27;text-align:center}
 #stage:has(> .slide.ai.v2.active) #aiTop .sd:not(.sdHome){font-size:25px!important;letter-spacing:0!important;padding-left:0!important;padding-right:0!important}
+
+/* ===== 2026-11-17 總覽改六卡：上排「變多」、下排「變深」 ===== */
+#ai-frame>.meta.mGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:64px 210px 84px 210px!important;gap:18px 50px!important;align-content:center!important;padding:236px 120px 80px!important}
+#ai-frame .mGrid .mRowTop{grid-column:1/4!important;grid-row:1!important}
+#ai-frame .mGrid .g-bullseye{grid-column:1!important;grid-row:2!important}
+#ai-frame .mGrid .g-order{grid-column:2!important;grid-row:2!important}
+#ai-frame .mGrid .g-filter{grid-column:3!important;grid-row:2!important}
+#ai-frame .mGrid .mRowBot{grid-column:2/4!important;grid-row:3!important}
+#ai-frame .mGrid .g-curve{grid-column:1!important;grid-row:4!important;padding-left:28px!important}
+#ai-frame .mGrid .g-compare{grid-column:2!important;grid-row:4!important}
+#ai-frame .mGrid .g-merge{grid-column:3!important;grid-row:4!important}
+#ai-frame .mGrid .mCard{height:210px!important;padding:20px 28px!important}
+#ai-frame .mGrid .mCard .mName{font-size:58px!important;margin-top:10px!important}
+#ai-frame .mGrid .mCard .mDesc{font-size:28px!important;margin-top:6px!important}
+#ai-frame .mGrid .mCardShapeFork{width:calc(100% + 50px)!important;height:calc(100% + 120px)!important}
+#ai-frame .mGrid .aiCardIcon{top:62px!important}
+#ai-frame .mGrid .mCard.g-curve,#ai-frame .mGrid .mCard.g-compare{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+#ai-frame .mGrid .mCard.g-curve:not(:hover):not(:focus-visible):not(:active),#ai-frame .mGrid .mCard.g-compare:not(:hover):not(:focus-visible):not(:active){box-shadow:none!important}
+#ai-frame .mGrid .mCard.g-merge{border-width:9px!important}
+#ai-frame .mGrid .mCard .mEnd{display:inline-block;margin-left:12px;font-size:24px;font-weight:900;color:#fff;background:#171717;border-radius:999px;padding:5px 16px;vertical-align:middle;letter-spacing:2px}
+#ai-frame .mGrid .mRowLab{display:flex;align-items:center;gap:22px;white-space:nowrap;align-self:center}
+#ai-frame .mGrid .mRowTag{font-size:30px;font-weight:900;color:#FBF8F3;background:#171717;border-radius:12px;padding:6px 18px;letter-spacing:4px}
+#ai-frame .mGrid .mRowText{font-size:52px;font-weight:900;color:#171717;line-height:1.1}
+#ai-frame .mGrid .mRowText em{font-style:normal;color:#D2262E}
+#ai-frame .mGrid .mRowLab .mPill{display:inline-block!important;margin:0!important;padding:8px 26px!important;font-size:28px!important;font-weight:900;background:#ffcb16!important;border-radius:999px!important;color:#171717!important;letter-spacing:1px!important}
+#reader .mGrid .mRowLab{grid-column:1/3!important;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 2px}
+#reader .mGrid .mRowTag{font-size:13px;font-weight:900;color:#FBF8F3;background:#171717;border-radius:6px;padding:2px 8px}
+#reader .mGrid .mRowText{font-size:20px;font-weight:900;color:#171717}
+#reader .mGrid .mRowText em{font-style:normal;color:#D2262E}
+#reader .mGrid .mRowLab .mPill{font-size:14px!important;padding:4px 10px!important;margin:0!important;display:inline-block!important;background:#ffcb16;border-radius:999px}
+#reader .mGrid .mCard.g-merge{border-width:3px!important}
+#reader .mGrid .mCard .mEnd{display:inline-block;margin-left:6px;font-size:12px;font-weight:900;color:#fff;background:#171717;border-radius:999px;padding:1px 8px}
 </style></head>
 <body>
 <div id="stage">
@@ -1365,8 +1397,10 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 <section class="slide frame mFrame" id="ai-frame" data-transition="fade">
 <h2 class="mH2">AI 加值：一個故事，18 萬種變化</h2><div class="aiBrand" aria-hidden="true">AI <small>加值的</small> 故事課</div>
 <div class="meta mGrid" id="metaTop">
-<div class="mCard g-bullseye" data-go="ai-bullseye"><span class="aiCardIcon" aria-hidden="true">🎯</span><svg class="mCardShape mCardShapeFork" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V82 H375 L398 114 L375 146 H365 V225 H199 V246 H215 L180 298 L145 246 H161 V225 H16 Q4 225 4 212 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">故事</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說一個完整的故事</p></div><div class="mCard g-order" data-go="ai-order"><span class="aiCardIcon" aria-hidden="true">🔢</span><svg class="mCardShape mCardShapeRight" viewBox="0 0 400 230" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V82 H375 L398 114 L375 146 H365 V212 Q365 225 352 225 H16 Q4 225 4 212 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">排列</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter"><span class="aiCardIcon" aria-hidden="true">🎬</span><div class="mTop"><span class="mTag">劇情</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div><div class="mCard g-curve" data-go="ai-curve"><span class="aiCardIcon" aria-hidden="true">🧠</span><div class="mTop"><span class="mTag">人物</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div>
-<div class="mHero"><p class="mTitle"><span class="mPrefix">一個故事，</span><span class="mEndGroup"><em>18 萬種變化</em><span class="mPill">5,040 × 36 = 181,440</span></span></p></div>
+<div class="mRowLab mRowTop"><span class="mRowTag">變多</span><span class="mRowText">一個故事，<em>18 萬種變化</em></span><span class="mPill">5,040 × 36 = 181,440</span></div>
+<div class="mCard g-bullseye" data-go="ai-bullseye"><span class="aiCardIcon" aria-hidden="true">🎯</span><svg class="mCardShape mCardShapeFork" viewBox="0 0 400 330" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V73 H375 L398 105 L375 137 H365 V207 H199 V268 H215 L180 326 L145 268 H161 V207 H16 Q4 207 4 195 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">故事</span></div><p class="mName">靶心人</p><p class="mDesc">七步驟說一個完整的故事</p></div><div class="mCard g-order" data-go="ai-order"><span class="aiCardIcon" aria-hidden="true">🔢</span><svg class="mCardShape mCardShapeRight" viewBox="0 0 400 230" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V82 H375 L398 114 L375 146 H365 V212 Q365 225 352 225 H16 Q4 225 4 212 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">排列</span></div><p class="mName">換順序</p><p class="mDesc">七步排列，5040 種講法</p></div><div class="mCard g-filter" data-go="ai-filter"><span class="aiCardIcon" aria-hidden="true">🎬</span><div class="mTop"><span class="mTag">劇情</span></div><p class="mName">套濾鏡</p><p class="mDesc">36 種劇情模式</p></div>
+<div class="mRowLab mRowBot"><span class="mRowTag">變深</span><span class="mRowText">事情會轉彎，<em>人也會轉變</em></span></div>
+<div class="mCard g-curve" data-go="ai-curve"><span class="aiCardIcon" aria-hidden="true">🧠</span><svg class="mCardShape mCardShapeRight" viewBox="0 0 400 230" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V82 H375 L398 114 L375 146 H365 V212 Q365 225 352 225 H16 Q4 225 4 212 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">人物</span></div><p class="mName">心結人</p><p class="mDesc">事情轉彎了，人呢？</p></div><div class="mCard g-compare" data-go="ai-compare"><span class="aiCardIcon" aria-hidden="true">⚖️</span><svg class="mCardShape mCardShapeRight" viewBox="0 0 400 230" preserveAspectRatio="none" aria-hidden="true"><path d="M16 4 H365 V82 H375 L398 114 L375 146 H365 V212 Q365 225 352 225 H16 Q4 225 4 212 V17 Q4 4 16 4 Z"/></svg><div class="mTop"><span class="mTag">並列</span></div><p class="mName">對比</p><p class="mDesc">看事情怎麼轉，看人物怎麼變</p></div><div class="mCard g-merge" data-go="ai-merge"><span class="aiCardIcon" aria-hidden="true">🧩</span><div class="mTop"><span class="mTag">合一</span><span class="mEnd">終點</span></div><p class="mName">揉合</p><p class="mDesc">讓事與人互相推動</p></div>
 </div>
 </section>
 
