@@ -69,6 +69,7 @@ body.bingo #bingo{display:block}
 #aCard{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;color:#F5C518;text-align:center;pointer-events:none}
 #aCard b{font-size:min(9vw,96px);letter-spacing:6px}
 #aCard span{font-size:min(4vw,36px);color:#E8E0D4;margin-top:16px}
+#noPl{display:none;margin:10px 20px 0;padding:10px 14px;border-radius:10px;background:#5A1418;color:#FFD9D9;font-size:16px;line-height:1.5}
 /* 播放端：影片蓋滿全螢幕 */
 #stageV{position:fixed;inset:0;background:#000;z-index:20;display:none;overflow:hidden}
 #stageV.show{display:block}
@@ -145,6 +146,7 @@ body.bingo #bingo{display:block}
 </section>
 <p id="solo">沒有連線碼（網址沒有 ?sync=…），只能在這台電腦上播放。</p>
 
+<div id="noPl">⚠ 桌機尚未連上：請在桌機用同一個網址打開；如果已經開了，在桌機按右上角「切換」，讓它變成「播放端」。</div>
 <main id="grid"></main>
 <section id="bingo"><div id="bBoard"></div></section>
 <div id="boom"><div>BINGO！<small></small></div></div>
@@ -346,14 +348,19 @@ $('#clr').onclick=function(){if(confirm('確定清除「播過」的紀錄？'))
 /* 同一房間只能有一個播放端：新的播放端登記後，其他播放端自動停播、變回遙控器 */
 function setPlayer(on){isPlayer=on;if(!on&&curIdx>=0){vid.pause();vid.removeAttribute('src');vid.load();stageV.classList.remove('show');curIdx=-1;}
  if(on&&ref&&room)ref.child('player').set({id:me,at:Date.now()});render();setRole();showBar();}
-if(ref&&room)ref.child('player').on('value',function(s){var v=s.val();if(isPlayer&&v&&v.id&&v.id!==me)setPlayer(false);});
+var playerInfo=null;
+if(ref&&room)ref.child('player').on('value',function(s){var v=s.val();playerInfo=v;if(isPlayer&&v&&v.id&&v.id!==me)setPlayer(false);noPlayerWarn();});
+/* 播放端每 20 秒報到一次；遙控器 60 秒沒收到就提醒 */
+setInterval(function(){if(isPlayer&&ref&&room)ref.child('player').set({id:me,at:Date.now()});},20000);
+function noPlayerWarn(){var w=$('#noPl');if(!w)return;var bad=room&&!isPlayer&&list.length&&(!playerInfo||Date.now()-(playerInfo.at||0)>60000);w.style.display=bad?'block':'none';}
+setInterval(noPlayerWarn,5000);
 $('#swap').onclick=function(){setPlayer(!isPlayer);};
 /* 網站上的影片：videos/list.json（[{file,name,th}]）。寬螢幕（桌機）自動當播放端，手機當遙控器 */
 fetch('videos/list.json?v='+Date.now()).then(function(r){return r.ok?r.json():null;}).then(function(v){
  if(!v||!v.length){setRole();return;}
  site=true;seenLines=-1;list=v.map(function(it){return {file:it.file,name:it.name,who:it.who||'',th:it.th?'videos/'+it.th:''};});
  var touch=matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>1&&!matchMedia('(pointer:fine)').matches;
- setPlayer(!room||(!touch&&window.innerWidth>=900));
+ setPlayer(!room||!touch);
 }).catch(function(){setRole();});
 setRole();
 })();
