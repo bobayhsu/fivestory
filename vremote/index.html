@@ -70,6 +70,20 @@ body.bingo #bingo{display:block}
 #aCard b{font-size:min(9vw,96px);letter-spacing:6px}
 #aCard span{font-size:min(4vw,36px);color:#E8E0D4;margin-top:16px}
 #noPl{display:none;margin:10px 20px 0;padding:10px 14px;border-radius:10px;background:#1F3A2E;color:#CDEBDB;font-size:16px;line-height:1.5}
+/* 封面＋宮格 */
+#bWrap{display:flex;align-items:center;gap:22px;justify-content:center}
+#cover{flex:none;height:calc(100vh - 190px);max-height:900px;width:auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
+#bWrap #bBoard{flex:1;margin:0;max-width:calc((100vh - 175px) * 1.75)}
+/* 滑鼠移到格子：歌曲資訊卡 */
+#tip{position:fixed;z-index:25;display:none;width:min(420px,92vw);max-height:calc(100vh - 40px);overflow:auto;background:#1E1A17;border:2px solid #F5C518;border-radius:14px;padding:18px 20px;box-shadow:0 12px 40px rgba(0,0,0,.7);pointer-events:none}
+#tip.show{display:block}
+#tip h3{margin:0 0 10px;font-size:22px;color:#F5C518;letter-spacing:1px;line-height:1.35}
+#tip .tg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+#tip .tg span{background:#C41F27;color:#fff;border-radius:8px;padding:3px 10px;font-size:15px;font-weight:700}
+#tip .tg span.b{background:#3A332D;color:#E8E0D4}
+#tip .ft{font-size:14px;color:#A89F94;line-height:1.55;margin-bottom:12px;border-bottom:1px solid #3A332D;padding-bottom:10px}
+#tip .ly{font-size:17px;line-height:1.75;color:#F3EEE6;white-space:pre-line}
+body.touch #tip{pointer-events:auto;left:4vw!important;top:auto!important;bottom:12px;max-height:70vh}
 /* 播放端：影片蓋滿全螢幕 */
 #stageV{position:fixed;inset:0;background:#000;z-index:20;display:none;overflow:hidden}
 #stageV.show{display:block}
@@ -128,6 +142,9 @@ body.touch #vBack{z-index:5;font-size:18px;padding:10px 16px}
  .vw button{font-size:14px;padding:6px 10px}
  #bingo{padding:8px 6px 220px}
  #bBoard{gap:4px}
+ #bWrap{flex-direction:column;gap:10px}
+ #cover{height:170px}
+ #bWrap #bBoard{width:100%;max-width:none}
  .cell{height:auto;aspect-ratio:3/4;min-height:0;border-radius:7px;padding:2px}
  .cell .pn{font-size:14px;letter-spacing:0}
  .cell .sn{display:none}
@@ -138,9 +155,9 @@ body.touch #vBack{z-index:5;font-size:18px;padding:10px 16px}
 }
 </style>
 </head>
-<body>
+<body class="bingo">
 <header><h1>2026 露營晚會歌曲</h1><span id="role">尚未選片</span><span id="state"></span><button id="undo" class="btn g hd" hidden>↩ 復原</button><button class="btn g hd" id="clr"><span class="lg">清除播過紀錄</span><span class="sm">清除</span></button><button id="swap" class="btn g" style="font-size:15px;padding:6px 14px;margin:0">切換</button></header>
-<div id="tools"><span class="vw"><button data-v="list" class="on">清單</button><button data-v="bingo">36 宮格</button></span><button class="btn y rnd">🎲 隨機播放</button><span class="cnt"></span><span class="lines"></span></div>
+<div id="tools"><span class="vw"><button data-v="bingo" class="on">36 宮格</button><button data-v="list">清單</button></span><button class="btn y rnd">🎲 隨機播放</button><span class="cnt"></span><span class="lines"></span></div>
 
 <section id="pick">
  <p id="pickMsg">【桌機】按下面的按鈕，選放影片的資料夾，這台就會負責播放。<br>【手機】用同一個網址打開，等桌機選好資料夾，片單會自動出現，就能遙控。</p>
@@ -151,7 +168,8 @@ body.touch #vBack{z-index:5;font-size:18px;padding:10px 16px}
 
 <div id="noPl">📱 目前沒有桌機播放：點歌會直接在這支手機播放。要投影的話，在桌機用同一個網址打開就會自動接手。</div>
 <main id="grid"></main>
-<section id="bingo"><div id="bBoard"></div></section>
+<section id="bingo"><div id="bWrap"><img id="cover" src="cover.webp" alt="故事課之王"><div id="bBoard"></div></div></section>
+<div id="tip"></div>
 <div id="boom"><div>BINGO！<small></small></div></div>
 
 <div id="stageV">
@@ -225,7 +243,7 @@ if(room&&window.firebase&&window.FIVESTORY_FIREBASE_CONFIG){
 
 function now(){return Date.now()+(off||0);}
 function playerActive(){return !!(playerInfo&&playerInfo.id&&now()-(playerInfo.at||0)<45000);}
-function send(c){/* 連線中但沒有播放端（桌機沒開）：手機點歌就自己當播放端 */
+function send(c){if(c.a==='open'&&window.__hideTip)window.__hideTip();/* 連線中但沒有播放端（桌機沒開）：手機點歌就自己當播放端 */
  if(ref&&room&&!isPlayer&&c.a==='open'&&!playerActive())setPlayer(true);
  c.seq=me+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,6);c.at=Date.now();
  if(ref&&room){if(isPlayer)lastSeq=c.seq;ref.child('cmd').set(c);if(isPlayer)exec(c);}else exec(c);}
@@ -251,6 +269,26 @@ function renderBingo(){makeLay();var B=$('#bBoard');B.innerHTML='';for(var q=0;q
  d.innerHTML='<span class="cn">'+(i<9?'0':'')+(i+1)+'</span><span class="pn"></span><span class="sn"></span>';
  d.querySelector('.pn').textContent=it.who==='全部'?'全體':(it.who||'').replace(/的採訪者$/,'')||it.name;d.querySelector('.sn').textContent=it.name;B.appendChild(d);}}
 function bingoLines(){return LINES.map(function(L){return L.map(function(q){return LAY[q];});}).filter(function(L){return L.every(function(i){return i!=null&&list[i]&&played[i];});});}
+/* 歌曲資訊卡（歌詞、曲風） */
+var LY={};fetch('videos/lyrics.json?v='+Date.now()).then(function(r){return r.ok?r.json():{};}).then(function(j){LY=j||{};}).catch(function(){});
+var tip=$('#tip'),tipFor=-1,lpT=null,lpDone=false;
+function esc(t){return String(t||'').replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+function showTip(cell){var i=+cell.dataset.i,it=list[i];if(!it)return;var k=(i<9?'0':'')+(i+1),d=LY[k]||{};tipFor=i;
+ tip.innerHTML='<h3>'+esc(d.title||(k+'｜'+it.name+(it.who?'｜'+it.who:'')))+'</h3>'+
+  ((d.style||d.bpm)?'<div class="tg">'+(d.style?'<span>'+esc(d.style)+'</span>':'')+(d.bpm?'<span class="b">BPM '+esc(d.bpm)+'</span>':'')+'</div>':'')+
+  (d.feat?'<div class="ft">'+esc(d.feat)+'</div>':'')+(d.lyrics?'<div class="ly">'+esc(d.lyrics)+'</div>':'<div class="ft">（全體大合唱）</div>');
+ tip.classList.add('show');if(document.body.classList.contains('touch'))return;
+ var r=cell.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,x=r.right+12;if(x+tw>innerWidth-10)x=r.left-tw-12;if(x<10)x=10;
+ var y=r.top+r.height/2-th/2;y=Math.max(10,Math.min(y,innerHeight-th-10));tip.style.left=x+'px';tip.style.top=y+'px';}
+function hideTip(){tip.classList.remove('show');tipFor=-1;}window.__hideTip=hideTip;
+$('#bBoard').addEventListener('mouseover',function(e){if(document.body.classList.contains('touch'))return;var c=e.target.closest('.cell[data-i]');if(c&&+c.dataset.i!==tipFor)showTip(c);});
+$('#bBoard').addEventListener('mouseleave',hideTip);
+/* 手機：長按格子看歌詞，點一下播放 */
+$('#bBoard').addEventListener('touchstart',function(e){var c=e.target.closest('.cell[data-i]');lpDone=false;if(!c)return;clearTimeout(lpT);lpT=setTimeout(function(){lpDone=true;showTip(c);},500);},{passive:true});
+['touchend','touchmove','touchcancel'].forEach(function(ev){$('#bBoard').addEventListener(ev,function(){clearTimeout(lpT);},{passive:true});});
+$('#bBoard').addEventListener('contextmenu',function(e){if(document.body.classList.contains('touch'))e.preventDefault();});
+document.addEventListener('click',function(e){if(lpDone)return;if(tip.classList.contains('show')&&document.body.classList.contains('touch')&&!e.target.closest('#tip'))hideTip();},true);
+$('#bBoard').addEventListener('click',function(e){if(lpDone){lpDone=false;e.stopImmediatePropagation();}},true);
 $('#bBoard').addEventListener('click',function(e){var t=e.target.closest('.cell');if(t&&t.dataset.i)send({a:'open',i:+t.dataset.i});});
 function boom(n){var b=$('#boom');b.querySelector('small').textContent='第 '+n+' 條線';b.classList.add('show');clearTimeout(boom.t);boom.t=setTimeout(function(){b.classList.remove('show');},3200);}
 function mark(){[].forEach.call(grid.querySelectorAll('.tile'),function(d){var i=+d.dataset.i;d.classList.toggle('on',pos.open&&i===pos.idx);d.classList.toggle('done',!!played[i]);});
@@ -362,7 +400,7 @@ function thumbs(){var gen=files,k=0,tv=document.createElement('video'),cv=docume
 document.querySelector('#tools .rnd').onclick=rnd;
 function setView(v){document.body.classList.toggle('bingo',v==='bingo');[].forEach.call(document.querySelectorAll('.vw button'),function(b){b.classList.toggle('on',b.dataset.v===v);});mark();}
 document.querySelector('.vw').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;setView(b.dataset.v);if(ref&&room)ref.child('view').set(b.dataset.v);});
-if(ref&&room)ref.child('view').on('value',function(s){setView(s.val()||'list');});
+if(ref&&room)ref.child('view').on('value',function(s){setView(s.val()||'bingo');});
 $('#undo').onclick=undoPlayed;
 if(ref&&room)ref.child('playedBak').on('value',function(s){undoBak=s.val();showUndo();});
 $('#clr').onclick=function(){if(confirm('確定清除「播過」的紀錄？'))resetPlayed();};
