@@ -20,18 +20,24 @@ header h1{margin:0;font-size:26px;letter-spacing:3px;color:#F5C518}
 .btn{display:inline-block;border:0;border-radius:12px;padding:14px 26px;margin:6px;font-size:20px;font-weight:700;cursor:pointer;font-family:inherit}
 .btn.y{background:#F5C518;color:#14110F}
 .btn.g{background:#3A332D;color:#F3EEE6}
-#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;padding:20px 20px 140px}
+#tools{display:flex;align-items:center;gap:14px;padding:16px 20px 0;flex-wrap:wrap}
+#tools .btn{margin:0}#tools .rnd{font-size:22px;padding:12px 28px}
+#tools #clr{margin-left:auto;font-size:15px;padding:8px 14px}
+.cnt{font-size:17px;color:#A89F94}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:10px 14px;padding:16px 20px 150px}
 .grp{grid-column:1/-1;margin:14px 0 0;font-size:26px;letter-spacing:3px;color:#F5C518;border-left:6px solid #C41F27;padding-left:12px}
 .grp:first-child{margin-top:0}
 .grp{scroll-margin-top:80px}
 .grp small{font-size:16px;color:#A89F94;letter-spacing:1px;margin-left:12px;font-weight:400}
-.tile{position:relative;background:#211C18;border:2px solid #3A332D;border-radius:12px;overflow:hidden;cursor:pointer;user-select:none;-webkit-user-select:none}
+.tile{position:relative;display:flex;align-items:center;gap:12px;background:#211C18;border:2px solid #3A332D;border-radius:10px;padding:10px 14px;cursor:pointer;user-select:none;-webkit-user-select:none}
 .tile:hover{border-color:#F5C518}
 .tile.on{border-color:#C41F27;box-shadow:0 0 0 3px #C41F27}
-.tile .th{aspect-ratio:9/16;background:#0B0A09 center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:900;color:#4A423B}
-.tile .no{position:absolute;top:6px;left:6px;background:#F5C518;color:#14110F;font-weight:900;font-size:16px;border-radius:8px;padding:1px 9px}
-.tile .nm{padding:7px 9px;font-size:17px;line-height:1.3;font-weight:700}
-.tile .who{padding:0 9px 8px;font-size:14px;color:#A89F94}
+.tile .no{flex:none;background:#F5C518;color:#14110F;font-weight:900;font-size:18px;border-radius:8px;padding:2px 9px}
+.tile .nm{font-size:20px;line-height:1.35;font-weight:700;flex:1}
+.tile .ck{display:none;flex:none;font-size:14px;color:#8FD3B0}
+.tile.done{background:#163028;border-color:#2B5A48}
+.tile.done .nm{color:#8FB5A5}.tile.done .no{background:#2B5A48;color:#CFE8DC}
+.tile.done .ck{display:inline}
 /* 播放端：影片蓋滿全螢幕 */
 #stageV{position:fixed;inset:0;background:#000;z-index:20;display:none}
 #stageV.show{display:block}
@@ -58,10 +64,15 @@ header h1{margin:0;font-size:26px;letter-spacing:3px;color:#F5C518}
  #state{display:none}
  #swap{margin-left:auto!important}
  #swap{font-size:13px!important;padding:5px 9px!important;white-space:nowrap}
- #grid{grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 10px 200px}
- .tile .nm{font-size:14px;padding:5px 6px}
- .tile .who{font-size:12px;padding:0 6px 6px}
- .tile .no{font-size:13px;padding:0 6px}
+ #grid{grid-template-columns:1fr;gap:7px;padding:10px 10px 210px}
+ .tile{padding:9px 10px;gap:9px}
+ .tile .nm{font-size:16px}
+ .tile .no{font-size:14px;padding:1px 7px}
+ .tile .ck{font-size:12px}
+ #tools{padding:10px 10px 0;gap:10px}
+ #tools .rnd{font-size:18px;padding:10px 18px}
+ #tools #clr{font-size:13px;padding:6px 10px}
+ .cnt{font-size:14px}
  .grp{font-size:20px;margin-top:10px}
  #pick p{font-size:16px}
  #pick.compact{display:none}
@@ -70,6 +81,7 @@ header h1{margin:0;font-size:26px;letter-spacing:3px;color:#F5C518}
 </head>
 <body>
 <header><h1>2026 露營晚會歌曲</h1><span id="role">尚未選片</span><span id="state"></span><button id="swap" class="btn g" style="font-size:15px;padding:6px 14px;margin:0">切換</button></header>
+<div id="tools"><button class="btn y rnd">🎲 隨機播放</button><span class="cnt"></span><button class="btn g" id="clr">清除播過紀錄</button></div>
 
 <section id="pick">
  <p id="pickMsg">【桌機】按下面的按鈕，選放影片的資料夾，這台就會負責播放。<br>【手機】用同一個網址打開，等桌機選好資料夾，片單會自動出現，就能遙控。</p>
@@ -92,7 +104,7 @@ header h1{margin:0;font-size:26px;letter-spacing:3px;color:#F5C518}
  <input id="seek" type="range" min="0" max="1000" value="0">
  <div id="bTime"><span id="tCur">0:00</span><span id="tDur">0:00</span></div>
  <div id="bBtns">
-  <button class="btn g" data-a="prev">⏮</button>
+  <button class="btn g" data-a="rnd">🎲</button><button class="btn g" data-a="prev">⏮</button>
   <button class="btn g" data-a="back10">−10秒</button>
   <button class="btn" id="bPlay" data-a="toggle">▶ 播放</button>
   <button class="btn g" data-a="fwd10">+10秒</button>
@@ -110,7 +122,7 @@ var $=function(s){return document.querySelector(s);};
 var room=new URLSearchParams(location.search).get('sync');
 if(room&&!/^[a-zA-Z0-9_-]{4,60}$/.test(room))room=null;
 var me=String(Date.now())+Math.random().toString(36).slice(2);
-var site=false,isPlayer=false,files=[],list=[],pos={open:false},lastSeq=null,ref=null,db=null;
+var played={},order=[],site=false,isPlayer=false,files=[],list=[],pos={open:false},lastSeq=null,ref=null,db=null;
 var vid=$('#vid'),stageV=$('#stageV'),grid=$('#grid'),bar=$('#bar'),seek=$('#seek'),dragging=false;
 
 function fmt(t){t=Math.max(0,Math.floor(t||0));var m=Math.floor(t/60),s=t%60;return m+':'+(s<10?'0':'')+s;}
@@ -125,6 +137,7 @@ if(room&&window.firebase&&window.FIVESTORY_FIREBASE_CONFIG){
   ref=db.ref('rooms/'+room+'/screen/localVideo');setState('連線中…');
   db.ref('.info/connected').on('value',function(s){setState(s.val()?'● 已連線':'連線中斷…');});
   ref.child('list').on('value',function(s){var v=s.val();if(isPlayer||site)return;list=(v&&v.items)||[];render();setRole();});
+  ref.child('played').on('value',function(s){played=s.val()||{};mark();});
   ref.child('pos').on('value',function(s){if(isPlayer)return;pos=s.val()||{open:false};showBar();});
   ref.child('cmd').on('value',function(s){var c=s.val();if(!c||c.seq===lastSeq)return;var first=lastSeq===null;lastSeq=c.seq;if(first&&Date.now()-(c.at||0)>5000)return;if(isPlayer)exec(c);});
  }catch(e){setState('連線失敗');console.error(e);room=null;}
@@ -135,15 +148,21 @@ function send(c){c.seq=me+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,
 
 /* ---------- 影片牆 ---------- */
 /* 分兩類：有作者（自己完成）／由採訪者完成；編號維持原檔編號 */
-var order=[];
 function groups(){var a=[],b=[];list.forEach(function(it,i){(/採訪者/.test(it.who||'')?b:a).push(i);});
  return b.length?[['作者親自完成',a],['由採訪者完成',b]]:[['',a]];}
 function render(){grid.innerHTML='';order=[];groups().forEach(function(g){
  if(g[0]){var h=document.createElement('h2');h.className='grp';h.innerHTML=g[0]+'<small>'+g[1].length+' 首</small>';grid.appendChild(h);}
  g[1].forEach(function(i){var it=list[i];order.push(i);var d=document.createElement('div');d.className='tile';d.dataset.i=i;
- d.innerHTML='<div class="th"'+(it.th?' style="background-image:url('+it.th+')"':'')+'>'+(it.th?'':(i+1))+'</div><span class="no">'+(i+1)+'</span><div class="nm"></div><div class="who"></div>';
- d.querySelector('.nm').textContent=it.name;d.querySelector('.who').textContent=it.who||'';grid.appendChild(d);});});mark();}
-function mark(){[].forEach.call(grid.querySelectorAll('.tile'),function(d){d.classList.toggle('on',pos.open&&+d.dataset.i===pos.idx);});}
+ var no=(i<9?'0':'')+(i+1);d.innerHTML='<span class="no">'+no+'</span><span class="nm"></span><span class="ck">✓ 播過</span>';
+ d.querySelector('.nm').textContent=it.name+(it.who?'｜'+it.who:'');grid.appendChild(d);});});mark();}
+function mark(){[].forEach.call(grid.querySelectorAll('.tile'),function(d){var i=+d.dataset.i;d.classList.toggle('on',pos.open&&i===pos.idx);d.classList.toggle('done',!!played[i]);});
+ var n=Object.keys(played).length;[].forEach.call(document.querySelectorAll('.cnt'),function(e){e.textContent=list.length?'已播 '+n+'／'+list.length:'';});}
+/* 隨機：從還沒播過的挑一首 */
+function rnd(){var pool=order.filter(function(i){return !played[i];});
+ if(!pool.length){if(confirm('全部都播過了，要清除紀錄、重新開始嗎？'))resetPlayed();return;}
+ send({a:'open',i:pool[Math.floor(Math.random()*pool.length)]});}
+function resetPlayed(){played={};if(ref&&room)ref.child('played').set(null);mark();}
+function savePlayed(){if(ref&&room)ref.child('played').set(played);}
 grid.addEventListener('click',function(e){var t=e.target.closest('.tile');if(t)send({a:'open',i:+t.dataset.i});});
 
 /* ---------- 遙控列 ---------- */
@@ -153,7 +172,8 @@ function showBar(){mark();var on=pos.open&&list[pos.idx];bar.classList.toggle('s
  if(!dragging){seek.value=pos.d?Math.round(pos.t/pos.d*1000):0;$('#tCur').textContent=fmt(pos.t);}
  $('#tDur').textContent=fmt(pos.d);}
 bar.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a;
- if(a==='toggle')send({a:pos.paused?'play':'pause'});
+ if(a==='rnd')rnd();
+ else if(a==='toggle')send({a:pos.paused?'play':'pause'});
  else if(a==='back10'||a==='fwd10')send({a:'seek',t:Math.max(0,(pos.t||0)+(a==='fwd10'?10:-10))});
  else if(a==='prev'||a==='next'){var k=order.indexOf(pos.idx)+(a==='next'?1:-1);if(k>=0&&k<order.length)send({a:'open',i:order[k]});}
  else if(a==='close')send({a:'close'});});
@@ -163,7 +183,7 @@ seek.addEventListener('change',function(){dragging=false;send({a:'seek',t:seek.v
 /* ---------- 播放端 ---------- */
 var curIdx=-1,url=null;
 function exec(c){if(!isPlayer)return;
- if(c.a==='open'&&list[c.i]){if(url){URL.revokeObjectURL(url);url=null;}if(files[c.i]){url=URL.createObjectURL(files[c.i]);vid.src=url;}else vid.src='videos/'+encodeURIComponent(list[c.i].file);curIdx=c.i;
+ if(c.a==='open'&&list[c.i]){if(url){URL.revokeObjectURL(url);url=null;}if(files[c.i]){url=URL.createObjectURL(files[c.i]);vid.src=url;}else vid.src='videos/'+encodeURIComponent(list[c.i].file);curIdx=c.i;played[c.i]=1;savePlayed();
   $('#vTitle').textContent=(c.i+1)+'　'+list[c.i].name+(list[c.i].who?'｜'+list[c.i].who:'');stageV.classList.add('show');wake();tryPlay();}
  else if(c.a==='play')tryPlay();
  else if(c.a==='pause')vid.pause();
@@ -192,7 +212,7 @@ function choose(fl){var v=[].filter.call(fl,function(f){return /^video\//.test(f
  if(!v.length){alert('這個資料夾裡沒有找到影片檔（mp4、mov、webm…）');return;}
  v.sort(function(a,b){return (a.webkitRelativePath||a.name).localeCompare(b.webkitRelativePath||b.name,'zh-Hant',{numeric:true});});
  files=v;isPlayer=true;list=v.map(function(f){return {name:f.name.replace(/\.[^.]+$/,'').replace(/^\d+[\s._-]*/,'')||f.name};});
- render();setRole();publishList();thumbs();}
+ render();setRole();publishList();}
 function publishList(){if(ref&&room)ref.child('list').set({by:me,at:Date.now(),items:list});}
 $('#dirIn').onchange=function(){choose(this.files);this.value='';};
 $('#fileIn').onchange=function(){choose(this.files);this.value='';};
@@ -205,6 +225,8 @@ function thumbs(){var gen=files,k=0,tv=document.createElement('video'),cv=docume
    k++;if(k%6===0)publishList();setTimeout(nx,0);};
   tv.onloadeddata=function(){tv.currentTime=Math.min(2,(tv.duration||4)/3);};tv.onseeked=function(){done(true);};tv.onerror=function(){done(false);};}
  nx();}
+document.querySelector('#tools .rnd').onclick=rnd;
+$('#clr').onclick=function(){if(confirm('確定清除「播過」的紀錄？'))resetPlayed();};
 $('#swap').onclick=function(){isPlayer=!isPlayer;if(!isPlayer&&curIdx>=0){vid.pause();stageV.classList.remove('show');curIdx=-1;}render();setRole();showBar();};
 /* 網站上的影片：videos/list.json（[{file,name,th}]）。寬螢幕（桌機）自動當播放端，手機當遙控器 */
 fetch('videos/list.json?v='+Date.now()).then(function(r){return r.ok?r.json():null;}).then(function(v){
