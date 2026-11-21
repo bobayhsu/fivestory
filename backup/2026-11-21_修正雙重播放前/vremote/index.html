@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>2026 露營晚會歌曲｜影片遙控</title>
+<style>
+html,body,*{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#14110F;color:#F3EEE6;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+header{display:flex;align-items:center;gap:14px;padding:14px 20px;background:#1E1A17;border-bottom:3px solid #F5C518;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:26px;letter-spacing:3px;color:#F5C518}
+#role{font-size:15px;padding:4px 12px;border-radius:14px;background:#3A332D;color:#E8E0D4}
+#role.player{background:#C41F27;color:#fff}
+#role.remote{background:#1F7A5A;color:#fff}
+#state{margin-left:auto;font-size:14px;color:#A89F94}
+#pick{padding:28px 20px;text-align:center}
+#pick.compact{padding:8px 20px 0}#pick.compact p{display:none}#pick.compact .btn{font-size:15px;padding:8px 16px}
+#pick p{font-size:18px;color:#C9C0B4;line-height:1.7;margin:0 0 18px}
+.btn{display:inline-block;border:0;border-radius:12px;padding:14px 26px;margin:6px;font-size:20px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn.y{background:#F5C518;color:#14110F}
+.btn.g{background:#3A332D;color:#F3EEE6}
+#tools{display:flex;align-items:center;gap:14px;padding:16px 20px 0;flex-wrap:wrap}
+#tools .btn{margin:0}#tools .rnd{font-size:22px;padding:12px 28px}
+header .hd{font-size:14px;padding:6px 12px;margin:0;color:#C9C0B4;background:#2A241F;white-space:nowrap}
+.sm{display:none}
+[hidden]{display:none!important}
+#undo{background:#1F7A5A!important;color:#fff!important}
+.cnt{font-size:17px;color:#A89F94}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:10px 14px;padding:16px 20px 150px}
+.grp{grid-column:1/-1;margin:14px 0 0;font-size:26px;letter-spacing:3px;color:#F5C518;border-left:6px solid #C41F27;padding-left:12px}
+.grp:first-child{margin-top:0}
+.grp{scroll-margin-top:80px}
+.grp small{font-size:16px;color:#A89F94;letter-spacing:1px;margin-left:12px;font-weight:400}
+.tile{position:relative;display:flex;align-items:center;gap:12px;background:#211C18;border:2px solid #3A332D;border-radius:10px;padding:10px 14px;cursor:pointer;user-select:none;-webkit-user-select:none}
+.tile:hover{border-color:#F5C518}
+.tile.on{border-color:#C41F27;box-shadow:0 0 0 3px #C41F27}
+.tile .no{flex:none;background:#F5C518;color:#14110F;font-weight:900;font-size:18px;border-radius:8px;padding:2px 9px}
+.tile .nm{font-size:20px;line-height:1.35;font-weight:700;flex:1}
+.tile .ck{display:none;flex:none;font-size:14px;color:#8FD3B0}
+.tile.done{background:#163028;border-color:#2B5A48}
+.tile.done .nm{color:#8FB5A5}.tile.done .no{background:#2B5A48;color:#CFE8DC}
+.tile.done .ck{display:inline}
+/* 檢視切換＋36 宮格賓果 */
+.vw{display:inline-flex;background:#2A241F;border-radius:12px;padding:4px;gap:4px}
+.vw button{border:0;background:none;color:#C9C0B4;font:700 17px inherit;font-family:inherit;padding:8px 16px;border-radius:9px;cursor:pointer}
+.vw button.on{background:#F5C518;color:#14110F}
+body.bingo #grid{display:none}
+#bingo{display:none;padding:12px 20px 150px}
+body.bingo #bingo{display:block}
+#bBoard{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:0 auto;max-width:calc((100vh - 175px) * 1.75)}
+.cell{position:relative;height:calc((100vh - 230px) / 6);min-height:62px;background:#211C18;border:2px solid #3A332D;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none;-webkit-user-select:none;padding:4px;transition:background .4s,color .4s,box-shadow .4s}
+.cell:hover{border-color:#F5C518}
+.cell .cn{position:absolute;top:4px;left:7px;font-size:13px;color:#7D746A;font-weight:700}
+.cell .pn{font-size:clamp(16px,2.6vw,34px);font-weight:900;letter-spacing:2px;line-height:1.15}
+.cell .sn{font-size:clamp(11px,1.1vw,15px);color:#A89F94;margin-top:4px;line-height:1.2}
+.cell.done{background:#3B2F12;border-color:#9C7A1C;color:#FFE27A}
+.cell.done .sn,.cell.done .cn{color:#D9B95A}
+.cell.on{border-color:#C41F27;box-shadow:0 0 0 3px #C41F27}
+.cell.line{background:#F5C518;border-color:#FFF3B0;color:#14110F;box-shadow:0 0 18px 4px rgba(245,197,24,.75);animation:glow 1.6s ease-in-out infinite}
+.cell.line .sn,.cell.line .cn{color:#5A4500}
+@keyframes glow{50%{box-shadow:0 0 30px 9px rgba(255,226,122,.95)}}
+.lines{font-size:17px;color:#F5C518;font-weight:700}
+#boom{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:30;pointer-events:none;background:rgba(0,0,0,.45)}
+#boom.show{display:flex}
+#boom div{font-size:min(16vw,170px);font-weight:900;color:#F5C518;letter-spacing:8px;text-shadow:0 0 40px #F5C518,0 6px 0 #C41F27;animation:pop .7s ease-out;text-align:center;line-height:1.1}
+#boom small{display:block;font-size:min(5vw,46px);letter-spacing:4px;color:#fff;text-shadow:none}
+@keyframes pop{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+#aCard{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;color:#F5C518;text-align:center;pointer-events:none}
+#aCard b{font-size:min(9vw,96px);letter-spacing:6px}
+#aCard span{font-size:min(4vw,36px);color:#E8E0D4;margin-top:16px}
+/* 播放端：影片蓋滿全螢幕 */
+#stageV{position:fixed;inset:0;background:#000;z-index:20;display:none;overflow:hidden}
+#stageV.show{display:block}
+#stageV video{width:100%;height:100%;object-fit:contain;background:#000}
+#vTitle{position:absolute;top:14px;left:18px;font-size:20px;color:#fff;background:rgba(0,0,0,.55);padding:4px 14px;border-radius:10px;transition:opacity .6s}
+#vBack{position:absolute;top:12px;right:16px;transition:opacity .6s}
+#stageV.idle #vTitle,#stageV.idle #vBack{opacity:0}
+#unmute{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:none;font-size:26px}
+/* 遙控器 */
+#bar{position:fixed;left:0;right:0;bottom:0;background:#1E1A17;border-top:3px solid #C41F27;padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:none;z-index:10}
+#bar.show{display:block}
+#bName{font-size:18px;font-weight:700;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#bName b{color:#F5C518;margin-right:6px}
+#seek{width:100%;accent-color:#F5C518;height:28px}
+#bTime{display:flex;justify-content:space-between;font-size:14px;color:#A89F94;margin:-2px 0 6px}
+#bBtns{display:flex;gap:8px}
+#bBtns .btn{flex:1;margin:0;padding:12px 0;font-size:19px}
+#bPlay{background:#C41F27!important;color:#fff!important}
+#solo{display:none;font-size:14px;color:#A89F94;padding:0 20px}
+@media (max-width:600px){
+ header{gap:8px;padding:10px 12px}
+ header h1{font-size:18px;letter-spacing:1px;white-space:nowrap}
+ #role{font-size:12px;white-space:nowrap;padding:3px 8px}
+ #state{display:none}
+ #swap{margin-left:auto!important}
+ #swap{font-size:13px!important;padding:5px 9px!important;white-space:nowrap}
+ #grid{grid-template-columns:1fr;gap:7px;padding:10px 10px 210px}
+ .tile{padding:9px 10px;gap:9px}
+ .tile .nm{font-size:16px}
+ .tile .no{font-size:14px;padding:1px 7px}
+ .tile .ck{font-size:12px}
+ #tools{padding:10px 10px 0;gap:10px}
+ #tools .rnd{font-size:18px;padding:10px 18px}
+ header .hd{font-size:12px;padding:5px 8px}
+ .lg{display:none}.sm{display:inline}
+ header h1{font-size:16px!important}
+ #role{display:none!important}
+ #undo{margin-left:auto!important}
+ #undo+#clr,#undo[hidden]+#clr{margin-left:0}
+ #undo[hidden]+#clr{margin-left:auto!important}
+ #swap{margin-left:0!important}
+ header{flex-wrap:nowrap}
+ .cnt{font-size:14px}
+ .grp{font-size:20px;margin-top:10px}
+ .vw button{font-size:14px;padding:6px 10px}
+ #bingo{padding:8px 6px 220px}
+ #bBoard{gap:4px}
+ .cell{height:auto;aspect-ratio:3/4;min-height:0;border-radius:7px;padding:2px}
+ .cell .pn{font-size:14px;letter-spacing:0}
+ .cell .sn{display:none}
+ .cell .cn{font-size:10px;top:2px;left:4px}
+ .lines{font-size:14px}
+ #pick p{font-size:16px}
+ #pick.compact{display:none}
+}
+</style>
+</head>
+<body>
+<header><h1>2026 露營晚會歌曲</h1><span id="role">尚未選片</span><span id="state"></span><button id="undo" class="btn g hd" hidden>↩ 復原</button><button class="btn g hd" id="clr"><span class="lg">清除播過紀錄</span><span class="sm">清除</span></button><button id="swap" class="btn g" style="font-size:15px;padding:6px 14px;margin:0">切換</button></header>
+<div id="tools"><span class="vw"><button data-v="list" class="on">清單</button><button data-v="bingo">36 宮格</button></span><button class="btn y rnd">🎲 隨機播放</button><span class="cnt"></span><span class="lines"></span></div>
+
+<section id="pick">
+ <p id="pickMsg">【桌機】按下面的按鈕，選放影片的資料夾，這台就會負責播放。<br>【手機】用同一個網址打開，等桌機選好資料夾，片單會自動出現，就能遙控。</p>
+ <label class="btn y">📁 選擇影片資料夾<input id="dirIn" type="file" webkitdirectory directory multiple hidden></label>
+ <label class="btn g">🎞 改選影片檔<input id="fileIn" type="file" accept="video/*" multiple hidden></label>
+</section>
+<p id="solo">沒有連線碼（網址沒有 ?sync=…），只能在這台電腦上播放。</p>
+
+<main id="grid"></main>
+<section id="bingo"><div id="bBoard"></div></section>
+<div id="boom"><div>BINGO！<small></small></div></div>
+
+<div id="stageV">
+ <video id="vid" playsinline></video>
+ <div id="aCard"><b></b><span></span></div>
+ <div id="vTitle"></div>
+ <button id="vBack" class="btn g">✕ 回影片牆</button>
+ <button id="unmute" class="btn y">🔊 按一下開啟聲音</button>
+</div>
+
+<div id="bar">
+ <div id="bName"></div>
+ <input id="seek" type="range" min="0" max="1000" value="0">
+ <div id="bTime"><span id="tCur">0:00</span><span id="tDur">0:00</span></div>
+ <div id="bBtns">
+  <button class="btn g" data-a="rnd">🎲</button><button class="btn g" data-a="prev">⏮</button>
+  <button class="btn g" data-a="back10">−10秒</button>
+  <button class="btn" id="bPlay" data-a="toggle">▶ 播放</button>
+  <button class="btn g" data-a="fwd10">+10秒</button>
+  <button class="btn g" data-a="next">⏭</button>
+ </div>
+ <div id="bBtns2" style="display:flex;margin-top:8px"><button class="btn g" data-a="close" style="flex:1;margin:0;padding:10px 0;font-size:17px">回影片牆</button></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script src="../sync-config.js?v=independent1"></script>
+<script>
+/* 播放時放大重點：直式 Suno 影片只取中間「標題＋圖片＋歌詞」區塊撐滿螢幕 */
+var FOCUS={x:.13,y:.145,w:.74,h:.585};
+function fitFocus(){var v=document.getElementById('vid');if(!v)return;var W=innerWidth,H=innerHeight,vw=v.videoWidth,vh=v.videoHeight;
+ if(!vw||!vh||vh<=vw){v.style.cssText='';return;}
+ var rw=vw*FOCUS.w,rh=vh*FOCUS.h,s=Math.min(W/rw,H/rh);
+ v.style.cssText='position:absolute;object-fit:fill;max-width:none;width:'+vw*s+'px;height:'+vh*s+'px;left:'+(W/2-(vw*FOCUS.x+rw/2)*s)+'px;top:'+(H/2-(vh*FOCUS.y+rh/2)*s)+'px';}
+addEventListener('resize',fitFocus);
+document.addEventListener('DOMContentLoaded',function(){var v=document.getElementById('vid');v.addEventListener('loadedmetadata',fitFocus);v.addEventListener('emptied',fitFocus);});
+</script>
+<script>
+(function(){'use strict';
+var $=function(s){return document.querySelector(s);};
+var room=new URLSearchParams(location.search).get('sync');
+if(room&&!/^[a-zA-Z0-9_-]{4,60}$/.test(room))room=null;
+var me=String(Date.now())+Math.random().toString(36).slice(2);
+var played={},order=[],site=false,isPlayer=false,files=[],list=[],pos={open:false},lastSeq=null,ref=null,db=null;
+var vid=$('#vid'),stageV=$('#stageV'),grid=$('#grid'),bar=$('#bar'),seek=$('#seek'),dragging=false;
+var LINES=[],seenLines=-1;(function(){var r,c;for(r=0;r<6;r++){var a=[];for(c=0;c<6;c++)a.push(r*6+c);LINES.push(a);}
+ for(c=0;c<6;c++){var b=[];for(r=0;r<6;r++)b.push(r*6+c);LINES.push(b);}
+ var d1=[],d2=[];for(r=0;r<6;r++){d1.push(r*6+r);d2.push(r*6+5-r);}LINES.push(d1,d2);})();
+
+function fmt(t){t=Math.max(0,Math.floor(t||0));var m=Math.floor(t/60),s=t%60;return m+':'+(s<10?'0':'')+s;}
+function setState(t){$('#state').textContent=t;}
+function setRole(){var r=$('#role');r.className=isPlayer?'player':(list.length?'remote':'');r.textContent=isPlayer?'這台：播放端':(list.length?'這台：遙控器':'尚未選片');
+ $('#pick').style.display=site?'none':'';$('#pick').classList.toggle('compact',!!(list.length&&!isPlayer&&room));
+ if(isPlayer)$('#pickMsg').innerHTML='已選好 '+files.length+' 支影片。要換資料夾，再按一次下面的按鈕。'+(room?'<br>手機用同一個網址打開，就能遙控。':'');}
+
+/* ---------- 連線 ---------- */
+if(room&&window.firebase&&window.FIVESTORY_FIREBASE_CONFIG){
+ try{if(!firebase.apps.length)firebase.initializeApp(window.FIVESTORY_FIREBASE_CONFIG);db=firebase.database();
+  ref=db.ref('rooms/'+room+'/screen/localVideo');setState('連線中…');
+  db.ref('.info/connected').on('value',function(s){setState(s.val()?'● 已連線':'連線中斷…');});
+  ref.child('list').on('value',function(s){var v=s.val();if(isPlayer||site)return;list=(v&&v.items)||[];render();setRole();});
+  ref.child('played').on('value',function(s){if(!mark.got){mark.got=1;seenLines=-1;}played=s.val()||{};mark();});
+  ref.child('pos').on('value',function(s){if(isPlayer)return;pos=s.val()||{open:false};showBar();});
+  ref.child('cmd').on('value',function(s){var c=s.val();if(!c||c.seq===lastSeq)return;var first=lastSeq===null;lastSeq=c.seq;if(first&&Date.now()-(c.at||0)>5000)return;if(isPlayer)exec(c);});
+ }catch(e){setState('連線失敗');console.error(e);room=null;}
+}else{$('#solo').style.display=room?'none':'block';}
+
+function send(c){c.seq=me+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,6);c.at=Date.now();
+ if(ref&&room){if(isPlayer)lastSeq=c.seq;ref.child('cmd').set(c);if(isPlayer)exec(c);}else exec(c);}
+
+/* ---------- 影片牆 ---------- */
+/* 分兩類：有作者（自己完成）／由採訪者完成；編號維持原檔編號 */
+function groups(){var a=[],b=[],c=[];list.forEach(function(it,i){(it.who==='全部'?c:/採訪者/.test(it.who||'')?b:a).push(i);});
+ var g=b.length?[['作者親自完成',a],['由採訪者完成',b]]:[['',a]];if(c.length)g.push(['全體',c]);return g;}
+function render(){grid.innerHTML='';order=[];groups().forEach(function(g){
+ if(g[0]){var h=document.createElement('h2');h.className='grp';h.innerHTML=g[0]+'<small>'+g[1].length+' 首</small>';grid.appendChild(h);}
+ g[1].forEach(function(i){var it=list[i];order.push(i);var d=document.createElement('div');d.className='tile';d.dataset.i=i;
+ var no=(i<9?'0':'')+(i+1);d.innerHTML='<span class="no">'+no+'</span><span class="nm"></span><span class="ck">✓ 播過</span>';
+ d.querySelector('.nm').textContent=it.name+(it.who?'｜'+it.who:'');grid.appendChild(d);});});renderBingo();mark();}
+/* ---------- 36 宮格：格子照編號排，播過亮起，連成一線發光 ---------- */
+
+function renderBingo(){var B=$('#bBoard');B.innerHTML='';for(var i=0;i<36;i++){var it=list[i],d=document.createElement('div');d.className='cell';
+ if(!it){d.style.visibility='hidden';B.appendChild(d);continue;}d.dataset.i=i;
+ d.innerHTML='<span class="cn">'+(i<9?'0':'')+(i+1)+'</span><span class="pn"></span><span class="sn"></span>';
+ d.querySelector('.pn').textContent=it.who==='全部'?'全體':(it.who||'').replace(/的採訪者$/,'')||it.name;d.querySelector('.sn').textContent=it.name;B.appendChild(d);}}
+function bingoLines(){return LINES.filter(function(L){return L.every(function(i){return list[i]&&played[i];});});}
+$('#bBoard').addEventListener('click',function(e){var t=e.target.closest('.cell');if(t&&t.dataset.i)send({a:'open',i:+t.dataset.i});});
+function boom(n){var b=$('#boom');b.querySelector('small').textContent='第 '+n+' 條線';b.classList.add('show');clearTimeout(boom.t);boom.t=setTimeout(function(){b.classList.remove('show');},3200);}
+function mark(){[].forEach.call(grid.querySelectorAll('.tile'),function(d){var i=+d.dataset.i;d.classList.toggle('on',pos.open&&i===pos.idx);d.classList.toggle('done',!!played[i]);});
+ var Ls=bingoLines(),lit={};Ls.forEach(function(L){L.forEach(function(i){lit[i]=1;});});
+ [].forEach.call(document.querySelectorAll('#bBoard .cell[data-i]'),function(d){var i=+d.dataset.i;d.classList.toggle('done',!!played[i]);d.classList.toggle('line',!!lit[i]);d.classList.toggle('on',pos.open&&i===pos.idx);});
+ $('.lines').textContent=Ls.length?'★ 連線 '+Ls.length+' 條':'';
+ var playing=isPlayer?curIdx>=0:pos.open;
+ if(!list.length)return;
+ if(seenLines<0||Ls.length<seenLines)seenLines=Ls.length;
+ else if(Ls.length>seenLines&&!playing&&document.body.classList.contains('bingo')){seenLines=Ls.length;boom(Ls.length);}
+ var n=Object.keys(played).length;[].forEach.call(document.querySelectorAll('.cnt'),function(e){e.textContent=list.length?'已播 '+n+'／'+list.length:'';});}
+/* 隨機：從還沒播過的挑一首 */
+function rnd(){var pool=order.filter(function(i){return !played[i];});
+ if(!pool.length){if(confirm('全部都播過了，要清除紀錄、重新開始嗎？'))resetPlayed();return;}
+ send({a:'open',i:pool[Math.floor(Math.random()*pool.length)]});}
+function resetPlayed(){var bak=JSON.parse(JSON.stringify(played));undoBak=bak;if(ref&&room)ref.child('playedBak').set(bak);played={};if(ref&&room)ref.child('played').set(null);mark();showUndo();}
+var undoBak=null;function showUndo(){$('#undo').hidden=!(undoBak&&Object.keys(undoBak).length);}
+function undoPlayed(){if(!undoBak)return;played=undoBak;undoBak=null;if(ref&&room){ref.child('played').set(played);ref.child('playedBak').set(null);}seenLines=-1;mark();showUndo();}
+function savePlayed(){if(ref&&room)ref.child('played').set(played);}
+grid.addEventListener('click',function(e){var t=e.target.closest('.tile');if(t)send({a:'open',i:+t.dataset.i});});
+
+/* ---------- 遙控列 ---------- */
+function showBar(){mark();var on=pos.open&&list[pos.idx];bar.classList.toggle('show',!!on&&!isPlayer);if(!on)return;
+ $('#bName').innerHTML='<b>'+(pos.idx+1)+'</b>';$('#bName').appendChild(document.createTextNode(list[pos.idx].name));
+ $('#bPlay').textContent=pos.paused?'▶ 播放':'⏸ 暫停';
+ if(!dragging){seek.value=pos.d?Math.round(pos.t/pos.d*1000):0;$('#tCur').textContent=fmt(pos.t);}
+ $('#tDur').textContent=fmt(pos.d);}
+bar.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a;
+ if(a==='rnd')rnd();
+ else if(a==='toggle')send({a:pos.paused?'play':'pause'});
+ else if(a==='back10'||a==='fwd10')send({a:'seek',t:Math.max(0,(pos.t||0)+(a==='fwd10'?10:-10))});
+ else if(a==='prev'||a==='next'){var k=order.indexOf(pos.idx)+(a==='next'?1:-1);if(k>=0&&k<order.length)send({a:'open',i:order[k]});}
+ else if(a==='close')send({a:'close'});});
+seek.addEventListener('input',function(){dragging=true;$('#tCur').textContent=fmt(seek.value/1000*(pos.d||0));});
+seek.addEventListener('change',function(){dragging=false;send({a:'seek',t:seek.value/1000*(pos.d||0)});});
+
+/* ---------- 播放端 ---------- */
+var curIdx=-1,url=null;
+function exec(c){if(!isPlayer)return;
+ if(c.a==='open'&&list[c.i]){if(url){URL.revokeObjectURL(url);url=null;}if(files[c.i]){url=URL.createObjectURL(files[c.i]);vid.src=url;}else vid.src='videos/'+encodeURIComponent(list[c.i].file);curIdx=c.i;played[c.i]=1;savePlayed();
+  $('#vTitle').textContent=(c.i+1)+'　'+list[c.i].name+(list[c.i].who?'｜'+list[c.i].who:'');var au=/\.mp3$/i.test(list[c.i].file||'');$('#aCard').style.display=au?'flex':'none';if(au){$('#aCard b').textContent=list[c.i].name;$('#aCard span').textContent=list[c.i].who==='全部'?'全體大合唱':list[c.i].who;}stageV.classList.add('show');wake();tryPlay();}
+ else if(c.a==='play')tryPlay();
+ else if(c.a==='pause')vid.pause();
+ else if(c.a==='seek'&&isFinite(c.t))vid.currentTime=Math.min(c.t,vid.duration||c.t);
+ else if(c.a==='close'){vid.pause();stageV.classList.remove('show');curIdx=-1;if(document.fullscreenElement)document.exitFullscreen().catch(function(){});}
+ pub();}
+function tryPlay(){vid.muted=false;var p=vid.play();if(p&&p.catch)p.catch(function(){vid.muted=true;vid.play().catch(function(){});$('#unmute').style.display='block';});}
+$('#unmute').onclick=function(){vid.muted=false;this.style.display='none';};
+$('#vBack').onclick=function(){send({a:'close'});};
+var lastPub=0;
+function pub(){var p={open:curIdx>=0,idx:curIdx,t:vid.currentTime||0,d:vid.duration||0,paused:vid.paused};pos=p;mark();
+ if(ref&&room){lastPub=Date.now();ref.child('pos').set(p);}}
+['play','pause','seeked','loadedmetadata','ended'].forEach(function(ev){vid.addEventListener(ev,pub);});
+vid.addEventListener('ended',function(){if(isPlayer&&curIdx>=0)setTimeout(function(){if(vid.ended)send({a:'close'});},1500);});
+vid.addEventListener('timeupdate',function(){if(Date.now()-lastPub>900)pub();});
+vid.addEventListener('click',function(){send({a:vid.paused?'play':'pause'});});
+document.addEventListener('keydown',function(e){if(!isPlayer||curIdx<0)return;
+ if(e.key===' '){e.preventDefault();send({a:vid.paused?'play':'pause'});}
+ else if(e.key==='Escape')send({a:'close'});
+ else if(e.key==='ArrowRight')send({a:'seek',t:vid.currentTime+10});
+ else if(e.key==='ArrowLeft')send({a:'seek',t:Math.max(0,vid.currentTime-10)});});
+var idleT;function wake(){stageV.classList.remove('idle');clearTimeout(idleT);idleT=setTimeout(function(){stageV.classList.add('idle');},2500);}
+stageV.addEventListener('mousemove',wake);
+
+/* ---------- 選資料夾 ---------- */
+function choose(fl){var v=[].filter.call(fl,function(f){return /^video\//.test(f.type)||/\.(mp4|m4v|mov|webm|mkv|ogv)$/i.test(f.name);});
+ if(!v.length){alert('這個資料夾裡沒有找到影片檔（mp4、mov、webm…）');return;}
+ v.sort(function(a,b){return (a.webkitRelativePath||a.name).localeCompare(b.webkitRelativePath||b.name,'zh-Hant',{numeric:true});});
+ files=v;isPlayer=true;list=v.map(function(f){return {name:f.name.replace(/\.[^.]+$/,'').replace(/^\d+[\s._-]*/,'')||f.name};});
+ render();setRole();publishList();}
+function publishList(){if(ref&&room)ref.child('list').set({by:me,at:Date.now(),items:list});}
+$('#dirIn').onchange=function(){choose(this.files);this.value='';};
+$('#fileIn').onchange=function(){choose(this.files);this.value='';};
+
+/* 縮圖：每支抓第 2 秒的畫面，做成小圖，手機也看得到 */
+function thumbs(){var gen=files,k=0,tv=document.createElement('video'),cv=document.createElement('canvas');tv.muted=true;tv.preload='auto';cv.width=240;cv.height=135;
+ function nx(){if(gen!==files)return;if(k>=files.length){publishList();return;}var u=URL.createObjectURL(files[k]);tv.src=u;
+  var done=function(ok){URL.revokeObjectURL(u);if(ok){try{var c=cv.getContext('2d'),w=tv.videoWidth,h=tv.videoHeight,s=Math.max(240/w,135/h);c.fillStyle='#000';c.fillRect(0,0,240,135);c.drawImage(tv,(240-w*s)/2,(135-h*s)/2,w*s,h*s);list[k].th=cv.toDataURL('image/jpeg',.6);
+   var t=grid.querySelector('.tile[data-i="'+k+'"] .th');if(t){t.style.backgroundImage='url('+list[k].th+')';t.textContent='';}}catch(e){}}
+   k++;if(k%6===0)publishList();setTimeout(nx,0);};
+  tv.onloadeddata=function(){tv.currentTime=Math.min(2,(tv.duration||4)/3);};tv.onseeked=function(){done(true);};tv.onerror=function(){done(false);};}
+ nx();}
+document.querySelector('#tools .rnd').onclick=rnd;
+function setView(v){document.body.classList.toggle('bingo',v==='bingo');[].forEach.call(document.querySelectorAll('.vw button'),function(b){b.classList.toggle('on',b.dataset.v===v);});mark();}
+document.querySelector('.vw').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;setView(b.dataset.v);if(ref&&room)ref.child('view').set(b.dataset.v);});
+if(ref&&room)ref.child('view').on('value',function(s){setView(s.val()||'list');});
+$('#undo').onclick=undoPlayed;
+if(ref&&room)ref.child('playedBak').on('value',function(s){undoBak=s.val();showUndo();});
+$('#clr').onclick=function(){if(confirm('確定清除「播過」的紀錄？'))resetPlayed();};
+$('#swap').onclick=function(){isPlayer=!isPlayer;if(!isPlayer&&curIdx>=0){vid.pause();stageV.classList.remove('show');curIdx=-1;}render();setRole();showBar();};
+/* 網站上的影片：videos/list.json（[{file,name,th}]）。寬螢幕（桌機）自動當播放端，手機當遙控器 */
+fetch('videos/list.json?v='+Date.now()).then(function(r){return r.ok?r.json():null;}).then(function(v){
+ if(!v||!v.length){setRole();return;}
+ site=true;seenLines=-1;list=v.map(function(it){return {file:it.file,name:it.name,who:it.who||'',th:it.th?'videos/'+it.th:''};});
+ isPlayer=!room||window.innerWidth>=900;render();setRole();if(!isPlayer)showBar();
+}).catch(function(){setRole();});
+setRole();
+})();
+</script>
+</body>
+</html>

@@ -314,12 +314,17 @@ if(ref&&room)ref.child('view').on('value',function(s){setView(s.val()||'list');}
 $('#undo').onclick=undoPlayed;
 if(ref&&room)ref.child('playedBak').on('value',function(s){undoBak=s.val();showUndo();});
 $('#clr').onclick=function(){if(confirm('確定清除「播過」的紀錄？'))resetPlayed();};
-$('#swap').onclick=function(){isPlayer=!isPlayer;if(!isPlayer&&curIdx>=0){vid.pause();stageV.classList.remove('show');curIdx=-1;}render();setRole();showBar();};
+/* 同一房間只能有一個播放端：新的播放端登記後，其他播放端自動停播、變回遙控器 */
+function setPlayer(on){isPlayer=on;if(!on&&curIdx>=0){vid.pause();vid.removeAttribute('src');vid.load();stageV.classList.remove('show');curIdx=-1;}
+ if(on&&ref&&room)ref.child('player').set({id:me,at:Date.now()});render();setRole();showBar();}
+if(ref&&room)ref.child('player').on('value',function(s){var v=s.val();if(isPlayer&&v&&v.id&&v.id!==me)setPlayer(false);});
+$('#swap').onclick=function(){setPlayer(!isPlayer);};
 /* 網站上的影片：videos/list.json（[{file,name,th}]）。寬螢幕（桌機）自動當播放端，手機當遙控器 */
 fetch('videos/list.json?v='+Date.now()).then(function(r){return r.ok?r.json():null;}).then(function(v){
  if(!v||!v.length){setRole();return;}
  site=true;seenLines=-1;list=v.map(function(it){return {file:it.file,name:it.name,who:it.who||'',th:it.th?'videos/'+it.th:''};});
- isPlayer=!room||window.innerWidth>=900;render();setRole();if(!isPlayer)showBar();
+ var touch=matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>1&&!matchMedia('(pointer:fine)').matches;
+ setPlayer(!room||(!touch&&window.innerWidth>=900));
 }).catch(function(){setRole();});
 setRole();
 })();
