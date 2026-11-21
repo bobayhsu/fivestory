@@ -234,11 +234,16 @@ function render(){grid.innerHTML='';order=[];groups().forEach(function(g){
  d.querySelector('.nm').textContent=it.name+(it.who?'｜'+it.who:'');grid.appendChild(d);});});renderBingo();mark();}
 /* ---------- 36 宮格：格子照編號排，播過亮起，連成一線發光 ---------- */
 
-function renderBingo(){var B=$('#bBoard');B.innerHTML='';for(var i=0;i<36;i++){var it=list[i],d=document.createElement('div');d.className='cell';
+/* 宮格排列：其他作者（含全體）→ 指定 8 位 → 12 位採訪者排最後兩列 */
+var LATE=[15,8,4,13,34,18,6,2],LAY=[];
+function makeLay(){var rest=[],late=[],iv=[],all=null;list.forEach(function(it,k){var n=k+1;
+  if(/採訪者/.test(it.who||''))iv.push(k);else if(it.who==='全部')all=k;else if(LATE.indexOf(n)<0)rest.push(k);});
+ LATE.forEach(function(n){if(list[n-1])late.push(n-1);});if(all!==null)rest.push(all);LAY=rest.concat(late,iv);}
+function renderBingo(){makeLay();var B=$('#bBoard');B.innerHTML='';for(var q=0;q<36;q++){var i=LAY[q],it=list[i],d=document.createElement('div');d.className='cell';
  if(!it){d.style.visibility='hidden';B.appendChild(d);continue;}d.dataset.i=i;
  d.innerHTML='<span class="cn">'+(i<9?'0':'')+(i+1)+'</span><span class="pn"></span><span class="sn"></span>';
  d.querySelector('.pn').textContent=it.who==='全部'?'全體':(it.who||'').replace(/的採訪者$/,'')||it.name;d.querySelector('.sn').textContent=it.name;B.appendChild(d);}}
-function bingoLines(){return LINES.filter(function(L){return L.every(function(i){return list[i]&&played[i];});});}
+function bingoLines(){return LINES.map(function(L){return L.map(function(q){return LAY[q];});}).filter(function(L){return L.every(function(i){return i!=null&&list[i]&&played[i];});});}
 $('#bBoard').addEventListener('click',function(e){var t=e.target.closest('.cell');if(t&&t.dataset.i)send({a:'open',i:+t.dataset.i});});
 function boom(n){var b=$('#boom');b.querySelector('small').textContent='第 '+n+' 條線';b.classList.add('show');clearTimeout(boom.t);boom.t=setTimeout(function(){b.classList.remove('show');},3200);}
 function mark(){[].forEach.call(grid.querySelectorAll('.tile'),function(d){var i=+d.dataset.i;d.classList.toggle('on',pos.open&&i===pos.idx);d.classList.toggle('done',!!played[i]);});
