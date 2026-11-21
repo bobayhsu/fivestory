@@ -69,7 +69,7 @@ body.bingo #bingo{display:block}
 #aCard{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;color:#F5C518;text-align:center;pointer-events:none}
 #aCard b{font-size:min(9vw,96px);letter-spacing:6px}
 #aCard span{font-size:min(4vw,36px);color:#E8E0D4;margin-top:16px}
-#noPl{display:none;margin:10px 20px 0;padding:10px 14px;border-radius:10px;background:#5A1418;color:#FFD9D9;font-size:16px;line-height:1.5}
+#noPl{display:none;margin:10px 20px 0;padding:10px 14px;border-radius:10px;background:#1F3A2E;color:#CDEBDB;font-size:16px;line-height:1.5}
 /* 播放端：影片蓋滿全螢幕 */
 #stageV{position:fixed;inset:0;background:#000;z-index:20;display:none;overflow:hidden}
 #stageV.show{display:block}
@@ -146,7 +146,7 @@ body.bingo #bingo{display:block}
 </section>
 <p id="solo">沒有連線碼（網址沒有 ?sync=…），只能在這台電腦上播放。</p>
 
-<div id="noPl">⚠ 桌機尚未連上：請在桌機用同一個網址打開；如果已經開了，在桌機按右上角「切換」，讓它變成「播放端」。</div>
+<div id="noPl">📱 目前沒有桌機播放：點歌會直接在這支手機播放。要投影的話，在桌機用同一個網址打開就會自動接手。</div>
 <main id="grid"></main>
 <section id="bingo"><div id="bBoard"></div></section>
 <div id="boom"><div>BINGO！<small></small></div></div>
@@ -172,7 +172,7 @@ body.bingo #bingo{display:block}
   <button class="btn g" data-a="fwd10">+10秒</button>
   <button class="btn g" data-a="next">⏭</button>
  </div>
- <div id="bBtns2" style="display:flex;margin-top:8px"><button class="btn g" data-a="close" style="flex:1;margin:0;padding:10px 0;font-size:17px">回影片牆</button></div>
+ <div id="bBtns2" style="display:flex;margin-top:8px"><button class="btn g" data-a="close" style="flex:1;margin:0;padding:10px 0;font-size:17px">回影片牆</button><button class="btn g" id="rSnd" style="flex:1;margin:0 0 0 8px;padding:10px 0;font-size:17px">🔈 手機也出聲</button></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -195,7 +195,7 @@ var $=function(s){return document.querySelector(s);};
 var room=new URLSearchParams(location.search).get('sync');
 if(room&&!/^[a-zA-Z0-9_-]{4,60}$/.test(room))room=null;
 var me=String(Date.now())+Math.random().toString(36).slice(2);
-var off=0,played={},order=[],site=false,isPlayer=false,files=[],list=[],pos={open:false},lastSeq=null,ref=null,db=null;
+var playerInfo=null,off=0,played={},order=[],site=false,isPlayer=false,files=[],list=[],pos={open:false},lastSeq=null,ref=null,db=null;
 var vid=$('#vid'),stageV=$('#stageV'),grid=$('#grid'),bar=$('#bar'),seek=$('#seek'),dragging=false;
 var LINES=[],seenLines=-1;(function(){var r,c;for(r=0;r<6;r++){var a=[];for(c=0;c<6;c++)a.push(r*6+c);LINES.push(a);}
  for(c=0;c<6;c++){var b=[];for(r=0;r<6;r++)b.push(r*6+c);LINES.push(b);}
@@ -220,7 +220,11 @@ if(room&&window.firebase&&window.FIVESTORY_FIREBASE_CONFIG){
  }catch(e){setState('連線失敗');console.error(e);room=null;}
 }else{$('#solo').style.display=room?'none':'block';}
 
-function send(c){c.seq=me+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,6);c.at=Date.now();
+function now(){return Date.now()+(off||0);}
+function playerActive(){return !!(playerInfo&&playerInfo.id&&now()-(playerInfo.at||0)<45000);}
+function send(c){/* 連線中但沒有播放端（桌機沒開）：手機點歌就自己當播放端 */
+ if(ref&&room&&!isPlayer&&c.a==='open'&&!playerActive())setPlayer(true);
+ c.seq=me+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,6);c.at=Date.now();
  if(ref&&room){if(isPlayer)lastSeq=c.seq;ref.child('cmd').set(c);if(isPlayer)exec(c);}else exec(c);}
 
 /* ---------- 影片牆 ---------- */
@@ -305,14 +309,16 @@ function ptl(){var d=vid.duration||0;if(!pDrag){pS.value=d?Math.round(vid.curren
 pS.addEventListener('input',function(){pDrag=true;$('#pCur').textContent=fmt(pS.value/1000*(vid.duration||0));});
 pS.addEventListener('change',function(){pDrag=false;send({a:'seek',t:pS.value/1000*(vid.duration||0)});});
 /* 手機遙控：上方同步播放同一支影片（靜音），進度跟著播放端 */
-var rv=$('#rv'),rBox=$('#rBox');
+var rv=$('#rv'),rBox=$('#rBox'),rvSound=false;
+function sndBtn(){var b=$('#rSnd');if(b){b.textContent=rvSound?'🔊 手機出聲中':'🔈 手機也出聲';b.style.background=rvSound?'#1F7A5A':'';b.style.color=rvSound?'#fff':'';}}
+$('#rSnd').addEventListener('click',function(e){e.stopPropagation();rvSound=!rvSound;rv.muted=!rvSound;if(rvSound&&rv.paused&&!pos.paused)rv.play().catch(function(){});sndBtn();});
 function syncRemote(){if(!rBox)return;var on=!isPlayer&&site&&pos.open&&list[pos.idx];
  if(!on){if(rBox.classList.contains('show')){rBox.classList.remove('show');rv.pause();rv.removeAttribute('src');rv.load();delete rv.dataset.i;}return;}
  rBox.style.bottom=bar.offsetHeight+'px';if(!rBox.classList.contains('show')){rBox.classList.add('show');setTimeout(fitFocus,0);}
- if(rv.dataset.i!=String(pos.idx)){rv.dataset.i=pos.idx;rv.muted=true;rv.src='videos/'+encodeURIComponent(list[pos.idx].file);}
+ if(rv.dataset.i!=String(pos.idx)){rv.dataset.i=pos.idx;rv.muted=!rvSound;rv.src='videos/'+encodeURIComponent(list[pos.idx].file);}
  var tgt=(pos.t||0)+(pos.paused||!pos.at?0:Math.max(0,(Date.now()+off-pos.at)/1000));if(pos.d)tgt=Math.min(tgt,pos.d);
  if(rv.readyState>=1&&Math.abs(rv.currentTime-tgt)>0.7)rv.currentTime=tgt;
- if(pos.paused){if(!rv.paused)rv.pause();}else if(rv.paused)rv.play().catch(function(){});
+ if(pos.paused){if(!rv.paused)rv.pause();}else if(rv.paused)rv.play().catch(function(){if(!rv.muted){rv.muted=true;rvSound=false;sndBtn();rv.play().catch(function(){});}});
  if(!dragging){$('#tCur').textContent=fmt(tgt);seek.value=pos.d?Math.round(tgt/pos.d*1000):0;}}
 rv.addEventListener('loadedmetadata',syncRemote);
 setInterval(function(){if(!isPlayer)syncRemote();},1000);
@@ -352,12 +358,11 @@ if(ref&&room)ref.child('playedBak').on('value',function(s){undoBak=s.val();showU
 $('#clr').onclick=function(){if(confirm('確定清除「播過」的紀錄？'))resetPlayed();};
 /* 同一房間只能有一個播放端：新的播放端登記後，其他播放端自動停播、變回遙控器 */
 function setPlayer(on){isPlayer=on;if(!on&&curIdx>=0){vid.pause();vid.removeAttribute('src');vid.load();stageV.classList.remove('show');curIdx=-1;}
- if(on&&ref&&room)ref.child('player').set({id:me,at:Date.now()});render();setRole();showBar();}
-var playerInfo=null;
+ if(on&&ref&&room){ref.child('player').set({id:me,at:now()});if(curIdx<0)pub();}render();setRole();showBar();}
 if(ref&&room)ref.child('player').on('value',function(s){var v=s.val();playerInfo=v;if(isPlayer&&v&&v.id&&v.id!==me)setPlayer(false);noPlayerWarn();});
 /* 播放端每 20 秒報到一次；遙控器 60 秒沒收到就提醒 */
-setInterval(function(){if(isPlayer&&ref&&room)ref.child('player').set({id:me,at:Date.now()});},20000);
-function noPlayerWarn(){var w=$('#noPl');if(!w)return;var bad=room&&!isPlayer&&list.length&&(!playerInfo||Date.now()-(playerInfo.at||0)>60000);w.style.display=bad?'block':'none';}
+setInterval(function(){if(isPlayer&&ref&&room)ref.child('player').set({id:me,at:now()});},20000);
+function noPlayerWarn(){var w=$('#noPl');if(!w)return;var bad=room&&!isPlayer&&list.length&&!playerActive();w.style.display=bad?'block':'none';}
 setInterval(noPlayerWarn,5000);
 $('#swap').onclick=function(){setPlayer(!isPlayer);};
 /* 網站上的影片：videos/list.json（[{file,name,th}]）。寬螢幕（桌機）自動當播放端，手機當遙控器 */
