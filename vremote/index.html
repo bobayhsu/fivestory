@@ -52,8 +52,8 @@ body.bingo #bingo{display:block}
 .cell{position:relative;height:calc((100vh - 230px) / 6);min-height:62px;background:#211C18;border:2px solid #3A332D;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none;-webkit-user-select:none;padding:4px;transition:background .4s,color .4s,box-shadow .4s}
 .cell:hover{border-color:#F5C518}
 .cell .cn{position:absolute;top:4px;left:7px;font-size:13px;color:#7D746A;font-weight:700}
-.cell .pn{font-size:clamp(16px,2.6vw,34px);font-weight:900;letter-spacing:2px;line-height:1.15}
-.cell .sn{font-size:clamp(11px,1.1vw,15px);color:#A89F94;margin-top:4px;line-height:1.2}
+.cell .pn{font-size:clamp(14px,min(2.4vw,4.4vh),34px);white-space:nowrap;font-weight:900;letter-spacing:2px;line-height:1.15}
+.cell .sn{font-size:clamp(10px,min(1.1vw,2.1vh),15px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;color:#A89F94;margin-top:4px;line-height:1.2}
 .cell.done{background:#3B2F12;border-color:#9C7A1C;color:#FFE27A}
 .cell.done .sn,.cell.done .cn{color:#D9B95A}
 .cell.on{border-color:#C41F27;box-shadow:0 0 0 3px #C41F27}
@@ -75,15 +75,18 @@ body.bingo #bingo{display:block}
 #cover{flex:none;height:calc(100vh - 190px);max-height:900px;width:auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
 #bWrap #bBoard{flex:1;margin:0;max-width:calc((100vh - 175px) * 1.75)}
 /* 滑鼠移到格子：歌曲資訊卡 */
-#tip{position:fixed;z-index:25;display:none;width:min(420px,92vw);max-height:calc(100vh - 40px);overflow:auto;background:#1E1A17;border:2px solid #F5C518;border-radius:14px;padding:18px 20px;box-shadow:0 12px 40px rgba(0,0,0,.7);pointer-events:none}
+#tip{position:fixed;z-index:25;display:none;width:min(420px,92vw);max-height:calc(100vh - 40px);overflow:auto;background:#FFFFFF;border:3px solid #F5C518;border-radius:14px;padding:18px 20px;box-shadow:0 12px 40px rgba(0,0,0,.7);pointer-events:none}
 #tip.show{display:block}
-#tip h3{margin:0 0 10px;font-size:22px;color:#F5C518;letter-spacing:1px;line-height:1.35}
+#tip h3{margin:0 0 10px;font-size:22px;color:#111;letter-spacing:1px;line-height:1.35}
 #tip .tg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 #tip .tg span{background:#C41F27;color:#fff;border-radius:8px;padding:3px 10px;font-size:15px;font-weight:700}
-#tip .tg span.b{background:#3A332D;color:#E8E0D4}
-#tip .ft{font-size:14px;color:#A89F94;line-height:1.55;margin-bottom:12px;border-bottom:1px solid #3A332D;padding-bottom:10px}
-#tip .ly{font-size:17px;line-height:1.75;color:#F3EEE6;white-space:pre-line}
+#tip .tg span.b{background:#EDE6DA;color:#333}
+#tip .ft{font-size:14px;color:#555;line-height:1.55;margin-bottom:12px;border-bottom:1px solid #DDD;padding-bottom:10px}
+#tip .ly{font-size:17px;line-height:1.75;color:#111;white-space:pre-line}
 body.touch #tip{pointer-events:auto;left:4vw!important;top:auto!important;bottom:12px;max-height:70vh}
+@media (max-height:620px) and (min-width:601px){.cell .sn{display:none}.cell .cn{font-size:11px}}
+/* 視窗較窄時標題列縮小，避免右邊按鈕被擠出去 */
+@media (max-width:1350px) and (min-width:601px){header{gap:8px;padding:12px 14px}header h1{font-size:21px;letter-spacing:1px;white-space:nowrap}#state{font-size:12px;white-space:nowrap}header .hd,#swap{white-space:nowrap}}
 /* 播放端：影片蓋滿全螢幕 */
 #stageV{position:fixed;inset:0;background:#000;z-index:20;display:none;overflow:hidden}
 #stageV.show{display:block}
