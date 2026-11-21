@@ -77,6 +77,9 @@ body.bingo #bingo{display:block}
 #vTitle{position:absolute;top:14px;left:18px;font-size:20px;color:#fff;background:rgba(0,0,0,.55);padding:4px 14px;border-radius:10px;transition:opacity .6s}
 #vBack{position:absolute;top:12px;right:16px;transition:opacity .6s}
 #stageV.idle #vTitle,#stageV.idle #vBack{opacity:0}
+/* 手機：回影片牆按鈕一直顯示 */
+body.touch #stageV.idle #vBack,body.touch #stageV.idle #vTitle{opacity:1}
+body.touch #vBack{z-index:5;font-size:18px;padding:10px 16px}
 #unmute{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:none;font-size:26px}
 /* 遙控器 */
 #bar{position:fixed;left:0;right:0;bottom:0;background:#1E1A17;border-top:3px solid #C41F27;padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:none;z-index:10}
@@ -329,7 +332,14 @@ document.addEventListener('keydown',function(e){if(!isPlayer||curIdx<0)return;
  else if(e.key==='ArrowRight')send({a:'seek',t:vid.currentTime+10});
  else if(e.key==='ArrowLeft')send({a:'seek',t:Math.max(0,vid.currentTime-10)});});
 var idleT;function wake(){stageV.classList.remove('idle');clearTimeout(idleT);idleT=setTimeout(function(){stageV.classList.add('idle');},2500);}
-stageV.addEventListener('mousemove',wake);
+stageV.addEventListener('mousemove',wake);stageV.addEventListener('touchstart',wake,{passive:true});
+if(matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>1)document.body.classList.add('touch');
+/* 手機的返回手勢／返回鍵：回影片牆，不離開網頁 */
+var pushed=false;
+new MutationObserver(function(){var on=stageV.classList.contains('show');
+ if(on&&!pushed&&document.body.classList.contains('touch')){history.pushState({vr:1},'');pushed=true;}
+ else if(!on&&pushed){pushed=false;if(history.state&&history.state.vr)history.back();}}).observe(stageV,{attributes:true,attributeFilter:['class']});
+addEventListener('popstate',function(){if(pushed){pushed=false;if(stageV.classList.contains('show'))send({a:'close'});}});
 
 /* ---------- 選資料夾 ---------- */
 function choose(fl){var v=[].filter.call(fl,function(f){return /^video\//.test(f.type)||/\.(mp4|m4v|mov|webm|mkv|ogv)$/i.test(f.name);});
