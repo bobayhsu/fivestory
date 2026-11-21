@@ -87,6 +87,14 @@ body.touch #tip{pointer-events:auto;left:4vw!important;top:auto!important;bottom
 @media (max-height:620px) and (min-width:601px){.cell .sn{display:none}.cell .cn{font-size:11px}}
 /* 視窗較窄時標題列縮小，避免右邊按鈕被擠出去 */
 @media (max-width:1350px) and (min-width:601px){header{gap:8px;padding:12px 14px}header h1{font-size:21px;letter-spacing:1px;white-space:nowrap}#state{font-size:12px;white-space:nowrap}header .hd,#swap{white-space:nowrap}}
+/* 桌機：資訊卡佔半個螢幕 */
+body:not(.touch) #tip{width:calc(50vw - 30px);top:14px!important;bottom:14px;max-height:none;padding:3vh 2.6vw;display:none;flex-direction:column}
+body:not(.touch) #tip.show{display:flex}
+body:not(.touch) #tip h3{font-size:clamp(24px,4vh,46px);margin-bottom:1.6vh}
+body:not(.touch) #tip .tg span{font-size:clamp(15px,2.2vh,24px);padding:.4vh 14px}
+body:not(.touch) #tip .ft{font-size:clamp(14px,2vh,22px);margin-bottom:1.8vh;padding-bottom:1.6vh}
+body:not(.touch) #tip .ly{flex:1;min-height:0;overflow:hidden;font-size:clamp(17px,2.9vh,34px);line-height:1.6}
+body:not(.touch) #tip .ly.c2{column-count:2;column-gap:3vw;font-size:clamp(15px,2.5vh,30px)}
 /* 播放端：影片蓋滿全螢幕 */
 #stageV{position:fixed;inset:0;background:#000;z-index:20;display:none;overflow:hidden}
 #stageV.show{display:block}
@@ -281,8 +289,8 @@ function showTip(cell){var i=+cell.dataset.i,it=list[i];if(!it)return;var k=(i<9
   ((d.style||d.bpm)?'<div class="tg">'+(d.style?'<span>'+esc(d.style)+'</span>':'')+(d.bpm?'<span class="b">BPM '+esc(d.bpm)+'</span>':'')+'</div>':'')+
   (d.feat?'<div class="ft">'+esc(d.feat)+'</div>':'')+(d.lyrics?'<div class="ly">'+esc(d.lyrics)+'</div>':'<div class="ft">（全體大合唱）</div>');
  tip.classList.add('show');if(document.body.classList.contains('touch'))return;
- var r=cell.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,x=r.right+12;if(x+tw>innerWidth-10)x=r.left-tw-12;if(x<10)x=10;
- var y=r.top+r.height/2-th/2;y=Math.max(10,Math.min(y,innerHeight-th-10));tip.style.left=x+'px';tip.style.top=y+'px';}
+ var r=cell.getBoundingClientRect(),left=(r.left+r.width/2)>innerWidth/2;tip.style.left=(left?14:innerWidth/2+16)+'px';
+ var ly=tip.querySelector('.ly');if(ly){var n=(d.lyrics||'').split('\n').length;if(n>16)ly.classList.add('c2');}}
 function hideTip(){tip.classList.remove('show');tipFor=-1;}window.__hideTip=hideTip;
 $('#bBoard').addEventListener('mouseover',function(e){if(document.body.classList.contains('touch'))return;var c=e.target.closest('.cell[data-i]');if(c&&+c.dataset.i!==tipFor)showTip(c);});
 $('#bBoard').addEventListener('mouseleave',hideTip);
