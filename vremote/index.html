@@ -70,7 +70,7 @@ body.bingo #bingo{display:block}
 #aCard b{font-size:min(9vw,96px);letter-spacing:6px}
 #aCard span{font-size:min(4vw,36px);color:#E8E0D4;margin-top:16px}
 /* 播放端：影片蓋滿全螢幕 */
-#stageV{position:fixed;inset:0;background:#000;z-index:20;display:none}
+#stageV{position:fixed;inset:0;background:#000;z-index:20;display:none;overflow:hidden}
 #stageV.show{display:block}
 #stageV video{width:100%;height:100%;object-fit:contain;background:#000}
 #vTitle{position:absolute;top:14px;left:18px;font-size:20px;color:#fff;background:rgba(0,0,0,.55);padding:4px 14px;border-radius:10px;transition:opacity .6s}
@@ -166,6 +166,16 @@ body.bingo #bingo{display:block}
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
 <script src="../sync-config.js?v=independent1"></script>
+<script>
+/* 播放時放大重點：直式 Suno 影片只取中間「標題＋圖片＋歌詞」區塊撐滿螢幕 */
+var FOCUS={x:.13,y:.145,w:.74,h:.585};
+function fitFocus(){var v=document.getElementById('vid');if(!v)return;var W=innerWidth,H=innerHeight,vw=v.videoWidth,vh=v.videoHeight;
+ if(!vw||!vh||vh<=vw){v.style.cssText='';return;}
+ var rw=vw*FOCUS.w,rh=vh*FOCUS.h,s=Math.min(W/rw,H/rh);
+ v.style.cssText='position:absolute;object-fit:fill;max-width:none;width:'+vw*s+'px;height:'+vh*s+'px;left:'+(W/2-(vw*FOCUS.x+rw/2)*s)+'px;top:'+(H/2-(vh*FOCUS.y+rh/2)*s)+'px';}
+addEventListener('resize',fitFocus);
+document.addEventListener('DOMContentLoaded',function(){var v=document.getElementById('vid');v.addEventListener('loadedmetadata',fitFocus);v.addEventListener('emptied',fitFocus);});
+</script>
 <script>
 (function(){'use strict';
 var $=function(s){return document.querySelector(s);};
