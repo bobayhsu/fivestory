@@ -80,6 +80,14 @@ body.bingo #bingo{display:block}
 /* 遙控器 */
 #bar{position:fixed;left:0;right:0;bottom:0;background:#1E1A17;border-top:3px solid #C41F27;padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:none;z-index:10}
 #bar.show{display:block}
+/* 桌機投影：底部時間軸（一直顯示，可點可拖） */
+#pTL{position:absolute;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;gap:16px;padding:0 28px;background:linear-gradient(transparent,rgba(0,0,0,.75));z-index:2}
+#pTL span{font-size:20px;color:#fff;font-variant-numeric:tabular-nums;min-width:3.2em;text-align:center}
+#pSeek{flex:1;accent-color:#F5C518;height:30px;cursor:pointer}
+/* 手機遙控：上方同步播放（靜音） */
+#rBox{position:fixed;left:0;right:0;top:0;background:#000;z-index:9;display:none;overflow:hidden}
+#rBox.show{display:block}
+#rv{position:absolute;width:100%;height:100%;object-fit:contain}
 #bName{font-size:18px;font-weight:700;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #bName b{color:#F5C518;margin-right:6px}
 #seek{width:100%;accent-color:#F5C518;height:28px}
@@ -147,7 +155,9 @@ body.bingo #bingo{display:block}
  <div id="vTitle"></div>
  <button id="vBack" class="btn g">✕ 回影片牆</button>
  <button id="unmute" class="btn y">🔊 按一下開啟聲音</button>
+ <div id="pTL"><span id="pCur">0:00</span><input id="pSeek" type="range" min="0" max="1000" value="0"><span id="pDur">0:00</span></div>
 </div>
+<div id="rBox"><video id="rv" playsinline muted></video></div>
 
 <div id="bar">
  <div id="bName"></div>
@@ -169,12 +179,13 @@ body.bingo #bingo{display:block}
 <script>
 /* 播放時放大重點：直式 Suno 影片只取中間「標題＋圖片＋歌詞」區塊撐滿螢幕 */
 var FOCUS={x:.13,y:.145,w:.74,h:.585};
-function fitFocus(){var v=document.getElementById('vid');if(!v)return;var W=innerWidth,H=innerHeight,vw=v.videoWidth,vh=v.videoHeight;
+function fitFocus(){fitOne(document.getElementById('vid'),innerWidth,innerHeight-64);var b=document.getElementById('rBox');if(b&&b.offsetHeight)fitOne(document.getElementById('rv'),b.offsetWidth,b.offsetHeight);}
+function fitOne(v,W,H){if(!v)return;var vw=v.videoWidth,vh=v.videoHeight;
  if(!vw||!vh||vh<=vw){v.style.cssText='';return;}
  var rw=vw*FOCUS.w,rh=vh*FOCUS.h,s=Math.min(W/rw,H/rh);
- v.style.cssText='position:absolute;object-fit:fill;max-width:none;width:'+vw*s+'px;height:'+vh*s+'px;left:'+(W/2-(vw*FOCUS.x+rw/2)*s)+'px;top:'+(H/2-(vh*FOCUS.y+rh/2)*s)+'px';}
+ v.style.cssText='position:absolute;object-fit:fill;max-width:none;width:'+vw*s+'px;height:'+vh*s+'px;left:'+(W/2-(vw*FOCUS.x+rw/2)*s)+'px;top:'+(H/2-(vh*FOCUS.y+rh/2)*s)+'px;clip-path:inset('+vh*FOCUS.y*s+'px 0 '+vh*(1-FOCUS.y-FOCUS.h)*s+'px 0)';}
 addEventListener('resize',fitFocus);
-document.addEventListener('DOMContentLoaded',function(){var v=document.getElementById('vid');v.addEventListener('loadedmetadata',fitFocus);v.addEventListener('emptied',fitFocus);});
+document.addEventListener('DOMContentLoaded',function(){['vid','rv'].forEach(function(id){var v=document.getElementById(id);v.addEventListener('loadedmetadata',fitFocus);v.addEventListener('emptied',fitFocus);});});
 </script>
 <script>
 (function(){'use strict';
@@ -182,7 +193,7 @@ var $=function(s){return document.querySelector(s);};
 var room=new URLSearchParams(location.search).get('sync');
 if(room&&!/^[a-zA-Z0-9_-]{4,60}$/.test(room))room=null;
 var me=String(Date.now())+Math.random().toString(36).slice(2);
-var played={},order=[],site=false,isPlayer=false,files=[],list=[],pos={open:false},lastSeq=null,ref=null,db=null;
+var off=0,played={},order=[],site=false,isPlayer=false,files=[],list=[],pos={open:false},lastSeq=null,ref=null,db=null;
 var vid=$('#vid'),stageV=$('#stageV'),grid=$('#grid'),bar=$('#bar'),seek=$('#seek'),dragging=false;
 var LINES=[],seenLines=-1;(function(){var r,c;for(r=0;r<6;r++){var a=[];for(c=0;c<6;c++)a.push(r*6+c);LINES.push(a);}
  for(c=0;c<6;c++){var b=[];for(r=0;r<6;r++)b.push(r*6+c);LINES.push(b);}
@@ -198,6 +209,7 @@ function setRole(){var r=$('#role');r.className=isPlayer?'player':(list.length?'
 if(room&&window.firebase&&window.FIVESTORY_FIREBASE_CONFIG){
  try{if(!firebase.apps.length)firebase.initializeApp(window.FIVESTORY_FIREBASE_CONFIG);db=firebase.database();
   ref=db.ref('rooms/'+room+'/screen/localVideo');setState('連線中…');
+  db.ref('.info/serverTimeOffset').on('value',function(s){off=s.val()||0;});
   db.ref('.info/connected').on('value',function(s){setState(s.val()?'● 已連線':'連線中斷…');});
   ref.child('list').on('value',function(s){var v=s.val();if(isPlayer||site)return;list=(v&&v.items)||[];render();setRole();});
   ref.child('played').on('value',function(s){if(!mark.got){mark.got=1;seenLines=-1;}played=s.val()||{};mark();});
@@ -247,7 +259,7 @@ function savePlayed(){if(ref&&room)ref.child('played').set(played);}
 grid.addEventListener('click',function(e){var t=e.target.closest('.tile');if(t)send({a:'open',i:+t.dataset.i});});
 
 /* ---------- 遙控列 ---------- */
-function showBar(){mark();var on=pos.open&&list[pos.idx];bar.classList.toggle('show',!!on&&!isPlayer);if(!on)return;
+function showBar(){mark();var on=pos.open&&list[pos.idx];bar.classList.toggle('show',!!on&&!isPlayer);syncRemote();if(!on)return;
  $('#bName').innerHTML='<b>'+(pos.idx+1)+'</b>';$('#bName').appendChild(document.createTextNode(list[pos.idx].name));
  $('#bPlay').textContent=pos.paused?'▶ 播放':'⏸ 暫停';
  if(!dragging){seek.value=pos.d?Math.round(pos.t/pos.d*1000):0;$('#tCur').textContent=fmt(pos.t);}
@@ -275,11 +287,28 @@ function tryPlay(){vid.muted=false;var p=vid.play();if(p&&p.catch)p.catch(functi
 $('#unmute').onclick=function(){vid.muted=false;this.style.display='none';};
 $('#vBack').onclick=function(){send({a:'close'});};
 var lastPub=0;
-function pub(){var p={open:curIdx>=0,idx:curIdx,t:vid.currentTime||0,d:vid.duration||0,paused:vid.paused};pos=p;mark();
+function pub(){var p={open:curIdx>=0,idx:curIdx,t:vid.currentTime||0,d:vid.duration||0,paused:vid.paused,at:Date.now()+off};pos=p;mark();ptl();
  if(ref&&room){lastPub=Date.now();ref.child('pos').set(p);}}
 ['play','pause','seeked','loadedmetadata','ended'].forEach(function(ev){vid.addEventListener(ev,pub);});
 vid.addEventListener('ended',function(){if(isPlayer&&curIdx>=0)setTimeout(function(){if(vid.ended)send({a:'close'});},1500);});
-vid.addEventListener('timeupdate',function(){if(Date.now()-lastPub>900)pub();});
+vid.addEventListener('timeupdate',function(){ptl();if(Date.now()-lastPub>900)pub();});
+/* 桌機時間軸 */
+var pDrag=false,pS=$('#pSeek');
+function ptl(){var d=vid.duration||0;if(!pDrag){pS.value=d?Math.round(vid.currentTime/d*1000):0;$('#pCur').textContent=fmt(vid.currentTime);}$('#pDur').textContent=fmt(d);}
+pS.addEventListener('input',function(){pDrag=true;$('#pCur').textContent=fmt(pS.value/1000*(vid.duration||0));});
+pS.addEventListener('change',function(){pDrag=false;send({a:'seek',t:pS.value/1000*(vid.duration||0)});});
+/* 手機遙控：上方同步播放同一支影片（靜音），進度跟著播放端 */
+var rv=$('#rv'),rBox=$('#rBox');
+function syncRemote(){if(!rBox)return;var on=!isPlayer&&site&&pos.open&&list[pos.idx];
+ if(!on){if(rBox.classList.contains('show')){rBox.classList.remove('show');rv.pause();rv.removeAttribute('src');rv.load();delete rv.dataset.i;}return;}
+ rBox.style.bottom=bar.offsetHeight+'px';if(!rBox.classList.contains('show')){rBox.classList.add('show');setTimeout(fitFocus,0);}
+ if(rv.dataset.i!=String(pos.idx)){rv.dataset.i=pos.idx;rv.muted=true;rv.src='videos/'+encodeURIComponent(list[pos.idx].file);}
+ var tgt=(pos.t||0)+(pos.paused||!pos.at?0:Math.max(0,(Date.now()+off-pos.at)/1000));if(pos.d)tgt=Math.min(tgt,pos.d);
+ if(rv.readyState>=1&&Math.abs(rv.currentTime-tgt)>0.7)rv.currentTime=tgt;
+ if(pos.paused){if(!rv.paused)rv.pause();}else if(rv.paused)rv.play().catch(function(){});
+ if(!dragging){$('#tCur').textContent=fmt(tgt);seek.value=pos.d?Math.round(tgt/pos.d*1000):0;}}
+rv.addEventListener('loadedmetadata',syncRemote);
+setInterval(function(){if(!isPlayer)syncRemote();},1000);
 vid.addEventListener('click',function(){send({a:vid.paused?'play':'pause'});});
 document.addEventListener('keydown',function(e){if(!isPlayer||curIdx<0)return;
  if(e.key===' '){e.preventDefault();send({a:vid.paused?'play':'pause'});}
