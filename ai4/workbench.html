@@ -23,8 +23,6 @@ main{max-width:1380px;margin:auto;padding:0 24px 48px;display:grid;grid-template
 </head>
 <body>
 <header><div class="head"><div class="brand"><span class="badge">AI4</span><span>故事變形操作台</span><small>選故事・組合變法・生成後驗收</small></div><nav class="links"><a href="./">AI4 導覽</a><a href="../ai/">AI 基礎</a><a href="../ai2/">AI2 進階</a></nav></div></header>
-<section class="hero"><div><h1>把故事變好，<em>不是把它變得更花。</em></h1><p>先守住靶心人的因果骨架；接著組合需要的變法；最後檢查 AI 有沒有把故事帶離你的事實與目的。</p></div><div class="rule"><b>AI4 的規則：</b>變法可以複選，但每一種都要說清楚怎麼改。</div></section>
-<section class="map" aria-label="操作步驟導覽"><button type="button" class="now" data-jump="step1"><b>① 選擇項目</b>故事、視角、順序、衝突、交付、邊界</button><button type="button" data-jump="step2"><b>② 選擇結果</b>設定每一項的結果</button><button type="button" data-jump="step3"><b>③ 預覽指令</b>取得可用版本</button><button type="button" data-jump="step4"><b>④ 驗收</b>確認沒有變質</button></section>
 <main>
   <section class="card" id="step1"><h2><span class="step">1</span>選擇項目</h2><p class="cap">故事必選；其餘選項可以複選。</p><div class="mode-grid" id="modes"></div></section>
   <section class="card" id="step2"><h2><span class="step">2</span>選擇結果</h2><p class="cap">設定各項結果後，右欄會立即更新完整指令。</p><textarea id="story" hidden></textarea><div class="select-group" id="choices"></div><div class="video" id="video">這是影片網址：請先用 <b>Gemini</b> 整理成文字骨架，再回來進行變形。其他 AI 未必能讀影片，容易自行補寫。</div><p class="axis-note" id="axisNote"></p>
