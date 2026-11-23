@@ -87,16 +87,123 @@ textarea:focus{outline:none;border-color:var(--accent);background:#fff}
 .aiBtns.yt .aiBtn:not([data-ai="gemini"]){opacity:.42}
 .status{margin-top:10px;min-height:22px;font-size:14px;font-weight:800;color:var(--accent)}
 .note{margin-top:6px;font-size:13px;color:var(--muted);line-height:1.5}
+/* AI3 導覽首頁（比照 AI2／AI 基礎篇風格） */
+body.is-home{background:#FAF5EB;padding-bottom:0}
+body.is-home #appView{display:none}
+body:not(.is-home) #homeView{display:none}
+#homeView{min-height:100vh;display:flex;flex-direction:column;background:#FAF5EB}
+.heroBanner{position:relative;background:linear-gradient(110deg,#0E233E 0%,#153A61 58%,#1D517C 100%);padding:26px 40px 58px;clip-path:polygon(0 0,100% 0,100% 68%,0 100%);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.heroTitle{font-size:clamp(28px,4vw,44px);font-weight:900;letter-spacing:2px;color:#fff;display:flex;align-items:baseline;gap:10px;line-height:1.1}
+.heroTitle .g{color:#F2C96B}
+.heroNav{display:flex;gap:10px;align-items:center}
+.heroNav a{color:#FBF8F3;text-decoration:none;font-size:14px;font-weight:800;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);transition:.18s}
+.heroNav a:hover{background:rgba(255,255,255,.26)}
+.mapWrap{flex:1;max-width:1180px;width:100%;margin:6px auto 36px;padding:0 28px;display:grid;grid-template-columns:220px 1fr;gap:18px;align-items:stretch}
+.anchorCard{background:#fff;border:2.5px solid #1E1C1A;border-radius:20px;padding:28px 18px 20px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;cursor:pointer;position:relative;box-shadow:0 8px 20px rgba(30,28,26,.08);transition:.18s}
+.anchorCard:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(30,28,26,.14);border-color:var(--accent)}
+.anchorVert{writing-mode:vertical-rl;text-orientation:upright;font-size:48px;font-weight:900;letter-spacing:10px;color:#1E1C1A;margin:auto 0;line-height:1.1}
+.anchorSub{font-size:16px;font-weight:700;color:#4B443D;margin-top:14px}
+.tracks{display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.trackHead{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:10px}
+.trackHead.bottom{margin-top:12px;margin-bottom:0}
+.pillTag{background:#1E1C1A;color:#fff;font-size:15px;font-weight:900;padding:4px 12px;border-radius:8px;letter-spacing:1px}
+.trackTitle{font-size:clamp(20px,2.4vw,28px);font-weight:900;color:#1E1C1A;letter-spacing:.5px}
+.trackTitle .ac{color:var(--accent)}
+.goldPill{background:#F5C518;color:#1E1C1A;font-size:14px;font-weight:900;padding:5px 14px;border-radius:999px;letter-spacing:.5px}
+.trackRow{display:grid;grid-template-columns:22px 1fr 22px 1fr;gap:12px;align-items:center}
+.tri{width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:14px solid #1E1C1A;justify-self:center}
+.tri.muted{border-left-color:#6B635B}
+.mapCard{background:#fff;border:2.5px solid #1E1C1A;border-radius:20px;padding:28px 22px 26px;text-align:center;cursor:pointer;position:relative;min-height:164px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 20px rgba(30,28,26,.08);transition:.18s}
+.mapCard:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(30,28,26,.14);border-color:var(--accent)}
+.mapCard.accentCard{border-color:var(--accent)}
+.mapCard h2{font-size:clamp(26px,3vw,38px);font-weight:900;color:#1E1C1A;letter-spacing:2px}
+.mapCard p{font-size:16px;font-weight:700;color:#5B534B}
+.enterHint{position:absolute;right:16px;bottom:10px;font-size:12px;font-weight:800;color:#8B8279}
+.mapCard.accentCard .enterHint{color:var(--accent)}
+.mapCard:hover .enterHint{color:var(--accent)}
+.brand{cursor:pointer}
+#homeBtn{border:0;cursor:pointer;font:inherit}
+@media (max-width:860px){
+  .heroBanner{padding:20px 20px 44px;clip-path:polygon(0 0,100% 0,100% 80%,0 100%)}
+  .mapWrap{grid-template-columns:1fr;padding:0 16px}
+  .anchorCard{padding:18px 16px}
+  .anchorVert{writing-mode:horizontal-tb;font-size:32px;letter-spacing:6px}
+  .trackRow{grid-template-columns:1fr;gap:12px}
+  .tri{display:none}
+  .mapCard{min-height:126px;padding:20px 16px 26px}
+}
 </style>
 </head>
-<body>
+<body class="is-home">
+<div id="homeView">
+  <div class="heroBanner">
+    <div class="heroTitle"><span class="g">AI3</span><span>疊加實戰的</span><span class="g">故事課</span></div>
+    <div class="heroNav">
+      <a href="../ai2/">← 回 AI2 進階實戰</a>
+      <a href="../ai4/">AI4 故事變形操作台 →</a>
+    </div>
+  </div>
+  <div class="mapWrap">
+    <div class="anchorCard" data-go-a="pov" data-go-b="scene" role="button" tabindex="0">
+      <div class="anchorVert">疊加實戰</div>
+      <div class="anchorSub">4 選 2，一次套用兩種變化</div>
+      <span class="enterHint">進入練習 →</span>
+    </div>
+    <div class="tracks">
+      <div>
+        <div class="trackHead">
+          <span class="pillTag">換角度</span>
+          <div class="trackTitle">同一個故事，<span class="ac">換人說・換場合</span></div>
+          <span class="goldPill">4 選 2 共 6 種組合</span>
+        </div>
+        <div class="trackRow">
+          <div class="tri"></div>
+          <div class="mapCard" data-go-a="pov" data-go-b="scene" role="button" tabindex="0">
+            <h2>換視角</h2>
+            <p>反派・配角・客戶・十年後・物品</p>
+            <span class="enterHint">進入練習 →</span>
+          </div>
+          <div class="tri muted"></div>
+          <div class="mapCard" data-go-a="scene" data-go-b="compress" role="button" tabindex="0">
+            <h2>換場合</h2>
+            <p>短影音・貼文・簡報・面試・睡前</p>
+            <span class="enterHint">進入練習 →</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="trackRow">
+          <div class="tri"></div>
+          <div class="mapCard" data-go-a="compress" data-go-b="filter2" role="button" tabindex="0">
+            <h2>七步壓三步</h2>
+            <p>困境 → 意外 → 轉彎，30 秒說重點</p>
+            <span class="enterHint">進入練習 →</span>
+          </div>
+          <div class="tri muted"></div>
+          <div class="mapCard accentCard" data-go-a="filter2" data-go-b="pov" role="button" tabindex="0">
+            <h2>情境濾鏡</h2>
+            <p>4 大情境・16 種高頻劇情模式</p>
+            <span class="enterHint">進入練習 →</span>
+          </div>
+        </div>
+        <div class="trackHead bottom">
+          <span class="pillTag">疊兩種</span>
+          <div class="trackTitle">任選兩個方框，<span class="ac">自動疊成一個指令</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="appView">
 <header>
-  <div class="brand">
+  <div class="brand" id="brandHome" title="回 AI3 導覽首頁">
     <span class="badge">AI3</span>
     <span>疊加實戰篇</span>
     <small>兩種變化，一次套用</small>
   </div>
   <div class="backLinks">
+    <button type="button" class="backAi" id="homeBtn">⌂ 導覽首頁</button>
     <a class="backAi" href="../ai2/">← 回 AI2 進階實戰</a>
     <a class="backAi" href="../ai/">AI 基礎篇</a>
     <a class="backAi" href="../ai4/">AI4 故事變形操作台</a>
@@ -140,6 +247,7 @@ textarea:focus{outline:none;border-color:var(--accent);background:#fff}
     <p class="note">按下按鈕會自動複製完整指令，並在新分頁開啟 AI；若沒有自動帶入（例如 Gemini），直接按 <b>Ctrl + V</b> 貼上送出即可。</p>
   </section>
 </main>
+</div>
 
 <div class="mask" id="mask"></div>
 <div class="bsPan" id="bsPan" role="dialog" aria-label="選一個練習故事">
@@ -409,6 +517,37 @@ document.getElementById('ownBtn').onclick=()=>{
   updatePrompt();
 };
 
+function showHome(pushHash){
+  document.body.classList.add('is-home');
+  if(pushHash!==false && location.hash) history.replaceState(null,'',location.pathname+location.search);
+  window.scrollTo(0,0);
+}
+function openCombo(dimA,dimB,pushHash){
+  if(!DIMENSIONS[dimA]) dimA='pov';
+  if(!DIMENSIONS[dimB] || dimB===dimA) dimB = Object.keys(DIMENSIONS).find(k=>k!==dimA);
+  sel.A.dim=dimA; sel.A.opt=firstOpt(dimA);
+  sel.B.dim=dimB; sel.B.opt=firstOpt(dimB);
+  document.body.classList.remove('is-home');
+  renderCard('A');
+  renderCard('B');
+  updateCombo();
+  if(pushHash!==false) history.replaceState(null,'','#'+dimA+'-'+dimB);
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('#homeView [data-go-a]').forEach(el=>{
+  const go=()=>openCombo(el.dataset.goA,el.dataset.goB,true);
+  el.addEventListener('click',go);
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+});
+document.getElementById('homeBtn').onclick=()=>showHome(true);
+document.getElementById('brandHome').onclick=()=>showHome(true);
+
+window.addEventListener('hashchange',()=>{
+  const parts=location.hash.replace('#','').split('-');
+  if(parts.length===2 && DIMENSIONS[parts[0]] && DIMENSIONS[parts[1]] && parts[0]!==parts[1]) openCombo(parts[0],parts[1],false);
+  else showHome(false);
+});
+
 storyInput.addEventListener('input',updatePrompt);
 
 async function copyText(t){
@@ -438,9 +577,15 @@ aiBtns.querySelectorAll('.aiBtn').forEach(btn=>{
   };
 });
 
-renderCard('A');
-renderCard('B');
-updateCombo();
+const initParts=location.hash.replace('#','').split('-');
+if(initParts.length===2 && DIMENSIONS[initParts[0]] && DIMENSIONS[initParts[1]] && initParts[0]!==initParts[1]){
+  openCombo(initParts[0],initParts[1],false);
+} else {
+  renderCard('A');
+  renderCard('B');
+  updateCombo();
+  showHome(false);
+}
 </script>
 </body>
 </html>
