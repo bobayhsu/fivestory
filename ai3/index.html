@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI3 疊加實戰｜兩種變化一次套用</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F7F5F1;--ink:#1E1C1A;--muted:#6B635B;--accent:#0D9488;--gold:#F5C518;--card:#FFFFFF;--line:#DDD6CC;--blueBg:#EAF1F8;--blueBd:#B9CCE0;--blueInk:#1F3A5A}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;min-height:100vh;padding-bottom:64px}
+header{background:#1E1C1A;color:#fff;padding:14px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:40;box-shadow:0 4px 16px rgba(0,0,0,.22)}
+.brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;letter-spacing:1px}
+.brand .badge{background:linear-gradient(135deg,#9333EA,#0D9488);color:#fff;padding:3px 10px;border-radius:8px;font-size:16px;letter-spacing:1px}
+.brand small{color:var(--gold);font-size:15px;font-weight:700}
+.backLinks{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.backAi{color:#FBF8F3;text-decoration:none;font-size:14px;font-weight:700;padding:7px 12px;border-radius:8px;background:rgba(255,255,255,.12);transition:.18s}
+.backAi:hover{background:rgba(255,255,255,.22)}
+.heroNote{max-width:1400px;margin:18px auto 0;padding:0 20px}
+.heroNote p{background:#EFFAF8;border:1px solid #BFE6E0;color:#0F6B61;font-size:14px;font-weight:700;padding:10px 16px;border-radius:12px;line-height:1.6}
+main{max-width:1400px;margin:16px auto 24px;padding:0 20px;display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:20px;align-items:start}
+@media (max-width:1180px){main{grid-template-columns:1fr 1fr}#execPanel{grid-column:1/-1}}
+@media (max-width:720px){main{grid-template-columns:1fr}#execPanel{grid-column:auto}}
+.panel{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 10px 28px rgba(30,28,26,.06)}
+.cardHead{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.cardLabel{font-size:20px;font-weight:900;color:var(--ink)}
+.cardLabel .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:14px;margin-right:6px}
+.dimRow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.cardWarn{display:none;margin:-8px 0 14px;font-size:13px;font-weight:800;color:#B94A1E;background:#FFF1E8;border-left:4px solid #E67E22;padding:7px 10px;border-radius:8px}
+.cardWarn.show{display:block}
+.dimChip{border:2px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-weight:800;font-size:13.5px;padding:8px 12px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.15s}
+.dimChip:hover{border-color:var(--accent)}
+.dimChip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.dimChip.taken{opacity:.4;border-style:dashed}
+.optGroup{margin-bottom:14px}
+.optGroupTitle{font-size:13px;font-weight:900;color:var(--muted);margin-bottom:7px;letter-spacing:1px}
+.optGrid{display:grid;grid-template-columns:1fr;gap:8px}
+.optBtn{text-align:left;background:#FBF9F6;border:2px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;font:inherit;transition:.16s}
+.optBtn:hover{border-color:var(--accent);transform:translateY(-2px)}
+.optBtn.on{background:#EFFAF8;border-color:var(--accent);box-shadow:0 6px 14px rgba(13,148,136,.14)}
+.optBtn b{display:block;font-size:14.5px;color:var(--ink);margin-bottom:2px}
+.optBtn.on b{color:var(--accent)}
+.optBtn small{display:block;font-size:12.5px;color:var(--muted);line-height:1.4}
+.comboBar{background:#F2F7F6;border:2px dashed var(--accent);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:800;color:#0F6B61;margin-bottom:16px;line-height:1.5}
+.comboBar b{color:var(--accent)}
+.stepH{font-size:16px;font-weight:900;color:var(--accent);margin:14px 0 8px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.stepH:first-child{margin-top:0}
+.pickBar{display:flex;gap:8px;position:relative}
+.dropBtn{flex:1;display:flex;align-items:center;justify-content:space-between;background:#fff;border:2px solid #1E1C1A;border-radius:12px;padding:10px 14px;font:inherit;font-size:16px;font-weight:800;color:var(--ink);cursor:pointer}
+.ownBtn{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-size:15px;font-weight:900;cursor:pointer;white-space:nowrap}
+.ownBtn:hover{filter:brightness(1.08)}
+.bsPan{display:none;position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:min(1180px,94vw);max-height:82vh;overflow-y:auto;background:#fff;border:3px solid #1E1C1A;border-radius:18px;padding:20px;z-index:100;box-shadow:0 24px 64px rgba(0,0,0,.35);grid-template-columns:3fr 2fr;gap:20px}
+.bsPan.open{display:grid}
+@media (max-width:860px){.bsPan{grid-template-columns:1fr}}
+.mask{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:90}
+.mask.open{display:block}
+.colH{font-size:18px;font-weight:900;border-bottom:3px solid var(--ink);padding-bottom:6px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.colH small{font-size:13px;color:var(--muted);font-weight:700}
+.vidList{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.txtList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+@media (max-width:640px){.vidList,.txtList{grid-template-columns:1fr 1fr}}
+.sBtn{display:flex;align-items:center;justify-content:space-between;gap:6px;text-align:left;padding:7px 10px;border-radius:10px;border:2px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:14px;font-weight:800;cursor:pointer}
+.sBtn.v{background:var(--blueBg);border-color:var(--blueBd);color:var(--blueInk)}
+.sBtn:hover,.sBtn.on{border-color:var(--accent);color:var(--accent);background:#EFFAF8}
+.sBtn .tag{font-size:11px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(0,0,0,.06);color:var(--muted);flex-shrink:0}
+textarea{width:100%;min-height:140px;border:2px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:15px;line-height:1.6;resize:vertical;background:#FCFBF9;color:var(--ink)}
+textarea:focus{outline:none;border-color:var(--accent);background:#fff}
+.promptBox{margin-top:10px;background:#F5F2EC;border-radius:12px;padding:10px 12px;font-size:13px;color:#4B443D;line-height:1.55}
+.promptBox summary{cursor:pointer;font-weight:800;color:var(--ink)}
+.promptBox pre{white-space:pre-wrap;font-family:inherit;margin-top:8px}
+.ytWarn{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:#FFF4E5;border-left:4px solid #E67E22;font-size:14px;font-weight:700;color:#8A4B08}
+.ytWarn.show{display:block}
+.aiBtns{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+@media (max-width:520px){.aiBtns{grid-template-columns:repeat(2,1fr)}}
+.aiBtn{border:0;border-radius:12px;padding:14px 8px;color:#fff;font:inherit;font-size:16px;font-weight:900;cursor:pointer;position:relative;transition:.18s}
+.aiBtn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.aiBtn[data-ai="claude"]{background:#C96442}
+.aiBtn[data-ai="meta"]{background:linear-gradient(135deg,#0866FF,#9B3CF0)}
+.aiBtn[data-ai="gemini"]{background:#3B6FE0}
+.aiBtn[data-ai="chatgpt"]{background:#10A37F}
+.aiBtns.yt .aiBtn[data-ai="gemini"]{outline:4px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 6px rgba(59,111,224,.28);transform:scale(1.04)}
+.aiBtns.yt .aiBtn:not([data-ai="gemini"]){opacity:.42}
+.status{margin-top:10px;min-height:22px;font-size:14px;font-weight:800;color:var(--accent)}
+.note{margin-top:6px;font-size:13px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="badge">AI3</span>
+    <span>疊加實戰篇</span>
+    <small>兩種變化，一次套用</small>
+  </div>
+  <div class="backLinks">
+    <a class="backAi" href="../ai2/">← 回 AI2 進階實戰</a>
+    <a class="backAi" href="../ai/">AI 基礎篇</a>
+  </div>
+</header>
+
+<div class="heroNote">
+  <p>AI2 的 4 個工具（換視角・換場合・七步壓三步・情境濾鏡）一次只能套 1 種。AI3 讓你任選其中 2 種「疊」在一起，4 選 2 共 6 種組合，把同一個故事變出更多層次——真正做到「乘法」而不只是「加法」。</p>
+</div>
+
+<main>
+  <section class="panel" id="cardA"></section>
+  <section class="panel" id="cardB"></section>
+  <section class="panel" id="execPanel">
+    <div class="comboBar" id="comboBar"></div>
+
+    <div class="stepH"><span>① 選一個練習故事</span></div>
+    <div class="pickBar">
+      <button type="button" class="dropBtn" id="dropBtn"><span id="dropLabel">── 點這裡選影片或文字故事 ──</span><span>▾</span></button>
+      <button type="button" class="ownBtn" id="ownBtn">✎ 自己寫</button>
+    </div>
+
+    <div class="stepH"><span>② 你的故事（可貼文字或 YouTube 網址）</span></div>
+    <textarea id="storyInput" placeholder="在這裡打字，或貼上故事、YouTube 影片網址……（也可以從上面選練習故事）"></textarea>
+
+    <details class="promptBox">
+      <summary>查看／預覽送給 AI 的完整指令</summary>
+      <pre id="promptPreview"></pre>
+    </details>
+
+    <div class="ytWarn" id="ytWarn">這是影片網址，請按 <b>Gemini</b>（它能看影片），其他 AI 看不到影片會亂編。</div>
+
+    <div class="stepH"><span>③ 選一個 AI 執行</span></div>
+    <div class="aiBtns" id="aiBtns">
+      <button class="aiBtn" data-ai="claude">Claude</button>
+      <button class="aiBtn" data-ai="meta">Meta AI</button>
+      <button class="aiBtn" data-ai="gemini">Gemini</button>
+      <button class="aiBtn" data-ai="chatgpt">ChatGPT</button>
+    </div>
+    <div class="status" id="statusMsg"></div>
+    <p class="note">按下按鈕會自動複製完整指令，並在新分頁開啟 AI；若沒有自動帶入（例如 Gemini），直接按 <b>Ctrl + V</b> 貼上送出即可。</p>
+  </section>
+</main>
+
+<div class="mask" id="mask"></div>
+<div class="bsPan" id="bsPan" role="dialog" aria-label="選一個練習故事">
+  <div>
+    <div class="colH"><span>影片</span><small>請用 Gemini</small></div>
+    <div class="vidList" id="vidList"></div>
+  </div>
+  <div>
+    <div class="colH"><span>文字</span><small>四個 AI 皆可</small></div>
+    <div class="txtList" id="txtList"></div>
+  </div>
+</div>
+
+<script>
+const STORIES = [
+  {t:'不求回報',u:'https://www.youtube.com/watch?v=7s22HX18wDY'},
+  {t:'潘婷廣告',u:'https://www.youtube.com/watch?v=Ect56804xfA'},
+  {t:'田能久與大蛇精',u:'https://www.youtube.com/watch?v=CSuwxPxaJSQ'},
+  {t:'天長地久',u:'https://www.youtube.com/watch?v=zTNnvuWkdTo'},
+  {t:'讓我留下',u:'https://www.youtube.com/watch?v=1ZrKxYUAyBQ'},
+  {t:'海尼根打開新世界',u:'https://www.youtube.com/watch?v=z3a8MdloAAM'},
+  {t:'接線生的自我介紹',u:'https://www.youtube.com/watch?v=J5TYcGGlvoU'},
+  {t:'火力四射的星際大愛',u:'https://www.youtube.com/watch?v=I6okB-cKV1w'},
+  {t:'概念具象化的美麗人生',u:'https://www.youtube.com/watch?v=KvAJRL-fEcU'},
+  {t:'教科書等級的無恥',u:'https://www.youtube.com/watch?v=RiJJvgIMA7A'},
+  {t:'概念綁架了創意',u:'https://www.youtube.com/watch?v=PueoWSAFTis'},
+  {t:'那個男人叫美國',u:'https://www.youtube.com/watch?v=2kihk03A0KI'},
+  {t:'全世界最爛的工作',u:'https://www.youtube.com/watch?v=YhID-_WNy98'},
+  {t:'電梯巧、無聲妙',u:'https://www.youtube.com/watch?v=Fca0mTUrDJw'},
+  {t:'讓配角活成主角',u:'https://www.youtube.com/watch?v=p_cGo5iWk8g'},
+  {t:'見鬼了：賓士死神',u:'https://www.youtube.com/watch?v=j_Q5s_LqxJ8'},
+  {t:'見鬼了：BMW 女鬼',u:'https://www.youtube.com/watch?v=afqXYKwy8NI'},
+  {t:'禮物（The Present）',u:'https://www.youtube.com/watch?v=WjqiU5FMCJU',tag:'4分・反轉'},
+  {t:'髮之愛（Hair Love）',u:'https://www.youtube.com/watch?v=kNw8V_Fkw28',tag:'7分・親情'},
+  {t:'搶餅乾的老奶奶',u:'https://www.youtube.com/watch?v=38y_1EWIE9I',tag:'4分・反轉'},
+  {t:'投幣火箭',u:'https://www.youtube.com/watch?v=5L4DQfVIcdg',tag:'5分・夢想'},
+  {t:'如出一轍（Alike）',u:'https://www.youtube.com/watch?v=PDHIyrfMl_U',tag:'8分・兩難'},
+  {t:'啄木鳥',tag:'笑話',s:'有天小明和小美出去約會，突然小明肚子一陣滾動，變得很想放屁。他靈機一動說要模仿啄木鳥叫聲「答答答答答」，順便偷偷放了一個大響屁！模仿完後小美尷尬地說：「不好意思……你剛剛放屁太大聲了，我完全沒聽到你模仿的叫聲。」'},
+  {t:'聖誕禮物',tag:'反轉',s:'貧窮的夫妻吉姆和黛拉各自擁有最珍貴的祖傳金錶與長髮。聖誕前夕，黛拉賣掉長髮買白金錶鏈送吉姆；吉姆卻賣掉金錶買玳瑁髮梳送黛拉。兩件禮物都暫時用不上了，卻證明了彼此才是對方心中最珍貴的禮物。'},
+  {t:'世界拼圖',tag:'寓言',s:'牧師苦思明天演講題目，孩子在旁吵著玩，牧師把世界地圖剪碎要孩子拼好才陪他玩。沒想到孩子三分鐘就拼完了，因為地圖背面是一個人像：「只要把人像拼好，翻過來不就是世界地圖了嗎？」牧師頓悟演講題目：「只要人對了，世界就對了。」'},
+  {t:'安海瑟薇',tag:'名人',s:'2004年李安籌拍《斷背山》面試時問安海瑟薇會不會騎馬，不會騎馬的她想起父母的話「機會最難、學習最簡單」，撒謊回答會，回家立刻拼命學騎馬，兩週後真的在馬背上接到李安通知錄取的電話。'},
+  {t:'小美人魚',tag:'童話',s:'小美人魚救了王子並用聲音換來雙腿，卻因無法開口而眼看王子誤認鄰國公主為救命恩人。姐姐換來匕首要她殺王子保命，她最後丟掉匕首選擇犧牲自己，化為泡沫。'},
+  {t:'三隻小豬',tag:'童話',s:'三隻小豬各自蓋了草屋、木屋與磚屋。大野狼吹倒草屋、撞垮木屋，卻拿磚屋沒辦法，想從煙囪溜進去時掉進豬小弟預先燒好的滾水鍋裡，從此不敢再來。'},
+  {t:'刺激1995',tag:'電影',s:'銀行家安迪蒙冤入獄，十九年來默默用小石鎚在海報後面挖牆，在唯一證人湯米被典獄長殺害後，他於雷雨夜爬過五百碼下水道越獄，並帶走典獄長洗錢帳本寄給報社，最後在墨西哥海邊與瑞德重逢。'},
+  {t:'項鍊',tag:'反轉',s:'瑪蒂達向閨蜜借鑽石項鍊參加晚宴卻弄丟了，夫妻借巨款買一條一模一樣的還給對方，辛苦還債十年耗盡青春。十年後偶遇閨蜜，對方震驚地說：「那條項鍊是假的，只值五百法郎！」'},
+  {t:'便利貼的誕生',tag:'商戰',s:'3M 科學家想做超強膠水卻做出「一撕就掉」的失敗品，五年無人問津。直到同事在教堂唱詩班苦於書籤滑落，靈機一動把它變成可重複撕貼的黃色便條紙，紅遍全球。'},
+  {t:'J.K. 羅琳',tag:'逆襲',s:'失業離婚又罹患憂鬱症的單親媽媽在咖啡館手寫《哈利波特》，遭十二家出版社退稿。第十三家社長把第一章給八歲女兒試讀，女兒追問「下一章呢？」，從此改寫她的人生。'},
+  {t:'神隱少女',tag:'動畫',s:'十歲的千尋誤闖神靈世界，父母變成豬、名字被湯婆婆奪走。她咬牙在湯屋工作，為救白龍想起他的真名，最後冷靜識破湯婆婆的考驗，帶著父母回到人類世界。'},
+  {t:'一碗陽春麵',tag:'溫情',s:'除夕夜負債的母子三人只點得起一碗陽春麵，麵館老闆默默多下麵並熱情款待。十多年後，西裝筆挺的兄弟陪著母親重返麵館，笑著點了「三碗陽春麵」向老闆致謝。'}
+];
+
+const DIMENSIONS = {
+  pov: {
+    key:'pov', label:'換視角', emoji:'🎭',
+    groups:[{
+      name:'選擇要切換的視角',
+      opts:[
+        {id:'反派／對手視角',sub:'從阻礙主角的人出發，寫出他的苦衷與立場'},
+        {id:'配角／旁觀者視角',sub:'由旁邊目擊一切的人來說，更有客觀說服力'},
+        {id:'客戶／聽眾視角',sub:'站在對方立場描述「我為什麼一開始抗拒，後來被感動」'},
+        {id:'十年後的自己回看',sub:'用成熟後的距離感，重新詮釋當年的痛與轉折'},
+        {id:'關鍵物品的視角',sub:'用故事裡的重要物件（如項鍊、石鎚、那碗麵）當說書人'}
+      ]
+    }],
+    reqs:(opt)=>[
+      `完全切換成「${opt}」的第一人稱內心獨白與觀察，但保留原本核心事件`,
+      `依然看得出靶心人七步驟的骨架（目標、阻礙、努力、結果、意外、轉彎、結局），並點出這個視角才看得到的「盲點」，以及主角在這個視角眼中其實有什麼不得已的兩難`
+    ],
+    lengthHint:null, priority:3
+  },
+  scene: {
+    key:'scene', label:'換場合', emoji:'📣',
+    groups:[{
+      name:'選擇要輸出的應用場合',
+      opts:[
+        {id:'30 秒短影音口播稿',sub:'前 3 秒丟「意外」當鉤子，節奏緊湊、適合 Reels/Shorts'},
+        {id:'Threads／FB 爆文貼文',sub:'短句分段、情緒共鳴強，結尾留一個引發留言的提問'},
+        {id:'簡報／演講開場白',sub:'1 分鐘內抓住全場注意力，自然銜接到核心觀點'},
+        {id:'面試／自我介紹版',sub:'把故事轉化成展現個人特質與解決問題能力的案例'},
+        {id:'親子睡前故事版',sub:'語氣溫暖有畫面感，結尾帶出一個孩子聽得懂的啟發'}
+      ]
+    }],
+    reqs:(opt)=>[
+      `開頭第一句就要抓住受眾注意力`,
+      `保留故事最關鍵的「意外」與「轉彎」`
+    ],
+    lengthHint:(opt)=>`語氣、字數與節奏完全符合「${opt}」的實戰格式，讓我可以直接拿來使用`,
+    priority:1
+  },
+  compress: {
+    key:'compress', label:'七步壓三步', emoji:'⚡',
+    groups:[{
+      name:'選擇壓縮強度',
+      opts:[
+        {id:'100 字電梯簡報版',sub:'用「困境 → 意外 → 轉彎」三段，100 字內一口氣講完'},
+        {id:'50 字一句話金句版',sub:'提煉成一句有強烈反差、讓人過耳不忘的故事金句'},
+        {id:'30 秒口說節奏版',sub:'標出停頓點（／）與重音字，照著唸就很有感染力'}
+      ]
+    }],
+    reqs:(opt)=>[
+      `嚴格聚焦在「困境（阻礙）→ 意外 → 轉彎（結局）」三個核心節點，刪掉所有多餘鋪陳`
+    ],
+    lengthHint:(opt)=>`嚴格符合「${opt}」本身的字數／節奏限制，這是最高優先的長度規則`,
+    priority:0
+  },
+  filter2: {
+    key:'filter2', label:'情境濾鏡', emoji:'🎬',
+    groups:[
+      {name:'💼 職場與商業常用',opts:[
+        {id:'壯舉（征服）',sub:'挑戰不可能的任務，展現專業與突破'},
+        {id:'獲取',sub:'為了得到關鍵機會／客戶／信任而奮戰'},
+        {id:'兩種不均等的勢力鬥爭',sub:'小蝦米對抗大鯨魚，最容易激起支持'},
+        {id:'錯誤的判斷',sub:'先誤判再醒悟，最適合分享經驗教訓'}
+      ]},
+      {name:'💛 溫情與人際共鳴',opts:[
+        {id:'援救',sub:'在對方最無助時伸出援手'},
+        {id:'為了所愛犧牲自己',sub:'展現無私的愛與守護，催淚首選'},
+        {id:'親族的重逢',sub:'跨越時間的思念與重聚'},
+        {id:'悔恨',sub:'來不及說出口的遺憾與珍惜'}
+      ]},
+      {name:'🔍 懸疑與反轉',opts:[
+        {id:'謎的解釋',sub:'層層抽絲剝繭，最後揭曉驚人真相'},
+        {id:'發現不名譽的事',sub:'揭開光鮮背後的秘密'},
+        {id:'因輕忽而招致損害',sub:'一個微小疏忽引發連鎖危機'},
+        {id:'錯誤的嫉妒',sub:'誤會越滾越大，最後反轉和解'}
+      ]},
+      {name:'🔥 經典戲劇張力',opts:[
+        {id:'反抗（革命）',sub:'打破不合理的體制或舊規則'},
+        {id:'復仇',sub:'以牙還牙、讓對手自食惡果'},
+        {id:'災禍',sub:'突如其來的巨變逼出人性光輝'},
+        {id:'野心',sub:'渴望登頂的代價與抉擇'}
+      ]}
+    ],
+    reqs:(opt)=>[
+      `把衝突、氛圍與高潮全部聚焦在「${opt}」的張力上，但保留原本人物與基本素材`
+    ],
+    lengthHint:null, priority:2
+  }
+};
+
+function firstOpt(dimKey){return DIMENSIONS[dimKey].groups[0].opts[0].id;}
+
+const sel = { A:{dim:'pov', opt:firstOpt('pov')}, B:{dim:'scene', opt:firstOpt('scene')} };
+
+function buildCombinedPrompt(story){
+  const A=DIMENSIONS[sel.A.dim], B=DIMENSIONS[sel.B.dim];
+  const optA=sel.A.opt, optB=sel.B.opt;
+  const reqs=[...A.reqs(optA).map(r=>`【${A.label}】${r}`), ...B.reqs(optB).map(r=>`【${B.label}】${r}`)];
+  const candidates=[];
+  if(A.lengthHint)candidates.push({p:A.priority,t:A.lengthHint(optA)});
+  if(B.lengthHint)candidates.push({p:B.priority,t:B.lengthHint(optB)});
+  let lenDirective;
+  if(candidates.length){candidates.sort((x,y)=>x.p-y.p);lenDirective=candidates[0].t;}
+  else lenDirective='字數約 350–500 字，口語生動、有畫面感';
+  const reqList=[...reqs, lenDirective, '兩種變化必須同時成立、自然融合成「一篇」最終成品，不要分開寫兩個版本；底層仍保留靶心人七步驟（目標、阻礙、努力、結果、意外、轉彎、結局）的邏輯骨架。'];
+  const reqText=reqList.map((r,i)=>`${i+1}. ${r}`).join('\n');
+  return `請把下面這個故事，同時套用以下兩種變化，一次改寫成最終成品：\n\n一、${A.label}：「${optA}」\n二、${B.label}：「${optB}」\n\n寫作要求：\n${reqText}\n\n故事內容：\n${story}`;
+}
+
+const cardA=document.getElementById('cardA'), cardB=document.getElementById('cardB');
+const comboBar=document.getElementById('comboBar');
+const storyInput=document.getElementById('storyInput');
+const promptPreview=document.getElementById('promptPreview');
+const ytWarn=document.getElementById('ytWarn');
+const aiBtns=document.getElementById('aiBtns');
+const statusMsg=document.getElementById('statusMsg');
+const dropBtn=document.getElementById('dropBtn');
+const dropLabel=document.getElementById('dropLabel');
+const bsPan=document.getElementById('bsPan');
+const mask=document.getElementById('mask');
+
+function isYT(s){return /https?:\/\/(?:www\.|m\.)?(?:youtube\.com|youtu\.be)/i.test(s||'');}
+
+function renderCard(side){
+  const container = side==='A'?cardA:cardB;
+  const other = side==='A'?'B':'A';
+  const d = DIMENSIONS[sel[side].dim];
+  let html = `<div class="cardHead"><span class="cardLabel"><span class="num">${side==='A'?'1':'2'}</span>變化${side==='A'?'一':'二'}</span></div>`;
+  html += '<div class="dimRow">';
+  Object.values(DIMENSIONS).forEach(dim=>{
+    const taken = dim.key===sel[other].dim;
+    const active = dim.key===sel[side].dim;
+    html += `<button type="button" class="dimChip ${active?'on':''} ${taken?'taken':''}" data-side="${side}" data-dim="${dim.key}">${dim.emoji} ${dim.label}</button>`;
+  });
+  html += '</div>';
+  html += `<div class="cardWarn" id="warn${side}"></div>`;
+  d.groups.forEach(g=>{
+    html += `<div class="optGroup"><div class="optGroupTitle">${g.name}</div><div class="optGrid">`;
+    g.opts.forEach(o=>{
+      html += `<button type="button" class="optBtn ${sel[side].opt===o.id?'on':''}" data-side="${side}" data-opt="${o.id}"><b>${o.id}</b><small>${o.sub}</small></button>`;
+    });
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+  container.querySelectorAll('.dimChip').forEach(c=>{
+    c.onclick=()=>{
+      const s=c.dataset.side, dim=c.dataset.dim, otherS=s==='A'?'B':'A';
+      const warnEl=document.getElementById('warn'+s);
+      if(dim===sel[otherS].dim){
+        if(warnEl){warnEl.textContent=`⚠️ 這個維度已經用在「變化${otherS==='A'?'一':'二'}」，請先改選它的維度，或換別的維度。`;warnEl.classList.add('show');}
+        return;
+      }
+      if(warnEl){warnEl.textContent='';warnEl.classList.remove('show');}
+      sel[s].dim = dim;
+      sel[s].opt = firstOpt(dim);
+      renderCard(s);
+      updateCombo();
+    };
+  });
+  container.querySelectorAll('.optBtn').forEach(b=>{
+    b.onclick=()=>{
+      const s=b.dataset.side;
+      sel[s].opt = b.dataset.opt;
+      renderCard(s);
+      updateCombo();
+    };
+  });
+}
+
+function getFullPrompt(){
+  const s = storyInput.value.trim() || '（請先在上方選一個練習故事，或貼上自己的故事）';
+  return buildCombinedPrompt(s);
+}
+
+function updateCombo(){
+  const A=DIMENSIONS[sel.A.dim], B=DIMENSIONS[sel.B.dim];
+  comboBar.innerHTML = `目前組合：<b>${A.emoji} ${sel.A.opt}</b>　✕　<b>${B.emoji} ${sel.B.opt}</b>`;
+  updatePrompt();
+}
+
+function updatePrompt(){
+  promptPreview.textContent = getFullPrompt();
+  const yt = isYT(storyInput.value);
+  ytWarn.classList.toggle('show', yt);
+  aiBtns.classList.toggle('yt', yt);
+}
+
+// Build story picker
+const vidList=document.getElementById('vidList'), txtList=document.getElementById('txtList');
+STORIES.forEach((st)=>{
+  const b=document.createElement('button');
+  b.type='button';
+  b.className='sBtn'+(st.u?' v':'');
+  b.innerHTML=`<span>${st.t}</span>${st.tag?`<span class="tag">${st.tag}</span>`:''}`;
+  b.onclick=()=>{
+    storyInput.value=st.u||st.s;
+    dropLabel.textContent=(st.u?'▶ ':'文 ')+st.t;
+    closePan();
+    updatePrompt();
+    statusMsg.textContent='';
+  };
+  (st.u?vidList:txtList).appendChild(b);
+});
+
+function openPan(){bsPan.classList.add('open');mask.classList.add('open');}
+function closePan(){bsPan.classList.remove('open');mask.classList.remove('open');}
+dropBtn.onclick=openPan;
+mask.onclick=closePan;
+document.getElementById('ownBtn').onclick=()=>{
+  storyInput.value='';
+  dropLabel.textContent='── 自己寫故事 ──';
+  storyInput.focus();
+  updatePrompt();
+};
+
+storyInput.addEventListener('input',updatePrompt);
+
+async function copyText(t){
+  try{await navigator.clipboard.writeText(t);return true;}catch(_){
+    const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();
+    let ok=false;try{ok=document.execCommand('copy');}catch(_){}
+    document.body.removeChild(ta);return ok;
+  }
+}
+
+aiBtns.querySelectorAll('.aiBtn').forEach(btn=>{
+  btn.onclick=async()=>{
+    if(!storyInput.value.trim()){
+      statusMsg.textContent='請先在「① 選故事」挑一個故事，或在「② 你的故事」輸入內容！';
+      storyInput.focus();
+      return;
+    }
+    const ai=btn.dataset.ai, full=getFullPrompt(), ok=await copyText(full), q=encodeURIComponent(full);
+    let url='';
+    if(ai==='chatgpt')url='https://chatgpt.com/?q='+q;
+    else if(ai==='claude')url='https://claude.ai/new?q='+q;
+    else if(ai==='gemini')url='https://gemini.google.com/app';
+    else if(ai==='meta')url='https://www.meta.ai/?q='+q;
+    window.open(url,'_blank','noopener');
+    if(ai==='gemini')statusMsg.textContent=ok?'已複製！請在剛打開的 Gemini 輸入框按 Ctrl+V 貼上並送出。':'已打開 Gemini，請展開上方預覽複製指令。';
+    else statusMsg.textContent=ok?`已打開 ${btn.textContent}（也已自動複製到剪貼簿，沒帶過去直接貼上即可）。`:`已打開 ${btn.textContent}。`;
+  };
+});
+
+renderCard('A');
+renderCard('B');
+updateCombo();
+</script>
+</body>
+</html>
