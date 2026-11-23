@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI4 故事變形操作台｜先定骨架，再改一軸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#192632;--paper:#f6f3ee;--card:#fff;--muted:#66717a;--line:#d8d2c9;--teal:#078b87;--teal-soft:#e4f5f2;--red:#c41f27;--gold:#f7c948;--nav:#17232d;--shadow:0 12px 30px rgba(24,35,45,.09)}
+*{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;line-height:1.55}
+button,input,textarea,select{font:inherit} button{cursor:pointer} header{position:sticky;top:0;z-index:20;background:var(--nav);color:#fff;box-shadow:0 3px 15px rgba(0,0,0,.25)}
+.head{max-width:1380px;margin:auto;padding:13px 24px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:21px;letter-spacing:.4px}.badge{background:linear-gradient(135deg,#0fb5ad,#087a8d);padding:3px 9px;border-radius:8px;font:900 15px Arial}.brand small{color:var(--gold);font-size:13px;letter-spacing:0}.links{display:flex;gap:8px;align-items:center}.links a{color:#edf6f5;text-decoration:none;background:#2c3a44;padding:7px 11px;border-radius:8px;font-weight:700;font-size:13px}.links a:hover{background:#3a4b56}
+.hero{max-width:1380px;margin:0 auto;padding:28px 24px 14px;display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.hero h1{margin:0;font-size:clamp(28px,4vw,45px);letter-spacing:-1px}.hero h1 em{font-style:normal;color:var(--teal)}.hero p{max-width:720px;margin:8px 0 0;color:var(--muted);font-size:16px}.rule{max-width:340px;border-left:5px solid var(--gold);padding:8px 0 8px 14px;font-size:13px;color:#4a545a;font-weight:700}.rule b{color:var(--teal)}
+.map{max-width:1380px;margin:0 auto 18px;padding:0 24px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.map div{background:#ece9e3;border-radius:12px;padding:11px 13px;color:#687079;font-size:13px;font-weight:700}.map b{display:block;color:var(--ink);font-size:14px}.map .now{background:var(--teal);color:#fff}.map .now b{color:#fff}
+main{max-width:1380px;margin:auto;padding:0 24px 48px;display:grid;grid-template-columns:minmax(285px,.84fr) minmax(350px,1.1fr) minmax(300px,.9fr);gap:18px;align-items:start}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:var(--shadow)}.card h2{font-size:18px;margin:0 0 4px}.cap{margin:0 0 14px;color:var(--muted);font-size:13px}.step{display:inline-grid;place-items:center;width:25px;height:25px;background:var(--teal);color:#fff;border-radius:50%;font-size:13px;margin-right:6px}.tip{background:#f3f0ea;border-radius:10px;padding:10px 12px;font-size:13px;color:#5f625f;margin:12px 0}.tip b{color:var(--teal)}
+.story-tools{display:flex;gap:8px;margin-bottom:8px}.selectBtn,.ownBtn{border-radius:10px;padding:9px 10px;font-weight:800}.selectBtn{flex:1;border:2px solid var(--ink);background:#fff;text-align:left}.ownBtn{border:0;background:var(--red);color:#fff}.picker{display:none;gap:7px;grid-template-columns:repeat(2,1fr);max-height:280px;overflow:auto;padding:10px;margin:8px 0;border:1px solid var(--line);border-radius:12px;background:#faf9f7}.picker.open{display:grid}.pick{border:1px solid var(--line);border-radius:9px;background:#fff;padding:8px;text-align:left;font-weight:700;font-size:13px}.pick:hover{border-color:var(--teal);color:var(--teal)}.pick span{display:block;color:var(--muted);font-size:11px}.source{width:100%;min-height:170px;resize:vertical;border:2px solid var(--line);border-radius:12px;padding:11px;background:#fdfcf9;line-height:1.6;font-size:14px}.source:focus{outline:0;border-color:var(--teal);background:#fff}.video{display:none;margin-top:8px;border-left:4px solid #e58b1b;background:#fff2de;padding:9px 10px;font-size:12px;font-weight:700;color:#885115}.video.show{display:block}
+.formula{margin-top:16px;padding:13px;border:1px solid #b9dfd9;background:var(--teal-soft);border-radius:12px}.formula strong{display:block;margin-bottom:6px}.formula p{font-size:13px;margin:5px 0}.formula .seq{font-weight:900;color:#075f62;font-size:14px;word-spacing:2px}
+.axis{display:grid;gap:9px}.axis button{border:2px solid var(--line);border-radius:12px;background:#fff;padding:10px 12px;text-align:left;transition:.15s}.axis button:hover{border-color:var(--teal);transform:translateY(-1px)}.axis button.on{border-color:var(--teal);background:var(--teal-soft);box-shadow:0 4px 10px rgba(7,139,135,.12)}.axis b{display:block;font-size:15px}.axis small{display:block;color:var(--muted);font-size:12px;margin-top:2px}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:13px}.choices button{min-height:67px;border:1px solid var(--line);border-radius:11px;padding:9px;background:#fbfaf8;text-align:left;font-size:13px;font-weight:800}.choices button.on{background:#172f37;color:#fff;border-color:#172f37}.choices button small{display:block;margin-top:3px;font-weight:500;line-height:1.35;color:inherit;opacity:.78}.axis-note{margin-top:10px;color:#5b6567;font-size:12px;font-weight:700}
+.field{margin:13px 0}.field label{display:block;font-weight:900;font-size:13px;margin-bottom:6px}.field input{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 10px;font-size:14px}.toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px}.toggle button{border:2px solid var(--line);border-radius:10px;background:#fff;padding:10px;text-align:left;font-size:13px;font-weight:800}.toggle button.on{border-color:var(--teal);background:var(--teal-soft);color:#075f62}.toggle small{display:block;font-weight:500;color:var(--muted);margin-top:2px}.boundary{border-top:1px solid var(--line);margin-top:16px;padding-top:16px}.noteBox{background:#fff9ec;border-left:4px solid var(--gold);padding:10px 11px;margin-top:13px;border-radius:6px;font-size:12px;color:#624c1a}
+.preview{background:#192632;color:#edf8f7;border-radius:12px;padding:13px;max-height:265px;overflow:auto;white-space:pre-wrap;font-size:12px;line-height:1.6}.copy{width:100%;border:0;border-radius:10px;padding:11px;background:var(--teal);color:#fff;font-weight:900;margin-top:10px}.ais{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}.ai{color:#fff;border:0;border-radius:10px;padding:11px;font-weight:900}.claude{background:#c96442}.gemini{background:#3b6fe0}.chatgpt{background:#10a37f}.meta{background:linear-gradient(135deg,#0866ff,#943cf0)}.disabled{opacity:.35}.status{min-height:22px;margin:10px 0 0;color:var(--teal);font-size:13px;font-weight:800}
+.checklist{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}.checklist h3{font-size:16px;margin:0 0 5px}.checks{display:grid;gap:8px;margin:10px 0}.checks label{display:flex;gap:8px;align-items:flex-start;font-size:13px;font-weight:700}.checks input{margin-top:4px;accent-color:var(--teal)}.feedback{width:100%;border:1px solid var(--teal);color:#075f62;background:#fff;border-radius:10px;padding:9px;font-weight:900;font-size:13px}.complete{margin-top:9px;color:#087a64;font-size:12px;font-weight:900;min-height:18px}
+@media (max-width:1080px){main{grid-template-columns:1fr 1fr}.right{grid-column:span 2}.hero{display:block}.rule{margin-top:14px;max-width:none}.map{grid-template-columns:repeat(3,1fr)}}@media (max-width:680px){.head,.hero,main,.map{padding-left:14px;padding-right:14px}.head{padding-top:10px;padding-bottom:10px}.links{width:100%}.links a{flex:1;text-align:center}.brand{font-size:18px}.brand small{display:none}.map{grid-template-columns:1fr 1fr}.map div:last-child{grid-column:span 2}main{grid-template-columns:1fr}.right{grid-column:auto}.choices{grid-template-columns:1fr}.hero{padding-top:20px}.picker{grid-template-columns:1fr}.ais{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><div class="head"><div class="brand"><span class="badge">AI4</span><span>故事變形操作台</span><small>先定骨架・一次只改一軸・生成後驗收</small></div><nav class="links"><a href="../ai/">AI 基礎</a><a href="../ai2/">AI2 進階</a></nav></div></header>
+<section class="hero"><div><h1>把故事變好，<em>不是把它變得更花。</em></h1><p>先守住靶心人的因果骨架；接著只選一種變法；最後檢查 AI 有沒有把故事帶離你的事實與目的。</p></div><div class="rule"><b>AI4 的規則：</b>一次只改一軸。你才會知道，究竟是哪一個改法讓故事更有力。</div></section>
+<section class="map"><div><b>① 定骨架</b>目標、阻礙、行動</div><div class="now"><b>② 改一軸</b>視角／順序／衝突／交付</div><div><b>③ 設邊界</b>忠實或創作、受眾、目的</div><div><b>④ 交給 AI</b>取得可用版本</div><div><b>⑤ 驗收</b>確認沒有變質</div></section>
+<main>
+  <section class="card"><h2><span class="step">1</span>釘住你的故事</h2><p class="cap">先給 AI 一份它不能隨便更動的核心材料。</p>
+    <div class="story-tools"><button class="selectBtn" id="pickOpen">選一個練習故事　⌄</button><button class="ownBtn" id="own">自己寫</button></div>
+    <div class="picker" id="picker"></div>
+    <textarea class="source" id="story" placeholder="貼上你的故事、七步骨架，或選上面的練習故事。&#10;&#10;最少要有：誰想要什麼、遇到什麼阻礙、他做了什麼、出了什麼意外。"></textarea>
+    <div class="video" id="video">這是影片網址：先按 <b>Gemini</b> 把影片整理成文字骨架，再回來進行變形。其他 AI 未必能讀影片，容易自行補寫。</div>
+    <div class="formula"><strong>靶心人：不是七個名詞，是一條因果鏈</strong><p class="seq">目標 → 阻礙 → 行動 → 暫時結果 → 意外 → 新選擇 → 新狀態</p><p><b>一句話自查：</b>因為想要＿＿，卻被＿＿擋住，所以他＿＿；沒想到＿＿，於是決定＿＿，最後＿＿。</p></div>
+  </section>
+  <section class="card"><h2><span class="step">2</span>只選一種變法</h2><p class="cap">「改故事」和「改交付」不同。這一輪只選其中一件事。</p>
+    <div class="axis" id="axis"></div><div class="choices" id="choices"></div><p class="axis-note" id="axisNote"></p>
+    <div class="boundary"><h2><span class="step">3</span>設定邊界與目的</h2><p class="cap">讓 AI 知道什麼不能亂改、要對誰說、要達成什麼。</p>
+      <div class="field"><label>改寫模式</label><div class="toggle" id="faith"><button class="on" data-v="忠實改寫"><b>忠實改寫</b><small>不新增關鍵事實，只調整說法與結構。</small></button><button data-v="創意擴寫"><b>創意擴寫</b><small>可補場景與對白；新增處須標為創作。</small></button></div></div>
+      <div class="field"><label for="audience">說給誰聽？</label><input id="audience" value="對這個主題還不熟悉的一般聽眾"></div>
+      <div class="field"><label for="goal">希望他聽完怎麼想或怎麼做？</label><input id="goal" value="理解主角的選擇，並記住故事的轉折"></div>
+      <div class="noteBox">換視角尤其要守「知識邊界」：角色只能描述他看見、合理推知或親身感受的事，不知道的地方不能假裝知道。</div>
+    </div>
+  </section>
+  <aside class="card right"><h2><span class="step">4</span>取得一個可用版本</h2><p class="cap">AI4 會附帶保留／改變／新增項目，讓你能看出它到底做了什麼。</p><pre class="preview" id="preview"></pre><button class="copy" id="copy">複製完整指令</button><div class="ais" id="ais"><button class="ai claude" data-ai="claude">Claude</button><button class="ai gemini" data-ai="gemini">Gemini</button><button class="ai chatgpt" data-ai="chatgpt">ChatGPT</button><button class="ai meta" data-ai="meta">Meta AI</button></div><div class="status" id="status"></div>
+    <div class="checklist"><h3><span class="step">5</span>生成後，先驗收再採用</h3><p class="cap">把 AI 的結果貼回來前，先對照這四題。</p><div class="checks" id="checks"><label><input type="checkbox">主角的目標、阻礙與選擇仍然清楚。</label><label><input type="checkbox">這一版只改了我選定的那一軸。</label><label><input type="checkbox">沒有把推測或虛構內容誤當成事實。</label><label><input type="checkbox">符合我的受眾、目的與使用長度。</label></div><button class="feedback" id="feedback">複製「請 AI 再修一次」回饋指令</button><div class="complete" id="complete"></div></div>
+  </aside>
+</main>
+<script>
+const STORIES=[
+['三隻小豬','童話','三隻小豬各自蓋了草屋、木屋與磚屋。大野狼吹倒草屋、撞垮木屋，卻拿磚屋沒辦法，想從煙囪溜進去時掉進豬小弟預先燒好的滾水鍋裡，從此不敢再來。'],
+['聖誕禮物','反轉','貧窮的夫妻吉姆和黛拉，各自賣掉祖傳金錶與長髮，為對方買聖誕禮物；兩件禮物都暫時用不上，卻證明彼此才是最珍貴的禮物。'],
+['世界拼圖','寓言','牧師把世界地圖剪碎要孩子拼好。孩子三分鐘完成，因為背面是一個人像：「只要把人像拼好，翻過來不就是世界地圖了嗎？」'],
+['項鍊','反轉','瑪蒂達借鑽石項鍊參加晚宴卻弄丟，夫妻借巨款買一條還人，辛苦還債十年。十年後才知道原本的項鍊是假的。'],
+['便利貼的誕生','商戰','3M 科學家做出一撕就掉的失敗膠水，五年無人問津。同事因書籤滑落，靈機一動把它變成可重複撕貼的黃色便條紙。'],
+['J.K. 羅琳','逆襲','失業離婚的單親媽媽在咖啡館手寫《哈利波特》，遭十二家出版社退稿。第十三家社長的女兒追問「下一章呢？」改寫她的人生。'],
+['神隱少女','動畫','千尋誤闖神靈世界，父母變成豬、名字被奪走。她在湯屋工作，為救白龍想起他的真名，最後識破考驗帶父母回到人類世界。'],
+['一碗陽春麵','溫情','除夕夜負債的母子三人只點得起一碗陽春麵，老闆默默多下麵。十多年後兄弟陪母親重返麵館，點了三碗麵向老闆致謝。'],
+['刺激1995','電影','銀行家安迪蒙冤入獄十九年，默默用小石鎚挖牆；唯一證人被害後，他越獄並揭露典獄長洗錢，最後在海邊與瑞德重逢。'],
+['小美人魚','童話','小美人魚救王子並用聲音換雙腿，卻無法證明自己是恩人。姐姐給她匕首保命，她最後選擇犧牲自己。'],
+['髮之愛','影片（請用 Gemini）','https://www.youtube.com/watch?v=kNw8V_Fkw28'],
+['禮物','影片（請用 Gemini）','https://www.youtube.com/watch?v=WjqiU5FMCJU']];
+const MODES={
+ pov:{name:'換視角',sub:'改誰在看、誰在說',note:'保留事件；換角色的可見範圍與感受。',options:[['對手／反派視角','看見他的苦衷與盲點'],['客戶／聽眾視角','從抗拒到被打動'],['旁觀者視角','增加見證感與可信度'],['十年後的自己','拉開距離重新理解']]},
+ order:{name:'換順序',sub:'改觀眾先知道什麼',note:'七步不是任意打散；選一種清楚的敘事意圖。',options:[['意外開場','先丟意外，再回填原因'],['情緒帶入','先丟困境，引發共鳴'],['觀點主題','先出問題，再建立觀點'],['答案先揭','先說結果，再倒推原因']]},
+ conflict:{name:'換衝突',sub:'改故事的壓力來源',note:'這不是只換語氣；它會改變主角最難跨過的那道門。',options:[['錯誤的判斷','先誤判，後醒悟'],['不均等的勢力鬥爭','小蝦米對抗大鯨魚'],['援救','在無助處伸出援手'],['謎的解釋','抽絲剝繭後揭露真相']]},
+ delivery:{name:'換交付',sub:'改使用任務與受眾',note:'同一個故事，媒介不同；但受眾與目的是決定寫法的核心。',options:[['30 秒短影音','意外鉤子 → 回填困境 → 選擇結果'],['簡報開場','一分鐘抓住注意力，導向觀點'],['社群貼文','短段落、具體畫面、引發回應'],['面試自我介紹','展現行動、判斷與解決問題']]},
+ compress:{name:'壓縮故事',sub:'改長度，不丟掉選擇',note:'壓縮不是只刪字；要留下目標、壓力、選擇與結果。',options:[['30 秒口說','意外鉤子 → 困境回填 → 選擇結果'],['100 字電梯版','目標＋困境 → 關鍵選擇 → 新狀態'],['一句話版本','保留最大反差與轉折'],['50 字故事標語','以可記住的畫面收束']]}
+};
+let axis='pov',opt='對手／反派視角',faith='忠實改寫';const $=s=>document.querySelector(s);const story=$('#story'),preview=$('#preview'),status=$('#status');
+function isVideo(){return /youtu\.be|youtube\.com/i.test(story.value)}
+function renderPicker(){const p=$('#picker');p.innerHTML=STORIES.map((s,i)=>`<button class="pick" data-i="${i}">${s[0]}<span>${s[1]}</span></button>`).join('');p.querySelectorAll('.pick').forEach(b=>b.onclick=()=>{const s=STORIES[+b.dataset.i];story.value=s[2];$('#pickOpen').textContent='已選：'+s[0]+'　⌄';p.classList.remove('open');update()})}
+function renderAxis(){const host=$('#axis');host.innerHTML=Object.entries(MODES).map(([k,m])=>`<button data-axis="${k}" class="${axis===k?'on':''}"><b>${m.name}</b><small>${m.sub}</small></button>`).join('');host.querySelectorAll('button').forEach(b=>b.onclick=()=>{axis=b.dataset.axis;opt=MODES[axis].options[0][0];renderAxis();renderChoices();update()})}
+function renderChoices(){const m=MODES[axis];$('#choices').innerHTML=m.options.map(o=>`<button data-opt="${o[0]}" class="${opt===o[0]?'on':''}">${o[0]}<small>${o[1]}</small></button>`).join('');$('#choices').querySelectorAll('button').forEach(b=>b.onclick=()=>{opt=b.dataset.opt;renderChoices();update()});$('#axisNote').textContent=m.note}
+function operation(){const a=MODES[axis].name;return `本輪只做「${a}」：${opt}。除了這一軸以外，不要任意改動故事的核心因果。`}
+function prompt(){const s=story.value.trim()||'（請先輸入或選擇故事）',aud=$('#audience').value.trim()||'一般聽眾',goal=$('#goal').value.trim()||'理解故事轉折';let mode=faith==='忠實改寫'?'不得添加新的關鍵事實、人物關係、動機或結果；資料不足時請明說。':'可補場景、動機與對白，但每一處新增設定都要標為「創作補寫」。';return `請用繁體中文擔任嚴謹的故事教練。\n\n【任務】\n${operation()}\n\n【事實邊界】\n${faith}：${mode}\n換視角時，只能寫該角色親眼看見、合理推知或親身感受的事。\n\n【受眾與目的】\n受眾：${aud}\n希望效果：${goal}\n\n【靶心人因果鏈】\n目標 → 阻礙 → 行動 → 暫時結果 → 意外 → 新選擇 → 新狀態。\n「意外」必須打破原本預期；「新選擇」必須是主角因此做出的回應。\n\n【請輸出】\n1. 改寫成品（依「${opt}」的需求選擇合適篇幅與結構）。\n2. 保留了什麼：列 2–4 點。\n3. 這一輪只改了什麼：列出「${MODES[axis].name}」造成的改變。\n4. ${faith==='忠實改寫'?'不確定或不能從素材推知的地方。':'新增的創作補寫。'}\n5. 以一句話提醒我：這版最適合在什麼情境使用。\n\n【故事素材】\n${s}`}
+function update(){preview.textContent=prompt();$('#video').classList.toggle('show',isVideo());document.querySelectorAll('.ai').forEach(b=>b.classList.toggle('disabled',isVideo()&&b.dataset.ai!=='gemini'));status.textContent='';updateComplete()}
+async function copy(t){try{await navigator.clipboard.writeText(t);return true}catch(e){const x=document.createElement('textarea');x.value=t;document.body.append(x);x.select();const ok=document.execCommand('copy');x.remove();return ok}}
+function openAI(ai){if(!story.value.trim()){status.textContent='請先寫入故事素材，再送給 AI。';story.focus();return}if(isVideo()&&ai!=='gemini'){status.textContent='影片請先使用 Gemini 整理成文字骨架，避免其他 AI 自行補寫。';return}copy(prompt()).then(ok=>{const q=encodeURIComponent(prompt());const urls={claude:'https://claude.ai/new?q='+q,gemini:'https://gemini.google.com/app',chatgpt:'https://chatgpt.com/?q='+q,meta:'https://www.meta.ai/?q='+q};window.open(urls[ai],'_blank','noopener');status.textContent=ai==='gemini'?(ok?'已複製指令；到 Gemini 按 Ctrl+V 貼上。':'請展開預覽手動複製指令。'):(ok?'已開啟並複製指令；若沒有自動帶入，直接貼上即可。':'已開啟 AI。')})}
+function updateComplete(){const n=[...document.querySelectorAll('#checks input:checked')].length;$('#complete').textContent=n===4?'✓ 四項都確認後，再採用這個版本。':`已完成 ${n}/4 項驗收。`}
+$('#pickOpen').onclick=()=>$('#picker').classList.toggle('open');$('#own').onclick=()=>{story.value='';story.focus();$('#pickOpen').textContent='選一個練習故事　⌄';update()};story.addEventListener('input',update);$('#faith').querySelectorAll('button').forEach(b=>b.onclick=()=>{faith=b.dataset.v;$('#faith').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));update()});$('#copy').onclick=()=>copy(prompt()).then(ok=>status.textContent=ok?'完整指令已複製。':'複製失敗，請直接從預覽選取。');$('#ais').querySelectorAll('button').forEach(b=>b.onclick=()=>openAI(b.dataset.ai));document.querySelectorAll('#checks input').forEach(x=>x.onchange=updateComplete);$('#feedback').onclick=()=>{const t='請依下列驗收回饋，重新修正剛才的故事版本：\n- 目標、阻礙與選擇仍要清楚。\n- 只保留本輪選定的變化，其餘核心因果不要亂動。\n- 把推測、創作補寫與已知事實清楚分開。\n- 更符合受眾「'+$('#audience').value+'」與目的「'+$('#goal').value+'」。';copy(t).then(ok=>status.textContent=ok?'驗收回饋已複製，貼回 AI 請它修第二版。':'請手動複製驗收回饋。')};renderPicker();renderAxis();renderChoices();update();
+</script>
+</body>
+</html>

@@ -9,17 +9,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#F7F5F1;--ink:#1E1C1A;--muted:#6B635B;--accent:#0D9488;--gold:#F5C518;--card:#FFFFFF;--line:#DDD6CC;--blueBg:#EAF1F8;--blueBd:#B9CCE0;--blueInk:#1F3A5A}
+:root{--bg:#F7F5F1;--ink:#1E1C1A;--muted:#6B635B;--accent:#D97706;--gold:#F5C518;--card:#FFFFFF;--line:#DDD6CC;--blueBg:#EAF1F8;--blueBd:#B9CCE0;--blueInk:#1F3A5A}
 body{background:var(--bg);color:var(--ink);font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;min-height:100vh;padding-bottom:64px}
 header{background:#1E1C1A;color:#fff;padding:14px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:40;box-shadow:0 4px 16px rgba(0,0,0,.22)}
 .brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;letter-spacing:1px}
-.brand .badge{background:linear-gradient(135deg,#9333EA,#0D9488);color:#fff;padding:3px 10px;border-radius:8px;font-size:16px;letter-spacing:1px}
+.brand .badge{background:linear-gradient(135deg,#9333EA,#D97706);color:#fff;padding:3px 10px;border-radius:8px;font-size:16px;letter-spacing:1px}
 .brand small{color:var(--gold);font-size:15px;font-weight:700}
 .backLinks{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .backAi{color:#FBF8F3;text-decoration:none;font-size:14px;font-weight:700;padding:7px 12px;border-radius:8px;background:rgba(255,255,255,.12);transition:.18s}
 .backAi:hover{background:rgba(255,255,255,.22)}
 .heroNote{max-width:1400px;margin:18px auto 0;padding:0 20px}
-.heroNote p{background:#EFFAF8;border:1px solid #BFE6E0;color:#0F6B61;font-size:14px;font-weight:700;padding:10px 16px;border-radius:12px;line-height:1.6}
+.heroNote p{background:#FBF0DF;border:1px solid #F0D4A6;color:#8A4B08;font-size:14px;font-weight:700;padding:10px 16px;border-radius:12px;line-height:1.6}
 main{max-width:1400px;margin:16px auto 24px;padding:0 20px;display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:20px;align-items:start}
 @media (max-width:1180px){main{grid-template-columns:1fr 1fr}#execPanel{grid-column:1/-1}}
 @media (max-width:720px){main{grid-template-columns:1fr}#execPanel{grid-column:auto}}
@@ -39,11 +39,11 @@ main{max-width:1400px;margin:16px auto 24px;padding:0 20px;display:grid;grid-tem
 .optGrid{display:grid;grid-template-columns:1fr;gap:8px}
 .optBtn{text-align:left;background:#FBF9F6;border:2px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;font:inherit;transition:.16s}
 .optBtn:hover{border-color:var(--accent);transform:translateY(-2px)}
-.optBtn.on{background:#EFFAF8;border-color:var(--accent);box-shadow:0 6px 14px rgba(13,148,136,.14)}
+.optBtn.on{background:#FBF0DF;border-color:var(--accent);box-shadow:0 6px 14px rgba(217,119,6,.16)}
 .optBtn b{display:block;font-size:14.5px;color:var(--ink);margin-bottom:2px}
 .optBtn.on b{color:var(--accent)}
 .optBtn small{display:block;font-size:12.5px;color:var(--muted);line-height:1.4}
-.comboBar{background:#F2F7F6;border:2px dashed var(--accent);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:800;color:#0F6B61;margin-bottom:16px;line-height:1.5}
+.comboBar{background:#FBF0DF;border:2px dashed var(--accent);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:800;color:#8A4B08;margin-bottom:16px;line-height:1.5}
 .comboBar b{color:var(--accent)}
 .stepH{font-size:16px;font-weight:900;color:var(--accent);margin:14px 0 8px;display:flex;align-items:center;justify-content:space-between;gap:8px}
 .stepH:first-child{margin-top:0}
@@ -63,7 +63,7 @@ main{max-width:1400px;margin:16px auto 24px;padding:0 20px;display:grid;grid-tem
 @media (max-width:640px){.vidList,.txtList{grid-template-columns:1fr 1fr}}
 .sBtn{display:flex;align-items:center;justify-content:space-between;gap:6px;text-align:left;padding:7px 10px;border-radius:10px;border:2px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:14px;font-weight:800;cursor:pointer}
 .sBtn.v{background:var(--blueBg);border-color:var(--blueBd);color:var(--blueInk)}
-.sBtn:hover,.sBtn.on{border-color:var(--accent);color:var(--accent);background:#EFFAF8}
+.sBtn:hover,.sBtn.on{border-color:var(--accent);color:var(--accent);background:#FBF0DF}
 .sBtn .tag{font-size:11px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(0,0,0,.06);color:var(--muted);flex-shrink:0}
 textarea{width:100%;min-height:140px;border:2px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:15px;line-height:1.6;resize:vertical;background:#FCFBF9;color:var(--ink)}
 textarea:focus{outline:none;border-color:var(--accent);background:#fff}
@@ -96,6 +96,7 @@ textarea:focus{outline:none;border-color:var(--accent);background:#fff}
   <div class="backLinks">
     <a class="backAi" href="../ai2/">← 回 AI2 進階實戰</a>
     <a class="backAi" href="../ai/">AI 基礎篇</a>
+    <a class="backAi" href="../ai4/">AI4 故事變形操作台</a>
   </div>
 </header>
 
