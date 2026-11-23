@@ -1490,6 +1490,12 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .bsPan .mic button{background:#EAF1F8;border-color:#B9CCE0;color:#1F3A5A}
 .bsPan .mic button:hover{border-color:#C41F27;color:#C41F27}
 .bsPan .mic button.on{background:#FDF1F0;border-color:#C41F27;color:#C41F27}
+/* 2026-11-23 選故事大面板：文字改 2 欄並排、左右高度對齊＋防超出螢幕；影片模式強化 Gemini 按鈕焦點 */
+.bsSel .bsPan{grid-template-columns:3fr 2fr;width:1280px;max-height:760px;overflow-y:auto}
+.bsPan .bsCol:not(.mic) .bsColL{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}
+.bsPan .bsCol:not(.mic) button{font-size:21px;padding:6px 10px}
+#aiRun.yt .arBtns button[data-ai="gemini"]{box-shadow:0 0 0 6px rgba(59,111,224,.28);transform:scale(1.04);transition:transform .2s,box-shadow .2s}
+#aiRun.yt .arBtns button:not([data-ai="gemini"]){opacity:.42}
 /* 2026-11-17 選中的分頁：字色、底色、字級同黃色副標 */
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome),#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome):hover{color:#F5C518!important;background:#1E1C1A!important;font-size:28px!important;font-weight:700!important;border-color:#C41F27!important;box-shadow:none!important}
 /* 2026-11-17 三個統一黃字白框：選中的分頁、黃色副標、選中的劇情 */
