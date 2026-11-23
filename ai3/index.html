@@ -30,6 +30,8 @@ main{max-width:1400px;margin:16px auto 24px;padding:0 20px;display:grid;grid-tem
 .dimRow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 .cardWarn{display:none;margin:-8px 0 14px;font-size:13px;font-weight:800;color:#B94A1E;background:#FFF1E8;border-left:4px solid #E67E22;padding:7px 10px;border-radius:8px}
 .cardWarn.show{display:block}
+.tipBox{margin:-6px 0 14px;background:#FFF8E8;border-left:4px solid var(--gold);padding:8px 11px;border-radius:8px;font-size:13px;font-weight:700;color:#6B5518;line-height:1.5}
+.tipBox a{color:var(--accent);font-weight:900}
 .dimChip{border:2px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-weight:800;font-size:13.5px;padding:8px 12px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.15s}
 .dimChip:hover{border-color:var(--accent)}
 .dimChip.on{background:var(--accent);border-color:var(--accent);color:#fff}
@@ -210,6 +212,7 @@ const DIMENSIONS = {
   },
   scene: {
     key:'scene', label:'換場合', emoji:'📣',
+    note:'💡 想要同時精簡又套格式？在另一邊的「變化」直接選「七步壓三步」疊加就好。',
     groups:[{
       name:'選擇要輸出的應用場合',
       opts:[
@@ -229,6 +232,7 @@ const DIMENSIONS = {
   },
   compress: {
     key:'compress', label:'七步壓三步', emoji:'⚡',
+    note:'💡 壓縮完想要特定格式？在另一邊的「變化」直接選「換場合」疊加就好。',
     groups:[{
       name:'選擇壓縮強度',
       opts:[
@@ -245,6 +249,7 @@ const DIMENSIONS = {
   },
   filter2: {
     key:'filter2', label:'情境濾鏡', emoji:'🎬',
+    note:'想看完整 36 種劇情模式？回<a href="../ai/" target="_blank" rel="noopener">AI 基礎篇的套濾鏡</a>。',
     groups:[
       {name:'💼 職場與商業常用',opts:[
         {id:'壯舉（征服）',sub:'挑戰不可能的任務，展現專業與突破',rec:1},
@@ -324,6 +329,7 @@ function renderCard(side){
   });
   html += '</div>';
   html += `<div class="cardWarn" id="warn${side}"></div>`;
+  if(d.note) html += `<div class="tipBox">${d.note}</div>`;
   d.groups.forEach(g=>{
     html += `<div class="optGroup"><div class="optGroupTitle">${g.name}</div><div class="optGrid">`;
     g.opts.forEach(o=>{

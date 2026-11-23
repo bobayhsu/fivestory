@@ -28,6 +28,8 @@ main{max-width:1280px;margin:24px auto;padding:0 20px;display:grid;grid-template
 .unitHead h1{font-size:32px;font-weight:900;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:10px}
 .unitHead h1 span{font-size:14px;background:#FDF1F0;color:var(--red);padding:4px 10px;border-radius:999px;border:1px solid #F3C4C2}
 .unitHead p{font-size:16px;color:var(--muted);line-height:1.6}
+.tipBox{margin-top:10px;background:#FFF8E8;border-left:4px solid var(--gold);padding:9px 12px;border-radius:8px;font-size:14px;font-weight:700;color:#6B5518;line-height:1.5}
+.tipBox a{color:var(--red);font-weight:900}
 .optGroup{margin-bottom:16px}
 .optGroupTitle{font-size:14px;font-weight:900;color:var(--muted);margin-bottom:8px;letter-spacing:1px}
 .optGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px}
@@ -195,6 +197,7 @@ const UNITS = {
   scene: {
     title:'換場合（變現輸出）', badge:'工作 × 社群直接用',
     desc:'同一個好故事，只要換成對應的輸出格式，就能直接拿來拍短影音、發社群、上台簡報或做業務溝通。',
+    note:'💡 使用建議：如果故事偏長，先用「③ 七步壓三步」濃縮出精華，再回來這裡套格式，效果最好。',
     groups:[{
       name:'選擇要輸出的應用場合',
       opts:[
@@ -210,6 +213,7 @@ const UNITS = {
   compress: {
     title:'七步壓三步（極簡版）', badge:'30 秒說出重點',
     desc:'七步驟適合打底，但真實聊天與簡報往往只有 30 秒。用「困境 → 意外 → 轉彎」把長故事壓縮成一擊必殺的精華。',
+    note:'💡 使用建議：壓縮出來的精華版，可以直接拿去「② 換場合」套上你需要的輸出格式（口播稿、貼文……）。',
     groups:[{
       name:'選擇壓縮強度',
       opts:[
@@ -223,6 +227,7 @@ const UNITS = {
   filter2: {
     title:'情境濾鏡（快速分組）', badge:'3 秒挑對劇情模式',
     desc:'從 36 種經典劇情模式中，精選最常在職場、行銷與日常溝通中派上用場的 16 種濾鏡，依情境分成四大組，告別選擇障礙。',
+    note:'想看完整 36 種劇情模式？回<a href="../ai/" target="_blank" rel="noopener">AI 基礎篇的套濾鏡</a>。',
     groups:[
       {name:'💼 職場與商業常用',opts:[
         {id:'壯舉（征服）',sub:'挑戰不可能的任務，展現專業與突破',rec:1},
@@ -269,7 +274,7 @@ function isYT(s){return /https?:\/\/(?:www\.|m\.)?(?:youtube\.com|youtu\.be)/i.t
 
 function renderUnit(){
   const u=UNITS[curUnit];
-  let html=`<div class="unitHead"><h1>${u.title}<span>${u.badge}</span></h1><p>${u.desc}</p></div>`;
+  let html=`<div class="unitHead"><h1>${u.title}<span>${u.badge}</span></h1><p>${u.desc}</p>${u.note?`<div class="tipBox">${u.note}</div>`:''}</div>`;
   u.groups.forEach(g=>{
     html+=`<div class="optGroup"><div class="optGroupTitle">${g.name}</div><div class="optGrid">`;
     g.opts.forEach(o=>{
