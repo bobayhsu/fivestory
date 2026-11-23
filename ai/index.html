@@ -1496,6 +1496,31 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .bsPan .bsCol:not(.mic) button{font-size:21px;padding:6px 10px}
 #aiRun.yt .arBtns button[data-ai="gemini"]{box-shadow:0 0 0 6px rgba(59,111,224,.28);transform:scale(1.04);transition:transform .2s,box-shadow .2s}
 #aiRun.yt .arBtns button:not([data-ai="gemini"]){opacity:.42}
+/* 2026-11-23 首頁總覽五張主卡片（.mCard）強化可點擊感與懸停回饋 */
+.mCard{position:relative;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease!important}
+.mCard::after{content:"進入練習 →";position:absolute;right:18px;bottom:14px;font-size:16px;font-weight:800;color:#8A8278;opacity:.65;transition:color .2s,opacity .2s,transform .2s;pointer-events:none}
+.mCard:hover{transform:translateY(-6px)!important;border-color:#C41F27!important;box-shadow:0 14px 28px rgba(196,31,39,.14)!important}
+.mCard:hover::after{color:#C41F27;opacity:1;transform:translateX(4px)}
+/* 2026-11-23 選故事按鈕加上極簡分類小標籤（純 CSS ::after，不影響程式抓故事名） */
+.bsPan button{display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left}
+.bsPan button[data-v]::after{font-size:13px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(0,0,0,.06);color:#6B635B;flex-shrink:0}
+.bsPan button[data-v="3"]::after{content:"笑話"}
+.bsPan button[data-v="4"]::after{content:"反轉"}
+.bsPan button[data-v="5"]::after{content:"寓言"}
+.bsPan button[data-v="6"]::after{content:"名人"}
+.bsPan button[data-v="8"]::after{content:"童話"}
+.bsPan button[data-v="10"]::after{content:"童話"}
+.bsPan button[data-v="11"]::after{content:"電影"}
+.bsPan button[data-v="24"]::after{content:"反轉"}
+.bsPan button[data-v="25"]::after{content:"商戰"}
+.bsPan button[data-v="26"]::after{content:"逆襲"}
+.bsPan button[data-v="27"]::after{content:"動畫"}
+.bsPan button[data-v="28"]::after{content:"溫情"}
+.bsPan button[data-v="29"]::after{content:"4分・反轉"}
+.bsPan button[data-v="30"]::after{content:"7分・親情"}
+.bsPan button[data-v="31"]::after{content:"4分・反轉"}
+.bsPan button[data-v="32"]::after{content:"5分・夢想"}
+.bsPan button[data-v="33"]::after{content:"8分・兩難"}
 /* 2026-11-17 選中的分頁：字色、底色、字級同黃色副標 */
 #stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome),#stage:has(> .slide.ai.v2.active) #aiTop .sd.on:not(.sdHome):hover{color:#F5C518!important;background:#1E1C1A!important;font-size:28px!important;font-weight:700!important;border-color:#C41F27!important;box-shadow:none!important}
 /* 2026-11-17 三個統一黃字白框：選中的分頁、黃色副標、選中的劇情 */
