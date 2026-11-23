@@ -40,8 +40,9 @@ main{max-width:1400px;margin:16px auto 24px;padding:0 20px;display:grid;grid-tem
 .optBtn{text-align:left;background:#FBF9F6;border:2px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;font:inherit;transition:.16s}
 .optBtn:hover{border-color:var(--accent);transform:translateY(-2px)}
 .optBtn.on{background:#FBF0DF;border-color:var(--accent);box-shadow:0 6px 14px rgba(217,119,6,.16)}
-.optBtn b{display:block;font-size:14.5px;color:var(--ink);margin-bottom:2px}
+.optBtn b{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:14.5px;color:var(--ink);margin-bottom:2px}
 .optBtn.on b{color:var(--accent)}
+.recTag{display:inline-block;font-size:10.5px;font-weight:900;color:#8A4B08;background:#FFF1D6;border:1px solid #F0CE86;padding:1px 6px;border-radius:999px;white-space:nowrap}
 .optBtn small{display:block;font-size:12.5px;color:var(--muted);line-height:1.4}
 .comboBar{background:#FBF0DF;border:2px dashed var(--accent);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:800;color:#8A4B08;margin-bottom:16px;line-height:1.5}
 .comboBar b{color:var(--accent)}
@@ -246,25 +247,25 @@ const DIMENSIONS = {
     key:'filter2', label:'情境濾鏡', emoji:'🎬',
     groups:[
       {name:'💼 職場與商業常用',opts:[
-        {id:'壯舉（征服）',sub:'挑戰不可能的任務，展現專業與突破'},
+        {id:'壯舉（征服）',sub:'挑戰不可能的任務，展現專業與突破',rec:1},
         {id:'獲取',sub:'為了得到關鍵機會／客戶／信任而奮戰'},
         {id:'兩種不均等的勢力鬥爭',sub:'小蝦米對抗大鯨魚，最容易激起支持'},
         {id:'錯誤的判斷',sub:'先誤判再醒悟，最適合分享經驗教訓'}
       ]},
       {name:'💛 溫情與人際共鳴',opts:[
-        {id:'援救',sub:'在對方最無助時伸出援手'},
+        {id:'援救',sub:'在對方最無助時伸出援手',rec:1},
         {id:'為了所愛犧牲自己',sub:'展現無私的愛與守護，催淚首選'},
         {id:'親族的重逢',sub:'跨越時間的思念與重聚'},
         {id:'悔恨',sub:'來不及說出口的遺憾與珍惜'}
       ]},
       {name:'🔍 懸疑與反轉',opts:[
-        {id:'謎的解釋',sub:'層層抽絲剝繭，最後揭曉驚人真相'},
+        {id:'謎的解釋',sub:'層層抽絲剝繭，最後揭曉驚人真相',rec:1},
         {id:'發現不名譽的事',sub:'揭開光鮮背後的秘密'},
         {id:'因輕忽而招致損害',sub:'一個微小疏忽引發連鎖危機'},
         {id:'錯誤的嫉妒',sub:'誤會越滾越大，最後反轉和解'}
       ]},
       {name:'🔥 經典戲劇張力',opts:[
-        {id:'反抗（革命）',sub:'打破不合理的體制或舊規則'},
+        {id:'反抗（革命）',sub:'打破不合理的體制或舊規則',rec:1},
         {id:'復仇',sub:'以牙還牙、讓對手自食惡果'},
         {id:'災禍',sub:'突如其來的巨變逼出人性光輝'},
         {id:'野心',sub:'渴望登頂的代價與抉擇'}
@@ -326,7 +327,7 @@ function renderCard(side){
   d.groups.forEach(g=>{
     html += `<div class="optGroup"><div class="optGroupTitle">${g.name}</div><div class="optGrid">`;
     g.opts.forEach(o=>{
-      html += `<button type="button" class="optBtn ${sel[side].opt===o.id?'on':''}" data-side="${side}" data-opt="${o.id}"><b>${o.id}</b><small>${o.sub}</small></button>`;
+      html += `<button type="button" class="optBtn ${sel[side].opt===o.id?'on':''}" data-side="${side}" data-opt="${o.id}"><b>${o.id}${o.rec?'<span class="recTag">⭐ 新手首選</span>':''}</b><small>${o.sub}</small></button>`;
     });
     html += '</div></div>';
   });
