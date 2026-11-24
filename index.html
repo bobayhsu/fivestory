@@ -1490,6 +1490,8 @@ html.fs-idle #stage.course-entry-page a.navPill[href="https://bobayhsu.github.io
 /* 2026-11-24 左上角第 5 顆：一鍵投影 QR Code 按鈕（只在靶心人公式頁顯示） */
 #stage a.navPill[data-qr-btn]{top:18px!important;bottom:auto!important;left:calc(18px + 4*(var(--nb) + 10px))!important;right:auto!important;background:#1E1C1A!important;color:#F5C518!important;z-index:96!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
 #stage.course-entry-page a.navPill[data-qr-btn]{opacity:.92!important;visibility:visible!important;pointer-events:auto!important}
+/* 2026-11-24 末頁（#endPage）、計時頁（#pv）與蓋版頁（.ovPage）層級高於左上角 5 顆 icon，避免透出 */
+#endPage,#pv,.ovPage{z-index:120!important}
 @media(max-width:700px){#stage a.navPill[data-qr-btn]{top:10px!important}}
 #fsQrModal{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:24px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif}
 #fsQrModal.open{display:flex}
