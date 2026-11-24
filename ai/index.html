@@ -1220,6 +1220,9 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiRun.v2.inPanel .arMiniT{flex:1;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 #aiRun.v2.inPanel .arMiniE{flex:none;font:700 18px/1 'Noto Sans TC',Arial,sans-serif;color:#1E1C1A;background:#ECE8E1;border:1px solid #D3CBBF;border-radius:999px;padding:8px 14px;cursor:pointer}
 #aiRun.v2.inPanel .arMiniE:hover{background:#C41F27;border-color:#C41F27;color:#FBF8F3}
+#aiRun .arMiniPlay{display:none}
+#aiRun.v2.inPanel.yt .arMiniPlay{display:inline-flex;order:2;align-items:center;justify-content:center;flex:none;font:900 17px/1 'Noto Sans TC',Arial,sans-serif;color:#FFFFFF;background:#C41F27;border:1px solid #C41F27;border-radius:999px;padding:7px 13px;cursor:pointer;white-space:nowrap}
+#aiRun.v2.inPanel.yt .arMiniPlay:hover{background:#A3161D;border-color:#A3161D}
 #aiRun.v2.inPanel .arEditorWrap{display:none!important}
 #aiRun.v2.inPanel.pedit .arEditorWrap{display:block!important;flex:1;min-height:0}
 #aiRun.v2.inPanel.pedit #arOwn,#aiRun.v2.inPanel.pedit .arStepH:not(.s3){display:none}
@@ -1739,7 +1742,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  /* 2026-11-12 新版面（先用在靶心人）：② 你的故事 只放故事；提示詞小字顯示、可展開修改；③ 選一個 AI 執行 */
  var v2own=document.createElement('textarea');v2own.id='arOwn';v2own.placeholder='在這裡打字，或貼上故事、YouTube 影片網址……（也可以從上面選練習故事）';
  var v2h2=document.createElement('p');v2h2.className='arStepH';v2h2.textContent='② 你的故事';
- var v2mini=document.createElement('div');v2mini.className='arMini';v2mini.innerHTML='<span class="arMiniL">給 AI 的指令</span><span class="arMiniT"></span><button type="button" class="arMiniE" data-act="editp">修改指令</button>';
+ var v2mini=document.createElement('div');v2mini.className='arMini';v2mini.innerHTML='<span class="arMiniL">給 AI 的指令</span><span class="arMiniT"></span><button type="button" class="arMiniPlay" data-act="playstory">▶ 播放影片</button><button type="button" class="arMiniE" data-act="editp">修改指令</button>';
  var v2h3=document.createElement('p');v2h3.className='arStepH s3';v2h3.textContent='③ 選一個 AI 執行';
  (function(){var w=$('.arEditorWrap'),bt=$('.arBtns');w.parentNode.insertBefore(v2h2,w);w.parentNode.insertBefore(v2own,w);w.parentNode.insertBefore(v2mini,w);bt.parentNode.insertBefore(v2h3,bt);})();
  function v2on(){return box.classList.contains('v2');}
@@ -1884,6 +1887,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   if(e.target===box){close();return;}
   var b=e.target.closest('button');if(!b)return;e.preventDefault();
   if(b.dataset.act==='editp'){box.classList.toggle('pedit');b.textContent=box.classList.contains('pedit')?'收起':'修改指令';if(!box.classList.contains('pedit'))v2own.value=editorStory();setTimeout(function(){try{(box.classList.contains('pedit')?ta:v2own).focus();}catch(_){}},30);}
+  else if(b.dataset.act==='playstory'){var source=(v2on()?v2own.value:editorStory()).trim(),url=(source.match(/https?:\/\/[^\s<]+/i)||[])[0]||source;playPromptVideo(url);}
   else if(b.dataset.act==='close')close();
   else if(b.dataset.act==='filmplay'){var F=FILMS[+b.dataset.film]||FILMS[0];
    if(F[2]){var pt=box.querySelector('.fPlay[data-film="'+b.dataset.film+'"]'),wt=pt.classList.contains('on');stopFilm();if(!wt){var d=document.createElement('div');d.className='fText';d.textContent=F[2];pt.appendChild(d);pt.classList.add('on','txt');msg('再點一次《'+F[0]+'》收起。');}else msg('');return;}
