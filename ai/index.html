@@ -1984,7 +1984,7 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   var html=k===null?'把我的故事'+BASE:'把<span class="plotSel">《'+name+'》</span>'+BASE;
   document.querySelectorAll('#ai-bullseye .aiPrompt, #reader .aiRunRow[data-slide="ai-bullseye"] .aiPrompt').forEach(function(p){p.innerHTML=html;});
   var f=k===null?null:(window.__bsFilms||[])[k],e=function(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
-  var box=!f?'':(f[2]?e(f[2]):'<span class="bsTag">▶ 影片網址</span><a class="bsUrl" href="'+e(f[1])+'" target="_blank" rel="noopener">'+e(f[1])+'</a>');
+  var box=!f?'':(f[2]?e(f[2]):'<span class="bsTag">▶ 影片</span><a class="bsUrl" data-video-title="'+e(f[0])+'" href="'+e(f[1])+'" title="點擊播放《'+e(f[0])+'》">▶ 點擊播放《'+e(f[0])+'》</a>');
   document.querySelectorAll('.bsShow').forEach(function(b){b.innerHTML=box;b.scrollTop=0;});if(window.__bsPrompts)window.__bsPrompts();}
  /* 2026-11-11 換順序、套濾鏡、心結人的提示詞：把「我的故事」換成《故事名》 */
  function bsPrompts(){var k=window.__bsStory,f=k===null?null:(window.__bsFilms||[])[k],nm=f?'<span class="plotSel bsNm">《'+f[0]+'》</span>':null;
@@ -2094,6 +2094,13 @@ document.addEventListener('mouseover',function(e){var p=e.target.closest&&e.targ
  var col=p.closest('.aiPlots').getBoundingClientRect();var x=(col.right-R.left)/sc+22,y=(q.top-R.top)/sc+(q.height/sc)/2;
  tip.style.left=x+'px';tip.classList.add('on');var h=tip.offsetHeight,yy=Math.max(h/2+30,Math.min(y,900-h/2));tip.style.top=yy+'px';tip.style.setProperty('--ay',(y-yy)+'px');});
 document.addEventListener('mouseleave',hide);})();
+</script>
+<script>/* AI 基礎頁：選到影片後，在故事欄直接點擊播放 */
+(function(){
+ function videoId(url){try{var u=new URL(url),h=u.hostname.toLowerCase();if(h==='youtu.be'||h==='www.youtu.be')return u.pathname.split('/')[1]||'';if(h==='youtube.com'||h==='www.youtube.com'||h==='m.youtube.com'||h==='youtube-nocookie.com'||h==='www.youtube-nocookie.com')return u.pathname==='/watch'?(u.searchParams.get('v')||''):(u.pathname.match(/^\/(?:shorts|live|embed)\/([\w-]+)/)||[])[1]||'';}catch(_){}return '';}
+ function play(url,title){var id=videoId(url);if(!/^[\w-]{11}$/.test(id))return;var layer=document.getElementById('aiStoryVideoPlayer');if(!layer){layer=document.createElement('div');layer.id='aiStoryVideoPlayer';layer.style.cssText='position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.92);display:flex;flex-direction:column;color:#fff;font:700 18px sans-serif';layer.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 18px"><span class="title">影片播放</span><button type="button" aria-label="關閉影片" style="font:inherit;padding:8px 16px;cursor:pointer;border:0;border-radius:8px">關閉 ✕</button></div><iframe title="YouTube 影片" style="flex:1;width:100%;border:0" allow="autoplay;encrypted-media;picture-in-picture;fullscreen" allowfullscreen></iframe>';layer.querySelector('button').addEventListener('click',function(){layer.querySelector('iframe').src='about:blank';layer.remove();});document.body.appendChild(layer);}layer.querySelector('.title').textContent='正在播放《'+title+'》';layer.querySelector('iframe').src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&playsinline=1&rel=0';}
+ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.bsShow .bsUrl');if(!a||e.defaultPrevented)return;e.preventDefault();e.stopPropagation();play(a.getAttribute('href'),a.getAttribute('data-video-title')||'影片');},true);
+})();
 </script>
 </body>
 </html>
