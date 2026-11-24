@@ -1233,6 +1233,17 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiRun.v2.inPanel.yt .arYT{order:6!important}
 #aiRun.v2.inPanel.yt .arMsg{order:7!important}
 #aiRun.v2.inPanel.yt .arBtns{order:8!important}
+/* 點選影片後的放大預覽：右欄以播放器為主，維持網址與 AI 執行入口。 */
+#aiRun.v2.inPanel.yt .arVideoPreview iframe{height:clamp(270px,48vh,440px)}
+#aiRun.v2.inPanel.yt .arMini{padding:5px 10px 6px!important;gap:3px 8px!important;margin-top:6px!important}
+#aiRun.v2.inPanel.yt .arMiniL{font-size:15px!important}
+#aiRun.v2.inPanel.yt .arMiniT{-webkit-line-clamp:1!important;font-size:15px!important}
+#aiRun.v2.inPanel.yt .arMiniE,#aiRun.v2.inPanel.yt .arMiniPlay{font-size:14px!important;padding:5px 9px!important}
+#aiRun.v2.inPanel.yt #arOwn{flex-basis:58px!important;height:58px!important;min-height:58px!important;padding:8px 12px!important;font-size:17px!important;line-height:1.35!important}
+#aiRun.v2.inPanel.yt .arYT{display:none!important}
+#aiRun.v2.inPanel.yt .arStepH.s3{margin:6px 0 3px!important;font-size:19px!important}
+#aiRun.v2.inPanel.yt .arBtns{margin:2px 0 0!important;row-gap:6px!important}
+#aiRun.v2.inPanel.yt .arBtns button{padding:10px 6px!important;font-size:18px!important}
 #aiRun.v2.inPanel .arEditorWrap{display:none!important}
 #aiRun.v2.inPanel.pedit .arEditorWrap{display:block!important;flex:1;min-height:0}
 #aiRun.v2.inPanel.pedit #arOwn,#aiRun.v2.inPanel.pedit .arStepH:not(.s3){display:none}
