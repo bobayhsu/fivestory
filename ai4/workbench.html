@@ -16,7 +16,7 @@ button,input,textarea,select{font:inherit} button{cursor:pointer} header{positio
 .map{max-width:1380px;margin:0 auto 18px;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.map button{border:0;width:100%;background:#ece9e3;border-radius:12px;padding:11px 13px;color:#687079;font-size:13px;font-weight:700;text-align:left;transition:.15s}.map button:hover,.map button:focus-visible{outline:0;background:#dcebe8;transform:translateY(-1px)}.map b{display:block;color:var(--ink);font-size:14px}.map button.now{background:var(--teal);color:#fff}.map button.now b{color:#fff}
 main{max-width:1380px;margin:auto;padding:0 24px 48px;display:grid;grid-template-columns:minmax(220px,1fr) minmax(300px,1fr) minmax(400px,2fr);gap:18px;align-items:start}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:var(--shadow)}.card h2{font-size:18px;margin:0 0 4px}.cap{margin:0 0 14px;color:var(--muted);font-size:13px}.step{display:inline-grid;place-items:center;width:25px;height:25px;background:var(--teal);color:#fff;border-radius:50%;font-size:13px;margin-right:6px}.video{display:none;margin-top:10px;border-left:4px solid #e58b1b;background:#fff2de;padding:9px 10px;font-size:12px;font-weight:700;color:#885115}.video.show{display:block}
 .mode-grid,.select-group{display:grid;grid-template-rows:repeat(6,58px);gap:9px}.mode-card{display:flex;align-items:flex-start;gap:8px;min-height:58px;box-sizing:border-box;border:1px solid var(--line);border-radius:11px;padding:10px;background:#fbfaf8;cursor:pointer;font-size:13px}.mode-card:has(input:checked){border:2px solid var(--teal);background:var(--teal-soft);padding:9px}.mode-card input{margin-top:4px;accent-color:var(--teal)}.mode-card b{display:block;font-size:14px}.mode-card small{display:block;color:var(--muted);line-height:1.35}.choice-row{display:flex;align-items:center;min-width:0}.choice-row .select-control{height:46px}.select-control{width:100%;appearance:none;border:1px solid #dbe3f5;border-radius:11px;padding:10px 42px 10px 12px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%232f6fed' d='M1 1l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 14px center;color:var(--ink);font-weight:800;font-size:14px;box-shadow:0 1px 0 rgba(20,46,99,.04)}.select-control:focus{outline:0;border-color:#6393f5;box-shadow:0 0 0 3px rgba(47,111,237,.13)}.axis-note{margin-top:10px;color:#5b6567;font-size:12px;font-weight:700}.field{margin:13px 0}.boundary{border-top:1px solid var(--line);margin-top:16px;padding-top:16px}.noteBox{background:#fff9ec;border-left:4px solid var(--gold);padding:10px 11px;margin-top:13px;border-radius:6px;font-size:12px;color:#624c1a}
-.preview{background:#192632;color:#edf8f7;border-radius:12px;padding:13px;max-height:265px;overflow:auto;white-space:pre-wrap;font-size:12px;line-height:1.6}.copy{width:100%;border:0;border-radius:10px;padding:11px;background:var(--teal);color:#fff;font-weight:900;margin-top:10px}.ais{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.ai{color:#fff;border:0;border-radius:10px;padding:11px;font-weight:900}.claude{background:#c96442}.gemini{background:#3b6fe0}.chatgpt{background:#10a37f}.meta{background:linear-gradient(135deg,#0866ff,#943cf0)}.disabled{opacity:.35}.status{min-height:22px;margin:10px 0 0;color:var(--teal);font-size:13px;font-weight:800}
+.preview{background:#192632;color:#edf8f7;border-radius:12px;padding:13px;max-height:265px;overflow:auto;white-space:pre-wrap;font-size:12px;line-height:1.6}.media-preview{margin-bottom:10px;border:1px solid #c49a18;border-radius:7px;overflow:hidden;background:#171513}.media-preview[hidden]{display:none}.media-preview .media-label{display:flex;align-items:center;gap:8px;padding:8px 11px;color:#fff8d6;font-size:13px;font-weight:900}.media-preview iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#000}.copy{width:100%;border:0;border-radius:10px;padding:11px;background:var(--teal);color:#fff;font-weight:900;margin-top:10px}.ais{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.ai{color:#fff;border:0;border-radius:10px;padding:11px;font-weight:900}.claude{background:#c96442}.gemini{background:#3b6fe0}.chatgpt{background:#10a37f}.meta{background:linear-gradient(135deg,#0866ff,#943cf0)}.disabled{opacity:.35}.status{min-height:22px;margin:10px 0 0;color:var(--teal);font-size:13px;font-weight:800}
 .checklist{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}.checklist h3{font-size:16px;margin:0 0 5px}.complete{margin-top:9px;color:#087a64;font-size:12px;font-weight:900;min-height:18px}
 /* 深色工作台＋白色成品區：依 AI4 操作流程保留三欄，但讓預覽成為主視覺。 */
 main{grid-template-columns:minmax(165px,.58fr) minmax(240px,.82fr) minmax(520px,2.6fr);gap:12px;padding-top:12px}
@@ -41,23 +41,137 @@ main{grid-template-columns:minmax(165px,.58fr) minmax(240px,.82fr) minmax(520px,
   <section class="card" id="step1"><h2><span class="step">1</span>選擇項目</h2><p class="cap">故事必選；其餘選項可以複選。</p><div class="mode-grid" id="modes"></div></section>
   <section class="card" id="step2"><h2><span class="step">2</span>選擇結果</h2><p class="cap">設定各項結果後，右欄會立即更新完整指令。</p><textarea id="story" hidden></textarea><div class="select-group" id="choices"></div><div class="video" id="video">這是影片網址：請先用 <b>Gemini</b> 整理成文字骨架，再回來進行變形。其他 AI 未必能讀影片，容易自行補寫。</div><p class="axis-note" id="axisNote"></p>
   </section>
-  <aside class="card right" id="step3"><h2><span class="step">3</span>取得一個可用版本</h2><p class="cap">AI4 會附帶保留／改變／新增項目與本版自我驗收；不用再生成第二版。</p><pre class="preview" id="preview"></pre><div class="ais" id="ais"><button class="ai claude" data-ai="claude">Claude</button><button class="ai gemini" data-ai="gemini">Gemini</button><button class="ai chatgpt" data-ai="chatgpt">ChatGPT</button><button class="ai meta" data-ai="meta">Meta AI</button></div><div class="status" id="status"></div>
+  <aside class="card right" id="step3"><h2><span class="step">3</span>取得一個可用版本</h2><p class="cap">AI4 會附帶保留／改變／新增項目與本版自我驗收；不用再生成第二版。</p><div class="media-preview" id="mediaPreview" hidden></div><pre class="preview" id="preview"></pre><div class="ais" id="ais"><button class="ai claude" data-ai="claude">Claude</button><button class="ai gemini" data-ai="gemini">Gemini</button><button class="ai chatgpt" data-ai="chatgpt">ChatGPT</button><button class="ai meta" data-ai="meta">Meta AI</button></div><div class="status" id="status"></div>
   </aside>
 </main>
 <script>
+// 與 AI 基礎頁共用的 34 則練習素材：文字保留全文，影片可在右欄直接播放。
 const STORIES=[
-['三隻小豬','童話','三隻小豬各自蓋了草屋、木屋與磚屋。大野狼吹倒草屋、撞垮木屋，卻拿磚屋沒辦法，想從煙囪溜進去時掉進豬小弟預先燒好的滾水鍋裡，從此不敢再來。'],
-['聖誕禮物','反轉','貧窮的夫妻吉姆和黛拉，各自賣掉祖傳金錶與長髮，為對方買聖誕禮物；兩件禮物都暫時用不上，卻證明彼此才是最珍貴的禮物。'],
-['世界拼圖','寓言','牧師把世界地圖剪碎要孩子拼好。孩子三分鐘完成，因為背面是一個人像：「只要把人像拼好，翻過來不就是世界地圖了嗎？」'],
-['項鍊','反轉','瑪蒂達借鑽石項鍊參加晚宴卻弄丟，夫妻借巨款買一條還人，辛苦還債十年。十年後才知道原本的項鍊是假的。'],
-['便利貼的誕生','商戰','3M 科學家做出一撕就掉的失敗膠水，五年無人問津。同事因書籤滑落，靈機一動把它變成可重複撕貼的黃色便條紙。'],
-['J.K. 羅琳','逆襲','失業離婚的單親媽媽在咖啡館手寫《哈利波特》，遭十二家出版社退稿。第十三家社長的女兒追問「下一章呢？」改寫她的人生。'],
-['神隱少女','動畫','千尋誤闖神靈世界，父母變成豬、名字被奪走。她在湯屋工作，為救白龍想起他的真名，最後識破考驗帶父母回到人類世界。'],
-['一碗陽春麵','溫情','除夕夜負債的母子三人只點得起一碗陽春麵，老闆默默多下麵。十多年後兄弟陪母親重返麵館，點了三碗麵向老闆致謝。'],
-['刺激1995','電影','銀行家安迪蒙冤入獄十九年，默默用小石鎚挖牆；唯一證人被害後，他越獄並揭露典獄長洗錢，最後在海邊與瑞德重逢。'],
-['小美人魚','童話','小美人魚救王子並用聲音換雙腿，卻無法證明自己是恩人。姐姐給她匕首保命，她最後選擇犧牲自己。'],
-['髮之愛','影片（請用 Gemini）','https://www.youtube.com/watch?v=kNw8V_Fkw28'],
-['禮物','影片（請用 Gemini）','https://www.youtube.com/watch?v=WjqiU5FMCJU']];
+['不求回報','影片','https://www.youtube.com/watch?v=7s22HX18wDY'],
+['潘婷廣告','影片','https://www.youtube.com/watch?v=Ect56804xfA'],
+['田能久與大蛇精','影片','https://www.youtube.com/watch?v=CSuwxPxaJSQ'],
+['啄木鳥','文字',String.raw`有天小明和小美出去約會，突然小明肚子一陣滾動，變得很想放屁。
+聰明的他靈機一動，想到了一個絕妙的掩飾方法，於是轉頭對小美說：
+「小美，妳知道啄木鳥是怎麼叫的嗎？」
+小美搖搖頭說：「不知道耶，怎麼叫？」
+小明得意地笑著說：「那我模仿給妳聽喔～」
+接著，小明一邊用嘴巴發出「答答答答答」的模仿聲，一邊順便偷偷放了一個大響屁！
+模仿完畢後，小明一臉輕鬆地問：「怎麼樣？現在妳知道啄木鳥是怎樣叫了吧！」
+此時，小美一臉尷尬地看著他，弱弱地說：
+「不好意思……你剛剛放屁太大聲了，我完全沒聽到你模仿的叫聲。」
+小明：……`],
+['聖誕禮物','文字',String.raw`吉姆和黛拉是一對貧窮的年輕夫妻，夫妻倆各有一件值得驕傲的財富，一是吉姆祖傳的金錶，一是黛拉的秀髮。
+聖誕節前夕，妻子黛拉想幫丈夫買一件聖誕禮物，雖然認真存了好一陣子的錢，但顯然手邊的錢買不起任何東西。
+最後，黛拉做了一個痛苦的抉擇，她把自己最引以為豪的秀髮剪下，賣了出去，並用所得的錢幫吉姆買了一個白金錶鏈。黛拉對這個禮物非常得意，因為它可以用來搭配丈夫的金錶。
+丈夫吉姆回到家，看見妻子的頭髮，驚訝得說不出話來。不只是因為妻子的頭髮不見了，而是吉姆也為妻子買了一個聖誕禮物，一套玳瑁髮梳，但現在這個禮物失去用處了。
+黛拉看到吉姆買的禮物，先是高興地狂叫（這是她夢想中的禮物），繼而變成歇斯底里地哭泣和哀嚎（但現在這個禮物用不著了）。哭完之後，換黛拉拿出她的禮物，白金錶鏈。
+看到妻子買的禮物，吉姆笑了出來，這個禮物目前也用不著了，因為他送給妻子的髮梳，正是用賣掉金錶的錢買來的。
+吉姆和黛拉為對方買的聖誕禮物，都是用自己最珍貴的東西換來的。原來，在他們心中，對方比長髮、金錶都重要，這才是最珍貴的聖誕禮物。`],
+['世界拼圖','文字',String.raw`某天，一位牧師正在苦思明天的「演講題目」，
+可他的孩子卻在旁邊吵著要玩，
+於是父親拿出一把剪刀，
+將一張世界地圖剪成許多碎片，變成一副拼圖，
+然後對孩子說：
+「只要你把世界地圖拼好，爸爸就陪你玩。」
+父親以為孩子要花很多時間才能拼得出來，
+沒想到他只花了三分鐘就拼完了。
+父親難以置信，於是問孩子怎麼辦到的？
+孩子說：
+「這還不簡單，地圖背後有個人像，
+只要把人像拼好，翻過來不就是地圖了嗎？」
+牧師聽完，深受啟發，因而把明天的「演講題目」定為：
+「只要人對了，世界就對了」`],
+['安海瑟薇','文字',String.raw`2004年，李安正在籌拍《斷背山》，面試了一堆女演員，當時還是個小咖的女星安海瑟薇也在其中。
+安海瑟薇面試完之後，導演李安問了她一句話：「你會騎馬嗎？」
+「會！我會騎馬。」安海瑟薇說。
+很平常的問與答，但安海瑟薇卻微微發著抖，因為她撒了一個謊。
+安海瑟薇不會騎馬，但她記得父母告訴她的話：
+「人生最難的是機會，最簡單的是學習。如果有人問你能不能做某件事，一定要回答可以，而且要在兩週內把那件事學起來。」
+回家之後，安海瑟薇開始學騎馬。
+學著、學著，有一天，馬背上的安海瑟薇，電話突然響了起來。
+電話那頭傳來的是李安的聲音，安海瑟薇屏住呼吸，隨後她聽到──恭喜你，你錄取了。`],
+['天長地久','影片','https://www.youtube.com/watch?v=zTNnvuWkdTo'],
+['小美人魚','文字',String.raw`一、目標：王子遭遇船難，美人魚救了他，並對他一見鍾情。她的目標是跟王子結婚。
+
+二、阻礙：美人魚有尾巴，無法像人類一樣用雙腳在陸地上生活。
+
+三、努力：美人魚向巫婆求助，以自己最美的嗓音交換一雙人類的腳，從此不能說話。巫婆警告：如果最後沒能與王子結婚，她就會化為泡沫死去。美人魚仍答應交換。
+
+四、結果：美人魚來到岸上，與王子度過一段短暫的美好時光。
+
+五、意外：王子興奮地宣布，終於找到當年在海上救他的女子——他誤以為那人是鄰國公主，並決定與公主結婚。真正救他的美人魚因失去聲音，無法說出真相。
+
+六、轉彎：姐姐們為救美人魚，用頭髮向巫婆換來一把匕首。只要美人魚殺死心愛的王子，就能活下來。深夜，她來到熟睡的王子身旁，舉起匕首，在愛情與自己的生命之間痛苦掙扎。
+
+七、結局：刀子還沒落下，眼淚先落下。美人魚丟掉匕首，選擇犧牲自己、成全王子，最後化為海上的泡沫。`],
+['讓我留下','影片','https://www.youtube.com/watch?v=1ZrKxYUAyBQ'],
+['三隻小豬','文字',String.raw`豬媽媽老了，養不起三個孩子，於是對三隻小豬說：「你們長大了，該自己去蓋房子、過日子了。不過要小心，森林裡有一隻大野狼。」
+豬大哥最懶，隨便撿了一堆稻草，半天就蓋好一間草屋，然後躺著曬太陽。
+豬二哥也想偷懶，砍了幾根木頭，一天就蓋好一間木屋，然後跑去玩。
+豬小弟卻一塊一塊地搬磚頭、砌牆，忙了好多天才蓋好一間磚屋。兩個哥哥笑他：「傻瓜，那麼辛苦幹嘛？」
+有一天，大野狼來了。牠對著草屋吹一口氣，草屋就飛走了，豬大哥嚇得逃到二哥的木屋。
+大野狼追過來，用力一撞，木屋也垮了。兩隻小豬拚命跑，躲進弟弟的磚屋。
+大野狼又吹又撞，磚屋卻一動也不動。牠不甘心，爬上屋頂，想從煙囪溜進去。
+豬小弟早就料到了，在壁爐上燒了一大鍋滾燙的開水。大野狼一滑下煙囪，就「撲通」掉進鍋裡，燙得哇哇大叫，從此再也不敢來了。
+兩個哥哥終於明白，最辛苦蓋的房子，才是最安全的家。從此三隻小豬一起住在磚屋裡，過著平安的日子。`],
+['刺激1995','文字',String.raw`銀行家安迪被控殺害妻子和她的情夫，雖然他堅稱自己是清白的，還是被判兩個無期徒刑，關進了鯊堡監獄。
+獄中生活很殘酷：獄警暴力、獄霸欺凌，安迪一開始沉默寡言，只跟一個專門走私東西的老囚犯瑞德做朋友，向他買了一把小石鎚，說是要雕石頭。
+後來安迪靠著理財專長，幫獄警報稅、替典獄長管帳，慢慢在監獄裡站穩腳步。他還一年又一年寫信爭取經費，把破舊的圖書室變成像樣的圖書館。
+有一天，一個年輕的新囚犯湯米說，他在別的監獄聽過有人承認殺了安迪的妻子。安迪終於看到洗清冤屈的希望，去找典獄長幫忙。
+沒想到典獄長怕安迪出獄後揭發他洗錢的祕密，不但拒絕，還把安迪關進禁閉室，更暗中派人殺了湯米。
+大家都以為安迪的希望徹底破滅了。瑞德甚至擔心他會想不開。
+隔天早上點名，安迪的牢房卻空了。原來這十九年來，他每天晚上用那把小石鎚，在牆上海報後面挖出一條通道。那天夜裡，他爬過五百碼又臭又髒的下水道，逃了出去。
+安迪不只逃獄，還帶走了典獄長的帳本和黑錢，把罪證寄給報社。典獄長在警察上門前自殺。
+多年後，瑞德獲得假釋，照著安迪的約定，在一棵大樹下找到他留下的信和錢。瑞德最後來到墨西哥的海邊，看見安迪正在修一艘小船，兩個老朋友終於重逢。`],
+['海尼根打開新世界','影片','https://www.youtube.com/watch?v=z3a8MdloAAM'],
+['接線生的自我介紹','影片','https://www.youtube.com/watch?v=J5TYcGGlvoU'],
+['火力四射的星際大愛','影片','https://www.youtube.com/watch?v=I6okB-cKV1w'],
+['概念具象化的美麗人生','影片','https://www.youtube.com/watch?v=KvAJRL-fEcU'],
+['教科書等級的無恥','影片','https://www.youtube.com/watch?v=RiJJvgIMA7A'],
+['概念綁架了創意','影片','https://www.youtube.com/watch?v=PueoWSAFTis'],
+['那個男人叫美國','影片','https://www.youtube.com/watch?v=2kihk03A0KI'],
+['全世界最爛的工作','影片','https://www.youtube.com/watch?v=YhID-_WNy98'],
+['電梯巧、無聲妙','影片','https://www.youtube.com/watch?v=Fca0mTUrDJw'],
+['讓配角活成主角','影片','https://www.youtube.com/watch?v=p_cGo5iWk8g'],
+['見鬼了：賓士死神','影片','https://www.youtube.com/watch?v=j_Q5s_LqxJ8'],
+['見鬼了：BMW 女鬼','影片','https://www.youtube.com/watch?v=afqXYKwy8NI'],
+['項鍊','文字',String.raw`瑪蒂達嫁給一位小職員，家境普通，卻一直渴望過上奢華的生活。某天，丈夫好不容易弄到一張部長晚宴的請柬，瑪蒂達卻愁眉苦臉，因為她沒有像樣的珠寶可以配戴。
+為了在晚宴上光彩奪目，她向富有的閨蜜借了一條華麗的鑽石項鍊。晚宴當晚，瑪蒂達果然成為全場焦點，度過了人生中最夢幻的一夜。
+沒想到回到家後，她突然發現脖子上的鑽石項鍊不見了！夫妻倆找遍大街小巷都一無所獲，走投無路之下，只好四處借高利貸，買了一條一模一樣的鑽石項鍊還給閨蜜。
+為了還清這筆巨債，瑪蒂達辭退女僕、搬進閣樓，每天做粗活、省吃儉用，整整辛苦了十年，終於還清所有債務，但她的青春與美貌也早已消逝。
+十年後的某天，她在公園偶遇閨蜜，鼓起勇氣說出當年弄丟項鍊、花十年還債的真相。
+閨蜜聽完震驚地拉住她的手說：「天啊，瑪蒂達，我借給妳的那條項鍊是假的，最多只值五百法郎啊！」`],
+['便利貼的誕生','文字',String.raw`1968年，3M 公司的科學家史賓賽想研發一種「黏性超強」的工業用膠水，用來黏合飛機零件。
+但實驗結果卻徹底失敗——他做出來的膠水黏性極弱，貼上去輕輕一撕就掉，完全無法固定重物。
+史賓賽捨不得丟掉這個失敗品，連續五年在公司裡四處推廣，希望幫它找到用途，卻沒有任何部門覺得「黏不牢的膠水」有什麼用。
+直到有一天，他的同事亞瑟在教堂唱詩班練唱，夾在歌本裡的紙條書籤一直滑落，讓他非常困擾。他突然想起史賓賽那款「黏不牢、撕下來又不留殘膠」的失敗膠水。
+兩人靈光一閃：既然黏不牢，何不反過來把它當成「可以重複撕貼的書籤與便條紙」？
+他們把這種膠水塗在黃色紙片背面，意外大受歡迎。當年被視為失敗品的膠水，就這樣變成了風靡全世界的「便利貼（Post-it）」。`],
+['J.K. 羅琳','文字',String.raw`1990年代初，J.K. 羅琳經歷了母親過世、離婚與失業，成了領救濟金過活的單親媽媽，甚至被診斷出憂鬱症。
+在人生最低谷時，她只想把腦海裡構思多年的魔法世界寫成小說出版。因為家裡太冷又買不起影印機，她常常推著嬰兒車躲進咖啡館，趁女兒睡著時，一字一句手寫完《哈利波特》，再寄給各大出版社。
+然而現實很殘酷，整整十二家出版社全部退稿，理由幾乎都一樣：「這本書太長了，小孩子不會看。」
+就在她幾乎要放棄時，第十三家小出版社的社長隨手把第一章帶回家，給自己八歲的女兒試讀。
+沒想到女兒看完第一章後，竟然追著爸爸喊：「下一章呢？快給我下一章！」
+社長決定相信孩子的直覺，答應出版這本書，雖然當時他還好心勸羅琳：「妳最好還是找份正職，寫童書是賺不到錢的。」
+後來，《哈利波特》紅遍全球，成為史上最暢銷的系列小說，徹底改寫了她的人生。`],
+['神隱少女','文字',String.raw`十歲的千尋和父母搬家途中誤闖神靈世界，父母因為貪吃神明的食物，竟然變成了豬。千尋又怕又慌，唯一的目標就是把父母救回來，一起回家。
+但湯屋的主人湯婆婆奪走了她的名字，改叫她「小千」，並警告她：一旦忘記自己的本名，就永遠回不去人類世界。
+原本膽小愛哭的千尋，為了生存下來，只好咬牙在湯屋裡刷地板、服侍滿身污泥的河神與各種難纏的客人。一路上，神祕少年白龍多次暗中幫助她，卻也因此受了重傷、瀕臨死亡。
+為了救白龍，千尋鼓起勇氣搭上水上列車去見錢婆婆，歸還偷來的魔女印章。在回程的天空中，她突然想起自己小時候掉進河裡被救起的記憶，喊出了白龍真正的名字——「賑早見琥珀主」，解開了他的魔咒。
+最後，湯婆婆提出終極考驗，要千尋從一群豬裡認出自己的父母。千尋冷靜看了一圈，堅定地說：「這裡面沒有我的爸爸媽媽。」
+她答對了，成功打破契約，帶著恢復原狀的父母走出隧道，再也不是當初那個只會哭泣的小女孩。`],
+['一碗陽春麵','文字',String.raw`除夕夜，寒風刺骨，一間小小的麵館正準備打烊，門外卻走進一位穿著樸素的母親和兩個年幼的兒子。
+原來父親過世後留下龐大債務，三個人在跨年夜裡，只點得起「一碗」最便宜的陽春麵。
+老闆和老闆娘看出他們的難處，什麼也沒多說，只在廚房裡悄悄多下了半團麵，讓母子三人能分著吃飽。結帳時，老闆夫婦還熱情地鞠躬說：「謝謝光臨，祝你們新年快樂！」
+之後連續幾年的除夕夜，母子三人都會準時來到麵館，照舊點一碗陽春麵，老闆也總是默默多加麵，並為他們留著二號桌。
+但某一年起，他們突然不再出現了，一晃眼過了十多年。
+直到某個除夕夜，店門再度被推開，走進來一位氣質優雅的婦人，和兩位穿著筆挺西裝的年輕人。他們走到二號桌坐下，笑著對老闆說：「老闆，請給我們三碗陽春麵！」
+原來，當年那碗多給的麵與老闆的尊重，成了母子三人撐過最苦日子的力量。如今債務還清、兩個孩子也各自成才，特地回來致謝。老闆含著淚，像當年一樣為他們端上熱騰騰的麵。`],
+['禮物（The Present）','影片','https://www.youtube.com/watch?v=WjqiU5FMCJU'],
+['髮之愛（Hair Love）','影片','https://www.youtube.com/watch?v=kNw8V_Fkw28'],
+['搶餅乾的老奶奶','影片','https://www.youtube.com/watch?v=38y_1EWIE9I'],
+['投幣火箭','影片','https://www.youtube.com/watch?v=5L4DQfVIcdg'],
+['如出一轍（Alike）','影片','https://www.youtube.com/watch?v=PDHIyrfMl_U']];
 const MODES={
  pov:{name:'換視角',sub:'改誰在看、誰在說',note:'保留事件；換角色的可見範圍與感受。',options:[['對手／反派視角','看見他的苦衷與盲點'],['客戶／聽眾視角','從抗拒到被打動'],['旁觀者視角','增加見證感與可信度'],['十年後的自己','拉開距離重新理解']]},
  order:{name:'換順序',sub:'改觀眾先知道什麼',note:'七步不是任意打散；選一種清楚的敘事意圖。',options:[['意外開場','先丟意外，再回填原因'],['情緒帶入','先丟困境，引發共鳴'],['觀點主題','先出問題，再建立觀點'],['答案先揭','先說結果，再倒推原因']]},
@@ -65,15 +179,18 @@ const MODES={
  delivery:{name:'換交付',sub:'改使用任務與受眾',note:'同一個故事，媒介不同；但受眾與目的是決定寫法的核心。',options:[['30 秒短影音','意外鉤子 → 回填困境 → 選擇結果'],['簡報開場','一分鐘抓住注意力，導向觀點'],['社群貼文','短段落、具體畫面、引發回應'],['面試自我介紹','展現行動、判斷與解決問題']]},
  compress:{name:'壓縮故事',sub:'改長度，不丟掉選擇',note:'壓縮不是只刪字；要留下目標、壓力、選擇與結果。',options:[['30 秒口說','意外鉤子 → 困境回填 → 選擇結果'],['100 字電梯版','目標＋困境 → 關鍵選擇 → 新狀態'],['一句話版本','保留最大反差與轉折'],['50 字故事標語','以可記住的畫面收束']]}
 };
-const VISIBLE_MODES=['pov','order','conflict','delivery'],BOUNDARY_PRESETS=[['無',null],['基本設定｜忠實改寫・一般聽眾・記住轉折',{faith:'忠實改寫',audience:'對這個主題還不熟悉的一般聽眾',goal:'理解主角的選擇，並記住故事的轉折'}],['商業說服｜忠實改寫・潛在客戶・採取行動',{faith:'忠實改寫',audience:'潛在客戶或學員',goal:'願意採取下一步行動'}],['親子共鳴｜創意擴寫・親子・同理',{faith:'創意擴寫',audience:'親子與孩子',goal:'對主角產生共鳴與同理'}]];const selectedAxes=new Set(),options=Object.fromEntries(VISIBLE_MODES.map(k=>[k,'無']));let faith='忠實改寫',audience='對這個主題還不熟悉的一般聽眾',goal='理解主角的選擇，並記住故事的轉折',storyIndex='',boundaryPreset='無';const $=s=>document.querySelector(s);const story=$('#story'),preview=$('#preview'),status=$('#status');
-function isVideo(){return /youtu\.be|youtube\.com/i.test(story.value)}
-function setStory(index){storyIndex=index;const selected=storyIndex===''?null:STORIES[+storyIndex];story.value=selected?selected[2]:''}
+const VISIBLE_MODES=['pov','order','conflict','delivery'],BOUNDARY_PRESETS=[['無',null],['基本設定｜忠實改寫・一般聽眾・記住轉折',{faith:'忠實改寫',audience:'對這個主題還不熟悉的一般聽眾',goal:'理解主角的選擇，並記住故事的轉折'}],['商業說服｜忠實改寫・潛在客戶・採取行動',{faith:'忠實改寫',audience:'潛在客戶或學員',goal:'願意採取下一步行動'}],['親子共鳴｜創意擴寫・親子・同理',{faith:'創意擴寫',audience:'親子與孩子',goal:'對主角產生共鳴與同理'}]];const selectedAxes=new Set(),options=Object.fromEntries(VISIBLE_MODES.map(k=>[k,'無']));let faith='忠實改寫',audience='對這個主題還不熟悉的一般聽眾',goal='理解主角的選擇，並記住故事的轉折',storyIndex='',boundaryPreset='無';const $=s=>document.querySelector(s);const story=$('#story'),preview=$('#preview'),status=$('#status'),mediaPreview=$('#mediaPreview');
+function selectedStory(){return storyIndex===''?null:STORIES[+storyIndex]}
+function isVideo(){return selectedStory()?.[1]==='影片'}
+function setStory(index){storyIndex=index;const selected=selectedStory();story.value=selected?selected[2]:''}
+function youtubeId(url){try{const u=new URL(url);return u.hostname==='youtu.be'?u.pathname.slice(1):u.searchParams.get('v')}catch(e){return ''}}
+function renderMedia(){const selected=selectedStory();if(!selected||!isVideo()){mediaPreview.hidden=true;mediaPreview.innerHTML='';return}const id=youtubeId(selected[2]);if(!id){mediaPreview.hidden=true;return}mediaPreview.hidden=false;mediaPreview.innerHTML=`<div class="media-label">▶ 點擊播放《${selected[0]}》</div><iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0" title="播放《${selected[0]}》" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`}
 function applyBoundaryPreset(){const preset=BOUNDARY_PRESETS.find(([name])=>name===boundaryPreset)?.[1];if(preset){faith=preset.faith;audience=preset.audience;goal=preset.goal}}
 function renderModes(){const host=$('#modes');host.innerHTML=`<label class="mode-card"><input type="checkbox" value="story" ${storyIndex!==''?'checked':''}><span><b>故事</b><small>選擇要改寫的故事素材</small></span></label>`+VISIBLE_MODES.map(k=>{const m=MODES[k];return `<label class="mode-card"><input type="checkbox" value="${k}" ${selectedAxes.has(k)?'checked':''}><span><b>${m.name}</b><small>${m.sub}</small></span></label>`}).join('')+`<label class="mode-card"><input type="checkbox" value="boundary" ${boundaryPreset!=='無'?'checked':''}><span><b>故事邊界與目的</b><small>設定可改範圍、受眾與想達成的效果</small></span></label>`;host.querySelectorAll('input').forEach(input=>input.onchange=()=>{if(input.value==='story'){setStory(input.checked?'0':'')}else if(input.value==='boundary'){boundaryPreset=input.checked?BOUNDARY_PRESETS[1][0]:'無';applyBoundaryPreset()}else if(input.checked){selectedAxes.add(input.value);options[input.value]=MODES[input.value].options[0][0]}else{selectedAxes.delete(input.value);options[input.value]='無'}renderModes();renderChoices();update()})}
-function renderChoices(){const host=$('#choices');host.innerHTML=`<div class="choice-row"><select class="select-control" id="storySelect" aria-label="故事"><option value="">無</option>${STORIES.map((s,i)=>`<option value="${i}" ${storyIndex===String(i)?'selected':''}>${s[0]}｜${s[1]}</option>`).join('')}</select></div>`+VISIBLE_MODES.map(k=>{const m=MODES[k];return `<div class="choice-row"><select class="select-control" id="choice-${k}" data-axis="${k}" aria-label="${m.name}"><option value="無">無</option>${m.options.map(o=>`<option value="${o[0]}" ${options[k]===o[0]?'selected':''}>${o[0]}｜${o[1]}</option>`).join('')}</select></div>`}).join('')+`<div class="choice-row"><select class="select-control" id="boundarySelect" aria-label="故事邊界與目的">${BOUNDARY_PRESETS.map(([name])=>`<option value="${name}" ${boundaryPreset===name?'selected':''}>${name}</option>`).join('')}</select></div>`;const storySelect=$('#storySelect');storySelect.onchange=()=>{setStory(storySelect.value);renderModes();update()};host.querySelectorAll('select[data-axis]').forEach(select=>select.onchange=()=>{const key=select.dataset.axis;options[key]=select.value;if(select.value==='無')selectedAxes.delete(key);else selectedAxes.add(key);renderModes();update()});$('#boundarySelect').onchange=()=>{boundaryPreset=$('#boundarySelect').value;applyBoundaryPreset();renderModes();update()};$('#axisNote').textContent=[...selectedAxes].map(k=>MODES[k].note).join('　')}
+function renderChoices(){const host=$('#choices'),storyOption=(s,i)=>`<option value="${i}" ${storyIndex===String(i)?'selected':''}>${s[0]}</option>`,texts=STORIES.map((s,i)=>[s,i]).filter(([s])=>s[1]==='文字'),videos=STORIES.map((s,i)=>[s,i]).filter(([s])=>s[1]==='影片');host.innerHTML=`<div class="choice-row"><select class="select-control" id="storySelect" aria-label="故事"><option value="">無</option><optgroup label="文字故事（選取後帶入完整內容）">${texts.map(([s,i])=>storyOption(s,i)).join('')}</optgroup><optgroup label="影片故事（選取後可在右欄播放）">${videos.map(([s,i])=>storyOption(s,i)).join('')}</optgroup></select></div>`+VISIBLE_MODES.map(k=>{const m=MODES[k];return `<div class="choice-row"><select class="select-control" id="choice-${k}" data-axis="${k}" aria-label="${m.name}"><option value="無">無</option>${m.options.map(o=>`<option value="${o[0]}" ${options[k]===o[0]?'selected':''}>${o[0]}｜${o[1]}</option>`).join('')}</select></div>`}).join('')+`<div class="choice-row"><select class="select-control" id="boundarySelect" aria-label="故事邊界與目的">${BOUNDARY_PRESETS.map(([name])=>`<option value="${name}" ${boundaryPreset===name?'selected':''}>${name}</option>`).join('')}</select></div>`;const storySelect=$('#storySelect');storySelect.onchange=()=>{setStory(storySelect.value);renderModes();update()};host.querySelectorAll('select[data-axis]').forEach(select=>select.onchange=()=>{const key=select.dataset.axis;options[key]=select.value;if(select.value==='無')selectedAxes.delete(key);else selectedAxes.add(key);renderModes();update()});$('#boundarySelect').onchange=()=>{boundaryPreset=$('#boundarySelect').value;applyBoundaryPreset();renderModes();update()};$('#axisNote').textContent=[...selectedAxes].map(k=>MODES[k].note).join('　')}
 function operation(){const changes=[...selectedAxes].map(k=>`- ${MODES[k].name}：${options[k]}`);return changes.length?`本輪同時套用以下變化：\n${changes.join('\n')}\n請把這些變化整合為同一個版本；除了選定的變化以外，不要任意改動故事的核心因果。`:'本輪不指定額外變法；請先保留原故事的核心因果。'}
 function prompt(){const s=story.value.trim()||'（請先選擇故事素材）',mode=faith==='忠實改寫'?'不得添加新的關鍵事實、人物關係、動機或結果；資料不足時請明說。':'可補場景、動機與對白，但每一處新增設定都要標為「創作補寫」。',boundary=boundaryPreset!=='無'?`【事實邊界】\n${faith}：${mode}\n換視角時，只能寫該角色親眼看見、合理推知或親身感受的事。\n\n【受眾與目的】\n受眾：${audience}\n希望效果：${goal}\n\n`:'【基本邊界】\n請勿添加故事素材沒有明示的關鍵事實、人物關係、動機或結果。\n\n',selected=[...selectedAxes].map(k=>`「${MODES[k].name}：${options[k]}」`).join('、')||'「不套用額外變法」';return `請用繁體中文擔任嚴謹的故事教練。\n\n【故事素材】\n${s}\n\n【任務】\n${operation()}\n\n${boundary}【靶心人因果鏈】\n目標 → 阻礙 → 行動 → 暫時結果 → 意外 → 新選擇 → 新狀態。\n「意外」必須打破原本預期；「新選擇」必須是主角因此做出的回應。\n\n【請輸出】\n1. 改寫成品（整合${selected}的需求，選擇合適篇幅與結構）。\n2. 保留了什麼：列 2–4 點。\n3. 這一輪套用了什麼：逐項列出各變法造成的改變。\n4. ${faith==='忠實改寫'?'不確定或不能從素材推知的地方。':'新增的創作補寫。'}\n5. 以一句話提醒我：這版最適合在什麼情境使用。\n6. 【本版自我驗收】只驗收這一版，不要重寫。逐項標示「✅符合」或「⚠️待注意」並各用一句話說明：\n   - 因果鏈是否完整：目標、阻礙、行動、意外、新選擇。\n   - 是否確實完成${selected}，且沒有額外亂改。\n   - 已知事實、推測與創作補寫是否清楚區分。\n   - 是否符合設定的受眾與目的。`}
-function update(){preview.textContent=prompt();preview.scrollTop=0;$('#axisNote').textContent=[...selectedAxes].map(k=>MODES[k].note).join('　');$('#video').classList.toggle('show',isVideo());document.querySelectorAll('.ai').forEach(b=>b.classList.toggle('disabled',isVideo()&&b.dataset.ai!=='gemini'));status.textContent=''}
+function update(){preview.textContent=prompt();preview.scrollTop=0;renderMedia();$('#axisNote').textContent=[...selectedAxes].map(k=>MODES[k].note).join('　');$('#video').classList.toggle('show',isVideo());document.querySelectorAll('.ai').forEach(b=>b.classList.toggle('disabled',isVideo()&&b.dataset.ai!=='gemini'));status.textContent=''}
 async function copy(t){try{await navigator.clipboard.writeText(t);return true}catch(e){const x=document.createElement('textarea');x.value=t;document.body.append(x);x.select();const ok=document.execCommand('copy');x.remove();return ok}}
 function openAI(ai){if(!story.value.trim()){status.textContent='請先選擇一個故事素材，再送給 AI。';$('#storySelect').focus();return}if(isVideo()&&ai!=='gemini'){status.textContent='影片請先使用 Gemini 整理成文字骨架，避免其他 AI 自行補寫。';return}copy(prompt()).then(ok=>{const q=encodeURIComponent(prompt());const urls={claude:'https://claude.ai/new?q='+q,gemini:'https://gemini.google.com/app',chatgpt:'https://chatgpt.com/?q='+q,meta:'https://www.meta.ai/?q='+q};window.open(urls[ai],'_blank','noopener');status.textContent=ai==='gemini'?(ok?'已複製指令；到 Gemini 按 Ctrl+V 貼上。':'請展開預覽手動複製指令。'):(ok?'已開啟並複製指令；若沒有自動帶入，直接貼上即可。':'已開啟 AI。')})}
 $('#ais').querySelectorAll('button').forEach(b=>b.onclick=()=>openAI(b.dataset.ai));document.querySelectorAll('.map button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.map button').forEach(x=>x.classList.toggle('now',x===b));document.getElementById(b.dataset.jump).scrollIntoView({behavior:'smooth',block:'start'})});renderModes();renderChoices();update();
