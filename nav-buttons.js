@@ -60,11 +60,12 @@ const timer=setInterval(()=>{
     b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();close.click();setTimeout(()=>b._src.click(),60);});});
   bottom.append(L,R);layer.appendChild(bottom);
   const st2=document.createElement('style');
-  st2.textContent='#fivestorySyncedExternal.withBottom #syncExternalFrame{width:min(100vw,calc((100vh - 132px)*16/9))!important}';
+  st2.textContent='#fivestorySyncedExternal.withBottom #syncExternalFrame{width:min(100vw,calc((100vh - 132px)*16/9))!important}#syncBottomBar button{opacity:.35!important;transition:opacity .2s ease,transform .2s ease!important}#syncBottomBar button:hover,#syncBottomBar button.cur{opacity:1!important}#syncBottomBar button:hover{transform:scale(1.08)!important}';
   document.head.appendChild(st2);
   /* 2026-11-04：所有超連結出去的網頁（說書人、影片資源、練習、YouTube）底下都顯示這排圖示 */
   setInterval(()=>{const on=layer.style.display!=='none';
-    bottom.style.display=on?'flex':'none';layer.classList.toggle('withBottom',on);},400);
+    bottom.style.display=on?'flex':'none';layer.classList.toggle('withBottom',on);
+    if(on){const curUrl=document.getElementById('syncExternalOpen')?.href||'';copies.forEach(b=>{const h=b._src&&b._src.getAttribute('href')||'';b.classList.toggle('cur',Boolean(h&&curUrl&&curUrl.startsWith(h.replace(/#.*$/,''))));});}},400);
   /* 2026-11-04：外部網頁和簡報同一個版面——
      網頁放在和投影片一樣大的範圍（同位置、同大小），拿掉上方黑色列；
      底下八顆圖示和簡報上的圖示同大小、同位置；返回故事鈕縮小，放在右上角。 */

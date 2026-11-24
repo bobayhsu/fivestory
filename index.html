@@ -1452,31 +1452,31 @@ html.fs-idle #stage.course-entry-page a.navPill[href="https://bobayhsu.github.io
 #stage div.navPill[data-jump="formula"]{right:calc(20px + 3*(var(--nb) + 12px))!important;left:auto!important}
 </style>
 <style id="formula-polish-20261124">
-/* 2026-11-24 靶心人公式頁版面優化：
-   1. 底部工具列平常淡化、滑鼠移入亮起
-   2. 在靶心人公式頁隱藏右下重複的靶心圖示
-   3. V 字七步驟加上 1~7 編號圓標
-   4. 強化「轉彎」的暖橘色視覺漸層 */
-#stage.course-entry-page a.navPill[data-sync-video="resources"],
-#stage.course-entry-page a.navPill[href="https://bobayhsu.github.io/practice/"],
-#stage.course-entry-page a.navPill[data-games],
-#stage.course-entry-page a.navPill[data-satir],
-#stage.course-entry-page a.navPill[data-dilemma],
-#stage.course-entry-page a.navPill[data-talk],
-#stage.course-entry-page a.navPill[data-download],
-#stage.course-entry-page #home,
-#stage.course-entry-page #backBtn,
-#stage.course-entry-page #endBtn{opacity:.35!important;transition:opacity .2s ease,transform .2s ease!important}
-#stage.course-entry-page a.navPill[data-sync-video="resources"]:hover,
-#stage.course-entry-page a.navPill[href="https://bobayhsu.github.io/practice/"]:hover,
-#stage.course-entry-page a.navPill[data-games]:hover,
-#stage.course-entry-page a.navPill[data-satir]:hover,
-#stage.course-entry-page a.navPill[data-dilemma]:hover,
-#stage.course-entry-page a.navPill[data-talk]:hover,
-#stage.course-entry-page a.navPill[data-download]:hover,
-#stage.course-entry-page #home:hover,
-#stage.course-entry-page #backBtn:hover,
-#stage.course-entry-page #endBtn:hover{opacity:1!important;transform:scale(1.08)!important}
+/* 2026-11-24 全站底部工具列統一半透明，只有當前頁面對應的 icon 亮起（滑鼠移入亦亮起） */
+#stage a.navPill[data-sync-video="resources"],
+#stage a.navPill[href="https://bobayhsu.github.io/practice/"],
+#stage a.navPill[data-games],
+#stage a.navPill[data-satir],
+#stage a.navPill[data-dilemma],
+#stage a.navPill[data-talk],
+#stage a.navPill[data-download],
+#stage div.navPill[data-jump="formula"],
+#stage #home,
+#stage #backBtn,
+#stage #endBtn{opacity:.35!important;transition:opacity .2s ease,transform .2s ease!important}
+#stage a.navPill[data-sync-video="resources"]:hover,
+#stage a.navPill[href="https://bobayhsu.github.io/practice/"]:hover,
+#stage a.navPill[data-games]:hover,
+#stage a.navPill[data-satir]:hover,
+#stage a.navPill[data-dilemma]:hover,
+#stage a.navPill[data-talk]:hover,
+#stage a.navPill[data-download]:hover,
+#stage div.navPill[data-jump="formula"]:hover,
+#stage #home:hover,
+#stage #backBtn:hover,
+#stage #endBtn:hover{opacity:1!important;transform:scale(1.08)!important}
+#stage:has(#cover.active) #home,
+#stage:has(#formula.active) div.navPill[data-jump="formula"]{opacity:1!important}
 #formula .fwrap .hs{overflow:visible!important}
 #formula .fwrap .hs::before{position:absolute;top:-10px;left:-6px;width:44px;height:44px;border-radius:50%;background:#1E1C1A;color:#F5C518;font:900 24px/44px 'Noto Sans TC',Arial,sans-serif;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.28);border:3px solid #F7F5F1;pointer-events:none;z-index:2}
 #formula .fwrap .hs:nth-of-type(1)::before{content:"1"}
