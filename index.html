@@ -1477,6 +1477,21 @@ html.fs-idle #stage.course-entry-page a.navPill[href="https://bobayhsu.github.io
 #stage #endBtn:hover{opacity:1!important;transform:scale(1.08)!important}
 #stage:has(#cover.active) #home,
 #stage:has(#formula.active) div.navPill[data-jump="formula"]{opacity:1!important}
+#stage:has(#endPage.open) #home,
+#stage:has(#endPage.open) div.navPill[data-jump="formula"]{opacity:.35!important}
+#stage:has(#endPage.open) #endBtn{opacity:1!important}
+/* 2026-11-24 底部 7+4 導覽列層級高於末頁（#endPage），讓末頁也能顯示底部導覽且只亮起「末頁」鈕 */
+#stage a.navPill[data-sync-video="resources"],
+#stage a.navPill[href="https://bobayhsu.github.io/practice/"],
+#stage a.navPill[data-games],
+#stage a.navPill[data-satir],
+#stage a.navPill[data-dilemma],
+#stage a.navPill[data-talk],
+#stage a.navPill[data-download],
+#stage div.navPill[data-jump="formula"],
+#stage #home,
+#stage #backBtn,
+#stage #endBtn{z-index:110!important}
 #formula .fwrap .hs{overflow:visible!important}
 #formula .fwrap .hs::before{position:absolute;top:-10px;left:-6px;width:44px;height:44px;border-radius:50%;background:#1E1C1A;color:#F5C518;font:900 24px/44px 'Noto Sans TC',Arial,sans-serif;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.28);border:3px solid #F7F5F1;pointer-events:none;z-index:2}
 #formula .fwrap .hs:nth-of-type(1)::before{content:"1"}
@@ -1490,8 +1505,9 @@ html.fs-idle #stage.course-entry-page a.navPill[href="https://bobayhsu.github.io
 /* 2026-11-24 左上角第 5 顆：一鍵投影 QR Code 按鈕（只在靶心人公式頁顯示） */
 #stage a.navPill[data-qr-btn]{top:18px!important;bottom:auto!important;left:calc(18px + 4*(var(--nb) + 10px))!important;right:auto!important;background:#1E1C1A!important;color:#F5C518!important;z-index:96!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
 #stage.course-entry-page a.navPill[data-qr-btn]{opacity:.92!important;visibility:visible!important;pointer-events:auto!important}
-/* 2026-11-24 末頁（#endPage）、計時頁（#pv）與蓋版頁（.ovPage）層級高於左上角 5 顆 icon，避免透出 */
-#endPage,#pv,.ovPage{z-index:120!important}
+/* 2026-11-24 末頁（#endPage）高於左上角 5 顆（96）但低於底部導覽（110）；計時頁（#pv）與蓋版頁（.ovPage）為 120 */
+#endPage{z-index:100!important}
+#pv,.ovPage{z-index:120!important}
 @media(max-width:700px){#stage a.navPill[data-qr-btn]{top:10px!important}}
 #fsQrModal{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:24px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif}
 #fsQrModal.open{display:flex}
