@@ -1504,7 +1504,9 @@ html.fs-idle #stage.course-entry-page a.navPill[href="https://bobayhsu.github.io
 #formula .fwrap .hs:nth-of-type(6){background:rgba(249,115,22,.16)!important;border:6px solid #EA580C!important;border-radius:50%!important;box-shadow:0 0 24px rgba(234,88,12,.3)!important}
 /* 2026-11-24 左上角第 5 顆：一鍵投影 QR Code 按鈕（只在靶心人公式頁顯示） */
 #stage a.navPill[data-qr-btn]{top:18px!important;bottom:auto!important;left:calc(18px + 4*(var(--nb) + 10px))!important;right:auto!important;background:#1E1C1A!important;color:#F5C518!important;z-index:96!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
-#stage.course-entry-page a.navPill[data-qr-btn]{opacity:.92!important;visibility:visible!important;pointer-events:auto!important}
+#stage.course-entry-page a.navPill[data-qr-btn],
+#stage:has(#types.active) a.navPill[data-qr-btn]{opacity:.92!important;visibility:visible!important;pointer-events:auto!important}
+#stage:has(#types.active):not(.course-entry-page) a.navPill[data-qr-btn]{left:18px!important}
 /* 2026-11-24 末頁（#endPage）高於左上角 5 顆（96）但低於底部導覽（110）；計時頁（#pv）與蓋版頁（.ovPage）為 120 */
 #endPage{z-index:100!important}
 #pv,.ovPage{z-index:120!important}
