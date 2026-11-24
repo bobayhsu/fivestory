@@ -201,6 +201,7 @@ body:not(.is-home) #homeView{display:none}
     <button class="tab" data-u="scene">2. 換場合</button>
     <button class="tab" data-u="compress">3. 七步壓三步</button>
     <button class="tab" data-u="filter2">4. 情境濾鏡</button>
+    <button type="button" class="backAi" id="qrBtn" style="border:0;cursor:pointer;color:#F5C518">QR 掃碼</button>
     <a class="backAi" href="../ai/">← 回 AI 基礎篇</a>
   </nav>
 </header>
@@ -504,6 +505,16 @@ aiBtns.querySelectorAll('.aiBtn').forEach(btn=>{
 const initHash=location.hash.replace('#','');
 if(UNITS[initHash]) openUnit(initHash,false);
 else { renderUnit(); updatePrompt(); showHome(false); }
+(function(){
+  const qb=document.getElementById('qrBtn');if(!qb)return;
+  const m=document.createElement('div');
+  m.style.cssText='display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:24px';
+  m.innerHTML='<div style="background:#fff;border-radius:20px;padding:24px 28px;text-align:center;max-width:440px;width:100%;position:relative"><button type="button" id="qrX" style="position:absolute;top:12px;right:14px;border:0;background:#F2EFEA;width:36px;height:36px;border-radius:50%;font-size:22px;font-weight:900;cursor:pointer">×</button><h3 style="font-size:22px;font-weight:900;margin-bottom:14px">掃碼開啟 AI2 進階實戰</h3><img id="qrI" style="width:300px;height:300px;max-width:72vw;max-height:72vw;border:3px solid #1E1C1A;border-radius:12px" alt="QR Code"><p id="qrU" style="margin-top:10px;font-size:13px;color:#6B635B;word-break:break-all;font-weight:700"></p></div>';
+  document.body.appendChild(m);
+  qb.onclick=()=>{const u='https://bobayhsu.github.io/fivestory/ai2/';m.querySelector('#qrI').src='https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=12&data='+encodeURIComponent(u);m.querySelector('#qrU').textContent=u;m.style.display='flex';};
+  m.querySelector('#qrX').onclick=()=>{m.style.display='none';};
+  m.onclick=(e)=>{if(e.target===m)m.style.display='none';};
+})();
 </script>
 </body>
 </html>

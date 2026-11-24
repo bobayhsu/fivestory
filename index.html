@@ -1488,5 +1488,45 @@ html.fs-idle #stage.course-entry-page a.navPill[href="https://bobayhsu.github.io
 #formula .fwrap .hs:nth-of-type(6)::before{content:"6";background:#EA580C;color:#fff}
 #formula .fwrap .hs:nth-of-type(7)::before{content:"7"}
 #formula .fwrap .hs:nth-of-type(6){background:rgba(249,115,22,.16)!important;border:6px solid #EA580C!important;border-radius:50%!important;box-shadow:0 0 24px rgba(234,88,12,.3)!important}
+/* 2026-11-24 左上角第 5 顆：一鍵投影 QR Code 按鈕（只在靶心人公式頁顯示） */
+#stage a.navPill[data-qr-btn]{top:18px!important;bottom:auto!important;left:calc(18px + 4*(var(--nb) + 10px))!important;right:auto!important;background:#1E1C1A!important;color:#F5C518!important;z-index:96!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#stage.course-entry-page a.navPill[data-qr-btn]{opacity:.92!important;visibility:visible!important;pointer-events:auto!important}
+@media(max-width:700px){#stage a.navPill[data-qr-btn]{top:10px!important}}
+#fsQrModal{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:24px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif}
+#fsQrModal.open{display:flex}
+#fsQrCard{background:#fff;color:#1E1C1A;border-radius:24px;padding:28px 32px;max-width:520px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.45);position:relative}
+#fsQrClose{position:absolute;top:14px;right:16px;border:0;background:#F2EFEA;color:#1E1C1A;width:40px;height:40px;border-radius:50%;font-size:24px;font-weight:900;cursor:pointer}
+#fsQrTabs{display:flex;gap:8px;justify-content:center;margin:8px 0 18px;flex-wrap:wrap}
+#fsQrTabs button{border:2px solid #DDD6CC;background:#FBF9F6;color:#1E1C1A;font:800 16px 'Noto Sans TC',sans-serif;padding:8px 16px;border-radius:999px;cursor:pointer}
+#fsQrTabs button.on{background:#C41F27;border-color:#C41F27;color:#fff}
+#fsQrImg{width:340px;height:340px;max-width:75vw;max-height:75vw;border-radius:14px;border:3px solid #1E1C1A;display:block;margin:0 auto 14px;background:#fff}
+#fsQrUrl{font-size:14px;color:#6B635B;word-break:break-all;font-weight:700}
 </style>
+<script id="top-entry-newtab-qr-20261124">
+(function(){
+  /* 1. 左上角四顆（說書人、五大類、AI、AI2）統一另開新分頁 */
+  var sels=['#stage a.navPill[href="https://bobayhsu.github.io/bullseye/"]','#stage a.navPill[data-course-types-entry]','#stage a.navPill[data-ai]','#stage a.navPill[data-ai2]'];
+  sels.forEach(function(s){
+    var el=document.querySelector(s);if(!el)return;
+    el.setAttribute('target','_blank');el.setAttribute('rel','noopener');
+    el.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();window.open(el.href,'_blank','noopener');},true);
+  });
+  /* 2. 左上角第 5 顆：一鍵顯示大張 QR Code（可切換 AI / AI2 / 本頁） */
+  var stage=document.getElementById('stage');if(!stage)return;
+  var btn=document.createElement('a');
+  btn.className='navPill';btn.href='#qr';btn.dataset.qrBtn='1';btn.title='顯示學員掃碼 QR Code';btn.setAttribute('aria-label','顯示學員掃碼 QR Code');
+  btn.innerHTML='<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h7M20 19v2"/></svg>';
+  stage.appendChild(btn);
+  var modal=document.createElement('div');modal.id='fsQrModal';
+  modal.innerHTML='<div id="fsQrCard"><button type="button" id="fsQrClose" aria-label="關閉">×</button><h3 style="font-size:26px;font-weight:900;margin-bottom:6px">掃碼進入實作</h3><div id="fsQrTabs"><button type="button" class="on" data-url="https://bobayhsu.github.io/fivestory/ai/">AI 基礎篇</button><button type="button" data-url="https://bobayhsu.github.io/fivestory/ai2/">AI2 進階操作台</button><button type="button" data-url="https://bobayhsu.github.io/fivestory/">故事課首頁</button></div><img id="fsQrImg" alt="QR Code"><p id="fsQrUrl"></p></div>';
+  document.body.appendChild(modal);
+  var img=modal.querySelector('#fsQrImg'),urlP=modal.querySelector('#fsQrUrl'),tabs=modal.querySelectorAll('#fsQrTabs button');
+  function setQr(u){img.src='https://api.qrserver.com/v1/create-qr-code/?size=420x420&margin=12&data='+encodeURIComponent(u);urlP.textContent=u;}
+  tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(x){x.classList.remove('on');});t.classList.add('on');setQr(t.dataset.url);});});
+  btn.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();setQr(modal.querySelector('#fsQrTabs button.on').dataset.url);modal.classList.add('open');},true);
+  modal.querySelector('#fsQrClose').addEventListener('click',function(){modal.classList.remove('open');});
+  modal.addEventListener('click',function(e){if(e.target===modal)modal.classList.remove('open');});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')modal.classList.remove('open');});
+})();
+</script>
 </body></html>
