@@ -1503,6 +1503,15 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 .bsPan .mic button{background:#EAF1F8;border-color:#B9CCE0;color:#1F3A5A}
 .bsPan .mic button:hover{border-color:#C41F27;color:#C41F27}
 .bsPan .mic button.on{background:#FDF1F0;border-color:#C41F27;color:#C41F27}
+/* 所有影片以縮圖牆完整顯示；點任一張縮圖，即帶入右欄播放器。 */
+.bsPan .mic .bsColL{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+.bsPan .mic button{position:relative;display:block!important;min-height:122px;padding:0!important;overflow:hidden;white-space:normal!important;background:#171717!important;border-color:#3D3935!important;color:#FFFFFF!important}
+.bsPan .mic button img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#2B2926}
+.bsPan .mic button .vName{display:block;padding:7px 9px 8px;font-size:16px;line-height:1.25;font-weight:900;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bsPan .mic button::before{content:'▶';position:absolute;left:8px;top:8px;z-index:1;display:grid;place-items:center;width:28px;height:28px;border-radius:999px;background:#C41F27;color:#FFFFFF;font-size:15px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+.bsPan .mic button::after{position:absolute;right:7px;top:7px;background:rgba(0,0,0,.72)!important;color:#FFFFFF!important}
+.bsPan .mic button:hover,.bsPan .mic button.on{border-color:#E2363D!important;color:#FFFFFF!important}
+.bsPan .mic button.on{box-shadow:0 0 0 3px #E2363D!important}
 /* 2026-11-23 選故事大面板：文字改 2 欄並排、左右高度對齊＋防超出螢幕；影片模式強化 Gemini 按鈕焦點 */
 .bsSel .bsPan{grid-template-columns:3fr 2fr;width:1280px;max-height:760px;overflow-y:auto}
 .bsPan .bsCol:not(.mic) .bsColL{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}
@@ -2070,9 +2079,10 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
   var drop=wrap.querySelector('.bsDrop');
   /* 2026-11-17 點選單改開大面板：影片｜微電影｜文字 三欄並排（原本的 select 保留，負責顯示與同步） */
   var nm=function(c){return c.textContent.replace(/^[▶文]/,'').trim();};
-  var col=function(t,list,cls){return '<div class="bsCol '+(cls||'')+'"><div class="bsColH">'+t+'</div><div class="bsColL">'+list.map(function(c){return '<button type="button"'+(c.classList.contains('bsM')?' class="m"':'')+' data-v="'+c.dataset.bs+'">'+nm(c)+'</button>';}).join('')+'</div></div>';};
+  var thumb=function(c){var f=(window.__bsFilms||[])[+c.dataset.bs],id=f&&((f[1].match(/[?&]v=([\w-]{11})/)||[])[1]);return '<button type="button" data-v="'+c.dataset.bs+'">'+(id?'<img src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg" alt="" loading="lazy">':'')+'<span class="vName">'+nm(c)+'</span></button>';};
+  var col=function(t,list,cls){var body=cls==='mic'?list.map(thumb).join(''):list.map(function(c){return '<button type="button"'+(c.classList.contains('bsM')?' class="m"':'')+' data-v="'+c.dataset.bs+'">'+nm(c)+'</button>';}).join('');return '<div class="bsCol '+(cls||'')+'"><div class="bsColH">'+t+'</div><div class="bsColL">'+body+'</div></div>';};
   var pan=document.createElement('div');pan.className='bsPan';pan.setAttribute('role','dialog');pan.setAttribute('aria-label','選一個練習故事');
-  pan.innerHTML=col('影片<small>（請用 Gemini）</small>',vid,'mic')+col('文字',txt);
+  pan.innerHTML=col('影片素材庫<small>（'+vid.length+' 部，點縮圖可播放）</small>',vid,'mic')+col('文字',txt);
   wrap.appendChild(pan);
   function panOpen(){pan.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.v===drop.value);});wrap.classList.add('panOn');}
   function panClose(){wrap.classList.remove('panOn');}
