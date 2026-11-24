@@ -47,7 +47,7 @@ const timer=setInterval(()=>{
   const group=()=>{const g=document.createElement('div');g.style.cssText='display:flex;gap:12px;align-items:center';return g;};
   const L=group(),R=group();
   /* 2026-11-04：遊戲已搬到獨立的 games 專案，「遊戲」圖示和其他藍色圖示一樣，由 sync.js 開在同步視窗裡。 */
-  ['a.navPill[data-sync-video=resources]','a.navPill[href="https://bobayhsu.github.io/bullseye/"]','a.navPill[data-course-types-entry]','a.navPill[href="https://bobayhsu.github.io/practice/"]','a.navPill[data-games]','a.navPill[data-satir]','a.navPill[data-dilemma]','a.navPill[data-talk]','a.navPill[data-ai]','a.navPill[data-ai2]','a.navPill[data-download]'].forEach(sel=>{const b=mk(sel,sel==='a.navPill[data-ai]'?'#D2262E':sel==='a.navPill[data-ai2]'?'#078B87':'#1F5FA8');if(!b)return;L.appendChild(b); /* AI 加值紅底；AI2 故事變形操作台青綠底。 */
+  ['a.navPill[data-sync-video=resources]','a.navPill[href="https://bobayhsu.github.io/practice/"]','a.navPill[data-games]','a.navPill[data-satir]','a.navPill[data-dilemma]','a.navPill[data-talk]','a.navPill[data-download]'].forEach(sel=>{const b=mk(sel,'#1F5FA8');if(!b)return;L.appendChild(b); /* 2026-11-24 左上角四顆只在靶心人公式頁顯示，同步視窗不顯示 */
     b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();
       const h=b._src.getAttribute('href');
       if(sel==='a.navPill[href="https://bobayhsu.github.io/bullseye/"]'||sel==='a.navPill[data-course-types-entry]'||sel==='a.navPill[data-ai]'||sel==='a.navPill[data-ai2]'){window.open(h,'_blank','noopener');return;}

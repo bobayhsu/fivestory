@@ -1,5 +1,6 @@
 /* FiveStory 共用底部導覽：每一頁都使用同一組 8＋7 圖示。 */
 (()=>{'use strict';
+  if(window.self!==window.top)return; /* 在同步視窗 iframe 內時，由外層 nav-buttons.js 統一提供底部列，避免雙層重疊 */
   const svg={talk:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>',ai2:'<svg viewBox="0 0 24 24" fill="currentColor"><text x="12" y="18.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="900">AI2</text></svg>'};
   const link=(cls,href,title,icon)=>{const a=document.createElement('a');a.className='fb '+cls;a.href=href;a.title=title;a.setAttribute('aria-label',title);a.innerHTML=icon;return a};
   const addToExisting=bar=>{const groups=bar.querySelectorAll(':scope > .g');if(groups.length<2)return false;const [left,right]=groups;if(!left.querySelector('[aria-label="演講：捕蟲人"]')){const talk=link('blue','https://bobayhsu.github.io/fivestory/talk/','演講：捕蟲人',svg.talk),download=left.querySelector('[aria-label="下載課程資料"]');(download?download.before(talk):left.append(talk));}if(!right.querySelector('[aria-label="AI2 故事變形操作台"]'))right.append(link('teal','https://bobayhsu.github.io/fivestory/ai2/','AI2 故事變形操作台',svg.ai2));return true};
