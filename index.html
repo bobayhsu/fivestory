@@ -1064,6 +1064,7 @@ addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeo
 function steps(i){return [...slides[i].querySelectorAll('.step')];}
 function show(i,revealAll){
   slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  stage.classList.toggle('course-entry-page',slides[i].id==='formula');
   steps(i).forEach(e=>e.classList.toggle('shown',!!revealAll));
   cur=i;
   document.getElementById('num').textContent=(i+1)+' / '+slides.length;
@@ -1426,20 +1427,16 @@ body.scrolled .toTop{opacity:1;pointer-events:auto;transform:none}
 <script>/* 2026-11-23：AI4 獨立入口，放在 AI3 旁邊 */(function(){var a3=document.querySelector('a.navPill[data-ai3]')||document.querySelector('a.navPill[data-ai2]');if(!a3||document.querySelector('a.navPill[data-ai4]'))return;var a=document.createElement('a');a.className='navPill';a.href='https://bobayhsu.github.io/fivestory/ai4/';a.dataset.ai4='1';a.target='_blank';a.rel='noopener';a.style.cssText='text-decoration:none';a.title='AI4 故事變形操作台';a.setAttribute('aria-label','AI4 故事變形操作台');a.innerHTML='<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><text x="12" y="18.2" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14.5" font-weight="900" fill="currentColor" stroke="none">AI4</text></svg>';a3.insertAdjacentElement('afterend',a);})();</script>
 <style id="ai-two-only-20261124">/* 只保留 AI 基礎與新的 AI2 操作台。 */#stage a.navPill[data-ai3],#stage a.navPill[data-ai4]{display:none!important}#stage a.navPill[data-ai2]{right:20px!important;left:auto!important;background:#078B87!important;color:#fff!important}#stage a.navPill[data-ai]{right:calc(20px + 1*(var(--nb) + 12px))!important;left:auto!important}#stage #home{right:calc(20px + 2*(var(--nb) + 12px))!important;left:auto!important}#stage #backBtn{right:calc(20px + 3*(var(--nb) + 12px))!important;left:auto!important}#stage #endBtn{right:calc(20px + 4*(var(--nb) + 12px))!important;left:auto!important}#stage div.navPill[data-jump=types]{right:calc(20px + 5*(var(--nb) + 12px))!important;left:auto!important}#stage div.navPill[data-jump=formula]{right:calc(20px + 6*(var(--nb) + 12px))!important;left:auto!important}</style>
 <script>/* 將原 AI2 入口換成故事變形操作台；AI3／AI4 僅保留舊網址轉址。 */(function(){var a=document.querySelector('a.navPill[data-ai2]');if(!a)return;a.href='https://bobayhsu.github.io/fivestory/ai2/';a.target='_blank';a.rel='noopener';a.title='AI2 故事變形操作台';a.setAttribute('aria-label','AI2 故事變形操作台');a.innerHTML='<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><text x="12" y="18.2" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14.5" font-weight="900" fill="currentColor" stroke="none">AI2</text></svg>';})();</script>
-<style id="top-course-entry-icons">/* 首頁左上：說書人、五大類、AI、AI2 四個入口常駐，與右上角的四個內容圖示分開。 */
-#stage a.navPill[href="https://bobayhsu.github.io/bullseye/"],
-#stage div.navPill[data-jump="types"],
-#stage a.navPill[data-ai],
-#stage a.navPill[data-ai2]{top:18px!important;bottom:auto!important;z-index:96!important}
+<script id="course-types-new-window">/* 五大類入口改為真正的新分頁連結。 */(function(){var old=document.querySelector('#stage div.navPill[data-jump="types"]');if(!old)return;var link=document.createElement('a');link.className=old.className;link.href='https://bobayhsu.github.io/fivestory/#3';link.target='_blank';link.rel='noopener';link.dataset.courseTypesEntry='1';link.style.cssText='text-decoration:none';link.title='五大類故事（另開新分頁）';link.setAttribute('aria-label','五大類故事');link.innerHTML=old.innerHTML;link.addEventListener('click',function(e){e.stopPropagation();});old.replaceWith(link);})();</script>
+<style id="top-course-entry-icons">/* 只在靶心人公式頁顯示四個新分頁入口。 */
+#stage a.navPill[href="https://bobayhsu.github.io/bullseye/"],#stage a.navPill[data-course-types-entry],#stage a.navPill[data-ai],#stage a.navPill[data-ai2]{top:18px!important;bottom:auto!important;z-index:96!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#stage.course-entry-page a.navPill[href="https://bobayhsu.github.io/bullseye/"],#stage.course-entry-page a.navPill[data-course-types-entry],#stage.course-entry-page a.navPill[data-ai],#stage.course-entry-page a.navPill[data-ai2]{opacity:.88!important;visibility:visible!important;pointer-events:auto!important}
 #stage a.navPill[href="https://bobayhsu.github.io/bullseye/"]{left:18px!important;right:auto!important}
-#stage div.navPill[data-jump="types"]{left:calc(18px + 1*(var(--nb) + 10px))!important;right:auto!important}
+#stage a.navPill[data-course-types-entry]{left:calc(18px + 1*(var(--nb) + 10px))!important;right:auto!important}
 #stage a.navPill[data-ai]{left:calc(18px + 2*(var(--nb) + 10px))!important;right:auto!important}
 #stage a.navPill[data-ai2]{left:calc(18px + 3*(var(--nb) + 10px))!important;right:auto!important}
-html.fs-idle #stage a.navPill[href="https://bobayhsu.github.io/bullseye/"],
-html.fs-idle #stage div.navPill[data-jump="types"],
-html.fs-idle #stage a.navPill[data-ai],
-html.fs-idle #stage a.navPill[data-ai2]{opacity:.88!important;visibility:visible!important}
-@media(max-width:700px){#stage a.navPill[href="https://bobayhsu.github.io/bullseye/"],#stage div.navPill[data-jump="types"],#stage a.navPill[data-ai],#stage a.navPill[data-ai2]{top:10px!important}}
+html.fs-idle #stage.course-entry-page a.navPill[href="https://bobayhsu.github.io/bullseye/"],html.fs-idle #stage.course-entry-page a.navPill[data-course-types-entry],html.fs-idle #stage.course-entry-page a.navPill[data-ai],html.fs-idle #stage.course-entry-page a.navPill[data-ai2]{opacity:.88!important;visibility:visible!important}
+@media(max-width:700px){#stage a.navPill[href="https://bobayhsu.github.io/bullseye/"],#stage a.navPill[data-course-types-entry],#stage a.navPill[data-ai],#stage a.navPill[data-ai2]{top:10px!important}}
 </style>
 <style id="bottom-course-nav-no-gaps">/* 左上入口移走後，底部兩側重新連續排列。 */
 #stage a.navPill[data-sync-video="resources"]{left:calc(20px + 0*(var(--nb) + 12px))!important;right:auto!important}
