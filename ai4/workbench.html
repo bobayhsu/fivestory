@@ -59,7 +59,7 @@ body{padding-bottom:82px}@media (max-width:1080px){main{grid-template-columns:1f
 </style>
 </head>
 <body>
-<header><div class="head"><div class="brand"><span class="badge">AI2</span><span>故事變形操作台</span><small>選故事・組合變法・一次生成即可驗收</small></div><nav class="links"><a href="../ai/">AI 基礎</a><a href="../">回故事課</a></nav></div></header>
+<header><div class="head"><div class="brand"><span class="badge">AI2</span><span>故事變形操作台</span><small>選故事・組合變法・一次生成即可驗收</small></div></div></header>
 <main>
   <section class="card" id="step1"><h2><span class="step">1</span>選擇項目與結果</h2><p class="cap">每一列左邊勾選要變的項目，右邊立即選擇結果。</p><textarea id="story" hidden></textarea><div class="paired-controls"><div class="mode-grid" id="modes"></div><div class="select-group" id="choices"></div></div><div class="video" id="video">這是影片網址：請先用 <b>Gemini</b> 整理成文字骨架，再回來進行變形。其他 AI 未必能讀影片，容易自行補寫。</div><p class="axis-note" id="axisNote"></p></section>
   <aside class="card right" id="step3"><h2><span class="step">3</span>取得一個可用版本</h2><p class="cap">AI2 會附帶保留／改變／新增項目與本版自我驗收；不用再生成第二版。</p><div class="media-preview" id="mediaPreview" hidden></div><pre class="preview" id="preview"></pre><div class="ais" id="ais"><button class="ai claude" data-ai="claude">Claude</button><button class="ai gemini" data-ai="gemini">Gemini</button><button class="ai chatgpt" data-ai="chatgpt">ChatGPT</button><button class="ai meta" data-ai="meta">Meta AI</button></div><div class="status" id="status"></div>
