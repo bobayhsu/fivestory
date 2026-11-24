@@ -1426,16 +1426,19 @@ body.scrolled .toTop{opacity:1;pointer-events:auto;transform:none}
 <script>/* 2026-11-23：AI4 獨立入口，放在 AI3 旁邊 */(function(){var a3=document.querySelector('a.navPill[data-ai3]')||document.querySelector('a.navPill[data-ai2]');if(!a3||document.querySelector('a.navPill[data-ai4]'))return;var a=document.createElement('a');a.className='navPill';a.href='https://bobayhsu.github.io/fivestory/ai4/';a.dataset.ai4='1';a.target='_blank';a.rel='noopener';a.style.cssText='text-decoration:none';a.title='AI4 故事變形操作台';a.setAttribute('aria-label','AI4 故事變形操作台');a.innerHTML='<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><text x="12" y="18.2" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14.5" font-weight="900" fill="currentColor" stroke="none">AI4</text></svg>';a3.insertAdjacentElement('afterend',a);})();</script>
 <style id="ai-two-only-20261124">/* 只保留 AI 基礎與新的 AI2 操作台。 */#stage a.navPill[data-ai3],#stage a.navPill[data-ai4]{display:none!important}#stage a.navPill[data-ai2]{right:20px!important;left:auto!important;background:#078B87!important;color:#fff!important}#stage a.navPill[data-ai]{right:calc(20px + 1*(var(--nb) + 12px))!important;left:auto!important}#stage #home{right:calc(20px + 2*(var(--nb) + 12px))!important;left:auto!important}#stage #backBtn{right:calc(20px + 3*(var(--nb) + 12px))!important;left:auto!important}#stage #endBtn{right:calc(20px + 4*(var(--nb) + 12px))!important;left:auto!important}#stage div.navPill[data-jump=types]{right:calc(20px + 5*(var(--nb) + 12px))!important;left:auto!important}#stage div.navPill[data-jump=formula]{right:calc(20px + 6*(var(--nb) + 12px))!important;left:auto!important}</style>
 <script>/* 將原 AI2 入口換成故事變形操作台；AI3／AI4 僅保留舊網址轉址。 */(function(){var a=document.querySelector('a.navPill[data-ai2]');if(!a)return;a.href='https://bobayhsu.github.io/fivestory/ai2/';a.target='_blank';a.rel='noopener';a.title='AI2 故事變形操作台';a.setAttribute('aria-label','AI2 故事變形操作台');a.innerHTML='<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><text x="12" y="18.2" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14.5" font-weight="900" fill="currentColor" stroke="none">AI2</text></svg>';})();</script>
-<style id="top-course-entry-icons">/* 首頁左上：說書人、AI、AI2 三個入口常駐，與右上角的四個內容圖示分開。 */
+<style id="top-course-entry-icons">/* 首頁左上：說書人、五大類、AI、AI2 四個入口常駐，與右上角的四個內容圖示分開。 */
 #stage a.navPill[href="https://bobayhsu.github.io/bullseye/"],
+#stage div.navPill[data-jump="types"],
 #stage a.navPill[data-ai],
 #stage a.navPill[data-ai2]{top:18px!important;bottom:auto!important;z-index:96!important}
 #stage a.navPill[href="https://bobayhsu.github.io/bullseye/"]{left:18px!important;right:auto!important}
-#stage a.navPill[data-ai]{left:calc(18px + 1*(var(--nb) + 10px))!important;right:auto!important}
-#stage a.navPill[data-ai2]{left:calc(18px + 2*(var(--nb) + 10px))!important;right:auto!important}
+#stage div.navPill[data-jump="types"]{left:calc(18px + 1*(var(--nb) + 10px))!important;right:auto!important}
+#stage a.navPill[data-ai]{left:calc(18px + 2*(var(--nb) + 10px))!important;right:auto!important}
+#stage a.navPill[data-ai2]{left:calc(18px + 3*(var(--nb) + 10px))!important;right:auto!important}
 html.fs-idle #stage a.navPill[href="https://bobayhsu.github.io/bullseye/"],
+html.fs-idle #stage div.navPill[data-jump="types"],
 html.fs-idle #stage a.navPill[data-ai],
 html.fs-idle #stage a.navPill[data-ai2]{opacity:.88!important;visibility:visible!important}
-@media(max-width:700px){#stage a.navPill[href="https://bobayhsu.github.io/bullseye/"],#stage a.navPill[data-ai],#stage a.navPill[data-ai2]{top:10px!important}}
+@media(max-width:700px){#stage a.navPill[href="https://bobayhsu.github.io/bullseye/"],#stage div.navPill[data-jump="types"],#stage a.navPill[data-ai],#stage a.navPill[data-ai2]{top:10px!important}}
 </style>
 </body></html>
