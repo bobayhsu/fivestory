@@ -1544,7 +1544,7 @@ html.fs-idle #stage.course-entry-page a.navPill[href="https://bobayhsu.github.io
   var img=modal.querySelector('#fsQrImg'),urlP=modal.querySelector('#fsQrUrl'),tabs=modal.querySelectorAll('#fsQrTabs button');
   function setQr(u){img.src='https://api.qrserver.com/v1/create-qr-code/?size=420x420&margin=12&data='+encodeURIComponent(u);urlP.textContent=u;}
   tabs.forEach(function(t){t.addEventListener('click',function(e){e.stopPropagation();tabs.forEach(function(x){x.classList.remove('on');});t.classList.add('on');setQr(t.dataset.url);});});
-  btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();setQr(modal.querySelector('#fsQrTabs button.on').dataset.url);modal.classList.add('open');},true);
+  btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();var defUrl=document.querySelector('#types.active')?'https://bobayhsu.github.io/fivestory/#3':modal.querySelector('#fsQrTabs button.on').dataset.url;tabs.forEach(function(x){x.classList.toggle('on',x.dataset.url===defUrl);});setQr(defUrl);modal.classList.add('open');},true);
   modal.querySelector('#fsQrClose').addEventListener('click',function(e){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();modal.classList.remove('open');});
   modal.addEventListener('click',function(e){e.stopPropagation();e.stopImmediatePropagation();if(e.target===modal)modal.classList.remove('open');});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open')){e.preventDefault();e.stopPropagation();modal.classList.remove('open');}},true);
