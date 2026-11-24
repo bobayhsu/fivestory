@@ -1504,21 +1504,23 @@ html.fs-idle #stage.course-entry-page a.navPill[href="https://bobayhsu.github.io
 </style>
 <script id="top-entry-newtab-qr-20261124">
 (function(){
-  /* 1. 左上角四顆（說書人、五大類、AI、AI2）統一另開新分頁 */
-  var sels=['#stage a.navPill[href="https://bobayhsu.github.io/bullseye/"]','#stage a.navPill[data-course-types-entry]','#stage a.navPill[data-ai]','#stage a.navPill[data-ai2]'];
-  sels.forEach(function(s){
-    var el=document.querySelector(s);if(!el)return;
-    el.setAttribute('target','_blank');el.setAttribute('rel','noopener');
-    el.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();window.open(el.href,'_blank','noopener');},true);
-  });
-  /* 2. 左上角第 5 顆：一鍵顯示大張 QR Code（可切換 AI / AI2 / 本頁） */
+  /* 1. 左上角四顆（說書人、五大類、AI、AI2）在 window capture 層攔截，確保任何模式下都一律另開新分頁 */
+  var TOP_SEL='#stage a.navPill[href="https://bobayhsu.github.io/bullseye/"],#stage a.navPill[data-course-types-entry],#stage a.navPill[data-ai],#stage a.navPill[data-ai2]';
+  document.querySelectorAll(TOP_SEL).forEach(function(el){el.setAttribute('target','_blank');el.setAttribute('rel','noopener');});
+  window.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest&&e.target.closest(TOP_SEL);
+    if(!a)return;
+    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+    window.open(a.href,'_blank','noopener');
+  },true);
+  /* 2. 左上角第 5 顆：一鍵顯示大張 QR Code（可切換 說書人 / 五大類 / AI / AI2 四個入口） */
   var stage=document.getElementById('stage');if(!stage)return;
   var btn=document.createElement('a');
   btn.className='navPill';btn.href='#qr';btn.dataset.qrBtn='1';btn.title='顯示學員掃碼 QR Code';btn.setAttribute('aria-label','顯示學員掃碼 QR Code');
   btn.innerHTML='<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h7M20 19v2"/></svg>';
   stage.appendChild(btn);
   var modal=document.createElement('div');modal.id='fsQrModal';
-  modal.innerHTML='<div id="fsQrCard"><button type="button" id="fsQrClose" aria-label="關閉">×</button><h3 style="font-size:26px;font-weight:900;margin-bottom:6px">掃碼進入實作</h3><div id="fsQrTabs"><button type="button" class="on" data-url="https://bobayhsu.github.io/fivestory/ai/">AI 基礎篇</button><button type="button" data-url="https://bobayhsu.github.io/fivestory/ai2/">AI2 進階操作台</button><button type="button" data-url="https://bobayhsu.github.io/fivestory/">故事課首頁</button></div><img id="fsQrImg" alt="QR Code"><p id="fsQrUrl"></p></div>';
+  modal.innerHTML='<div id="fsQrCard"><button type="button" id="fsQrClose" aria-label="關閉">×</button><h3 style="font-size:26px;font-weight:900;margin-bottom:6px">掃碼進入實作</h3><div id="fsQrTabs"><button type="button" class="on" data-url="https://bobayhsu.github.io/bullseye/">說書人</button><button type="button" data-url="https://bobayhsu.github.io/fivestory/#3">五大類</button><button type="button" data-url="https://bobayhsu.github.io/fivestory/ai/">AI</button><button type="button" data-url="https://bobayhsu.github.io/fivestory/ai2/">AI2</button></div><img id="fsQrImg" alt="QR Code"><p id="fsQrUrl"></p></div>';
   document.body.appendChild(modal);
   var img=modal.querySelector('#fsQrImg'),urlP=modal.querySelector('#fsQrUrl'),tabs=modal.querySelectorAll('#fsQrTabs button');
   function setQr(u){img.src='https://api.qrserver.com/v1/create-qr-code/?size=420x420&margin=12&data='+encodeURIComponent(u);urlP.textContent=u;}
