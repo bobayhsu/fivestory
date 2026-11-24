@@ -1223,6 +1223,16 @@ body.reader #fsbar .fb{width:min(9.6vw,48px);height:min(9.6vw,48px)}
 #aiRun .arMiniPlay{display:none}
 #aiRun.v2.inPanel.yt .arMiniPlay{display:inline-flex;order:2;align-items:center;justify-content:center;flex:none;font:900 17px/1 'Noto Sans TC',Arial,sans-serif;color:#FFFFFF;background:#C41F27;border:1px solid #C41F27;border-radius:999px;padding:7px 13px;cursor:pointer;white-space:nowrap}
 #aiRun.v2.inPanel.yt .arMiniPlay:hover{background:#A3161D;border-color:#A3161D}
+#aiRun .arVideoPreview{display:none}
+#aiRun.v2.inPanel.yt .arVideoPreview{display:block;order:2;flex:0 0 auto;overflow:hidden;margin:0;border:2px solid #C41F27;border-radius:12px;background:#111}
+#aiRun.v2.inPanel .arVideoPreview .arVideoLabel{padding:7px 12px;background:#1E1C1A;color:#FFFFFF;font:900 15px/1.2 'Noto Sans TC',Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#aiRun.v2.inPanel .arVideoPreview iframe{display:block;width:100%;height:clamp(150px,28vh,260px);border:0;background:#000}
+#aiRun.v2.inPanel.yt .arMini{order:3!important;margin-top:8px!important}
+#aiRun.v2.inPanel.yt #arOwn{order:4!important;flex:0 0 86px!important;height:86px!important;min-height:86px!important}
+#aiRun.v2.inPanel.yt .arStepH.s3{order:5!important}
+#aiRun.v2.inPanel.yt .arYT{order:6!important}
+#aiRun.v2.inPanel.yt .arMsg{order:7!important}
+#aiRun.v2.inPanel.yt .arBtns{order:8!important}
 #aiRun.v2.inPanel .arEditorWrap{display:none!important}
 #aiRun.v2.inPanel.pedit .arEditorWrap{display:block!important;flex:1;min-height:0}
 #aiRun.v2.inPanel.pedit #arOwn,#aiRun.v2.inPanel.pedit .arStepH:not(.s3){display:none}
@@ -1743,8 +1753,9 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  var v2own=document.createElement('textarea');v2own.id='arOwn';v2own.placeholder='在這裡打字，或貼上故事、YouTube 影片網址……（也可以從上面選練習故事）';
  var v2h2=document.createElement('p');v2h2.className='arStepH';v2h2.textContent='② 你的故事';
  var v2mini=document.createElement('div');v2mini.className='arMini';v2mini.innerHTML='<span class="arMiniL">給 AI 的指令</span><span class="arMiniT"></span><button type="button" class="arMiniPlay" data-act="playstory">▶ 播放影片</button><button type="button" class="arMiniE" data-act="editp">修改指令</button>';
+ var v2video=document.createElement('div');v2video.className='arVideoPreview';
  var v2h3=document.createElement('p');v2h3.className='arStepH s3';v2h3.textContent='③ 選一個 AI 執行';
- (function(){var w=$('.arEditorWrap'),bt=$('.arBtns');w.parentNode.insertBefore(v2h2,w);w.parentNode.insertBefore(v2own,w);w.parentNode.insertBefore(v2mini,w);bt.parentNode.insertBefore(v2h3,bt);})();
+ (function(){var w=$('.arEditorWrap'),bt=$('.arBtns');w.parentNode.insertBefore(v2h2,w);w.parentNode.insertBefore(v2own,w);w.parentNode.insertBefore(v2mini,w);w.parentNode.insertBefore(v2video,w);bt.parentNode.insertBefore(v2h3,bt);})();
  function v2on(){return box.classList.contains('v2');}
  function v2mini_(){var t=$('.arMiniT');if(!t)return;var full=ta.value,st=v2own.value.trim();var p=st&&full.lastIndexOf(st)>0?full.slice(0,full.lastIndexOf(st)):full;p=p.replace(/\s+/g,' ').trim();var terms=[];if(cur==='ai-filter'&&window.__aiPlot)terms.push(window.__aiPlot.name);if(cur==='ai-order'&&window.__aiOrd){terms.push(window.__aiOrd.name);terms.push(window.__aiOrd.n);}if(cur==='ai-bullseye')terms.push('靶心人');if(cur==='ai-curve')terms.push('心結人');if(window.__bsStory!=null&&window.__bsFilms&&window.__bsFilms[window.__bsStory])terms.push(window.__bsFilms[window.__bsStory][0]);terms=terms.filter(Boolean).sort(function(a,b){return b.length-a.length;});var esc=function(x){return x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};if(!terms.length){t.textContent=p;return;}var re=new RegExp('('+terms.map(function(x){return x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}).join('|')+')','gi');t.innerHTML=p.split(re).map(function(seg,i){return i%2?'<b class="arHl">'+esc(seg)+'</b>':esc(seg);}).join('');}
  v2own.addEventListener('input',function(){ta.value=compose(v2own.value);ytUI();paintPrompt();v2mini_();ta.dispatchEvent(new Event('input'));});
@@ -1788,13 +1799,15 @@ var b=document.getElementById('fsBack');if(b)b.onclick=function(){history.length
  ta.value=story;
  var YT=/(https?:\/\/)?(www\.|m\.)?(youtube\.com\/(watch\?|shorts\/|live\/)|youtu\.be\/)\S+/i;
  function isYT(){return YT.test(ta.value.trim());}
+ function youtubeId(url){var u,host='';try{u=new URL(url);host=u.hostname.toLowerCase();if(host==='youtu.be'||host==='www.youtu.be')return u.pathname.split('/')[1]||'';if(host==='youtube.com'||host==='www.youtube.com'||host==='m.youtube.com'||host==='youtube-nocookie.com'||host==='www.youtube-nocookie.com')return u.pathname==='/watch'?(u.searchParams.get('v')||''):(u.pathname.match(/^\/(?:shorts|live|embed)\/([\w-]+)/)||[])[1]||'';}catch(_){}return '';}
+ function renderPromptVideo(){var source=(v2on()?v2own.value:editorStory()).trim(),url=(source.match(/https?:\/\/[^\s<]+/i)||[])[0]||source,id=youtubeId(url);if(!v2on()||!isYT()||!/^[\w-]{11}$/.test(id)){v2video.innerHTML='';return;}var f=window.__bsStory!=null&&FILMS[window.__bsStory],name=f?f[0]:'目前影片';v2video.innerHTML='<div class="arVideoLabel">▶ 影片預覽｜《'+escapeHtml(name)+'》</div><iframe src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&playsinline=1" title="播放《'+escapeHtml(name)+'》" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';}
  function full(){return ta.value.trim();}
  function editorStory(){var nm=FILMS.map(function(f){return f[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}).join('|');var m=ta.value.match(new RegExp('\\n\\n(?:我的故事|'+nm+'|Giving|Violinist|Snake|Woodpecker|Christmas|Puzzle|Star|Titus|Fish|Leave me|【我的故事】|【《[^】]+》】)\\n'));return m?ta.value.slice(m.index+m[0].length):'';}
  function compose(storyText){var t=TASKS[cur];if(!t)return '';refreshSel();var yt=YT.test(storyText);
   var pre=yt?'我給你的是一支 YouTube 影片網址。請先看這支影片（畫面、聲音或字幕），把影片裡的故事用靶心人七步（目標、阻礙、努力、結果、意外、轉彎、結局）整理出來，再做下面的任務。\n如果你看不到影片內容，請直接告訴我「我看不到這支影片」，不要根據標題、說明欄或網址猜測內容。\n\n':'';
   return '請用繁體中文回答。\n'+pre+t.p(opt[cur]||(t.opts&&t.opts[0])||'',storyText||'');}
  function setStory(storyText){ta.value=compose(storyText||'');ytUI();paintPrompt();if(typeof v2own!=='undefined')v2own.value=storyText||'';if(typeof v2mini_==='function')v2mini_();}
- function ytUI(){var yt=isYT();box.classList.toggle('yt',yt);}
+ function ytUI(){var yt=isYT();box.classList.toggle('yt',yt);renderPromptVideo();}
  function refreshSel(){if(document.body.classList.contains('reader'))return;var t=TASKS[cur];if(!t)return;
   if(cur==='ai-filter'&&window.__aiPlot){opt[cur]=window.__aiPlot.name;}
   if(cur==='ai-order'&&window.__aiOrd){opt[cur]=window.__aiOrd.name+' '+window.__aiOrd.n;}}
