@@ -40,13 +40,28 @@ body{padding-bottom:82px}@media (max-width:1080px){main{grid-template-columns:1f
 @media (min-width:1081px){main{grid-template-columns:minmax(270px,.78fr) minmax(650px,2.25fr);grid-template-rows:auto auto;gap:0 12px;padding-top:14px}#step1{grid-column:1;grid-row:1;border-radius:9px 9px 0 0;padding:15px 14px 10px}#step2{grid-column:1;grid-row:2;border-radius:0 0 9px 9px;border-top:1px solid #4a443d;padding:11px 14px 15px}#step3{grid-column:2;grid-row:1 / span 2;align-self:stretch;min-height:560px;padding:14px 16px}.mode-grid,.select-group{grid-template-rows:repeat(6,48px);gap:6px}.mode-card{min-height:48px;padding:7px 8px;font-size:12px}.mode-card:has(input:checked){padding:6px 7px}.mode-card b{font-size:13px}.mode-card small{font-size:11px}.choice-row .select-control{height:38px}.select-control{padding:7px 36px 7px 10px;font-size:12px;background-position:right 12px center}.card h2{font-size:16px}.cap{font-size:11px;margin-bottom:9px}.step{width:22px;height:22px;font-size:12px}.axis-note{display:none}#step3 .media-preview{margin:4px 0 8px}#step3 .media-preview .media-label{padding:6px 9px;font-size:12px}#step3 .media-preview iframe{height:min(260px,37vh);aspect-ratio:auto}#step3:has(.media-preview:not([hidden])) .preview{max-height:126px;min-height:84px;margin-top:6px;font-size:12px}#step3 .preview{max-height:390px}.ais{margin-top:8px}.status{margin-top:6px}}
 @media (min-width:1081px){main{grid-template-rows:minmax(610px,auto)}#step1{grid-row:1;min-height:610px;border-radius:9px;padding:12px 14px}#step2{grid-row:1;align-self:end;background:transparent;border:0;box-shadow:none;border-radius:0;padding:10px 14px 14px}#step2 .cap{display:none}.mode-grid{grid-template-rows:repeat(6,42px);gap:5px}.select-group{grid-template-rows:repeat(6,34px);gap:4px}.mode-card{min-height:42px;padding:5px 7px}.mode-card:has(input:checked){padding:4px 6px}.mode-card small{font-size:10px}.choice-row .select-control{height:34px}.select-control{font-size:11px;padding-top:5px;padding-bottom:5px}#step3{grid-row:1;min-height:610px}}
 </style>
+<style>
+/* 六組控制一列一對：左邊勾選項目，右邊直接選結果。 */
+#step1 .paired-controls{display:grid;grid-template-columns:minmax(122px,.92fr) minmax(142px,1.08fr);grid-template-rows:repeat(6,48px);gap:7px 8px;align-items:stretch}
+#step1 .paired-controls .mode-grid,#step1 .paired-controls .select-group{display:contents}
+#step1 .paired-controls .mode-card,#step1 .paired-controls .choice-row{min-width:0;margin:0}
+#step1 .paired-controls .mode-card{grid-column:1;min-height:48px;padding:7px 8px}
+#step1 .paired-controls .choice-row{grid-column:2;display:flex;align-items:center}
+#step1 .paired-controls .choice-row .select-control{height:40px;font-size:12px;padding-left:9px;padding-right:30px;background-position:right 10px center}
+#step1 .paired-controls .mode-card:nth-child(1),#step1 .paired-controls .choice-row:nth-child(1){grid-row:1}
+#step1 .paired-controls .mode-card:nth-child(2),#step1 .paired-controls .choice-row:nth-child(2){grid-row:2}
+#step1 .paired-controls .mode-card:nth-child(3),#step1 .paired-controls .choice-row:nth-child(3){grid-row:3}
+#step1 .paired-controls .mode-card:nth-child(4),#step1 .paired-controls .choice-row:nth-child(4){grid-row:4}
+#step1 .paired-controls .mode-card:nth-child(5),#step1 .paired-controls .choice-row:nth-child(5){grid-row:5}
+#step1 .paired-controls .mode-card:nth-child(6),#step1 .paired-controls .choice-row:nth-child(6){grid-row:6}
+@media (min-width:1081px){main{grid-template-rows:minmax(500px,auto)}#step1{grid-row:1;min-height:500px;align-self:stretch}#step3{grid-row:1;min-height:500px}#step2{display:none}}
+@media (max-width:420px){#step1 .paired-controls{grid-template-columns:minmax(112px,.9fr) minmax(126px,1.1fr);gap:6px}#step1 .paired-controls .mode-card b{font-size:12px}#step1 .paired-controls .mode-card small{font-size:9px}#step1 .paired-controls .choice-row .select-control{font-size:11px}}
+</style>
 </head>
 <body>
 <header><div class="head"><div class="brand"><span class="badge">AI2</span><span>故事變形操作台</span><small>選故事・組合變法・一次生成即可驗收</small></div><nav class="links"><a href="../ai/">AI 基礎</a><a href="../">回故事課</a></nav></div></header>
 <main>
-  <section class="card" id="step1"><h2><span class="step">1</span>選擇項目</h2><p class="cap">故事必選；其餘選項可以複選。</p><div class="mode-grid" id="modes"></div></section>
-  <section class="card" id="step2"><h2><span class="step">2</span>選擇結果</h2><p class="cap">設定各項結果後，右欄會立即更新完整指令。</p><textarea id="story" hidden></textarea><div class="select-group" id="choices"></div><div class="video" id="video">這是影片網址：請先用 <b>Gemini</b> 整理成文字骨架，再回來進行變形。其他 AI 未必能讀影片，容易自行補寫。</div><p class="axis-note" id="axisNote"></p>
-  </section>
+  <section class="card" id="step1"><h2><span class="step">1</span>選擇項目與結果</h2><p class="cap">每一列左邊勾選要變的項目，右邊立即選擇結果。</p><textarea id="story" hidden></textarea><div class="paired-controls"><div class="mode-grid" id="modes"></div><div class="select-group" id="choices"></div></div><div class="video" id="video">這是影片網址：請先用 <b>Gemini</b> 整理成文字骨架，再回來進行變形。其他 AI 未必能讀影片，容易自行補寫。</div><p class="axis-note" id="axisNote"></p></section>
   <aside class="card right" id="step3"><h2><span class="step">3</span>取得一個可用版本</h2><p class="cap">AI2 會附帶保留／改變／新增項目與本版自我驗收；不用再生成第二版。</p><div class="media-preview" id="mediaPreview" hidden></div><pre class="preview" id="preview"></pre><div class="ais" id="ais"><button class="ai claude" data-ai="claude">Claude</button><button class="ai gemini" data-ai="gemini">Gemini</button><button class="ai chatgpt" data-ai="chatgpt">ChatGPT</button><button class="ai meta" data-ai="meta">Meta AI</button></div><div class="status" id="status"></div>
   </aside>
 </main>
