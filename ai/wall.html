@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>班級作品講評牆｜AI 加值的故事課</title>
+  <style>
+    :root {
+      --navy: #0f2942;
+      --cream: #fdf8f0;
+      --gold: #f5c542;
+      --red: #c0392b;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5dfd5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, #0b1f33, #173b5e);
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    header h1 { margin: 0; font-size: 1.3rem; }
+    header h1 span { color: var(--gold); }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: rgba(255,255,255,0.25); }
+    .btn.primary {
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+      font-weight: 700;
+    }
+    .controls {
+      max-width: 1280px;
+      margin: 18px auto 0;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1.5px solid var(--navy);
+      background: #fff;
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .chip.active { background: var(--navy); color: #fff; }
+    .meta-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .meta-bar input {
+      padding: 7px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      width: 180px;
+    }
+    main {
+      max-width: 1280px;
+      margin: 20px auto 60px;
+      padding: 0 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--card);
+      border: 2px solid var(--navy);
+      border-radius: 16px;
+      padding: 18px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(15, 41, 66, 0.12);
+    }
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .author { font-weight: 800; font-size: 1.05rem; color: var(--navy); }
+    .badge {
+      font-size: 0.78rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .tags { font-size: 0.85rem; color: var(--red); font-weight: 600; }
+    .excerpt {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--ink);
+      white-space: pre-wrap;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+      margin-top: auto;
+    }
+    .empty {
+      text-align: center;
+      padding: 64px 20px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    /* 全螢幕投影講評 Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 31, 51, 0.82);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 100;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 20px;
+      max-width: 920px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px 36px;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    .modal-author { font-size: 1.6rem; font-weight: 800; color: var(--navy); }
+    .modal-meta { font-size: 1.05rem; color: var(--red); font-weight: 700; margin-bottom: 16px; }
+    .modal-story {
+      font-size: 1.35rem;
+      line-height: 1.85;
+      white-space: pre-wrap;
+      color: #111827;
+      margin-bottom: 20px;
+    }
+    .modal-note {
+      background: var(--cream);
+      border-left: 4px solid var(--gold);
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      color: var(--navy);
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .modal-btn {
+      padding: 9px 18px;
+      border-radius: 10px;
+      border: 1.5px solid var(--navy);
+      background: #fff;
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    .modal-btn:hover { background: var(--navy); color: #fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><span>AI 加值的</span> 故事課｜班級講評牆</h1>
+    <div class="toolbar">
+      <button class="btn" id="refreshBtn">立即刷新</button>
+      <button class="btn" id="autoBtn">自動刷新：開</button>
+      <a class="btn primary" href="./submit.html">+ 學生交作品</a>
+      <a class="btn" href="./index.html">回課程地圖</a>
+    </div>
+  </header>
+
+  <section class="controls">
+    <div class="filters" id="filters">
+      <button class="chip active" data-stage="ALL">全部</button>
+      <button class="chip" data-stage="靶心人">靶心人</button>
+      <button class="chip" data-stage="變多：套濾鏡">變多：套濾鏡</button>
+      <button class="chip" data-stage="變深：二合一">變深：二合一</button>
+    </div>
+    <div class="meta-bar">
+      <input type="text" id="searchInput" placeholder="搜尋組別、姓名、關鍵字..." />
+      <span id="countText">載入中...</span>
+    </div>
+  </section>
+
+  <main>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="emptyBox" style="display:none;">目前還沒有作品，請學生點「交作品」送出第一篇故事吧！</div>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div>
+          <span class="modal-author" id="mAuthor"></span>
+          <span class="badge" id="mStage" style="margin-left:10px;font-size:0.9rem;"></span>
+        </div>
+        <button class="modal-btn" id="closeModalBtn">關閉 (Esc)</button>
+      </div>
+      <div class="modal-meta" id="mMeta"></div>
+      <div class="modal-story" id="mStory"></div>
+      <div class="modal-note" id="mNote" style="display:none;"></div>
+      <div class="modal-footer">
+        <button class="modal-btn" id="prevBtn">← 上一篇</button>
+        <span id="mIndex" style="color:var(--muted);font-weight:600;"></span>
+        <button class="modal-btn" id="nextBtn">下一篇 →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwa_BoLKEHRjb1AwKiPjfOhdoXNThB2g_XBPHO2QbhFccJGSjlBBYt1sKQSspFMECq5/exec";
+
+    let allItems = [];
+    let filtered = [];
+    let currentStage = "ALL";
+    let currentIndex = -1;
+    let autoRefresh = true;
+    let timer = null;
+
+    const grid = document.getElementById("grid");
+    const emptyBox = document.getElementById("emptyBox");
+    const countText = document.getElementById("countText");
+    const searchInput = document.getElementById("searchInput");
+    const modalBackdrop = document.getElementById("modalBackdrop");
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    async function loadData() {
+      try {
+        const res = await fetch(SCRIPT_URL + "?t=" + Date.now());
+        const data = await res.json();
+        allItems = Array.isArray(data) ? data.filter(x => x.story || x.name) : [];
+        render();
+      } catch (err) {
+        countText.textContent = "載入失敗，請按刷新重試";
+      }
+    }
+
+    function render() {
+      const q = searchInput.value.trim().toLowerCase();
+      filtered = allItems.filter(item => {
+        const okStage = currentStage === "ALL" || item.stage === currentStage;
+        const text = `${item.name} ${item.topic} ${item.twist} ${item.story} ${item.note}`.toLowerCase();
+        const okQuery = !q || text.includes(q);
+        return okStage && okQuery;
+      });
+
+      countText.textContent = `共 ${filtered.length} 篇作品`;
+      if (filtered.length === 0) {
+        grid.innerHTML = "";
+        emptyBox.style.display = "block";
+        return;
+      }
+      emptyBox.style.display = "none";
+      grid.innerHTML = filtered.map((item, idx) => `
+        <article class="card" data-idx="${idx}">
+          <div class="card-top">
+            <span class="author">${escapeHtml(item.name || "匿名")}</span>
+            <span class="badge">${escapeHtml(item.stage || "作品")}</span>
+          </div>
+          ${(item.topic || item.twist) ? `<div class="tags">${escapeHtml([item.topic, item.twist].filter(Boolean).join(" ｜ "))}</div>` : ""}
+          <div class="excerpt">${escapeHtml(item.story)}</div>
+          ${item.note ? `<div class="note">心得：${escapeHtml(item.note)}</div>` : ""}
+        </article>
+      `).join("");
+
+      grid.querySelectorAll(".card").forEach(card => {
+        card.addEventListener("click", () => openModal(Number(card.dataset.idx)));
+      });
+    }
+
+    function openModal(idx) {
+      if (idx < 0 || idx >= filtered.length) return;
+      currentIndex = idx;
+      const item = filtered[idx];
+      document.getElementById("mAuthor").textContent = item.name || "匿名";
+      document.getElementById("mStage").textContent = item.stage || "作品";
+      document.getElementById("mMeta").textContent = [item.topic, item.twist].filter(Boolean).join(" ｜ ");
+      document.getElementById("mStory").textContent = item.story || "";
+      const noteEl = document.getElementById("mNote");
+      if (item.note) {
+        noteEl.textContent = "學生心得：" + item.note;
+        noteEl.style.display = "block";
+      } else {
+        noteEl.style.display = "none";
+      }
+      document.getElementById("mIndex").textContent = `${idx + 1} / ${filtered.length}`;
+      modalBackdrop.classList.add("open");
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove("open");
+      currentIndex = -1;
+    }
+
+    document.getElementById("filters").addEventListener("click", (e) => {
+      if (!e.target.classList.contains("chip")) return;
+      document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+      e.target.classList.add("active");
+      currentStage = e.target.dataset.stage;
+      render();
+    });
+
+    searchInput.addEventListener("input", render);
+    document.getElementById("refreshBtn").addEventListener("click", loadData);
+    document.getElementById("autoBtn").addEventListener("click", (e) => {
+      autoRefresh = !autoRefresh;
+      e.target.textContent = `自動刷新：${autoRefresh ? "開" : "關"}`;
+    });
+    document.getElementById("closeModalBtn").addEventListener("click", closeModal);
+    modalBackdrop.addEventListener("click", (e) => { if (e.target === modalBackdrop) closeModal(); });
+    document.getElementById("prevBtn").addEventListener("click", () => openModal((currentIndex - 1 + filtered.length) % filtered.length));
+    document.getElementById("nextBtn").addEventListener("click", () => openModal((currentIndex + 1) % filtered.length));
+
+    document.addEventListener("keydown", (e) => {
+      if (!modalBackdrop.classList.contains("open")) return;
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowLeft") openModal((currentIndex - 1 + filtered.length) % filtered.length);
+      if (e.key === "ArrowRight") openModal((currentIndex + 1) % filtered.length);
+    });
+
+    loadData();
+    timer = setInterval(() => { if (autoRefresh) loadData(); }, 10000);
+  </script>
+</body>
+</html>

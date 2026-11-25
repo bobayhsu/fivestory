@@ -2161,5 +2161,16 @@ document.addEventListener('mouseleave',hide);})();
   document.addEventListener('keydown',function(e){if(e.key==='Escape')m.style.display='none';});
 })();
 </script>
+<script id="ai-wall-nav">
+(function(){
+  if(document.getElementById('aiWallNav'))return;
+  var bar=document.createElement('div');
+  bar.id='aiWallNav';
+  bar.style.cssText='position:fixed;top:14px;right:74px;z-index:9990;display:flex;gap:8px;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif';
+  bar.innerHTML='<a href="./submit.html" style="display:inline-flex;align-items:center;height:48px;padding:0 16px;border-radius:999px;background:#C41F27;color:#fff;font-weight:900;font-size:15px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.3)">交作品</a><a href="./wall.html" style="display:inline-flex;align-items:center;height:48px;padding:0 16px;border-radius:999px;background:#1E1C1A;color:#F5C518;font-weight:900;font-size:15px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.3)">講評牆</a>';
+  bar.addEventListener('click',function(e){e.stopPropagation();});
+  document.body.appendChild(bar);
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>交作品｜AI 加值的故事課</title>
+  <style>
+    :root {
+      --navy: #0f2942;
+      --cream: #fdf8f0;
+      --gold: #f5c542;
+      --red: #c0392b;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5dfd5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, #0b1f33, #173b5e);
+      color: #fff;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+    }
+    header h1 span { color: var(--gold); }
+    .nav-links { display: flex; gap: 8px; }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: background 0.2s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.15); }
+    main {
+      max-width: 680px;
+      margin: 24px auto 48px;
+      padding: 0 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 2px solid var(--navy);
+      border-radius: 16px;
+      padding: 24px 20px;
+      box-shadow: 0 8px 24px rgba(15, 41, 66, 0.08);
+    }
+    .field { margin-bottom: 16px; }
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      color: var(--navy);
+    }
+    label .req { color: var(--red); margin-left: 4px; }
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fff;
+      color: var(--ink);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(15, 41, 66, 0.12);
+    }
+    textarea { min-height: 160px; resize: vertical; line-height: 1.6; }
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 560px) {
+      .row-2 { grid-template-columns: 1fr; }
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .btn-submit:hover { background: #173b5e; }
+    .btn-submit:active { transform: scale(0.99); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .status {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      display: none;
+      line-height: 1.5;
+    }
+    .status.ok {
+      display: block;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .status.err {
+      display: block;
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+    .hint { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><span>AI 加值的</span> 故事課｜交作品</h1>
+    <div class="nav-links">
+      <a href="./index.html">← 回課程地圖</a>
+      <a href="./wall.html">看講評牆</a>
+    </div>
+  </header>
+
+  <main>
+    <form class="card" id="submitForm">
+      <div class="row-2">
+        <div class="field">
+          <label for="name">組別 / 姓名<span class="req">*</span></label>
+          <input id="name" type="text" placeholder="例如：第 3 組 小明" required />
+        </div>
+        <div class="field">
+          <label for="stage">選擇關卡<span class="req">*</span></label>
+          <select id="stage" required>
+            <option value="靶心人">靶心人（七步驟說故事）</option>
+            <option value="變多：套濾鏡">變多：換順序 ＋ 套濾鏡</option>
+            <option value="變深：二合一">變深：心結人 ＋ 二合一</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label for="topic">人物 / 故事主題</label>
+          <input id="topic" type="text" placeholder="例如：哈利波特 / 我的面試經驗" />
+        </div>
+        <div class="field">
+          <label for="twist">使用的濾鏡或兩難</label>
+          <input id="twist" type="text" placeholder="例如：復仇模式 / 友情與誠實的兩難" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="story">你的故事成果<span class="req">*</span></label>
+        <textarea id="story" placeholder="直接貼上你的七步驟骨架或 AI 改寫後的 200 字故事..." required></textarea>
+        <div class="hint">小提醒：請勿輸入個人隱私資料（手機、地址等）。</div>
+      </div>
+
+      <div class="field">
+        <label for="note">一句話心得（你改了什麼？哪裡最有張力？）</label>
+        <input id="note" type="text" placeholder="例如：加了主角的兩難之後，結局更有反轉感！" />
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">送出作品到講評牆</button>
+      <div class="status" id="statusBox"></div>
+    </form>
+  </main>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwa_BoLKEHRjb1AwKiPjfOhdoXNThB2g_XBPHO2QbhFccJGSjlBBYt1sKQSspFMECq5/exec";
+
+    const form = document.getElementById("submitForm");
+    const btn = document.getElementById("submitBtn");
+    const statusBox = document.getElementById("statusBox");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = "送出中...";
+      statusBox.className = "status";
+      statusBox.textContent = "";
+
+      const payload = {
+        name: document.getElementById("name").value.trim(),
+        stage: document.getElementById("stage").value,
+        topic: document.getElementById("topic").value.trim(),
+        twist: document.getElementById("twist").value.trim(),
+        story: document.getElementById("story").value.trim(),
+        note: document.getElementById("note").value.trim()
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        statusBox.className = "status ok";
+        statusBox.innerHTML = '已成功交出作品！老師的講評牆幾秒內就會看到你的故事。<br><a href="./wall.html" style="color:#065f46;text-decoration:underline;">前往班級講評牆 →</a>';
+        document.getElementById("story").value = "";
+        document.getElementById("note").value = "";
+      } catch (err) {
+        statusBox.className = "status err";
+        statusBox.textContent = "送出失敗，請檢查網路連線後再試一次。";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "送出作品到講評牆";
+      }
+    });
+  </script>
+</body>
+</html>
